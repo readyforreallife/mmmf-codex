@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMMF for Schools</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap');
+    :root{--navy:#10203a;--navy2:#1d3354;--gold:#c89b3c;--gold2:#e5be66;--paper:#f7f2e9;--ink:#1f2937;--muted:#64748b;--line:#d9cfbd;--panel:#ffffff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink)}
+    header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:42px 24px;border-bottom:4px solid var(--gold)}
+    .wrap{max-width:1120px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:56px;height:56px;object-fit:contain}
+    .ey{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:700}
+    h1,h2{font-family:'Playfair Display',serif;margin:0 0 10px}
+    p{line-height:1.8}
+    main{max-width:1120px;margin:0 auto;padding:30px 24px 56px}
+    .toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 15px;border-radius:999px;text-decoration:none;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--navy)}
+    .btn.primary{background:var(--navy);color:#fff;border-color:transparent}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:stretch}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 26px rgba(0,0,0,.05)}
+    .lead{font-size:1.02rem;color:#334155}
+    .checklist{margin:0;padding-left:18px;line-height:1.9;color:#475569}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 24px rgba(0,0,0,.04)}
+    .card h3{font-family:'Playfair Display',serif;margin:10px 0 8px;font-size:1.3rem}
+    .card p{color:#475569;margin:0}
+    .section{margin-top:28px}
+    .resource-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .resource{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+    .resource strong{display:block;margin-bottom:8px}
+    .resource p{margin:0;color:#475569}
+    .cta{margin-top:28px;background:#efe4cb;border:1px solid #dec79a;border-radius:18px;padding:22px}
+    @media (max-width:900px){.hero,.grid,.resource-list{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap brand">
+      <img class="logo" src="assets/mmmf-site-mark.svg" alt="MMMF logo">
+      <div>
+        <div class="ey">Modern Manners & Mental Fortitude</div>
+        <h1>Start Here for Schools</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <a class="btn" href="index.html">Repository Landing</a>
+      <a class="btn" href="web/index.html">Program Hub</a>
+      <a class="btn" href="docs/index.html">Deliverables Library</a>
+      <a class="btn" href="data/mmmf-curriculum.json">Curriculum JSON</a>
+    </div>
+
+    <div class="hero">
+      <div class="panel">
+        <div class="ey">School Review Path</div>
+        <h2>What school leaders should review first.</h2>
+        <p class="lead">This page is a short path for principals, district leaders, curriculum teams, and board members who want to understand what MMMF is, why a school might use it, and which materials to review next.</p>
+        <ul class="checklist">
+          <li>Review the program overview and implementation fit</li>
+          <li>Open the facilitator-facing hub and training materials</li>
+          <li>Examine the formal program documents and printable assets</li>
+          <li>Reach out for adoption, presentation, or implementation discussion</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="ey">Program Fit</div>
+        <h2>Designed for practical school use.</h2>
+        <p>MMMF is built to help schools teach conduct, communication, regulation, and decision-making as explicit skills. The materials in this repository are organized to support review, pilot planning, and facilitator preparation.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="grid">
+        <div class="card">
+          <div class="ey">Step 1</div>
+          <h3>Review the Hub</h3>
+          <p>Open the main hub to see the teacher portal, interactive resources, and program-facing web materials together.</p>
+          <p style="margin-top:14px;"><a href="web/index.html" style="color:#8a6424;font-weight:700;text-decoration:none;">Open Program Hub →</a></p>
+        </div>
+        <div class="card">
+          <div class="ey">Step 2</div>
+          <h3>Review Deliverables</h3>
+          <p>Use the formal documents library to open the handbook, slide deck, one-pager, printable cards, and registration materials.</p>
+          <p style="margin-top:14px;"><a href="docs/index.html" style="color:#8a6424;font-weight:700;text-decoration:none;">Open Deliverables Library →</a></p>
+        </div>
+        <div class="card">
+          <div class="ey">Step 3</div>
+          <h3>Review Data</h3>
+          <p>Inspect the structured curriculum file if your team wants a machine-readable view of the program architecture.</p>
+          <p style="margin-top:14px;"><a href="data/mmmf-curriculum.json" style="color:#8a6424;font-weight:700;text-decoration:none;">Open Curriculum JSON →</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="ey">Recommended Materials</div>
+      <h2>Suggested review order for school teams.</h2>
+      <div class="resource-list">
+        <div class="resource"><strong>Community One-Pager</strong><p>Best first overview for quick program understanding and stakeholder sharing.</p></div>
+        <div class="resource"><strong>Teach-the-Teacher Slide Deck</strong><p>Best next review item for understanding how the program is framed and introduced.</p></div>
+        <div class="resource"><strong>Facilitator Handbook</strong><p>Best document for evaluating implementation depth and delivery expectations.</p></div>
+        <div class="resource"><strong>Participant Workbook</strong><p>Best learner-facing artifact for seeing how the content lands with participants.</p></div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="ey">Next Step</div>
+      <h2 style="margin:8px 0 8px;">Interested in school adoption or a presentation?</h2>
+      <p style="margin:0 0 14px;color:#4b5563;">Reach out directly to discuss fit, implementation, or how MMMF could be presented to your team.</p>
+      <a class="btn primary" href="mailto:mikeyterry44@gmail.com">Email Michael Terry</a>
+    </div>
+  </main>
+</body>
+</html>
