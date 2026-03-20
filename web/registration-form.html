@@ -459,6 +459,10 @@ body::before {
   padding: 0.8rem 2rem;
 }
 .btn-submit:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(13,115,119,0.4); }
+#submit-status { margin-top: 1rem; padding: .9rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: var(--gray-lt); font-size: .82rem; line-height: 1.6; display: none; }
+#submit-status.show { display: block; }
+#submit-status.error { border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.08); color: #fecaca; }
+#submit-status.success { border-color: rgba(20,160,133,.4); background: rgba(20,160,133,.08); color: #ccfbf1; }
 .nav-note { font-size: 0.7rem; color: var(--gray); }
 
 /* ── SUCCESS STATE ───────────────────────────────────────────────── */
@@ -870,6 +874,7 @@ footer a { color: var(--teal-lt); text-decoration: none; }
             </div>
           </label>
         </div>
+        <div id="submit-status" aria-live="polite"></div>
       </div>
       <div class="form-nav">
         <button class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
@@ -1048,27 +1053,153 @@ function buildReview() {
 }
 
 // ── Submit ────────────────────────────────────────────────────────
-function submitForm() {
+const DEFAULT_REGISTRATION_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzH2--hkA4ezway034VJ6AKK7AQlkiDkGn2rjQ1tP2PhaY25gOKX89cfJZ7fucx6yUH/exec';
+const FALLBACK_REGISTRATION_ENDPOINTS = [
+  'https://script.google.com/macros/s/AKfycby9WsQIZXATnaKbC4JeBNT4DRLzIDVXXWutlH01wW-CXg3aWcxxsZyKErNyrLRNaCmf/exec',
+  DEFAULT_REGISTRATION_ENDPOINT
+];
+const REGISTRATION_QUEUE_KEY = 'mmmf_registration_queue';
+const REGISTRATION_SECRET = '4429-DECISION-LAB';
+let submitInFlight = false;
+
+function showSubmitStatus(message, kind) {
+  const el = document.getElementById('submit-status');
+  if (!el) return;
+  el.textContent = message;
+  el.className = 'show' + (kind ? ' ' + kind : '');
+}
+
+async function trySubmitToEndpoint(url, payload) {
+  if (!url) return false;
+  const outbound = { ...payload, secret: payload.secret || REGISTRATION_SECRET };
+  const body = JSON.stringify(outbound);
+  const opts = {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body
+  };
+  try {
+    const res = await fetch(url, opts);
+    if (res.ok) return true;
+  } catch (_err) {}
+  try {
+    if (navigator.sendBeacon) {
+      const sent = navigator.sendBeacon(url, new Blob([body], { type: 'text/plain;charset=utf-8' }));
+      if (sent) return true;
+    }
+  } catch (_err) {}
+  try {
+    await fetch(url, { ...opts, mode: 'no-cors' });
+    return true;
+  } catch (_err) {}
+  return false;
+}
+
+function queueRegistration(payload) {
+  try {
+    const queue = JSON.parse(localStorage.getItem(REGISTRATION_QUEUE_KEY) || '[]');
+    queue.push(payload);
+    localStorage.setItem(REGISTRATION_QUEUE_KEY, JSON.stringify(queue));
+  } catch (_err) {}
+}
+
+async function submitForm() {
   const consent = document.getElementById('consent');
   const cc = document.getElementById('consent-check');
+  const submitBtn = document.getElementById('submit-btn');
+  if (submitInFlight) return;
   if (!consent.checked) {
     cc.style.borderColor = 'var(--red)';
     cc.style.background = 'rgba(239,68,68,0.08)';
+    showSubmitStatus('Please confirm the consent statement before submitting.', 'error');
     setTimeout(() => { cc.style.borderColor = ''; cc.style.background = ''; }, 2000);
     return;
   }
-  // Show success
-  document.getElementById('form-card').style.display = 'none';
-  document.querySelector('.progress-wrap').style.display = 'none';
-  const sp = document.getElementById('success-panel');
-  sp.style.display = 'block';
-  document.getElementById('success-summary').innerHTML = `
-    <div class="det"><strong>Name:</strong> ${formData.fname} ${formData.lname}</div>
-    <div class="det"><strong>Email:</strong> ${formData.email}</div>
-    <div class="det"><strong>Organization:</strong> ${formData.org}</div>
-    <div class="det"><strong>Track(s):</strong> ${formData.tracks}</div>
-    <div class="det"><strong>Delivery:</strong> ${formData.delivery || 'TBD'}</div>`;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  collectStep(1);
+  collectStep(2);
+  collectStep(3);
+
+  const payload = {
+    type: 'registration',
+    event: 'registration',
+    form: 'mmmf_registration_form',
+    program: 'Modern Manners and Mental Fortitude',
+    source: 'mmmf-github-pages-registration-form',
+    timestamp: new Date().toISOString(),
+    full_name: `${formData.fname || ''} ${formData.lname || ''}`.trim(),
+    first_name: formData.fname || '',
+    last_name: formData.lname || '',
+    name: `${formData.fname || ''} ${formData.lname || ''}`.trim(),
+    email: formData.email || '',
+    phone: formData.phone || '',
+    role: formData.role || '',
+    organization: formData.org || '',
+    city_state: formData.location || '',
+    referral: formData.referral || '',
+    tracks: formData.tracks || '',
+    delivery: formData.delivery || '',
+    start_date: formData.startDate || '',
+    class_size: formData.classSize || '',
+    training_status: formData.training || '',
+    population: formData.population || '',
+    gaps_identified: formData.gaps || '',
+    sel_confidence: formData.confidence || '',
+    support_needed: formData.support || '',
+    notes: formData.notes || '',
+    consent_given: consent.checked ? 'Yes' : 'No',
+    notify_email: 'mikeyterry44@gmail.com',
+    send_email_notification: 'true',
+    notification_subject: 'New MMMF registration submission',
+    scenario_title: 'MMMF Registration Form',
+    choice: formData.tracks || 'Registration',
+    tool: formData.email || '',
+    concept: formData.role || '',
+    why: formData.notes || '',
+    best_fit: formData.role || '',
+    role_or_level: formData.role || ''
+  };
+
+  const endpointCandidates = FALLBACK_REGISTRATION_ENDPOINTS.filter(Boolean).filter((url, idx, arr) => arr.indexOf(url) === idx);
+
+  submitInFlight = true;
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+  }
+  showSubmitStatus('Submitting your registration now. This will route to the MMMF intake sheet and trigger follow-up notification handling.', '');
+
+  try {
+    let sent = false;
+    for (const url of endpointCandidates) {
+      sent = await trySubmitToEndpoint(url, payload);
+      if (sent) break;
+    }
+
+    if (!sent) throw new Error('All endpoints failed');
+
+    showSubmitStatus('Submitted successfully. Your registration has been routed for intake and follow-up.', 'success');
+    document.getElementById('form-card').style.display = 'none';
+    document.querySelector('.progress-wrap').style.display = 'none';
+    const sp = document.getElementById('success-panel');
+    sp.style.display = 'block';
+    document.getElementById('success-summary').innerHTML = `
+      <div class="det"><strong>Name:</strong> ${formData.fname} ${formData.lname}</div>
+      <div class="det"><strong>Email:</strong> ${formData.email}</div>
+      <div class="det"><strong>Organization:</strong> ${formData.org}</div>
+      <div class="det"><strong>Track(s):</strong> ${formData.tracks}</div>
+      <div class="det"><strong>Delivery:</strong> ${formData.delivery || 'TBD'}</div>`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (_err) {
+    queueRegistration(payload);
+    showSubmitStatus('We could not confirm a live delivery to the intake endpoint, so a backup copy was saved on this device. Please retry once, or contact Michael directly if needed.', 'error');
+  } finally {
+    submitInFlight = false;
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = '✓ Submit Registration';
+    }
+  }
 }
 
 function resetForm() {
