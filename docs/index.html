@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMMF Documents</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap');
+    :root { --navy:#15233d; --navy2:#213556; --gold:#c89b3c; --paper:#f7f3ea; --ink:#1f2937; --muted:#64748b; --line:#ddd4c1; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); }
+    header { background: linear-gradient(135deg, var(--navy), var(--navy2)); color: white; padding: 48px 24px; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    h1, h2 { font-family: 'Playfair Display', serif; margin: 0 0 10px; }
+    p { line-height: 1.6; }
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 56px; }
+    .toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    .btn { display: inline-block; padding: 10px 14px; border-radius: 999px; background: white; color: var(--navy); text-decoration: none; border: 1px solid var(--line); font-weight: 700; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .card { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.05); }
+    .eyebrow { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 8px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .card a { color: var(--navy); font-weight: 700; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">MMMF Deliverables</div>
+      <h1>Documents & Print Materials</h1>
+      <p>All facilitator documents, printable materials, and presentation files in one organized place.</p>
+    </div>
+  </header>
+  <main>
+    <div class="toolbar">
+      <a class="btn" href="../web/index.html">Back to Program Hub</a>
+      <a class="btn" href="../README.md">View README</a>
+    </div>
+
+    <h2 style="margin: 0 0 16px;">Deliverables</h2>
+    <div class="grid">
+      <div class="card"><div class="eyebrow">Training</div><a href="MMMF_Teach_the_Teacher.pptx">Teach the Teacher Slide Deck</a><p class="meta">PowerPoint training deck for facilitator onboarding.</p></div>
+      <div class="card"><div class="eyebrow">Facilitator</div><a href="MMMF_Facilitator_Handbook.docx">Facilitator Handbook</a><p class="meta">Guide for delivery, pacing, and implementation support.</p></div>
+      <div class="card"><div class="eyebrow">Participant</div><a href="MMMF_Participant_Workbook.docx">Participant Workbook</a><p class="meta">Learner-facing workbook with activities and reflection prompts.</p></div>
+      <div class="card"><div class="eyebrow">Agreement</div><a href="MMMF_Facilitator_Certification_Agreement.docx">Facilitator Certification Agreement</a><p class="meta">Facilitator licensing and certification agreement.</p></div>
+      <div class="card"><div class="eyebrow">Cards</div><a href="MMMF_Scenario_Cards.pdf">Scenario Cards</a><p class="meta">Printable scenario prompts for practice and transfer tasks.</p></div>
+      <div class="card"><div class="eyebrow">Cards</div><a href="MMMF_Manners_in_Motion_Cards.pdf">Manners in Motion Cards</a><p class="meta">Printable challenge card set for discussion and facilitation.</p></div>
+      <div class="card"><div class="eyebrow">Outreach</div><a href="MMMF_Community_OnePager.pdf">Community One-Pager</a><p class="meta">Shareable overview for families, schools, and partners.</p></div>
+      <div class="card"><div class="eyebrow">Enrollment</div><a href="MMMF_Registration_Form_Printable.pdf">Printable Registration Form</a><p class="meta">Paper-friendly intake and registration form.</p></div>
+    </div>
+  </main>
+</body>
+</html>

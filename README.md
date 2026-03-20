@@ -1,200 +1,68 @@
-# Modern Manners & Mental Fortitude (MMMF)
-### Program Resource Repository · readyforreal.life
+# Modern Manners & Mental Fortitude
 
-> *"Transfer, not coverage. Students leave able to apply concepts independently to unfamiliar, high-stakes situations."*
-> — Michael R. Terry, Founder
+Program repository for the MMMF curriculum, facilitator tools, printable resources, and web-based delivery materials.
 
----
+## Quick Links
 
-## Overview
+- Program hub: `web/index.html`
+- Documents browser: `docs/index.html`
+- Curriculum data: `data/mmmf-curriculum.json`
+- GitHub Pages target: `https://readyforreallife.github.io/mmmf-codex/`
 
-**Modern Manners & Mental Fortitude (MMMF)** is a real-world life skills curriculum for Grades 7–12 and community programs. It is a 1-term course (16 weeks, 2 sessions per week) built around four core pillars and two student-facing frameworks, designed for transfer — not coverage.
+## What This Repository Includes
 
-This repository contains all program deliverables, web applications, structured curriculum data, and documentation needed to deploy, teach, and extend the MMMF program.
+### Web experience
 
-| | |
-|---|---|
-| **Founder** | Michael R. Terry · Utah Highway Patrol Sergeant · MAT Candidate |
-| **Organization** | Columbia College of Missouri · Kappa Delta Pi |
-| **Website** | [readyforreal.life](https://readyforreal.life) |
-| **Contact** | mikeyterry44@gmail.com · (435) 840-1896 |
-| **Standards** | Utah CASEL & CCA Core Standards |
-| **Duration** | 16 weeks · 2 sessions/week · 20–25 students |
+- `web/index.html` — program hub and launch page
+- `web/teach-the-teacher-portal.html` — facilitator-facing training portal
+- `web/manners-in-motion-cards.html` — digital card deck
+- `web/registration-form.html` — registration and intake experience
 
----
+### Document deliverables
 
-## Repository Structure
+- `docs/MMMF_Teach_the_Teacher.pptx`
+- `docs/MMMF_Facilitator_Handbook.docx`
+- `docs/MMMF_Participant_Workbook.docx`
+- `docs/MMMF_Facilitator_Certification_Agreement.docx`
+- `docs/MMMF_Scenario_Cards.pdf`
+- `docs/MMMF_Manners_in_Motion_Cards.pdf`
+- `docs/MMMF_Community_OnePager.pdf`
+- `docs/MMMF_Registration_Form_Printable.pdf`
 
-```
-mmmf-codex/
-├── web/                          # Web applications (open in browser)
-│   ├── index.html                # ← START HERE — Program Hub
-│   ├── teach-the-teacher-portal.html
-│   ├── manners-in-motion-cards.html
-│   └── registration-form.html
-│
-├── docs/                         # All print & document deliverables
-│   ├── MMMF_Teach_the_Teacher.pptx
-│   ├── MMMF_Facilitator_Handbook.docx
-│   ├── MMMF_Participant_Workbook.docx
-│   ├── MMMF_Facilitator_Certification_Agreement.docx
-│   ├── MMMF_Scenario_Cards.pdf
-│   ├── MMMF_Manners_in_Motion_Cards.pdf
-│   ├── MMMF_Community_OnePager.pdf
-│   └── MMMF_Registration_Form_Printable.pdf
-│
-├── data/                         # Structured curriculum data
-│   └── mmmf-curriculum.json      # Full curriculum as machine-readable JSON
-│
-└── README.md                     # This file
-```
+### Structured data
 
----
+- `data/mmmf-curriculum.json` — curriculum content in machine-readable form for tooling, reuse, and future app work
 
-## Quick Start
+## Program Summary
 
-### Run locally
-```bash
-# Clone the repo
-git clone https://github.com/YOUR_USERNAME/mmmf-codex.git
-cd mmmf-codex
+Modern Manners & Mental Fortitude is a real-world life skills program built around four core pillars:
 
-# Open the program hub in your browser
-open web/index.html
-```
+1. Respectful communication
+2. Emotional regulation
+3. Decision-making under pressure
+4. Accountability and repair
 
-### Deploy to the web
-The `web/` folder contains three fully self-contained HTML files with no dependencies. Drop any of them directly into your web host, CMS, or readyforreal.life.
+It supports instruction across youth, adult, family, and educator contexts and is designed for transfer into real-life situations rather than simple content coverage.
 
-```bash
-# Example: deploy with any static host (Netlify, Vercel, GitHub Pages)
-# Just point the root to the web/ directory
-```
+## Publishing
 
-### Use curriculum data with Codex / AI tools
-The structured JSON in `data/mmmf-curriculum.json` contains the complete curriculum — all pillars, modules, frameworks, learning targets, pacing calendar, rubrics, and assessment tools — in machine-readable format.
+This repository includes a GitHub Pages workflow at `.github/workflows/deploy-pages.yml`.
 
-```javascript
-// Load curriculum data
-const curriculum = require('./data/mmmf-curriculum.json');
+On pushes to `main`, GitHub Pages will publish a bundled site containing:
 
-// Access frameworks
-const PLRR = curriculum.student_frameworks.PLRR;
-const POCC = curriculum.student_frameworks.POCC;
+- the root landing page
+- the `web/` experience
+- the `docs/` document browser
+- the `data/` folder
 
-// Access modules
-const modules = curriculum.modules;
+If Pages is not already enabled in repository settings, set the source to `GitHub Actions`.
 
-// Access rubric
-const rubric = curriculum.assessment_framework.summative[0].rubric;
-```
+## Suggested Use
 
----
+- Use the `web/` folder for the interactive experience.
+- Use `docs/index.html` as the public-facing browser for handouts and deliverables.
+- Use `data/mmmf-curriculum.json` for future automation, search, and curriculum tooling.
 
-## All 11 Deliverables
+## Ownership
 
-### Web Applications (`web/`)
-
-| File | Description |
-|------|-------------|
-| `index.html` | Program Hub — central navigation to all resources |
-| `teach-the-teacher-portal.html` | 9-tab interactive training portal with readiness checklist |
-| `manners-in-motion-cards.html` | 36-card interactive digital deck — filterable & shuffleable |
-| `registration-form.html` | 4-step multi-page program registration form (embeddable) |
-
-### Documents & Print Materials (`docs/`)
-
-| File | Format | Description |
-|------|--------|-------------|
-| `MMMF_Teach_the_Teacher.pptx` | PowerPoint | 15-slide training deck covering all 3 days |
-| `MMMF_Facilitator_Handbook.docx` | Word | Complete facilitator guide with speaker notes |
-| `MMMF_Participant_Workbook.docx` | Word | Day 1–3 activities, pacing template, 4-week journals |
-| `MMMF_Facilitator_Certification_Agreement.docx` | Word | Legal licensing agreement — 8 sections, signature pages |
-| `MMMF_Scenario_Cards.pdf` | PDF | 24 scenario cards across 4 implementation tracks |
-| `MMMF_Manners_in_Motion_Cards.pdf` | PDF | 36 printable challenge cards across 6 categories |
-| `MMMF_Community_OnePager.pdf` | PDF | Print-ready program overview for parents & partners |
-| `MMMF_Registration_Form_Printable.pdf` | PDF | 2-page printable intake form |
-
-### Curriculum Data (`data/`)
-
-| File | Description |
-|------|-------------|
-| `mmmf-curriculum.json` | Full curriculum as structured JSON — frameworks, modules, rubrics, pacing, research foundations, all deliverable metadata |
-
----
-
-## Curriculum Summary
-
-### Four Core Pillars
-1. 🤝 **Respectful Communication** — Tone, body language, active listening, repair
-2. 🧘 **Emotional Regulation** — Triggers, PLRR routine, grounding, mindfulness
-3. ⚖️ **Decision-Making Under Pressure** — POCC framework, consequence mapping
-4. 🔁 **Accountability & Repair** — Own it, fix it, follow through
-
-### Two Student Frameworks
-
-**PLRR — Regulation Routine** *(used before decision-making)*
-```
-P — Pause      Stop the automatic reaction. Create space.
-L — Label      Name the emotion exactly.
-R — Reframe    What is actually happening vs. what I assumed?
-R — Respond    Choose deliberately, aligned with values.
-```
-
-**POCC — Decision-Making Framework** *(structured choice under pressure)*
-```
-P — Pause         Regulate first. Good decisions require cognitive space.
-O — Options       Identify multiple possible responses.
-C — Consequences  Evaluate short and long-term outcomes.
-C — Choose        Select and justify a response.
-```
-
-### Five Modules
-| # | Module | Framework Focus |
-|---|--------|----------------|
-| 01 | 🎩 Modern Manners | PLRR intro |
-| 02 | 🧠 Emotional Intelligence | PLRR deep dive |
-| 03 | 🕊️ Conflict Navigation | PLRR + POCC |
-| 04 | 📱 Digital Citizenship | POCC focus |
-| 05 | 🌱 Personal Growth | Both frameworks |
-
-### Four Implementation Tracks
-| Track | Context | Complexity |
-|-------|---------|------------|
-| 🏫 Grades 7–8 | School | Foundational |
-| 🎓 Grades 9–12 | School | Levels up annually |
-| 👦 Community Youth | After-school, faith orgs | Flexible |
-| 👤 Community Adult | Workplace, family | Adult-adapted |
-
----
-
-## Research Foundation
-
-| Theorist | Year | Application in MMMF |
-|----------|------|---------------------|
-| Tyler | 1949 | Objectives-based backward design |
-| Bruner | 1960 | Spiral curriculum — revisited complexity |
-| Dewey | 1938 | Experience + reflection + transfer |
-| CASEL | 2020 | SEL competency alignment |
-| Stern et al. | 2021 | Anchoring concepts + dissimilar transfer |
-| Wiles & Bondi | 2015 | Curriculum Planning Model |
-| Lang | 2021 | Small teaching + retrieval cycles |
-
----
-
-## Licensing & IP
-
-All MMMF curriculum materials are protected intellectual property of **Michael R. Terry**.
-
-- ✅ Licensed facilitators may deliver, use, and distribute materials to enrolled participants
-- ✅ Structural and data files in this repository may be used to build tools that support MMMF delivery
-- ❌ Unauthorized copying, redistribution, sub-licensing, or derivative works are prohibited
-- ❌ MMMF frameworks (PLRR, POCC) may not be presented as original works of any other party
-
-For licensing inquiries: **mikeyterry44@gmail.com**
-
-See `docs/MMMF_Facilitator_Certification_Agreement.docx` for full terms.
-
----
-
-*© Michael R. Terry · Modern Manners & Mental Fortitude · readyforreal.life*
+All MMMF materials remain the intellectual property of Michael R. Terry unless separately licensed.
