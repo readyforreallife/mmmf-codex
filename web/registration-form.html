@@ -682,7 +682,7 @@ footer a { color: var(--teal-lt); text-decoration: none; }
       </div>
       <div class="form-nav">
         <span class="nav-note">Step 1 of 4</span>
-        <button class="btn btn-primary" onclick="nextStep(1)">Continue <span>→</span></button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(1)">Continue <span>→</span></button>
       </div>
     </div>
 
@@ -768,8 +768,8 @@ footer a { color: var(--teal-lt); text-decoration: none; }
         </div>
       </div>
       <div class="form-nav">
-        <button class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
-        <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+        <button type="button" class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
       </div>
     </div>
 
@@ -847,8 +847,8 @@ footer a { color: var(--teal-lt); text-decoration: none; }
         </div>
       </div>
       <div class="form-nav">
-        <button class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
-        <button class="btn btn-primary" onclick="nextStep(3)">Review & Submit →</button>
+        <button type="button" class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Review & Submit →</button>
       </div>
     </div>
 
@@ -877,8 +877,8 @@ footer a { color: var(--teal-lt); text-decoration: none; }
         <div id="submit-status" aria-live="polite"></div>
       </div>
       <div class="form-nav">
-        <button class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
-        <button class="btn btn-submit" id="submit-btn" onclick="submitForm()">
+        <button type="button" class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
+        <button type="button" class="btn btn-submit" id="submit-btn" onclick="submitForm()">
           ✓ Submit Registration
         </button>
       </div>
@@ -930,6 +930,13 @@ function nextStep(from) {
 function prevStep(from) {
   goToStep(from - 1);
 }
+function focusFirstError(stepNumber) {
+  const step = document.getElementById('step-' + stepNumber);
+  if (!step) return;
+  const first = step.querySelector('.error, .field.has-error input, .field.has-error select, #track-error[style*="block"], #delivery-error[style*="block"]');
+  if (first && typeof first.focus === 'function') first.focus();
+}
+
 function goToStep(n) {
   document.getElementById('step-' + currentStep).classList.remove('active');
   // update nodes
@@ -948,7 +955,8 @@ function goToStep(n) {
 function validateStep(n) {
   let ok = true;
   if (n === 1) {
-    ok = req('fname') & req('lname') & reqEmail('email') & reqSelect('role', 'f-role') & req('org');
+    ok = !!(req('fname') && req('lname') && reqEmail('email') && reqSelect('role', 'f-role') && req('org'));
+    if (!ok) focusFirstError(1);
   }
   if (n === 2) {
     const tracks = document.querySelectorAll('#track-group input:checked');
@@ -966,6 +974,7 @@ function validateStep(n) {
       document.getElementById('delivery-error').style.display = 'none';
     }
   }
+  if (!ok && n === 2) focusFirstError(2);
   return !!ok;
 }
 function req(id) {
