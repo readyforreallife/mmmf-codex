@@ -24,6 +24,8 @@
     .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
     header{padding:22px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(16,29,52,.82);backdrop-filter:blur(10px);z-index:10}
     .top{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .brand-wrap{display:flex;align-items:center;gap:14px}
+    .logo{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,.25))}
     .ey{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:700}
     .brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900}
     .brand em{font-style:italic;color:var(--gold2)}
@@ -63,9 +65,12 @@
 <body>
   <header>
     <div class="wrap top">
-      <div>
-        <div class="ey">Modern Manners & Mental Fortitude</div>
-        <div class="brand"><em>MMMF</em> Program Repository</div>
+      <div class="brand-wrap">
+        <img class="logo" src="assets/mmmf-site-mark.svg" alt="MMMF logo">
+        <div>
+          <div class="ey">Modern Manners & Mental Fortitude</div>
+          <div class="brand"><em>MMMF</em> Program Repository</div>
+        </div>
       </div>
       <div class="meta">readyforreal.life<br>Michael R. Terry · Founder</div>
     </div>
@@ -82,6 +87,7 @@
           <a class="btn secondary" href="docs/index.html">Browse Deliverables</a>
           <a class="btn secondary" href="data/mmmf-curriculum.json">View Curriculum JSON</a>
         </div>
+        <div style="margin-top:18px;color:#c8d1df;line-height:1.8;">Questions or partnership inquiries: <a href="mailto:mikeyterry44@gmail.com" style="color:#e6bc5d;text-decoration:none;font-weight:700;">mikeyterry44@gmail.com</a> · <a href="tel:+14358401896" style="color:#e6bc5d;text-decoration:none;font-weight:700;">(435) 840-1896</a></div>
       </div>
       <div class="hero-panel">
         <div class="ey">At a Glance</div>
@@ -125,10 +131,10 @@
       <div class="ey">Included Materials</div>
       <h2 class="section-title">Core deliverables in this repo.</h2>
       <div class="deliverables">
-        <div class="deliverable"><strong>Teach the Teacher Slide Deck</strong><span>Presentation for facilitator onboarding and guided training.</span></div>
+        <div class="deliverable"><strong>Teach-the-Teacher Slide Deck</strong><span>Presentation for facilitator onboarding and guided training.</span></div>
         <div class="deliverable"><strong>Facilitator Handbook</strong><span>Guide for delivery, planning, and implementation support.</span></div>
         <div class="deliverable"><strong>Participant Workbook</strong><span>Activities, prompts, and learner-facing practice pages.</span></div>
-        <div class="deliverable"><strong>Certification Agreement</strong><span>Facilitator licensing and certification materials.</span></div>
+        <div class="deliverable"><strong>Facilitator Certification Agreement</strong><span>Facilitator licensing and certification materials.</span></div>
         <div class="deliverable"><strong>Scenario Cards</strong><span>Printable prompts for practice and transfer work.</span></div>
         <div class="deliverable"><strong>Manners in Motion Cards</strong><span>Printable challenge cards for facilitation and reflection.</span></div>
         <div class="deliverable"><strong>Community One-Pager</strong><span>Program overview for schools, families, and partners.</span></div>
@@ -137,6 +143,6 @@
     </section>
   </main>
 
-  <footer class="wrap">© Michael R. Terry · Modern Manners & Mental Fortitude · Repository landing page for the public MMMF resource set.</footer>
+  <footer class="wrap">© Michael R. Terry · Modern Manners & Mental Fortitude · For speaking, school adoption, or facilitator inquiries: <a href="mailto:mikeyterry44@gmail.com" style="color:#e6bc5d;text-decoration:none;">mikeyterry44@gmail.com</a></footer>
 </body>
 </html>
