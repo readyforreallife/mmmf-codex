@@ -3,20 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MMMF Codex</title>
-  <meta http-equiv="refresh" content="0; url=web/index.html">
-  <link rel="canonical" href="web/index.html">
+  <title>Modern Manners & Mental Fortitude</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #0f1d32; color: #fff; margin: 0; display: grid; min-height: 100vh; place-items: center; }
-    main { text-align: center; padding: 32px; }
-    a { color: #e8b84b; }
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap');
+    :root {
+      --navy:#101d34;
+      --navy2:#1a2c4a;
+      --navy3:#274064;
+      --gold:#c89b3c;
+      --gold2:#e6bc5d;
+      --paper:#f6f1e7;
+      --ink:#1f2937;
+      --muted:#7a8597;
+      --line:rgba(255,255,255,.12);
+      --card:rgba(255,255,255,.06);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'DM Sans',sans-serif;background:linear-gradient(180deg,var(--navy) 0%,#122543 45%,#1d2f4e 100%);color:#fff}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(200,155,60,.12),transparent 35%),radial-gradient(circle at 85% 18%,rgba(24,136,120,.14),transparent 30%),radial-gradient(circle at 50% 100%,rgba(255,255,255,.04),transparent 45%);pointer-events:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+    header{padding:22px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(16,29,52,.82);backdrop-filter:blur(10px);z-index:10}
+    .top{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .ey{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:700}
+    .brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900}
+    .brand em{font-style:italic;color:var(--gold2)}
+    .meta{font-size:.85rem;color:#b9c3d6;text-align:right;line-height:1.6}
+    main{padding:56px 0 72px}
+    .hero{display:grid;grid-template-columns:1.3fr .9fr;gap:28px;align-items:stretch}
+    .hero-copy{padding:24px 0}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,6vw,5rem);line-height:1.02;margin:14px 0 14px}
+    .hero h1 em{font-style:italic;color:var(--gold2)}
+    .lede{font-size:1.08rem;line-height:1.8;max-width:720px;color:#c2cad8}
+    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:700;border:1px solid var(--line)}
+    .btn.primary{background:var(--gold);color:#18263f;border-color:transparent}
+    .btn.secondary{background:rgba(255,255,255,.06);color:#fff}
+    .hero-panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 40px rgba(0,0,0,.22)}
+    .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px}
+    .stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold2);line-height:1}
+    .stat-label{font-size:.78rem;color:#cad3e1;margin-top:6px}
+    section{margin-top:52px}
+    .section-title{font-family:'Playfair Display',serif;font-size:2rem;margin:0 0 10px}
+    .section-copy{color:#c2cad8;line-height:1.75;max-width:720px;margin-bottom:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+    .card h3{font-family:'Playfair Display',serif;font-size:1.25rem;margin:10px 0 8px}
+    .card p{color:#bfc8d8;line-height:1.7;font-size:.95rem}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(200,155,60,.14);color:var(--gold2);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .linkline{display:inline-block;margin-top:14px;color:var(--gold2);font-weight:700;text-decoration:none}
+    .deliverables{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+    .deliverable{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:16px}
+    .deliverable strong{display:block;margin-bottom:6px}
+    .deliverable span{color:#c2cad8;font-size:.92rem;line-height:1.6}
+    footer{padding:28px 0 56px;color:#aeb8ca;font-size:.85rem}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.meta{text-align:left}}
   </style>
 </head>
 <body>
-  <main>
-    <h1>Modern Manners &amp; Mental Fortitude</h1>
-    <p>Redirecting to the program hub.</p>
-    <p><a href="web/index.html">Open the hub</a></p>
+  <header>
+    <div class="wrap top">
+      <div>
+        <div class="ey">Modern Manners & Mental Fortitude</div>
+        <div class="brand"><em>MMMF</em> Program Repository</div>
+      </div>
+      <div class="meta">readyforreal.life<br>Michael R. Terry · Founder</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="ey">Real-World Life Skills Program</div>
+        <h1>Built to <em>Teach</em>,<br>Organize, and Share.</h1>
+        <p class="lede">This repository brings together the MMMF program hub, facilitator tools, printable materials, and structured curriculum data in one clean public-facing home. Start with the hub, open the document library, or go straight to the curriculum data.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="web/index.html">Open Program Hub</a>
+          <a class="btn secondary" href="docs/index.html">Browse Deliverables</a>
+          <a class="btn secondary" href="data/mmmf-curriculum.json">View Curriculum JSON</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="ey">At a Glance</div>
+        <p style="margin:8px 0 0;color:#cad3e1;line-height:1.8;">MMMF is organized around respectful communication, emotional regulation, decision-making under pressure, and accountability and repair.</p>
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-num">3</div><div class="stat-label">Web experiences</div></div>
+          <div class="stat"><div class="stat-num">8</div><div class="stat-label">Core deliverables</div></div>
+          <div class="stat"><div class="stat-num">4</div><div class="stat-label">Program pillars</div></div>
+          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Structured curriculum file</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="ey">Start Here</div>
+      <h2 class="section-title">Pick the part you need.</h2>
+      <p class="section-copy">The landing page now points people to the right part of the MMMF system depending on whether they need the web experience, facilitator resources, or downloadable files.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="chip">Hub</span>
+          <h3>Program Hub</h3>
+          <p>The main browser-based entry point for the repository, linking out to the teacher portal, cards, intake form, and document library.</p>
+          <a class="linkline" href="web/index.html">Open the hub →</a>
+        </div>
+        <div class="card">
+          <span class="chip">Documents</span>
+          <h3>Deliverables Library</h3>
+          <p>A browsable document page with direct file actions for presentation decks, handbooks, cards, printable forms, and one-pagers.</p>
+          <a class="linkline" href="docs/index.html">Open the library →</a>
+        </div>
+        <div class="card">
+          <span class="chip">Data</span>
+          <h3>Curriculum JSON</h3>
+          <p>A structured machine-readable version of the curriculum for future tools, search, automation, and app development.</p>
+          <a class="linkline" href="data/mmmf-curriculum.json">Open the data file →</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="ey">Included Materials</div>
+      <h2 class="section-title">Core deliverables in this repo.</h2>
+      <div class="deliverables">
+        <div class="deliverable"><strong>Teach the Teacher Slide Deck</strong><span>Presentation for facilitator onboarding and guided training.</span></div>
+        <div class="deliverable"><strong>Facilitator Handbook</strong><span>Guide for delivery, planning, and implementation support.</span></div>
+        <div class="deliverable"><strong>Participant Workbook</strong><span>Activities, prompts, and learner-facing practice pages.</span></div>
+        <div class="deliverable"><strong>Certification Agreement</strong><span>Facilitator licensing and certification materials.</span></div>
+        <div class="deliverable"><strong>Scenario Cards</strong><span>Printable prompts for practice and transfer work.</span></div>
+        <div class="deliverable"><strong>Manners in Motion Cards</strong><span>Printable challenge cards for facilitation and reflection.</span></div>
+        <div class="deliverable"><strong>Community One-Pager</strong><span>Program overview for schools, families, and partners.</span></div>
+        <div class="deliverable"><strong>Printable Registration Form</strong><span>Paper-friendly intake form for non-digital use.</span></div>
+      </div>
+    </section>
   </main>
+
+  <footer class="wrap">© Michael R. Terry · Modern Manners & Mental Fortitude · Repository landing page for the public MMMF resource set.</footer>
 </body>
 </html>
