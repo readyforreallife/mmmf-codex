@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMMF — Program Registration & Intake Form</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --navy:    #111E35;
+  --navy2:   #1B2A4A;
+  --navy3:   #1E3A5F;
+  --navy4:   #243B5E;
+  --gold:    #C89B3C;
+  --gold-lt: #E8B84B;
+  --gold-pale: rgba(200,155,60,0.08);
+  --teal:    #0D7377;
+  --teal-lt: #14A085;
+  --white:   #FFFFFF;
+  --off-w:   #F5F4F0;
+  --gray:    #6B7280;
+  --gray-lt: #9CA3AF;
+  --border:  rgba(255,255,255,0.09);
+  --input-bg: rgba(255,255,255,0.04);
+  --input-border: rgba(255,255,255,0.12);
+  --input-focus: rgba(200,155,60,0.5);
+  --red: #EF4444;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND TEXTURE ──────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 90% 10%, rgba(13,115,119,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 5% 90%, rgba(200,155,60,0.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HEADER ──────────────────────────────────────────────────────── */
+.site-header {
+  position: relative;
+  z-index: 10;
+  background: rgba(17,30,53,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+}
+.header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
+  gap: 1rem;
+}
+.brand .eyebrow {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+.brand h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--white);
+  line-height: 1.2;
+}
+.brand h1 em { color: var(--gold); font-style: italic; }
+.header-tag {
+  font-size: 0.68rem;
+  color: var(--gray);
+  text-align: right;
+  line-height: 1.7;
+}
+
+/* ── HERO ────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 2rem;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding: 0.35rem 1rem;
+  border: 1px solid rgba(200,155,60,0.3);
+  border-radius: 99px;
+  background: var(--gold-pale);
+}
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+}
+.hero h2 em { color: var(--gold); font-style: italic; }
+.hero p {
+  font-size: 0.95rem;
+  color: var(--gray-lt);
+  max-width: 540px;
+  margin: 0 auto 0.5rem;
+  line-height: 1.7;
+}
+
+/* ── PROGRESS BAR ────────────────────────────────────────────────── */
+.progress-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.progress-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  cursor: default;
+}
+.step-node::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: -50%;
+  right: 50%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.step-node:first-child::before { display: none; }
+.step-node.done::before,
+.step-node.active::before { background: var(--gold); }
+
+.step-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--navy3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--gray);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.step-node.active .step-circle {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--navy);
+}
+.step-node.done .step-circle {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: var(--white);
+}
+.step-label {
+  font-size: 0.58rem;
+  color: var(--gray);
+  margin-top: 0.35rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.step-node.active .step-label { color: var(--gold-lt); }
+.step-node.done .step-label { color: var(--teal-lt); }
+
+/* ── FORM CARD ───────────────────────────────────────────────────── */
+.form-card {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+}
+.form-panel {
+  background: rgba(30,58,95,0.35);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+.panel-header {
+  padding: 1.5rem 2rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.panel-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.panel-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  font-weight: 700;
+}
+.panel-header p {
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin-top: 0.1rem;
+  line-height: 1.5;
+}
+.panel-body { padding: 1.75rem 2rem; }
+
+/* Steps */
+.form-step { display: none; }
+.form-step.active { display: block; animation: fadeUp 0.35s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── FORM FIELDS ─────────────────────────────────────────────────── */
+.field-grid { display: grid; gap: 1.25rem; }
+.field-grid-2 { grid-template-columns: 1fr 1fr; }
+@media (max-width: 560px) { .field-grid-2 { grid-template-columns: 1fr; } }
+
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-lt);
+  letter-spacing: 0.04em;
+}
+.field label .req { color: var(--gold); margin-left: 2px; }
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+  width: 100%;
+  appearance: none;
+}
+.field input::placeholder,
+.field textarea::placeholder { color: var(--gray); }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--input-focus);
+  background: rgba(255,255,255,0.07);
+}
+.field input.error,
+.field select.error,
+.field textarea.error {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.2);
+}
+.field .error-msg {
+  font-size: 0.7rem;
+  color: var(--red);
+  display: none;
+}
+.field.has-error .error-msg { display: block; }
+
+.field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+.field select option { background: var(--navy2); color: var(--white); }
+
+.field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+/* Checkbox group */
+.check-group { display: flex; flex-direction: column; gap: 0.55rem; }
+.check-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s;
+  user-select: none;
+}
+.check-option:hover { border-color: rgba(200,155,60,0.3); background: rgba(200,155,60,0.05); }
+.check-option input[type="checkbox"],
+.check-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 1px;
+  padding: 0;
+  border: none;
+}
+.check-option.selected {
+  border-color: var(--gold);
+  background: var(--gold-pale);
+}
+.check-option .opt-text { font-size: 0.85rem; color: var(--white); line-height: 1.5; }
+.check-option .opt-sub { font-size: 0.72rem; color: var(--gray); display: block; margin-top: 0.1rem; }
+
+/* Radio inline */
+.radio-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.radio-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--gray-lt);
+  transition: all 0.18s;
+  user-select: none;
+}
+.radio-pill:hover { border-color: rgba(200,155,60,0.35); color: var(--white); }
+.radio-pill input { display: none; }
+.radio-pill.selected { border-color: var(--gold); background: var(--gold-pale); color: var(--gold-lt); font-weight: 600; }
+
+/* Scale */
+.scale-row { display: flex; gap: 0.4rem; align-items: stretch; }
+.scale-btn {
+  flex: 1;
+  padding: 0.6rem 0.3rem;
+  border: 1.5px solid var(--input-border);
+  border-radius: 7px;
+  background: var(--input-bg);
+  color: var(--gray);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.18s;
+  text-align: center;
+}
+.scale-btn:hover { border-color: var(--gold); color: var(--white); }
+.scale-btn.selected { border-color: var(--gold); background: var(--gold-pale); color: var(--gold-lt); }
+.scale-labels { display: flex; justify-content: space-between; font-size: 0.62rem; color: var(--gray); margin-top: 0.3rem; }
+
+/* Divider */
+.field-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0.5rem 0;
+}
+
+/* Info callout */
+.info-callout {
+  background: rgba(13,115,119,0.12);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+}
+.info-callout p { font-size: 0.8rem; color: var(--gray-lt); line-height: 1.6; }
+.info-callout strong { color: var(--teal-lt); }
+
+/* ── NAV BUTTONS ─────────────────────────────────────────────────── */
+.form-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem 1.5rem;
+  border-top: 1px solid var(--border);
+  gap: 1rem;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--gray);
+  border: 1.5px solid var(--border);
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--white); }
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  border: 1.5px solid var(--gold);
+}
+.btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,155,60,0.3); }
+.btn-primary:active { transform: translateY(0); }
+.btn-submit {
+  background: linear-gradient(135deg, var(--teal), var(--teal-lt));
+  color: var(--white);
+  border: none;
+  font-size: 0.95rem;
+  padding: 0.8rem 2rem;
+}
+.btn-submit:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(13,115,119,0.4); }
+.nav-note { font-size: 0.7rem; color: var(--gray); }
+
+/* ── SUCCESS STATE ───────────────────────────────────────────────── */
+#success-panel {
+  display: none;
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  text-align: center;
+  animation: fadeUp 0.5s ease;
+}
+#success-panel .success-card {
+  background: rgba(30,58,95,0.4);
+  border: 1px solid rgba(13,115,119,0.4);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(8px);
+}
+.success-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.success-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.success-card h2 em { color: var(--gold); font-style: italic; }
+.success-card p { font-size: 0.9rem; color: var(--gray-lt); line-height: 1.7; max-width: 500px; margin: 0 auto 1.5rem; }
+.success-details {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+.success-details .det { font-size: 0.82rem; color: var(--gray-lt); }
+.success-details .det strong { color: var(--gold-lt); }
+.next-steps { margin-top: 1.5rem; }
+.next-steps h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; color: var(--teal-lt); text-transform: uppercase; margin-bottom: 0.75rem; }
+.next-steps ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; max-width: 420px; margin: 0 auto; }
+.next-steps li { font-size: 0.82rem; color: var(--gray-lt); display: flex; gap: 0.5rem; align-items: flex-start; }
+.next-steps li::before { content: "→"; color: var(--gold); flex-shrink: 0; }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.68rem;
+  color: var(--gray);
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+}
+footer a { color: var(--teal-lt); text-decoration: none; }
+
+/* ── REVIEW SUMMARY ──────────────────────────────────────────────── */
+.review-grid { display: flex; flex-direction: column; gap: 1rem; }
+.review-section {
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+.review-section h4 {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.review-row { display: flex; gap: 0.75rem; padding: 0.25rem 0; font-size: 0.82rem; }
+.review-label { color: var(--gray); min-width: 140px; flex-shrink: 0; }
+.review-val { color: var(--white); }
+
+@media (max-width: 600px) {
+  .panel-body { padding: 1.25rem 1rem; }
+  .panel-header { padding: 1.25rem 1rem 1rem; }
+  .form-nav { padding: 1rem; flex-wrap: wrap; }
+  .hero { padding: 2rem 1rem 1.5rem; }
+  .form-card { padding: 0 1rem; }
+  .progress-wrap { padding: 0 1rem 1.25rem; }
+  .step-label { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="eyebrow">Modern Manners & Mental Fortitude</div>
+      <h1><em>MMMF</em> Program Registration</h1>
+    </div>
+    <div class="header-tag">readyforreal.life<br>Michael R. Terry</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">📋 Registration & Intake</div>
+  <h2>Register for <em>MMMF</em></h2>
+  <p>Complete this form to enroll in the Modern Manners & Mental Fortitude program. Michael R. Terry will follow up within 2 business days to confirm your spot and next steps.</p>
+</section>
+
+<!-- Progress -->
+<div class="progress-wrap">
+  <div class="progress-steps">
+    <div class="step-node active" id="sn-1">
+      <div class="step-circle">1</div>
+      <div class="step-label">You & Your Role</div>
+    </div>
+    <div class="step-node" id="sn-2">
+      <div class="step-circle">2</div>
+      <div class="step-label">Program Details</div>
+    </div>
+    <div class="step-node" id="sn-3">
+      <div class="step-circle">3</div>
+      <div class="step-label">Your Students</div>
+    </div>
+    <div class="step-node" id="sn-4">
+      <div class="step-circle">4</div>
+      <div class="step-label">Review & Submit</div>
+    </div>
+  </div>
+</div>
+
+<!-- Form card -->
+<div class="form-card" id="form-card">
+  <div class="form-panel">
+
+    <!-- ── STEP 1: About You ────────────────────────────────────── -->
+    <div class="form-step active" id="step-1">
+      <div class="panel-header">
+        <div class="panel-num">1</div>
+        <div>
+          <h3>About You</h3>
+          <p>Tell us who you are and how you found MMMF.</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="field-grid">
+
+          <div class="field-grid field-grid-2">
+            <div class="field" id="f-fname">
+              <label>First Name <span class="req">*</span></label>
+              <input type="text" id="fname" placeholder="First name" autocomplete="given-name">
+              <span class="error-msg">Please enter your first name.</span>
+            </div>
+            <div class="field" id="f-lname">
+              <label>Last Name <span class="req">*</span></label>
+              <input type="text" id="lname" placeholder="Last name" autocomplete="family-name">
+              <span class="error-msg">Please enter your last name.</span>
+            </div>
+          </div>
+
+          <div class="field-grid field-grid-2">
+            <div class="field" id="f-email">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+              <span class="error-msg">Please enter a valid email address.</span>
+            </div>
+            <div class="field" id="f-phone">
+              <label>Phone Number</label>
+              <input type="tel" id="phone" placeholder="(___) ___-____" autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="field" id="f-role">
+            <label>Your Role <span class="req">*</span></label>
+            <select id="role">
+              <option value="" disabled selected>Select your role…</option>
+              <option>K–12 Teacher</option>
+              <option>School Counselor</option>
+              <option>School Administrator</option>
+              <option>University / College Instructor</option>
+              <option>Community Program Facilitator</option>
+              <option>Youth Organization Leader</option>
+              <option>Faith Community Leader</option>
+              <option>Parent / Guardian</option>
+              <option>Other Educator or Coach</option>
+            </select>
+            <span class="error-msg">Please select your role.</span>
+          </div>
+
+          <div class="field" id="f-org">
+            <label>School or Organization <span class="req">*</span></label>
+            <input type="text" id="org" placeholder="Name of your school, district, or organization">
+            <span class="error-msg">Please enter your organization name.</span>
+          </div>
+
+          <div class="field">
+            <label>City & State</label>
+            <input type="text" id="location" placeholder="e.g., Tooele, Utah">
+          </div>
+
+          <div class="field">
+            <label>How did you hear about MMMF?</label>
+            <select id="referral">
+              <option value="" disabled selected>Select one…</option>
+              <option>Colleague or coworker</option>
+              <option>School administrator</option>
+              <option>readyforreal.life website</option>
+              <option>Social media (Instagram)</option>
+              <option>Professional conference or event</option>
+              <option>Word of mouth</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-nav">
+        <span class="nav-note">Step 1 of 4</span>
+        <button class="btn btn-primary" onclick="nextStep(1)">Continue <span>→</span></button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Program Details ──────────────────────────────── -->
+    <div class="form-step" id="step-2">
+      <div class="panel-header">
+        <div class="panel-num" style="background:var(--teal);color:var(--white);">2</div>
+        <div>
+          <h3>Program Details</h3>
+          <p>Tell us about your intended implementation.</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="field-grid">
+
+          <div class="field" id="f-track">
+            <label>Implementation Track <span class="req">*</span> <span style="color:var(--gray);font-weight:400;">(select all that apply)</span></label>
+            <div class="check-group" id="track-group">
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Grades 7–8">
+                <div class="opt-text">🏫 Grades 7–8 <span class="opt-sub">Foundational · 1-term intro · Introductory complexity</span></div>
+              </label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Grades 9–12">
+                <div class="opt-text">🎓 Grades 9–12 <span class="opt-sub">Levels up each year · Spiral design · Transfer-focused</span></div>
+              </label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Community Youth">
+                <div class="opt-text">👦 Community Youth <span class="opt-sub">After-school, faith orgs, community centers · Flexible delivery</span></div>
+              </label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Community Adult">
+                <div class="opt-text">👤 Community Adult <span class="opt-sub">Workplace, family, personal development · Adult contexts</span></div>
+              </label>
+            </div>
+            <span class="error-msg" id="track-error">Please select at least one implementation track.</span>
+          </div>
+
+          <hr class="field-divider">
+
+          <div class="field" id="f-delivery">
+            <label>Preferred Delivery Format <span class="req">*</span></label>
+            <div class="radio-row" id="delivery-group">
+              <label class="radio-pill" onclick="selectPill(this, 'delivery-group')"><input type="radio" name="delivery" value="Daily elective (45–60 min)">Daily elective</label>
+              <label class="radio-pill" onclick="selectPill(this, 'delivery-group')"><input type="radio" name="delivery" value="A/B block (90 min)">A/B block</label>
+              <label class="radio-pill" onclick="selectPill(this, 'delivery-group')"><input type="radio" name="delivery" value="Advisory / enrichment block">Advisory block</label>
+              <label class="radio-pill" onclick="selectPill(this, 'delivery-group')"><input type="radio" name="delivery" value="Community workshop series">Workshop series</label>
+              <label class="radio-pill" onclick="selectPill(this, 'delivery-group')"><input type="radio" name="delivery" value="Online / hybrid">Online / hybrid</label>
+              <label class="radio-pill" onclick="selectPill(this, 'delivery-group')"><input type="radio" name="delivery" value="Not sure yet">Not sure yet</label>
+            </div>
+            <span class="error-msg" id="delivery-error">Please select a delivery format.</span>
+          </div>
+
+          <div class="field-grid field-grid-2">
+            <div class="field">
+              <label>Anticipated Start Date</label>
+              <input type="date" id="start-date">
+            </div>
+            <div class="field">
+              <label>Estimated Class / Group Size</label>
+              <select id="class-size">
+                <option value="" disabled selected>Select…</option>
+                <option>Under 10</option>
+                <option>10–15</option>
+                <option>16–20</option>
+                <option>21–25</option>
+                <option>26–30</option>
+                <option>Over 30</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Have you completed the MMMF Teach the Teacher Training?</label>
+            <div class="radio-row" id="training-group">
+              <label class="radio-pill" onclick="selectPill(this, 'training-group')"><input type="radio" name="training" value="Yes — fully certified">✅ Yes — certified</label>
+              <label class="radio-pill" onclick="selectPill(this, 'training-group')"><input type="radio" name="training" value="In progress">🔄 In progress</label>
+              <label class="radio-pill" onclick="selectPill(this, 'training-group')"><input type="radio" name="training" value="Not yet — interested">📋 Not yet</label>
+              <label class="radio-pill" onclick="selectPill(this, 'training-group')"><input type="radio" name="training" value="Requesting training info">📬 Send me info</label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Your Students / Participants ─────────────────── -->
+    <div class="form-step" id="step-3">
+      <div class="panel-header">
+        <div class="panel-num" style="background:var(--navy4);color:var(--gold);">3</div>
+        <div>
+          <h3>Your Students & Context</h3>
+          <p>Help us understand who you're serving so we can tailor your onboarding.</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="info-callout">
+          <p><strong>Why we ask this:</strong> Your answers help Michael R. Terry prepare any supplemental resources, scenario sets, or pacing guidance specific to your population before your first session.</p>
+        </div>
+        <div class="field-grid">
+
+          <div class="field">
+            <label>Describe your student or participant population</label>
+            <textarea id="population" placeholder="e.g., 9th graders in a Title I high school, 60% ELL students, high rates of conflict in the hallways…"></textarea>
+          </div>
+
+          <div class="field">
+            <label>What is the most pressing soft-skill gap you see in your students/participants?</label>
+            <div class="check-group" id="gap-group">
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Respectful communication">🤝 Respectful communication (tone, body language, listening)</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Emotional regulation">🧘 Emotional regulation (managing triggers, staying calm)</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Decision-making under pressure">⚖️ Decision-making under pressure</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Digital citizenship">📱 Digital citizenship (online behavior, permanence)</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Accountability and repair">🔁 Accountability and repair (owning mistakes, follow-through)</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="All of the above">All of the above — they need the full program</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>How confident are you in your ability to facilitate SEL / life skills content right now?</label>
+            <div class="scale-row" id="confidence-scale">
+              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="1">1</button>
+              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="2">2</button>
+              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="3">3</button>
+              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="4">4</button>
+              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="5">5</button>
+            </div>
+            <div class="scale-labels"><span>Not confident</span><span>Very confident</span></div>
+          </div>
+
+          <div class="field">
+            <label>What support would help you most before your first MMMF session?</label>
+            <div class="check-group" id="support-group">
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="One-on-one coaching call with Michael">📞 One-on-one coaching call with Michael</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Sample lesson plan for my track">📄 Sample lesson plan for my specific track</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Parent / community communication template">📬 Parent or community communication template</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="Access to full digital curriculum portal">🖥️ Access to the full digital curriculum portal</label>
+              <label class="check-option" onclick="toggleCheck(this)">
+                <input type="checkbox" value="I'm good — just need the materials">✅ I'm good — just need the materials</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Anything else you'd like Michael to know before your first session?</label>
+            <textarea id="notes" placeholder="Additional context, questions, constraints, or goals…" style="min-height:80px;"></textarea>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(3)">Review & Submit →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Review ───────────────────────────────────────── -->
+    <div class="form-step" id="step-4">
+      <div class="panel-header">
+        <div class="panel-num" style="background:linear-gradient(135deg,var(--teal),var(--teal-lt));color:var(--white);">4</div>
+        <div>
+          <h3>Review & Submit</h3>
+          <p>Confirm your information before submitting.</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="review-grid" id="review-content">
+          <!-- populated by JS -->
+        </div>
+
+        <div style="margin-top:1.5rem;">
+          <label class="check-option" id="consent-check" onclick="toggleConsent(this)" style="align-items:flex-start; gap:0.75rem;">
+            <input type="checkbox" id="consent">
+            <div class="opt-text" style="font-size:0.78rem;color:var(--gray-lt);line-height:1.6;">
+              I understand that by submitting this form I am requesting enrollment in the MMMF program. My information will be used solely by Michael R. Terry to process my registration and follow up regarding my program onboarding. I have read and agree to the <strong style="color:var(--gold);">MMMF program terms</strong> available at readyforreal.life.
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
+        <button class="btn btn-submit" id="submit-btn" onclick="submitForm()">
+          ✓ Submit Registration
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /form-panel -->
+</div><!-- /form-card -->
+
+<!-- Success state -->
+<div id="success-panel">
+  <div class="success-card">
+    <span class="success-icon">🏅</span>
+    <h2>You're <em>Registered!</em></h2>
+    <p>Your MMMF registration has been received. Michael R. Terry will follow up within 2 business days to confirm your spot and discuss next steps for your implementation track.</p>
+    <div class="success-details" id="success-summary"></div>
+    <div class="next-steps">
+      <h4>What happens next</h4>
+      <ul>
+        <li>Michael reviews your intake and reaches out within 2 business days</li>
+        <li>You'll receive confirmation with your onboarding materials</li>
+        <li>If you haven't completed teacher training, you'll be enrolled in the next cohort</li>
+        <li>Your program materials will be delivered before your first session</li>
+      </ul>
+    </div>
+    <div style="margin-top:2rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+      <a href="https://readyforreal.life" class="btn btn-primary" target="_blank">Visit readyforreal.life</a>
+      <button class="btn btn-ghost" onclick="resetForm()">Submit Another Registration</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="https://readyforreal.life" target="_blank">readyforreal.life</a> · (435) 840-1896 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ec818587899598899e9e95d8d8ac8b818d8580c28f8381">[email&#160;protected]</a></p>
+  <p style="margin-top:0.3rem;color:#374151;">Protected intellectual property. Registration data is used solely for program enrollment purposes.</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+let currentStep = 1;
+const totalSteps = 4;
+const formData = {};
+
+// ── Step navigation ───────────────────────────────────────────────
+function nextStep(from) {
+  if (!validateStep(from)) return;
+  collectStep(from);
+  if (from === 3) { buildReview(); }
+  goToStep(from + 1);
+}
+function prevStep(from) {
+  goToStep(from - 1);
+}
+function goToStep(n) {
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  // update nodes
+  for (let i = 1; i <= totalSteps; i++) {
+    const node = document.getElementById('sn-' + i);
+    node.classList.remove('active', 'done');
+    if (i < n) node.classList.add('done');
+    else if (i === n) node.classList.add('active');
+  }
+  currentStep = n;
+  document.getElementById('step-' + n).classList.add('active');
+  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Validation ────────────────────────────────────────────────────
+function validateStep(n) {
+  let ok = true;
+  if (n === 1) {
+    ok = req('fname') & req('lname') & reqEmail('email') & reqSelect('role', 'f-role') & req('org');
+  }
+  if (n === 2) {
+    const tracks = document.querySelectorAll('#track-group input:checked');
+    if (tracks.length === 0) {
+      document.getElementById('track-error').style.display = 'block';
+      ok = false;
+    } else {
+      document.getElementById('track-error').style.display = 'none';
+    }
+    const delivery = document.querySelector('#delivery-group input:checked');
+    if (!delivery) {
+      document.getElementById('delivery-error').style.display = 'block';
+      ok = false;
+    } else {
+      document.getElementById('delivery-error').style.display = 'none';
+    }
+  }
+  return !!ok;
+}
+function req(id) {
+  const el = document.getElementById(id);
+  const wrap = el.closest('.field');
+  if (!el.value.trim()) {
+    wrap.classList.add('has-error'); el.classList.add('error'); return false;
+  }
+  wrap.classList.remove('has-error'); el.classList.remove('error'); return true;
+}
+function reqEmail(id) {
+  const el = document.getElementById(id);
+  const wrap = el.closest('.field');
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+  if (!ok) { wrap.classList.add('has-error'); el.classList.add('error'); return false; }
+  wrap.classList.remove('has-error'); el.classList.remove('error'); return true;
+}
+function reqSelect(id, wrapId) {
+  const el = document.getElementById(id);
+  const wrap = document.getElementById(wrapId) || el.closest('.field');
+  if (!el.value) {
+    wrap.classList.add('has-error'); el.classList.add('error'); return false;
+  }
+  wrap.classList.remove('has-error'); el.classList.remove('error'); return true;
+}
+
+// ── Data collection ───────────────────────────────────────────────
+function collectStep(n) {
+  if (n === 1) {
+    formData.fname    = v('fname');
+    formData.lname    = v('lname');
+    formData.email    = v('email');
+    formData.phone    = v('phone');
+    formData.role     = v('role');
+    formData.org      = v('org');
+    formData.location = v('location');
+    formData.referral = v('referral');
+  }
+  if (n === 2) {
+    formData.tracks   = [...document.querySelectorAll('#track-group input:checked')].map(x=>x.value).join(', ');
+    formData.delivery = (document.querySelector('#delivery-group input:checked')||{}).value || '';
+    formData.startDate = v('start-date');
+    formData.classSize = v('class-size');
+    formData.training  = (document.querySelector('#training-group input:checked')||{}).value || '';
+  }
+  if (n === 3) {
+    formData.population  = v('population');
+    formData.gaps        = [...document.querySelectorAll('#gap-group input:checked')].map(x=>x.value).join(', ');
+    formData.confidence  = (document.querySelector('#confidence-scale .selected')||{}).dataset?.val || '';
+    formData.support     = [...document.querySelectorAll('#support-group input:checked')].map(x=>x.value).join(', ');
+    formData.notes       = v('notes');
+  }
+}
+function v(id) { return (document.getElementById(id)||{}).value || ''; }
+
+// ── Review builder ────────────────────────────────────────────────
+function buildReview() {
+  collectStep(3);
+  const el = document.getElementById('review-content');
+  el.innerHTML = `
+    <div class="review-section">
+      <h4>Your Information</h4>
+      <div class="review-row"><span class="review-label">Name</span><span class="review-val">${formData.fname} ${formData.lname}</span></div>
+      <div class="review-row"><span class="review-label">Email</span><span class="review-val">${formData.email}</span></div>
+      <div class="review-row"><span class="review-label">Phone</span><span class="review-val">${formData.phone || '—'}</span></div>
+      <div class="review-row"><span class="review-label">Role</span><span class="review-val">${formData.role}</span></div>
+      <div class="review-row"><span class="review-label">Organization</span><span class="review-val">${formData.org}</span></div>
+      <div class="review-row"><span class="review-label">Location</span><span class="review-val">${formData.location || '—'}</span></div>
+    </div>
+    <div class="review-section">
+      <h4>Program Details</h4>
+      <div class="review-row"><span class="review-label">Track(s)</span><span class="review-val">${formData.tracks || '—'}</span></div>
+      <div class="review-row"><span class="review-label">Delivery Format</span><span class="review-val">${formData.delivery || '—'}</span></div>
+      <div class="review-row"><span class="review-label">Start Date</span><span class="review-val">${formData.startDate || '—'}</span></div>
+      <div class="review-row"><span class="review-label">Class Size</span><span class="review-val">${formData.classSize || '—'}</span></div>
+      <div class="review-row"><span class="review-label">Training Status</span><span class="review-val">${formData.training || '—'}</span></div>
+    </div>
+    <div class="review-section">
+      <h4>Your Students & Context</h4>
+      <div class="review-row"><span class="review-label">Gaps Identified</span><span class="review-val">${formData.gaps || '—'}</span></div>
+      <div class="review-row"><span class="review-label">SEL Confidence</span><span class="review-val">${formData.confidence ? formData.confidence + ' / 5' : '—'}</span></div>
+      <div class="review-row"><span class="review-label">Support Needed</span><span class="review-val">${formData.support || '—'}</span></div>
+      ${formData.notes ? `<div class="review-row"><span class="review-label">Notes</span><span class="review-val">${formData.notes}</span></div>` : ''}
+    </div>`;
+}
+
+// ── Submit ────────────────────────────────────────────────────────
+function submitForm() {
+  const consent = document.getElementById('consent');
+  const cc = document.getElementById('consent-check');
+  if (!consent.checked) {
+    cc.style.borderColor = 'var(--red)';
+    cc.style.background = 'rgba(239,68,68,0.08)';
+    setTimeout(() => { cc.style.borderColor = ''; cc.style.background = ''; }, 2000);
+    return;
+  }
+  // Show success
+  document.getElementById('form-card').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  const sp = document.getElementById('success-panel');
+  sp.style.display = 'block';
+  document.getElementById('success-summary').innerHTML = `
+    <div class="det"><strong>Name:</strong> ${formData.fname} ${formData.lname}</div>
+    <div class="det"><strong>Email:</strong> ${formData.email}</div>
+    <div class="det"><strong>Organization:</strong> ${formData.org}</div>
+    <div class="det"><strong>Track(s):</strong> ${formData.tracks}</div>
+    <div class="det"><strong>Delivery:</strong> ${formData.delivery || 'TBD'}</div>`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetForm() {
+  document.getElementById('form-card').style.display = 'block';
+  document.querySelector('.progress-wrap').style.display = 'block';
+  document.getElementById('success-panel').style.display = 'none';
+  goToStep(1);
+}
+
+// ── UI helpers ────────────────────────────────────────────────────
+function toggleCheck(label) {
+  setTimeout(() => {
+    const cb = label.querySelector('input[type="checkbox"]');
+    label.classList.toggle('selected', cb.checked);
+  }, 0);
+}
+function selectPill(label, groupId) {
+  document.querySelectorAll('#' + groupId + ' .radio-pill').forEach(p => p.classList.remove('selected'));
+  setTimeout(() => label.classList.add('selected'), 0);
+}
+function selectScale(btn, groupId) {
+  document.querySelectorAll('#' + groupId + ' .scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.

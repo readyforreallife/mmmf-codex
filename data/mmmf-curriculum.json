@@ -1,0 +1,277 @@
+{
+  "program": {
+    "name": "Modern Manners & Mental Fortitude",
+    "abbreviation": "MMMF",
+    "version": "1.0",
+    "founder": {
+      "name": "Michael R. Terry",
+      "title": "Founder, MMMF · Utah Highway Patrol Sergeant · MAT Candidate",
+      "organization": "Columbia College of Missouri",
+      "honor_society": "Kappa Delta Pi (KDP)",
+      "website": "readyforreal.life",
+      "email": "mikeyterry44@gmail.com",
+      "phone": "(435) 840-1896"
+    },
+    "tagline": "The life skills course your students actually need.",
+    "mission": "Transfer, not coverage. Students leave able to apply concepts independently to unfamiliar, high-stakes situations.",
+    "duration": "16 weeks · 2 sessions per week",
+    "class_size": "20–25 students",
+    "standards_alignment": ["Utah CASEL", "Utah CCA Core Standards"],
+    "submitted": "August 2025",
+    "copyright": "© Michael R. Terry. This material is protected intellectual property."
+  },
+
+  "implementation_tracks": [
+    {
+      "id": "gr78",
+      "name": "Grades 7–8",
+      "label": "Foundational",
+      "icon": "🏫",
+      "description": "1 term per year. Introductory complexity. Peer, classroom, and family contexts.",
+      "key_notes": [
+        "Foundational level — shared vocabulary building",
+        "More modeling and think-alouds required",
+        "Emphasis on formative assessment and reflection journals",
+        "Introductory scenario complexity"
+      ]
+    },
+    {
+      "id": "gr912",
+      "name": "Grades 9–12",
+      "label": "Leveling Up Annually",
+      "icon": "🎓",
+      "description": "1 term per year. Complexity increases each grade. Spiral design ensures no content repeated at same level.",
+      "grade_progression": {
+        "grade_9": "Core concepts established. Familiar scenarios.",
+        "grade_10": "Layered complexity. Competing priorities introduced.",
+        "grade_11": "Dissimilar transfer. Workplace and digital dilemmas.",
+        "grade_12": "Full capstone, novel scenario, authentic audience."
+      }
+    },
+    {
+      "id": "community_youth",
+      "name": "Community Youth",
+      "label": "Outside School · Youth Program",
+      "icon": "👦",
+      "description": "Flexible delivery. Cohort-based or workshop format. Community centers, faith orgs, after-school.",
+      "key_notes": [
+        "No formal grading — growth documentation",
+        "Youth-relevant community scenarios",
+        "Flexible pacing to fit program schedule"
+      ]
+    },
+    {
+      "id": "community_adult",
+      "name": "Community Adult",
+      "label": "Outside School · Adult Program",
+      "icon": "👤",
+      "description": "Workplace, family, and personal development contexts. Same frameworks, adult-relevant scenarios.",
+      "key_notes": [
+        "Pre/post CASEL-adapted surveys for program evaluation",
+        "Weekend workshops or multi-week series",
+        "Co-workers, partners, authority figures as scenario contexts"
+      ]
+    }
+  ],
+
+  "core_pillars": [
+    {
+      "number": "01",
+      "title": "Respectful Communication",
+      "icon": "🤝",
+      "topics": ["Tone & body language", "Active listening", "I-statements & conflict repair", "Eye contact & nonverbal cues", "Authority & feedback response"]
+    },
+    {
+      "number": "02",
+      "title": "Emotional Regulation",
+      "icon": "🧘",
+      "topics": ["Trigger identification", "Pause–Label–Reframe–Respond routine", "Escalation vs. de-escalation", "Peer pressure & belonging", "Mindfulness & grounding"]
+    },
+    {
+      "number": "03",
+      "title": "Decision-Making Under Pressure",
+      "icon": "⚖️",
+      "topics": ["Pause–Options–Consequences–Choose framework", "Consequence mapping", "Short vs. long-term thinking", "Digital permanence", "Competing priorities"]
+    },
+    {
+      "number": "04",
+      "title": "Accountability & Repair",
+      "icon": "🔁",
+      "topics": ["Own it, fix it, follow through", "Integrity & trust-building", "Self-assessment cycles", "Personal growth targets", "Repair after mistakes"]
+    }
+  ],
+
+  "student_frameworks": {
+    "PLRR": {
+      "name": "Regulation Routine",
+      "full_name": "Pause–Label–Reframe–Respond",
+      "icon": "🧘",
+      "purpose": "Self-regulation under stress — used BEFORE decision-making",
+      "steps": [
+        { "letter": "P", "name": "PAUSE", "description": "Stop the automatic reaction. Create space before responding." },
+        { "letter": "L", "name": "LABEL", "description": "Name the emotion. What am I actually feeling right now?" },
+        { "letter": "R", "name": "REFRAME", "description": "Shift perspective. What is actually happening vs. what I assumed?" },
+        { "letter": "R", "name": "RESPOND", "description": "Choose deliberately — aligned with values and context." }
+      ],
+      "introduced_in": "Module 2",
+      "reinforced_in": ["Module 1", "Module 3", "Module 4", "Module 5"]
+    },
+    "POCC": {
+      "name": "Decision-Making Framework",
+      "full_name": "Pause–Options–Consequences–Choose",
+      "icon": "⚖️",
+      "purpose": "Structured choice-making under pressure and competing priorities",
+      "steps": [
+        { "letter": "P", "name": "PAUSE", "description": "Regulate first. Good decisions require cognitive space." },
+        { "letter": "O", "name": "OPTIONS", "description": "Identify multiple possible responses. What are my real choices?" },
+        { "letter": "C", "name": "CONSEQUENCES", "description": "Evaluate short and long-term outcomes. Who is affected and how?" },
+        { "letter": "C", "name": "CHOOSE", "description": "Select a response and justify it. Be able to explain the reasoning." }
+      ],
+      "introduced_in": "Module 2",
+      "reinforced_in": ["Module 3", "Module 4", "Module 5"],
+      "note": "Always teach PLRR before POCC. Students cannot make good decisions when dysregulated."
+    }
+  },
+
+  "modules": [
+    {
+      "number": "01",
+      "title": "Modern Manners",
+      "icon": "🎩",
+      "framework_focus": "PLRR intro",
+      "topics": ["Eye contact & greetings", "Cell phone etiquette", "Gratitude practices", "Context-appropriate behavior"],
+      "introduced_learning_targets": [1]
+    },
+    {
+      "number": "02",
+      "title": "Emotional Intelligence",
+      "icon": "🧠",
+      "framework_focus": "PLRR deep dive",
+      "topics": ["Self-awareness & triggers", "Stress & anxiety tools", "Mindfulness basics", "Regulation routines"],
+      "introduced_learning_targets": [2, 3]
+    },
+    {
+      "number": "03",
+      "title": "Conflict Navigation",
+      "icon": "🕊️",
+      "framework_focus": "PLRR + POCC",
+      "topics": ["Disagreement without disrespect", "Apologies & repair", "Boundaries", "Peer mediation"],
+      "introduced_learning_targets": [1, 2]
+    },
+    {
+      "number": "04",
+      "title": "Digital Citizenship",
+      "icon": "📱",
+      "framework_focus": "POCC focus",
+      "topics": ["Online tone & posting", "Digital permanence", "Reputation management", "Privacy & boundaries"],
+      "introduced_learning_targets": [4]
+    },
+    {
+      "number": "05",
+      "title": "Personal Growth",
+      "icon": "🌱",
+      "framework_focus": "Both frameworks",
+      "topics": ["Goal setting", "Self-assessment", "Integrity & follow-through", "Capstone project"],
+      "introduced_learning_targets": [5, 6]
+    }
+  ],
+
+  "learning_targets": [
+    { "id": 1, "description": "Recognize and actively use respectful communication approaches across school, community, workplace, and digital contexts.", "introduced": "Module 1", "reinforced": "Module 3" },
+    { "id": 2, "description": "Use a decision-making framework (POCC) to analyze scenarios and justify choices with evidence and likely consequences.", "introduced": "Module 2", "reinforced": "Module 3" },
+    { "id": 3, "description": "Apply self-regulation strategies (PLRR) during conflict or stress, using the routine as a performance skill, not a therapeutic one.", "introduced": "Module 2", "reinforced": "Module 2" },
+    { "id": 4, "description": "Navigate digital and in-person etiquette with attention to permanence, reputation, and audience — in school, community, and online settings.", "introduced": "Module 4", "reinforced": "Module 4" },
+    { "id": 5, "description": "Explain how accountability — owning a mistake, repairing it, and following through — builds trust and long-term opportunity.", "introduced": "Module 5", "reinforced": "Module 5" },
+    { "id": 6, "description": "Establish personal growth targets, monitor progress through self-assessment, and independently transfer all skills to an unfamiliar, high-stakes scenario.", "introduced": "Module 5", "reinforced": "Module 5" }
+  ],
+
+  "spiral_design": {
+    "model": "Bruner (1960)",
+    "four_week_cycle": [
+      { "weeks": "1–2", "phase": "Direct Instruction", "description": "Core concepts introduced through mini-lessons, case studies, graphic organizers, and instructor modeling." },
+      { "week": "3", "phase": "Simulation & Role-Play", "description": "Students apply learned skills in structured practice. Scenario prompts build fluency before independent application." },
+      { "week": "4", "phase": "Collaborative Challenge & Reflection", "description": "Team-based tasks reinforce understanding. Reflection journals connect experience to concept." }
+    ],
+    "principle": "All four pillars revisited every cycle at increasing levels of complexity."
+  },
+
+  "16_week_pacing": [
+    { "week": 1, "topic": "Course Introduction · Expectations · Icebreakers" },
+    { "week": 2, "topic": "Respectful Communication: Active listening, sentence stems" },
+    { "week": 3, "topic": "Role-Play: Disagreements & Listening Skills" },
+    { "week": 4, "topic": "Manners Challenge + Group Discussion ★", "milestone": true },
+    { "week": 5, "topic": "EQ & Emotional Regulation: Triggers, grounding" },
+    { "week": 6, "topic": "Peer Interviews: How We Cope" },
+    { "week": 7, "topic": "Team Challenge: Managing Stress" },
+    { "week": 8, "topic": "Guest Speaker: First Responder on Composure ★", "milestone": true },
+    { "week": 9, "topic": "Modern Etiquette: Digital, public, school settings" },
+    { "week": 10, "topic": "Scenario Simulations: Online Conversations" },
+    { "week": 11, "topic": "Role-Play & Manners in Motion Challenge" },
+    { "week": 12, "topic": "Conflict Resolution: Boundaries, apologies ★", "milestone": true },
+    { "week": 13, "topic": "Simulation: Group Conflicts & Peer Mediation" },
+    { "week": 14, "topic": "Self-Evaluation & Goal Setting" },
+    { "week": 15, "topic": "Capstone Project Work Week" },
+    { "week": 16, "topic": "Capstone Presentations & Course Reflections ★", "milestone": true }
+  ],
+
+  "assessment_framework": {
+    "formative": [
+      { "name": "Weekly Reflection Journals", "description": "Five guided prompts each week tracking metacognitive growth.", "targets": [3, 5, 6], "prompts": ["What was one skill or idea you practiced this week?", "How did it go when you applied it outside the classroom?", "What would you do differently next time?", "How did someone else demonstrate good manners or emotional control this week?", "What is one goal you want to set for next week?"] },
+      { "name": "Concept Sorting & Exit Reflections", "description": "Determines whether students can accurately define and distinguish anchoring concepts.", "targets": [1] },
+      { "name": "Scenario Analysis & Role-Play Rubrics", "description": "Observes whether students apply regulation and decision frameworks during structured practice.", "targets": [2, 3] },
+      { "name": "Pre/Post Self-Efficacy Surveys", "description": "CASEL-based competency surveys at course start and end.", "targets": [1, 2, 3, 4, 5, 6] }
+    ],
+    "summative": [
+      {
+        "name": "How I Handle It Capstone",
+        "description": "Students present a real or simulated scenario walking through course strategies.",
+        "targets": [1, 2, 3, 4, 5, 6],
+        "rubric": [
+          { "criteria": "Clarity of Scenario", "exceeds": "Clear, relatable, thoughtfully chosen with real-world grounding", "meets": "Relevant and understandable", "needs_improvement": "Unclear or vague scenario", "points_exceeds": 10, "points_meets": 8, "points_needs": 5 },
+          { "criteria": "Application of Strategies", "exceeds": "Demonstrates mastery with nuanced, layered application", "meets": "Applies most tools correctly", "needs_improvement": "Few or incorrect applications", "points_exceeds": 10, "points_meets": 8, "points_needs": 5 },
+          { "criteria": "Self-Reflection", "exceeds": "Insightful, honest, shows genuine growth awareness", "meets": "Basic self-reflection shown", "needs_improvement": "Minimal or shallow insight", "points_exceeds": 10, "points_meets": 8, "points_needs": 5 },
+          { "criteria": "Delivery", "exceeds": "Confident, clear, and engaging throughout", "meets": "Clear but with minor issues", "needs_improvement": "Unclear or difficult to follow", "points_exceeds": 10, "points_meets": 8, "points_needs": 5 },
+          { "criteria": "Visual/Support Materials", "exceeds": "Effective, well-prepared, enhances the presentation", "meets": "Basic visuals included", "needs_improvement": "Missing or ineffective visuals", "points_exceeds": 10, "points_meets": 8, "points_needs": 5 }
+        ]
+      },
+      {
+        "name": "Novel Scenario Performance Task",
+        "description": "Unfamiliar, high-pressure scenario mixing school, digital, and community contexts. Real-world authentic audience.",
+        "targets": [1, 2, 3, 4, 5, 6],
+        "required_outputs": ["Justified Decision", "Evidence of Self-Regulation", "Accountability or Repair Plan", "Written or Multimedia Response", "Metacognitive Reflection"]
+      }
+    ]
+  },
+
+  "theoretical_foundations": [
+    { "author": "Tyler", "year": 1949, "theory": "Objectives-Based Design", "application": "All goals intentional, measurable, and aligned with student needs. Backward design from capstone to daily objectives." },
+    { "author": "Bruner", "year": 1960, "theory": "Spiral Curriculum", "application": "Core concepts revisited with increasing complexity across all five modules." },
+    { "author": "Dewey", "year": 1938, "theory": "Experience & Education", "application": "Real-world role-play and simulations ground learning. Reflection journals connect experience to concept." },
+    { "author": "Skinner", "year": 1953, "theory": "Reinforcement in Practice", "application": "Peer feedback, instructor recognition, and Manners in Motion challenges reinforce positive skill application." },
+    { "author": "Wiles & Bondi", "year": 2015, "theory": "Curriculum Planning Model", "application": "CMP links context, goals, implementation, and evaluation into a coherent whole." },
+    { "author": "CASEL", "year": 2020, "theory": "SEL Competencies", "application": "Self-management, interpersonal communication, responsible decision-making, digital citizenship aligned to Utah CCA Core Standards." },
+    { "author": "Stern et al.", "year": 2021, "theory": "Learning That Transfers", "application": "Anchoring concepts, compelling questions, and dissimilar transfer tasks drive unit structure." },
+    { "author": "Lang", "year": 2021, "theory": "Small Teaching", "application": "Brief, frequent retrieval and reflection cycles build durable habits." }
+  ],
+
+  "compelling_questions": [
+    "How do my everyday choices shape how others trust me — and the opportunities I get?",
+    "What does respect look like when no one is watching?",
+    "Why do strong emotions make good decisions harder — and what can I do about it in the moment?",
+    "How should my behavior change depending on context: friend group, classroom, workplace, or online?"
+  ],
+
+  "deliverables": [
+    { "id": 1, "name": "Teach the Teacher Slide Deck", "file": "docs/MMMF_Teach_the_Teacher.pptx", "format": "pptx", "description": "15-slide professional deck covering all 3 training days" },
+    { "id": 2, "name": "Facilitator Handbook", "file": "docs/MMMF_Facilitator_Handbook.docx", "format": "docx", "description": "Complete facilitator guide with speaker notes for all 3 days" },
+    { "id": 3, "name": "Training Portal", "file": "web/teach-the-teacher-portal.html", "format": "html", "description": "9-tab interactive training portal with readiness checklist" },
+    { "id": 4, "name": "Participant Workbook", "file": "docs/MMMF_Participant_Workbook.docx", "format": "docx", "description": "Full workbook with Day 1–3 activities, pacing template, journals" },
+    { "id": 5, "name": "Scenario Prompt Card Sets", "file": "docs/MMMF_Scenario_Cards.pdf", "format": "pdf", "description": "24 scenario cards across 4 implementation tracks" },
+    { "id": 6, "name": "Manners in Motion Cards — Printable", "file": "docs/MMMF_Manners_in_Motion_Cards.pdf", "format": "pdf", "description": "36 printable challenge cards across 6 categories" },
+    { "id": 7, "name": "Manners in Motion Cards — Interactive", "file": "web/manners-in-motion-cards.html", "format": "html", "description": "Filterable, shuffleable digital card deck" },
+    { "id": 8, "name": "Community One-Pager", "file": "docs/MMMF_Community_OnePager.pdf", "format": "pdf", "description": "Print-ready program overview for parents, schools, community partners" },
+    { "id": 9, "name": "Facilitator Certification Agreement", "file": "docs/MMMF_Facilitator_Certification_Agreement.docx", "format": "docx", "description": "Legal licensing agreement for certified MMMF facilitators" },
+    { "id": 10, "name": "Registration Form — Embeddable", "file": "web/registration-form.html", "format": "html", "description": "4-step web registration form for readyforreal.life" },
+    { "id": 11, "name": "Registration Form — Printable", "file": "docs/MMMF_Registration_Form_Printable.pdf", "format": "pdf", "description": "2-page printable intake form for handout distribution" }
+  ]
+}

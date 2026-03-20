@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMMF — Teach the Teacher Training Portal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #1B2A4A;
+    --navy-dk: #111E35;
+    --navy-md: #1E3A5F;
+    --gold: #C89B3C;
+    --gold-lt: #E8B84B;
+    --teal: #0D7377;
+    --teal-lt: #14A085;
+    --white: #FFFFFF;
+    --off-white: #F5F4F0;
+    --gray: #6B7280;
+    --gray-lt: #E5E7EB;
+    --sand: #F0EBE1;
+    --red: #C0392B;
+    --purple: #7C3AED;
+    --green: #16A34A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy-dk);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────── */
+  header {
+    background: var(--navy-dk);
+    border-bottom: 3px solid var(--gold);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+  .logo-block .eyebrow {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .logo-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .logo-block h1 em { color: var(--gold); font-style: italic; }
+  .header-meta {
+    font-size: 0.7rem;
+    color: var(--gray);
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  /* ── NAV TABS ───────────────────────────────────────────── */
+  .nav-tabs {
+    background: var(--navy);
+    border-bottom: 1px solid var(--navy-md);
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-tab:hover { color: var(--white); background: var(--navy-md); }
+  .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); background: var(--navy-dk); }
+
+  /* ── MAIN LAYOUT ────────────────────────────────────────── */
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+  .tab-content { display: none; animation: fadeIn 0.3s ease; }
+  .tab-content.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTION HEADERS ────────────────────────────────────── */
+  .section-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .section-title em { color: var(--gold); font-style: italic; }
+  .section-sub {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    max-width: 680px;
+    line-height: 1.6;
+  }
+
+  /* ── CARDS ──────────────────────────────────────────────── */
+  .card-grid { display: grid; gap: 1.25rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: var(--navy-md);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+
+  .card-accent { border-top: 4px solid var(--gold); }
+  .card-accent-teal { border-top: 4px solid var(--teal); }
+  .card-accent-red { border-top: 4px solid var(--red); }
+  .card-accent-purple { border-top: 4px solid var(--purple); }
+  .card-accent-green { border-top: 4px solid var(--green); }
+
+  .card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .card-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+  .card-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .card h3 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+  .card p { font-size: 0.83rem; color: var(--gray); line-height: 1.6; }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { font-size: 0.82rem; color: var(--gray); padding: 0.22rem 0; line-height: 1.5; }
+  .card ul li::before { content: "· "; color: var(--gold); font-weight: 700; }
+
+  /* ── HERO OVERVIEW ──────────────────────────────────────── */
+  .hero-banner {
+    background: linear-gradient(135deg, var(--navy-md) 0%, var(--navy-dk) 100%);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+  .hero-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+  .hero-banner h2 em { color: var(--gold); font-style: italic; }
+  .hero-banner p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; max-width: 560px; }
+  .stat-block { text-align: center; }
+  .stat-block .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .stat-block .lbl { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.12em; }
+
+  /* ── TAGS ───────────────────────────────────────────────── */
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin: 0.2rem;
+  }
+  .tag-navy { background: var(--navy-md); color: var(--gray); }
+  .tag-gold { background: rgba(200,155,60,0.2); color: var(--gold); border: 1px solid var(--gold); }
+  .tag-teal { background: rgba(13,115,119,0.25); color: var(--teal-lt); }
+
+  /* ── FRAMEWORK CARDS ────────────────────────────────────── */
+  .framework-block {
+    background: var(--navy-md);
+    border-radius: 12px;
+    padding: 1.75rem;
+    flex: 1;
+    min-width: 280px;
+  }
+  .framework-row { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .fw-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .fw-step:last-child { border-bottom: none; }
+  .fw-letter {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background: var(--gold);
+    color: var(--navy-dk);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .fw-letter.teal { background: var(--teal); color: var(--white); }
+  .fw-text strong { display: block; font-size: 0.78rem; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+  .fw-text span { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+  /* ── AGENDA ITEMS ───────────────────────────────────────── */
+  .agenda { display: flex; flex-direction: column; gap: 0.4rem; }
+  .agenda-item {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+    background: var(--navy-md);
+    border-radius: 7px;
+    border-left: 3px solid transparent;
+    transition: background 0.15s;
+  }
+  .agenda-item:hover { background: #1a3560; }
+  .agenda-item.break { opacity: 0.45; border-left-color: transparent; }
+  .agenda-item.highlight { border-left-color: var(--gold); }
+  .agenda-time { font-size: 0.73rem; font-weight: 600; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .agenda-title { font-size: 0.85rem; font-weight: 500; color: var(--white); }
+  .agenda-note { font-size: 0.73rem; color: var(--gray); text-align: right; max-width: 220px; }
+
+  /* ── RUBRIC TABLE ───────────────────────────────────────── */
+  .rubric-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .rubric-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .rubric-table th.exceeds { background: var(--teal); }
+  .rubric-table th.meets { background: var(--gold); color: var(--navy-dk); }
+  .rubric-table th.needs { background: var(--red); }
+  .rubric-table td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--gray);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+  .rubric-table td:first-child { color: var(--white); font-weight: 500; }
+  .rubric-table tr:nth-child(even) td { background: rgba(255,255,255,0.025); }
+
+  /* ── CALLOUT ────────────────────────────────────────────── */
+  .callout {
+    background: rgba(13,115,119,0.15);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+  }
+  .callout strong { display: block; color: var(--teal-lt); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
+  .callout p { font-size: 0.84rem; color: var(--gray); line-height: 1.6; font-style: italic; }
+
+  .callout-gold {
+    background: rgba(200,155,60,0.1);
+    border-left-color: var(--gold);
+  }
+  .callout-gold strong { color: var(--gold-lt); }
+
+  /* ── TRACKS ─────────────────────────────────────────────── */
+  .track-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+  .track-card {
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--navy-md);
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: transform 0.2s;
+  }
+  .track-card:hover { transform: translateY(-3px); }
+  .track-header { padding: 1rem 1.25rem 0.75rem; }
+  .track-icon { font-size: 1.8rem; margin-bottom: 0.3rem; display: block; }
+  .track-title { font-size: 1rem; font-weight: 600; color: var(--white); }
+  .track-sub { font-size: 0.73rem; color: var(--gray); font-style: italic; margin-top: 0.15rem; }
+  .track-body { padding: 0.75rem 1.25rem 1.25rem; }
+  .track-body li { font-size: 0.8rem; color: var(--gray); padding: 0.2rem 0; list-style: none; line-height: 1.5; }
+  .track-body li::before { content: "→ "; color: var(--gold); }
+
+  /* ── CHECKLIST ──────────────────────────────────────────── */
+  .checklist { display: flex; flex-direction: column; gap: 0.5rem; }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 1rem;
+    background: var(--navy-md);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .check-item:hover { background: #1a3560; }
+  .check-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--gold); flex-shrink: 0; }
+  .check-item label { font-size: 0.84rem; color: var(--gray); cursor: pointer; line-height: 1.5; }
+  .check-item.checked label { color: var(--teal-lt); text-decoration: line-through; opacity: 0.7; }
+
+  .progress-bar-wrap { background: rgba(255,255,255,0.08); border-radius: 99px; height: 8px; margin: 1rem 0 0.4rem; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: 99px; transition: width 0.4s ease; }
+  .progress-label { font-size: 0.72rem; color: var(--gray); }
+
+  /* ── DIVIDER ────────────────────────────────────────────── */
+  .divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 2rem 0; }
+
+  /* ── FOOTER ─────────────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.72rem;
+    color: var(--gray);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin-top: 3rem;
+  }
+  footer a { color: var(--teal-lt); text-decoration: none; }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    main { padding: 1rem; }
+    .hero-banner { grid-template-columns: 1fr; }
+    .agenda-item { grid-template-columns: 90px 1fr; }
+    .agenda-note { display: none; }
+    .section-title { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-block">
+      <div class="eyebrow">Modern Manners & Mental Fortitude</div>
+      <h1><em>Teach the Teacher</em> Training Portal</h1>
+    </div>
+    <div class="header-meta">
+      Michael R. Terry · Founder<br>
+      readyforreal.life · Kappa Delta Pi
+    </div>
+  </div>
+</header>
+
+<nav class="nav-tabs" role="tablist">
+  <button class="nav-tab active" onclick="showTab('overview')" role="tab">Overview</button>
+  <button class="nav-tab" onclick="showTab('pillars')" role="tab">Pillars & Modules</button>
+  <button class="nav-tab" onclick="showTab('frameworks')" role="tab">Frameworks</button>
+  <button class="nav-tab" onclick="showTab('tracks')" role="tab">Implementation Tracks</button>
+  <button class="nav-tab" onclick="showTab('day1')" role="tab">Day 1</button>
+  <button class="nav-tab" onclick="showTab('day2')" role="tab">Day 2</button>
+  <button class="nav-tab" onclick="showTab('day3')" role="tab">Day 3</button>
+  <button class="nav-tab" onclick="showTab('assessment')" role="tab">Assessment</button>
+  <button class="nav-tab" onclick="showTab('readiness')" role="tab">Readiness Check</button>
+</nav>
+
+<main>
+
+  <!-- ── OVERVIEW ─────────────────────────────────────────── -->
+  <div id="tab-overview" class="tab-content active">
+    <div class="hero-banner">
+      <div>
+        <p class="section-eyebrow">3-Day Intensive Training</p>
+        <h2><em>Teach the Teacher</em><br>Training Program</h2>
+        <p>Modern Manners & Mental Fortitude (MMMF) is a real-world life skills curriculum for Grades 7–12 and community programs. This portal guides licensed facilitators through every element of the 3-day Teach the Teacher training.</p>
+        <div style="margin-top:1.25rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="tag tag-gold">Grades 7–8</span>
+          <span class="tag tag-gold">Grades 9–12</span>
+          <span class="tag tag-teal">Community Youth</span>
+          <span class="tag tag-teal">Community Adult</span>
+          <span class="tag tag-navy">Utah CASEL Aligned</span>
+          <span class="tag tag-navy">16-Week Spiral Design</span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:center;">
+        <div class="stat-block"><div class="num">3</div><div class="lbl">Training Days</div></div>
+        <div class="stat-block"><div class="num">5</div><div class="lbl">Modules</div></div>
+        <div class="stat-block"><div class="num">4</div><div class="lbl">Tracks</div></div>
+      </div>
+    </div>
+
+    <div class="section-eyebrow">Why This Course Exists</div>
+    <div class="section-title">The Gap & The Response</div>
+    <p class="section-sub">Academic achievement dominates curricula while students navigate complex social, digital, and emotional landscapes with few tools. MMMF makes soft skills explicit, measurable, and transferable.</p>
+
+    <div class="card-grid card-grid-3" style="margin-bottom:2rem;">
+      <div class="card card-accent-red">
+        <span class="card-icon">🏫</span>
+        <div class="card-label">The Gap</div>
+        <h3>Unaddressed in Schools</h3>
+        <p>Soft skills are assumed, not taught. This curriculum makes them explicit and designs backward from real-world transfer.</p>
+      </div>
+      <div class="card card-accent">
+        <span class="card-icon">👮</span>
+        <div class="card-label">Real Experience</div>
+        <h3>Built from 18+ Years</h3>
+        <p>Law enforcement, crisis response, SRO experience, and youth mentorship shaped every module in this course.</p>
+      </div>
+      <div class="card card-accent-teal">
+        <span class="card-icon">🎯</span>
+        <div class="card-label">Design Standard</div>
+        <h3>Transfer, Not Coverage</h3>
+        <p>Every lesson and assessment is designed backward from one outcome: independent application to unfamiliar, high-stakes situations.</p>
+      </div>
+    </div>
+
+    <div class="section-eyebrow">About the Founder</div>
+    <div class="section-title">Michael R. Terry</div>
+    <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
+      <div class="card">
+        <ul>
+          <li>Utah Highway Patrol Sergeant — 18+ Years</li>
+          <li>MAT Candidate, Columbia College of Missouri</li>
+          <li>Kappa Delta Pi Honor Society Member</li>
+          <li>Published Author: <em>Still. Small. Daily.</em></li>
+          <li>Former SRO, Blue Peak High School</li>
+          <li>Spanish Proficient (Professional)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul>
+          <li>Dr. MLK Jr. Community Service Award (2026)</li>
+          <li>CCAA Scholar (2025)</li>
+          <li>Dean's List, Fall 2024 & 2021</li>
+          <li>NAACP First Responders Award (2021)</li>
+          <li>Excellence in Criminal Interdiction (2015)</li>
+          <li>Officer of the Year, Tooele City PD (2010)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-gold">
+      <strong>📋 Training Overview</strong>
+      <p>Day 1 covers curriculum overview & philosophy. Day 2 is a module-by-module deep dive. Day 3 focuses on facilitation practice & assessment training. Use the tabs above to navigate each day and component.</p>
+    </div>
+  </div>
+
+  <!-- ── PILLARS & MODULES ─────────────────────────────────── -->
+  <div id="tab-pillars" class="tab-content">
+    <div class="section-eyebrow">Curriculum Foundation</div>
+    <div class="section-title">Four Core <em>Pillars</em></div>
+    <p class="section-sub">Every module and every lesson orbits around these four anchoring concepts. All four pillars are revisited in every module at increasing levels of complexity.</p>
+
+    <div class="card-grid card-grid-2" style="margin-bottom:2.5rem;">
+      <div class="card card-accent">
+        <div class="card-num">01</div>
+        <div class="card-label">Pillar One</div>
+        <h3>🤝 Respectful Communication</h3>
+        <ul>
+          <li>Tone & body language</li>
+          <li>Active listening</li>
+          <li>I-statements & conflict repair</li>
+          <li>Authority & feedback response</li>
+        </ul>
+      </div>
+      <div class="card card-accent-teal">
+        <div class="card-num">02</div>
+        <div class="card-label">Pillar Two</div>
+        <h3>🧘 Emotional Regulation</h3>
+        <ul>
+          <li>Trigger identification</li>
+          <li>Pause–Label–Reframe–Respond routine</li>
+          <li>Peer pressure & belonging</li>
+          <li>Mindfulness & grounding</li>
+        </ul>
+      </div>
+      <div class="card card-accent-red">
+        <div class="card-num">03</div>
+        <div class="card-label">Pillar Three</div>
+        <h3>⚖️ Decision-Making Under Pressure</h3>
+        <ul>
+          <li>Pause–Options–Consequences–Choose</li>
+          <li>Consequence mapping</li>
+          <li>Short vs. long-term thinking</li>
+          <li>Digital permanence</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top:4px solid var(--gray);">
+        <div class="card-num">04</div>
+        <div class="card-label">Pillar Four</div>
+        <h3>🔁 Accountability & Repair</h3>
+        <ul>
+          <li>Own it, fix it, follow through</li>
+          <li>Integrity & trust-building</li>
+          <li>Self-assessment cycles</li>
+          <li>Personal growth targets</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-eyebrow">Content Strands</div>
+    <div class="section-title">Five <em>Modules</em></div>
+    <p class="section-sub">One cohesive program. Every module reinforces all four pillars at increasing complexity — exactly as Bruner's spiral curriculum model intended.</p>
+
+    <div class="card-grid card-grid-3">
+      <div class="card card-accent">
+        <span class="card-icon">🎩</span>
+        <div class="card-label">Module 01</div>
+        <h3>Modern Manners</h3>
+        <ul>
+          <li>Eye contact & greetings</li>
+          <li>Cell phone etiquette</li>
+          <li>Gratitude practices</li>
+          <li>Context-appropriate behavior</li>
+        </ul>
+        <div style="margin-top:0.75rem;"><span class="tag tag-navy">Intro: PLRR</span></div>
+      </div>
+      <div class="card card-accent-teal">
+        <span class="card-icon">🧠</span>
+        <div class="card-label">Module 02</div>
+        <h3>Emotional Intelligence</h3>
+        <ul>
+          <li>Self-awareness & triggers</li>
+          <li>Stress & anxiety tools</li>
+          <li>Mindfulness basics</li>
+          <li>Regulation routines</li>
+        </ul>
+        <div style="margin-top:0.75rem;"><span class="tag tag-teal">PLRR Deep Dive</span></div>
+      </div>
+      <div class="card card-accent-red">
+        <span class="card-icon">🕊️</span>
+        <div class="card-label">Module 03</div>
+        <h3>Conflict Navigation</h3>
+        <ul>
+          <li>Disagreement without disrespect</li>
+          <li>Apologies & repair</li>
+          <li>Boundaries</li>
+          <li>Peer mediation</li>
+        </ul>
+        <div style="margin-top:0.75rem;"><span class="tag tag-gold">PLRR + POCC</span></div>
+      </div>
+      <div class="card card-accent-purple">
+        <span class="card-icon">📱</span>
+        <div class="card-label">Module 04</div>
+        <h3>Digital Citizenship</h3>
+        <ul>
+          <li>Online tone & posting</li>
+          <li>Digital permanence</li>
+          <li>Reputation management</li>
+          <li>Privacy & boundaries</li>
+        </ul>
+        <div style="margin-top:0.75rem;"><span class="tag tag-navy">POCC Focus</span></div>
+      </div>
+      <div class="card card-accent-green">
+        <span class="card-icon">🌱</span>
+        <div class="card-label">Module 05</div>
+        <h3>Personal Growth</h3>
+        <ul>
+          <li>Goal setting</li>
+          <li>Self-assessment</li>
+          <li>Integrity & follow-through</li>
+          <li>Capstone project</li>
+        </ul>
+        <div style="margin-top:0.75rem;"><span class="tag tag-gold">Both Frameworks</span></div>
+      </div>
+      <div class="card" style="background:rgba(200,155,60,0.08); border:1px solid rgba(200,155,60,0.25);">
+        <span class="card-icon">🔄</span>
+        <div class="card-label">Spiral Design · Bruner (1960)</div>
+        <h3>4-Week Cycle</h3>
+        <ul>
+          <li><strong style="color:var(--white)">Weeks 1–2:</strong> Direct instruction</li>
+          <li><strong style="color:var(--white)">Week 3:</strong> Simulation & role-play</li>
+          <li><strong style="color:var(--white)">Week 4:</strong> Collaborative challenge + reflection</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FRAMEWORKS ────────────────────────────────────────── -->
+  <div id="tab-frameworks" class="tab-content">
+    <div class="section-eyebrow">Student-Facing Thinking Tools</div>
+    <div class="section-title">The Two Core <em>Frameworks</em></div>
+    <p class="section-sub">Know these cold before Day 2. Every module applies one or both. Introduce PLRR first — students must regulate before they can decide well.</p>
+
+    <div class="framework-row">
+      <div class="framework-block">
+        <div style="margin-bottom:1rem;">
+          <div class="card-label">🧘 Regulation Routine</div>
+          <h3 style="font-size:1.2rem; color:var(--white); margin-bottom:0.3rem;">Pause – Label – Reframe – Respond</h3>
+          <p style="font-size:0.8rem; color:var(--gray); font-style:italic;">Used BEFORE decision-making. Self-regulation under stress.</p>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter teal">P</div>
+          <div class="fw-text"><strong>PAUSE</strong><span>Stop the automatic reaction. Create space before responding.</span></div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter teal">L</div>
+          <div class="fw-text"><strong>LABEL</strong><span>Name the emotion. What am I actually feeling right now?</span></div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter teal">R</div>
+          <div class="fw-text"><strong>REFRAME</strong><span>Shift perspective. What is actually happening vs. what I assumed?</span></div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter teal">R</div>
+          <div class="fw-text"><strong>RESPOND</strong><span>Choose deliberately — aligned with values and context.</span></div>
+        </div>
+      </div>
+
+      <div class="framework-block">
+        <div style="margin-bottom:1rem;">
+          <div class="card-label">⚖️ Decision-Making Framework</div>
+          <h3 style="font-size:1.2rem; color:var(--white); margin-bottom:0.3rem;">Pause – Options – Consequences – Choose</h3>
+          <p style="font-size:0.8rem; color:var(--gray); font-style:italic;">Structured choice-making under pressure and competing priorities.</p>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter">P</div>
+          <div class="fw-text"><strong>PAUSE</strong><span>Regulate first. Good decisions require cognitive space.</span></div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter">O</div>
+          <div class="fw-text"><strong>OPTIONS</strong><span>Identify multiple possible responses. What are my real choices?</span></div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter">C</div>
+          <div class="fw-text"><strong>CONSEQUENCES</strong><span>Evaluate short and long-term outcomes. Who is affected and how?</span></div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-letter">C</div>
+          <div class="fw-text"><strong>CHOOSE</strong><span>Select a response and justify it. Be able to explain the reasoning.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>💡 Facilitation Tip — Sequence Matters</strong>
+      <p>Always teach PLRR before POCC. Students cannot make good decisions when dysregulated. The PAUSE in POCC is only effective after students have practiced the full PLRR loop. In every scenario simulation, require students to show PLRR first, then move to POCC.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-eyebrow">Compelling Questions · Stern et al. (2021)</div>
+    <div class="section-title">Unit <em>Inquiry</em></div>
+    <div class="card-grid card-grid-2">
+      <div class="card"><p>"How do my everyday choices shape how others trust me — and the opportunities I get?"</p></div>
+      <div class="card"><p>"What does respect look like when no one is watching?"</p></div>
+      <div class="card"><p>"Why do strong emotions make good decisions harder — and what can I do about it in the moment?"</p></div>
+      <div class="card"><p>"How should my behavior change depending on context: friend group, classroom, workplace, or online?"</p></div>
+    </div>
+  </div>
+
+  <!-- ── TRACKS ─────────────────────────────────────────────── -->
+  <div id="tab-tracks" class="tab-content">
+    <div class="section-eyebrow">Who You Will Teach</div>
+    <div class="section-title">Four Implementation <em>Tracks</em></div>
+    <p class="section-sub">MMMF is designed to work across multiple delivery contexts. Every track uses the same frameworks — the scenarios, complexity, and pacing differ.</p>
+
+    <div class="track-cards" style="margin-bottom:2rem;">
+      <div class="track-card">
+        <div class="track-header" style="background:var(--navy);">
+          <span class="track-icon">🏫</span>
+          <div class="track-title">Grades 7–8</div>
+          <div class="track-sub">Foundational · Introductory Level</div>
+        </div>
+        <div class="track-body">
+          <ul>
+            <li>1 term per year (16 weeks)</li>
+            <li>Introductory complexity scenarios</li>
+            <li>Peer, classroom, family contexts</li>
+            <li>Emphasis on formative + reflection journals</li>
+            <li>More modeling and think-alouds</li>
+          </ul>
+        </div>
+      </div>
+      <div class="track-card">
+        <div class="track-header" style="background:var(--teal);">
+          <span class="track-icon">🎓</span>
+          <div class="track-title">Grades 9–12</div>
+          <div class="track-sub">Leveling Up · Annually</div>
+        </div>
+        <div class="track-body">
+          <ul>
+            <li>1 term per year · Complexity increases each grade</li>
+            <li>Gr. 9: Core concepts, familiar scenarios</li>
+            <li>Gr. 10: Layered complexity, competing priorities</li>
+            <li>Gr. 11: Dissimilar transfer, workplace/digital</li>
+            <li>Gr. 12: Full capstone, novel scenario, authentic audience</li>
+          </ul>
+        </div>
+      </div>
+      <div class="track-card">
+        <div class="track-header" style="background:var(--purple);">
+          <span class="track-icon">👦</span>
+          <div class="track-title">Community Youth</div>
+          <div class="track-sub">Outside School · Flexible Delivery</div>
+        </div>
+        <div class="track-body">
+          <ul>
+            <li>Cohort-based or workshop format</li>
+            <li>Community centers, faith orgs, after-school</li>
+            <li>Youth-relevant community scenarios</li>
+            <li>No formal grading — growth documentation</li>
+            <li>Flexible pacing to fit program schedule</li>
+          </ul>
+        </div>
+      </div>
+      <div class="track-card">
+        <div class="track-header" style="background:var(--red);">
+          <span class="track-icon">👤</span>
+          <div class="track-title">Community Adult</div>
+          <div class="track-sub">Outside School · Adult Program</div>
+        </div>
+        <div class="track-body">
+          <ul>
+            <li>Workplace, family, personal growth contexts</li>
+            <li>Same frameworks — adult-relevant scenarios</li>
+            <li>Co-workers, partners, authority figures</li>
+            <li>Pre/post CASEL-adapted surveys</li>
+            <li>Weekend workshops or multi-week series</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-gold">
+      <strong>🔄 Cross-Track Delivery Tip</strong>
+      <p>If you have a mixed-track group (e.g., a parent-educator workshop), anchor on the frameworks. PLRR and POCC are universal. Customize the scenarios — not the structure.</p>
+    </div>
+  </div>
+
+  <!-- ── DAY 1 ──────────────────────────────────────────────── -->
+  <div id="tab-day1" class="tab-content">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem;">
+      <div style="width:48px; height:48px; background:var(--teal); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; font-family:'Playfair Display',serif; color:var(--white); flex-shrink:0;">1</div>
+      <div>
+        <div class="section-eyebrow">Day 1 of 3</div>
+        <div class="section-title" style="margin-bottom:0;">Curriculum Overview & <em>Philosophy</em></div>
+      </div>
+    </div>
+    <p class="section-sub">Objective: Participants understand MMMF's purpose, theoretical foundation, and four core pillars, and can articulate how the curriculum serves their specific track.</p>
+
+    <div class="agenda">
+      <div class="agenda-item highlight">
+        <span class="agenda-time">8:00–8:30</span>
+        <span class="agenda-title">Welcome, Introductions & Norms</span>
+        <span class="agenda-note">Who is in the room — all tracks represented</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">8:30–9:30</span>
+        <span class="agenda-title">The Gap: Why MMMF Exists</span>
+        <span class="agenda-note">Data, real-world context, Michael's story</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">9:30–10:30</span>
+        <span class="agenda-title">Theoretical Foundations Deep Dive</span>
+        <span class="agenda-note">Tyler, Bruner, Dewey, CASEL, Stern et al.</span>
+      </div>
+      <div class="agenda-item break">
+        <span class="agenda-time">10:30–10:45</span>
+        <span class="agenda-title">Break</span>
+        <span class="agenda-note"></span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">10:45–12:00</span>
+        <span class="agenda-title">Four Core Pillars Walk-Through</span>
+        <span class="agenda-note">Paired discussion: which pillar resonates most?</span>
+      </div>
+      <div class="agenda-item break">
+        <span class="agenda-time">12:00–1:00</span>
+        <span class="agenda-title">Lunch</span>
+        <span class="agenda-note"></span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">1:00–2:30</span>
+        <span class="agenda-title">Standards Alignment Workshop</span>
+        <span class="agenda-note">Utah CASEL & CCA Core Standards mapping</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">2:30–3:30</span>
+        <span class="agenda-title">Track Differentiation Overview</span>
+        <span class="agenda-note">Gr. 7–8 vs 9–12 vs Community — key differences</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">3:30–4:00</span>
+        <span class="agenda-title">Day 1 Reflection & Q&A</span>
+        <span class="agenda-note">Prompt: What surprised you most?</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:1.5rem;">
+      <strong>🗣️ Facilitator Note — Opening</strong>
+      <p>Open with your story — the SRO experience, Lions Quest, 18 years in the field. Make it real. This is not a textbook course. Let participants feel that from the first 5 minutes. Name cards: Name + Track + One word for why they're here.</p>
+    </div>
+
+    <div class="callout callout-gold" style="margin-top:1rem;">
+      <strong>📓 Day 1 Closing Reflection Prompt</strong>
+      <p>In your participant workbook: "What surprised you most about the MMMF curriculum design? What question do you most want answered before Day 3?"</p>
+    </div>
+  </div>
+
+  <!-- ── DAY 2 ──────────────────────────────────────────────── -->
+  <div id="tab-day2" class="tab-content">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem;">
+      <div style="width:48px; height:48px; background:var(--gold); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; font-family:'Playfair Display',serif; color:var(--navy-dk); flex-shrink:0;">2</div>
+      <div>
+        <div class="section-eyebrow">Day 2 of 3</div>
+        <div class="section-title" style="margin-bottom:0;">Module-by-Module <em>Deep Dive</em></div>
+      </div>
+    </div>
+    <p class="section-sub">Objective: Participants can describe and deliver each of the five modules, apply PLRR and POCC in live scenarios, and begin a track-specific pacing plan.</p>
+
+    <div class="agenda">
+      <div class="agenda-item highlight">
+        <span class="agenda-time">8:00–8:15</span>
+        <span class="agenda-title">Day 1 Debrief & Warm-Up</span>
+        <span class="agenda-note">Quick pair share from yesterday's reflection</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">8:15–9:15</span>
+        <span class="agenda-title">Module 1: Modern Manners</span>
+        <span class="agenda-note">Greeting, cell phone, gratitude activities</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">9:15–10:15</span>
+        <span class="agenda-title">Module 2: Emotional Intelligence</span>
+        <span class="agenda-note">PLRR framework practice — in-role scenarios</span>
+      </div>
+      <div class="agenda-item break">
+        <span class="agenda-time">10:15–10:30</span>
+        <span class="agenda-title">Break</span>
+        <span class="agenda-note"></span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">10:30–11:30</span>
+        <span class="agenda-title">Module 3: Conflict Navigation</span>
+        <span class="agenda-note">Live role-play with peer mediation debrief</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">11:30–12:00</span>
+        <span class="agenda-title">Module 4: Digital Citizenship</span>
+        <span class="agenda-note">Digital permanence simulation</span>
+      </div>
+      <div class="agenda-item break">
+        <span class="agenda-time">12:00–1:00</span>
+        <span class="agenda-title">Lunch</span>
+        <span class="agenda-note"></span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">1:00–2:00</span>
+        <span class="agenda-title">Module 5: Personal Growth & Capstone</span>
+        <span class="agenda-note">Walk-through capstone design and rubric</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">2:00–3:15</span>
+        <span class="agenda-title">Pacing & Differentiation Workshop</span>
+        <span class="agenda-note">Adapt each module for your specific track</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">3:15–4:00</span>
+        <span class="agenda-title">Day 2 Reflection & Planning</span>
+        <span class="agenda-note">Begin your track-specific pacing plan</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:1.5rem;">
+      <strong>⚡ Key Activity — PLRR In Role (Module 2)</strong>
+      <p>Scenario: "Your supervisor criticizes your lesson in front of students." Walk through PLRR together — real time, out loud. Debrief: What did PAUSE feel like? What was hard about LABEL? This is the most important 60 minutes of Day 2.</p>
+    </div>
+
+    <div class="callout callout-gold" style="margin-top:1rem;">
+      <strong>📓 Day 2 Closing Reflection Prompt</strong>
+      <p>"Which module do you feel most ready to teach? Which needs the most preparation? What specific resource would help you most?"</p>
+    </div>
+  </div>
+
+  <!-- ── DAY 3 ──────────────────────────────────────────────── -->
+  <div id="tab-day3" class="tab-content">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem;">
+      <div style="width:48px; height:48px; background:var(--red); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; font-family:'Playfair Display',serif; color:var(--white); flex-shrink:0;">3</div>
+      <div>
+        <div class="section-eyebrow">Day 3 of 3</div>
+        <div class="section-title" style="margin-bottom:0;">Facilitation Practice & <em>Assessment</em></div>
+      </div>
+    </div>
+    <p class="section-sub">Objective: Participants demonstrate readiness to deliver MMMF, calibrate on rubrics, complete the Teacher Readiness Checklist, and receive MMMF Licensed Facilitator status.</p>
+
+    <div class="agenda">
+      <div class="agenda-item highlight">
+        <span class="agenda-time">8:00–8:15</span>
+        <span class="agenda-title">Day 2 Debrief</span>
+        <span class="agenda-note">Share your pacing plan draft</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">8:15–9:30</span>
+        <span class="agenda-title">Facilitation Micro-Teaching</span>
+        <span class="agenda-note">10-min teach-back + peer feedback</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">9:30–10:30</span>
+        <span class="agenda-title">Scenario Simulation Lab</span>
+        <span class="agenda-note">Live student scenarios — practice both frameworks</span>
+      </div>
+      <div class="agenda-item break">
+        <span class="agenda-time">10:30–10:45</span>
+        <span class="agenda-title">Break</span>
+        <span class="agenda-note"></span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">10:45–12:00</span>
+        <span class="agenda-title">Assessment Deep Dive</span>
+        <span class="agenda-note">Capstone rubric, novel scenario, CASEL surveys</span>
+      </div>
+      <div class="agenda-item break">
+        <span class="agenda-time">12:00–1:00</span>
+        <span class="agenda-title">Lunch</span>
+        <span class="agenda-note"></span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">1:00–2:00</span>
+        <span class="agenda-title">Track-Specific Q&A Roundtables</span>
+        <span class="agenda-note">Breakout: Gr 7–8 / 9–12 / Community</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">2:00–3:00</span>
+        <span class="agenda-title">Readiness Self-Assessment</span>
+        <span class="agenda-note">Complete Teacher Readiness Checklist</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">3:00–3:45</span>
+        <span class="agenda-title">Certification & Commitment</span>
+        <span class="agenda-note">MMMF Licensed Facilitator — sign & receive materials</span>
+      </div>
+      <div class="agenda-item highlight">
+        <span class="agenda-time">3:45–4:00</span>
+        <span class="agenda-title">Closing Reflection</span>
+        <span class="agenda-note">What will you do differently next week?</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:1.5rem;">
+      <strong>🗣️ Facilitator Note — Micro-Teaching Feedback</strong>
+      <p>Be direct but kind. The standard is: could this educator walk into a classroom or community session on Monday and deliver this with fidelity? If not — name it. Give them a specific growth target. This is where the training earns its credibility.</p>
+    </div>
+
+    <div class="callout callout-gold" style="margin-top:1rem;">
+      <strong>📓 Closing Reflection Prompt</strong>
+      <p>"What is one thing you will do differently in your classroom or community session next week because of this training?" Write it down. Sign it.</p>
+    </div>
+  </div>
+
+  <!-- ── ASSESSMENT ────────────────────────────────────────── -->
+  <div id="tab-assessment" class="tab-content">
+    <div class="section-eyebrow">Assessment Framework · Tyler (1949) & Dewey (1938)</div>
+    <div class="section-title">How Learning Is <em>Measured</em></div>
+    <p class="section-sub">Four formative tools and two summative tasks. All aligned to the six learning targets and Utah CASEL/CCA Core Standards.</p>
+
+    <div class="card-grid card-grid-3" style="margin-bottom:2rem;">
+      <div class="card card-accent-teal">
+        <span class="card-icon">📝</span>
+        <div class="card-label">Formative</div>
+        <h3>Weekly Reflection Journals</h3>
+        <p>Five guided prompts each week tracking metacognitive growth. Targets LT 3, 5, 6.</p>
+      </div>
+      <div class="card card-accent-teal">
+        <span class="card-icon">🗂️</span>
+        <div class="card-label">Formative</div>
+        <h3>Concept Sorting & Exit Reflections</h3>
+        <p>Checks whether students can define and distinguish anchoring concepts. Informs pacing. Targets LT 1.</p>
+      </div>
+      <div class="card card-accent-teal">
+        <span class="card-icon">🎭</span>
+        <div class="card-label">Formative</div>
+        <h3>Scenario Analysis & Role-Play Rubrics</h3>
+        <p>Observes framework application during structured practice. Peer observation checklists. Targets LT 2, 3.</p>
+      </div>
+      <div class="card card-accent-teal">
+        <span class="card-icon">📊</span>
+        <div class="card-label">Formative</div>
+        <h3>Pre/Post Self-Efficacy Surveys</h3>
+        <p>CASEL-based competency surveys at course start and end. Quantifies growth. Targets LT 1–6.</p>
+      </div>
+      <div class="card card-accent">
+        <span class="card-icon">🏆</span>
+        <div class="card-label">Summative</div>
+        <h3>"How I Handle It" Capstone</h3>
+        <p>Students present a real or simulated scenario demonstrating all course strategies. Targets LT 1–6.</p>
+      </div>
+      <div class="card card-accent-red">
+        <span class="card-icon">🎯</span>
+        <div class="card-label">Summative</div>
+        <h3>Novel Scenario Performance Task</h3>
+        <p>Unfamiliar, high-pressure scenario mixing school, digital, and community contexts. Real-world audience. Targets LT 1–6.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-eyebrow">Summative Rubric</div>
+    <div class="section-title">Capstone: <em>"How I Handle It"</em></div>
+    <p class="section-sub">Use this rubric to evaluate student capstone presentations. Calibrate with your cohort on Day 3 using sample student responses.</p>
+
+    <div style="overflow-x:auto; margin-top:1rem;">
+      <table class="rubric-table">
+        <thead>
+          <tr>
+            <th>Criteria</th>
+            <th class="exceeds">Exceeds (10)</th>
+            <th class="meets">Meets (8)</th>
+            <th class="needs">Needs Improvement (5)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Clarity of Scenario</td>
+            <td>Clear, relatable, thoughtfully chosen with real-world grounding</td>
+            <td>Relevant and understandable</td>
+            <td>Unclear or vague scenario</td>
+          </tr>
+          <tr>
+            <td>Application of Strategies</td>
+            <td>Demonstrates mastery with nuanced, layered application</td>
+            <td>Applies most tools correctly</td>
+            <td>Few or incorrect applications</td>
+          </tr>
+          <tr>
+            <td>Self-Reflection</td>
+            <td>Insightful, honest, shows genuine growth awareness</td>
+            <td>Basic self-reflection shown</td>
+            <td>Minimal or shallow insight</td>
+          </tr>
+          <tr>
+            <td>Delivery</td>
+            <td>Confident, clear, and engaging throughout</td>
+            <td>Clear but with minor issues</td>
+            <td>Unclear or difficult to follow</td>
+          </tr>
+          <tr>
+            <td>Visual/Support Materials</td>
+            <td>Effective, well-prepared, enhances the presentation</td>
+            <td>Basic visuals included</td>
+            <td>Missing or ineffective visuals</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-eyebrow">Weekly Formative Practice · Dewey (1938)</div>
+    <div class="section-title">Reflection Journal <em>Prompts</em></div>
+    <div class="card-grid card-grid-3" style="margin-top:1rem;">
+      <div class="card"><span class="card-icon">💡</span><p>What was one skill or idea you practiced this week?</p></div>
+      <div class="card"><span class="card-icon">🌍</span><p>How did it go when you applied it outside the classroom?</p></div>
+      <div class="card"><span class="card-icon">🔄</span><p>What would you do differently next time?</p></div>
+      <div class="card"><span class="card-icon">👀</span><p>How did someone else demonstrate good manners or emotional control this week?</p></div>
+      <div class="card"><span class="card-icon">🎯</span><p>What is one goal you want to set for next week?</p></div>
+    </div>
+  </div>
+
+  <!-- ── READINESS CHECKLIST ───────────────────────────────── -->
+  <div id="tab-readiness" class="tab-content">
+    <div class="section-eyebrow">Teacher Readiness Checklist</div>
+    <div class="section-title">Are You Ready to <em>Facilitate?</em></div>
+    <p class="section-sub">Complete this before receiving MMMF Licensed Facilitator status. Be honest — areas marked not yet become your immediate growth targets.</p>
+
+    <div id="progress-wrap" style="margin-bottom:1.5rem;">
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progress-label">0 of 10 complete</div>
+    </div>
+
+    <div class="checklist" id="checklist">
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I can explain the purpose and design philosophy of MMMF in 60 seconds.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I can recite and model both the PLRR and POCC frameworks without notes.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I can describe the key difference between Gr. 7–8, 9–12, and Community tracks.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I have completed a 16-week pacing plan for my specific track.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I can facilitate a PLRR or POCC scenario debrief in real time.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I understand when to use formative vs. summative assessment in MMMF.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I can score a capstone presentation using the "How I Handle It" rubric.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I have designed at least one novel scenario for my specific student population.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I understand the spiral design and can explain why content levels up each year.</span>
+      </label>
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <span>I am ready to begin delivering MMMF with fidelity in my next session.</span>
+      </label>
+    </div>
+
+    <div id="certified-msg" style="display:none; margin-top:2rem;">
+      <div style="background:linear-gradient(135deg,var(--teal),var(--navy-md)); border:2px solid var(--gold); border-radius:12px; padding:2rem; text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:0.5rem;">🏅</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin-bottom:0.3rem;">Readiness Standard Met</div>
+        <p style="color:var(--gray); font-size:0.85rem;">All 10 indicators confirmed. You are ready to receive MMMF Licensed Facilitator status.<br>Complete your signature with Michael R. Terry on Day 3.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="callout callout-gold">
+      <strong>📋 After Certification</strong>
+      <p>Licensed facilitators receive: the full Participant Workbook, the Facilitator Handbook, scenario prompt card sets, Manners in Motion challenge cards, a scope & sequence guide, and access to the MMMF educator resource folder at readyforreal.life.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="https://readyforreal.life" target="_blank">readyforreal.life</a></p>
+  <p style="margin-top:0.3rem; color:#374151;">Protected intellectual property. Unauthorized copying, redistribution, and derivative reuse are prohibited.</p>
+  <p style="margin-top:0.5rem; color:#374151; font-size:0.65rem;">Bruner (1960) · CASEL (2020) · Dewey (1938) · Lang (2021) · Skinner (1953) · Stern et al. (2021) · Tyler (1949) · Wiles & Bondi (2015)</p>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleCheck(el) {
+    const cb = el.querySelector('input[type="checkbox"]');
+    setTimeout(() => {
+      el.classList.toggle('checked', cb.checked);
+      updateProgress();
+    }, 0);
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('#checklist input[type="checkbox"]');
+    const checked = document.querySelectorAll('#checklist input[type="checkbox"]:checked');
+    const pct = Math.round((checked.length / all.length) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = checked.length + ' of ' + all.length + ' complete';
+    document.getElementById('certified-msg').style.display = checked.length === all.length ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>

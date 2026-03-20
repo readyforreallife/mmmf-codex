@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMMF — Program Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root {
+  --navy:#111E35; --navy2:#1B2A4A; --navy3:#1E3A5F;
+  --gold:#C89B3C; --gold-lt:#E8B84B;
+  --teal:#0D7377; --teal-lt:#14A085;
+  --gray:#6B7280; --gray-lt:#9CA3AF;
+  --white:#FFFFFF; --border:rgba(255,255,255,0.09);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 90% 10%,rgba(13,115,119,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 5% 90%,rgba(200,155,60,.07) 0%,transparent 60%);pointer-events:none;}
+header{background:rgba(17,30,53,.97);border-bottom:3px solid var(--gold);padding:1.1rem 2rem;position:sticky;top:0;z-index:10;}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.brand .ey{font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;}
+.brand h1{font-family:'Playfair Display',serif;font-size:1.1rem;}
+.brand h1 em{color:var(--gold);font-style:italic;}
+.htag{font-size:.68rem;color:var(--gray);text-align:right;line-height:1.8;}
+main{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
+.hero{text-align:center;margin-bottom:3rem;}
+.hero .ey{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;padding:.3rem .9rem;border:1px solid rgba(200,155,60,.3);border-radius:99px;margin-bottom:1rem;}
+.hero h2{font-family:'Playfair Display',serif;font-size:2.8rem;margin-bottom:.6rem;}
+.hero h2 em{color:var(--gold);font-style:italic;}
+.hero p{font-size:.95rem;color:var(--gray-lt);max-width:520px;margin:0 auto;line-height:1.7;}
+.section-label{font-size:.62rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem;margin-bottom:3rem;}
+.app-card{background:var(--navy3);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s;text-decoration:none;display:flex;flex-direction:column;}
+.app-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4);}
+.app-card-top{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid var(--border);}
+.app-icon{font-size:2rem;margin-bottom:.6rem;display:block;}
+.app-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .6rem;border-radius:99px;margin-bottom:.5rem;display:inline-block;}
+.tag-gold{background:rgba(200,155,60,.15);color:var(--gold-lt);}
+.tag-teal{background:rgba(13,115,119,.2);color:var(--teal-lt);}
+.tag-red{background:rgba(192,57,43,.2);color:#FCA5A5;}
+.app-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin-bottom:.35rem;}
+.app-desc{font-size:.82rem;color:var(--gray);line-height:1.6;}
+.app-card-foot{padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.app-link{font-size:.78rem;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:.35rem;}
+.app-tech{font-size:.65rem;color:var(--gray);}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;margin-bottom:3rem;}
+.doc-card{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem;display:flex;align-items:flex-start;gap:.85rem;text-decoration:none;transition:border-color .2s,background .2s;}
+.doc-card:hover{border-color:rgba(200,155,60,.35);background:rgba(200,155,60,.05);}
+.doc-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
+.doc-info .doc-name{font-size:.83rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:.2rem;}
+.doc-info .doc-type{font-size:.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;}
+.info-bar{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
+.info-bar .ib-item{font-size:.78rem;color:var(--gray-lt);display:flex;align-items:center;gap:.4rem;}
+.info-bar .ib-item strong{color:var(--white);}
+footer{text-align:center;padding:1.5rem 2rem;font-size:.68rem;color:var(--gray);border-top:1px solid var(--border);}
+footer a{color:var(--teal-lt);text-decoration:none;}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="ey">Modern Manners & Mental Fortitude</div>
+      <h1><em>MMMF</em> Program Hub</h1>
+    </div>
+    <div class="htag">readyforreal.life<br>Michael R. Terry · Founder</div>
+  </div>
+</header>
+<main>
+  <div class="hero">
+    <div class="ey">Program Resource Hub</div>
+    <h2>Everything You Need to<br><em>Teach This.</em></h2>
+    <p>All MMMF tools, documents, and resources in one place. Start with the web apps below, then access all printed and document deliverables.</p>
+  </div>
+
+  <div class="info-bar">
+    <div class="ib-item">📁 <strong>11</strong> total deliverables</div>
+    <div class="ib-item">🌐 <strong>3</strong> web apps</div>
+    <div class="ib-item">📄 <strong>4</strong> Word documents</div>
+    <div class="ib-item">🖨️ <strong>4</strong> print-ready PDFs</div>
+    <div class="ib-item">📊 <strong>1</strong> slide deck</div>
+    <div class="ib-item">🎓 <strong>4</strong> implementation tracks</div>
+  </div>
+
+  <div class="section-label">Web Applications — Open in Browser</div>
+  <div class="app-grid">
+    <a class="app-card" href="teach-the-teacher-portal.html" target="_blank">
+      <div class="app-card-top">
+        <span class="app-icon">🎓</span>
+        <span class="app-tag tag-gold">3-Day Training</span>
+        <div class="app-title">Teach the Teacher Portal</div>
+        <div class="app-desc">Full 9-tab training portal. Day 1–3 agendas with facilitator notes, all frameworks, module deep dives, four implementation tracks, capstone rubric, and interactive Teacher Readiness Checklist.</div>
+      </div>
+      <div class="app-card-foot">
+        <span class="app-link">Open Portal →</span>
+        <span class="app-tech">HTML · Self-contained</span>
+      </div>
+    </a>
+    <a class="app-card" href="manners-in-motion-cards.html" target="_blank">
+      <div class="app-card-top">
+        <span class="app-icon">🏅</span>
+        <span class="app-tag tag-teal">36 Cards · 6 Categories</span>
+        <div class="app-title">Manners in Motion Cards</div>
+        <div class="app-desc">Interactive digital card deck. Filter by category, shuffle randomly, flip cards to reveal discussion prompts and reflection questions. Works on any device.</div>
+      </div>
+      <div class="app-card-foot">
+        <span class="app-link">Open Card Deck →</span>
+        <span class="app-tech">HTML · Self-contained</span>
+      </div>
+    </a>
+    <a class="app-card" href="registration-form.html" target="_blank">
+      <div class="app-card-top">
+        <span class="app-icon">📋</span>
+        <span class="app-tag tag-red">Program Enrollment</span>
+        <div class="app-title">Registration & Intake Form</div>
+        <div class="app-desc">4-step multi-page registration form. Collects registrant info, program details, implementation track, student context, and support needs. Includes validation and success confirmation.</div>
+      </div>
+      <div class="app-card-foot">
+        <span class="app-link">Open Form →</span>
+        <span class="app-tech">HTML · Embeddable</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="section-label">Documents & Print Materials</div>
+  <div class="doc-grid">
+    <a class="doc-card" href="../docs/MMMF_Teach_the_Teacher.pptx" download>
+      <span class="doc-icon">📊</span>
+      <div class="doc-info"><div class="doc-name">Teach the Teacher Slide Deck</div><div class="doc-type">PowerPoint · 15 slides</div></div>
+    </a>
+    <a class="doc-card" href="../docs/MMMF_Facilitator_Handbook.docx" download>
+      <span class="doc-icon">📖</span>
+      <div class="doc-info"><div class="doc-name">Facilitator Handbook</div><div class="doc-type">Word · 10+ pages</div></div>
+    </a>
+    <a class="doc-card" href="../docs/MMMF_Participant_Workbook.docx" download>
+      <span class="doc-icon">📓</span>
+      <div class="doc-info"><div class="doc-name">Participant Workbook</div><div class="doc-type">Word · Activities + Journals</div></div>
+    </a>
+    <a class="doc-card" href="../docs/MMMF_Facilitator_Certification_Agreement.docx" download>
+      <span class="doc-icon">✍️</span>
+      <div class="doc-info"><div class="doc-name">Facilitator Certification Agreement</div><div class="doc-type">Word · Legal · 8 Sections</div></div>
+    </a>
+    <a class="doc-card" href="../docs/MMMF_Scenario_Cards.pdf" download>
+      <span class="doc-icon">🃏</span>
+      <div class="doc-info"><div class="doc-name">Scenario Prompt Card Sets</div><div class="doc-type">PDF · 4 tracks · 24 cards</div></div>
+    </a>
+    <a class="doc-card" href="../docs/MMMF_Manners_in_Motion_Cards.pdf" download>
+      <span class="doc-icon">🏅</span>
+      <div class="doc-info"><div class="doc-name">Manners in Motion Cards</div><div class="doc-type">PDF · 36 cards · Printable</div></div>
+    </a>
+    <a class="doc-card" href="../docs/MMMF_Community_OnePager.pdf" download>
+      <span class="doc-icon">📄</span>
+      <div class="doc-info"><div class="doc-name">Community One-Pager</div><div class="doc-type">PDF · Print-ready</div></div>
+    </a>
+    <a class="doc-card" href="../docs/MMMF_Registration_Form_Printable.pdf" download>
+      <span class="doc-icon">📝</span>
+      <div class="doc-info"><div class="doc-name">Registration Form — Printable</div><div class="doc-type">PDF · 2 pages · Hand-out ready</div></div>
+    </a>
+  </div>
+</main>
+<footer>
+  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="https://readyforreal.life" target="_blank">readyforreal.life</a> · Protected Intellectual Property</p>
+</footer>
+</body>
+</html>

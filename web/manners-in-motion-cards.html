@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMMF — Manners in Motion Challenge Cards</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy:    #1B2A4A;
+    --navy-dk: #111E35;
+    --navy-md: #1E3A5F;
+    --gold:    #C89B3C;
+    --gold-lt: #E8B84B;
+    --teal:    #0D7377;
+    --teal-lt: #14A085;
+    --red:     #C0392B;
+    --purple:  #7C3AED;
+    --green:   #16A34A;
+    --gray:    #6B7280;
+    --gray-lt: #9CA3AF;
+    --off-w:   #F5F4F0;
+    --white:   #FFFFFF;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy-dk);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy-dk);
+    border-bottom: 3px solid var(--gold);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .logo { }
+  .logo .eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+  .logo h1 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); }
+  .logo h1 em { color: var(--gold); font-style: italic; }
+  .header-right { font-size: 0.72rem; color: var(--gray); text-align: right; line-height: 1.7; }
+
+  /* CONTROLS */
+  .controls {
+    background: var(--navy);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .filter-label { font-size: 0.72rem; font-weight: 600; color: var(--gray); letter-spacing: 0.06em; text-transform: uppercase; }
+  .filter-btn {
+    padding: 0.35rem 0.85rem;
+    border-radius: 99px;
+    font-size: 0.73rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.18s;
+    background: var(--navy-md);
+    color: var(--gray);
+  }
+  .filter-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+  .filter-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(200,155,60,0.1); }
+  .filter-btn[data-cat="0"].active { color: var(--teal-lt); border-color: var(--teal-lt); background: rgba(13,115,119,0.15); }
+  .filter-btn[data-cat="1"].active { color: #60A5FA; border-color: #60A5FA; background: rgba(27,42,74,0.5); }
+  .filter-btn[data-cat="2"].active { color: #FCA5A5; border-color: var(--red); background: rgba(192,57,43,0.15); }
+  .filter-btn[data-cat="3"].active { color: #C4B5FD; border-color: var(--purple); background: rgba(124,58,237,0.15); }
+  .filter-btn[data-cat="4"].active { color: #86EFAC; border-color: var(--green); background: rgba(22,163,74,0.15); }
+  .filter-btn[data-cat="5"].active { color: var(--gold-lt); border-color: var(--gold-lt); background: rgba(232,184,75,0.12); }
+
+  .controls-right { margin-left: auto; display: flex; align-items: center; gap: 0.5rem; }
+  .count-badge { font-size: 0.72rem; color: var(--gray); }
+  .shuffle-btn {
+    padding: 0.35rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.18s;
+  }
+  .shuffle-btn:hover { background: var(--gold); color: var(--navy-dk); }
+
+  /* CARD GRID */
+  main { padding: 1.5rem 2rem 3rem; }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--navy-md);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .card.flipped .card-front { display: none; }
+  .card.flipped .card-back { display: flex; }
+
+  .card-top {
+    padding: 0.65rem 0.9rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cat-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .card-num {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(200,155,60,0.2);
+    color: var(--gold);
+  }
+
+  .card-front { display: flex; flex-direction: column; flex: 1; }
+  .card-back { display: none; flex-direction: column; flex: 1; padding: 1rem; }
+
+  .card-body { padding: 0 0.9rem 0.9rem; flex: 1; }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+  .card-divider { width: 24px; height: 2px; margin: 0.4rem 0 0.6rem; }
+  .challenge-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .card-scenario {
+    font-size: 0.8rem;
+    color: var(--gray-lt);
+    line-height: 1.6;
+  }
+
+  .card-prompts-hint {
+    margin: 0.75rem 0.9rem 0.9rem;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.72rem;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  /* Back of card */
+  .back-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .back-prompts { list-style: none; margin-bottom: 1rem; }
+  .back-prompts li {
+    font-size: 0.82rem;
+    color: var(--white);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    line-height: 1.5;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .back-prompts li::before { content: "→"; color: var(--gold); flex-shrink: 0; }
+  .reflection-box {
+    background: rgba(0,0,0,0.2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 0.65rem 0.75rem;
+    margin-top: auto;
+  }
+  .reflection-box .rlabel { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.25rem; }
+  .reflection-box p { font-size: 0.78rem; color: var(--gray-lt); line-height: 1.5; font-style: italic; }
+
+  .flip-hint {
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--gray);
+    padding: 0 0.9rem 0.75rem;
+  }
+  .unflip-btn {
+    margin-top: 0.75rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    color: var(--gray);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    align-self: flex-start;
+    transition: all 0.15s;
+  }
+  .unflip-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* No results */
+  .no-results { text-align: center; padding: 4rem 2rem; color: var(--gray); font-size: 0.9rem; }
+
+  /* Footer */
+  footer { text-align: center; padding: 1.5rem; font-size: 0.7rem; color: var(--gray); border-top: 1px solid rgba(255,255,255,0.07); }
+  footer a { color: var(--teal-lt); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    main { padding: 1rem; }
+    .controls { padding: 0.75rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="eyebrow">Modern Manners & Mental Fortitude</div>
+    <h1><em>Manners in Motion</em> Challenge Cards</h1>
+  </div>
+  <div class="header-right">Michael R. Terry · Founder<br>readyforreal.life · 36 Cards · 6 Categories</div>
+</header>
+
+<div class="controls">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-cat="all" onclick="filter('all', this)">All 36</button>
+  <button class="filter-btn" data-cat="0" onclick="filter(0, this)">🤝 Manners in Action</button>
+  <button class="filter-btn" data-cat="1" onclick="filter(1, this)">🧘 Regulation Check</button>
+  <button class="filter-btn" data-cat="2" onclick="filter(2, this)">⚖️ Decide Now</button>
+  <button class="filter-btn" data-cat="3" onclick="filter(3, this)">📱 Digital Life</button>
+  <button class="filter-btn" data-cat="4" onclick="filter(4, this)">🔁 Repair Move</button>
+  <button class="filter-btn" data-cat="5" onclick="filter(5, this)">⭐ Wild Card</button>
+  <div class="controls-right">
+    <span class="count-badge" id="count-badge">36 cards</span>
+    <button class="shuffle-btn" onclick="shuffle()">⇄ Shuffle</button>
+  </div>
+</div>
+
+<main>
+  <div class="card-grid" id="card-grid"></div>
+  <div class="no-results" id="no-results" style="display:none;">No cards in this category.</div>
+</main>
+
+<footer>
+  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="https://readyforreal.life" target="_blank">readyforreal.life</a></p>
+  <p style="margin-top:0.25rem;color:#374151;">Click any card to reveal discussion prompts. Protected intellectual property.</p>
+</footer>
+
+<script>
+const CATS = [
+  { label: "MANNERS IN ACTION", icon: "🤝", color: "#0D7377" },
+  { label: "REGULATION CHECK",  icon: "🧘", color: "#1B2A4A" },
+  { label: "DECIDE NOW",        icon: "⚖️", color: "#C0392B" },
+  { label: "DIGITAL LIFE",      icon: "📱", color: "#7C3AED" },
+  { label: "REPAIR MOVE",       icon: "🔁", color: "#16A34A" },
+  { label: "WILD CARD",         icon: "⭐", color: "#C89B3C" },
+];
+
+const CARDS = [
+  // MANNERS IN ACTION
+  {cat:0,num:"M1",title:"The Greeting Gauntlet",challenge:"Greet every person you pass in the hallway or workspace for one full day. Eye contact. First name if you know it. Report back: how many responded? How did it feel?",prompts:["What percentage of people responded positively?","Did your own body language change as the day went on?","What did you learn about the power of acknowledgment?"],reflection:"What did you notice about how people responded to being acknowledged?"},
+  {cat:0,num:"M2",title:"Phone-Free Zone",challenge:"Put your phone face-down (or away) for every meal or meeting today. Don't check it. At the end of the day, describe what you noticed about your interactions.",prompts:["How many times did you feel the urge to check your phone?","What did you notice about other people in the same settings?","Did the quality of conversation change?"],reflection:"What changed when the phone wasn't a distraction?"},
+  {cat:0,num:"M3",title:"Gratitude Out Loud",challenge:"Thank three different people today — in person, specifically, for something real. Not a general 'thanks.' Name what they did and why it mattered.",prompts:["How did the recipient respond to specific vs. general thanks?","Which one was hardest to say out loud — and why?","What does specific gratitude communicate that generic thanks doesn't?"],reflection:"How did the specific gratitude land differently than a generic thank you?"},
+  {cat:0,num:"M4",title:"Context Switch",challenge:"Identify one behavior that is appropriate in your friend group but NOT appropriate in a professional or adult setting. Practice the professional version today.",prompts:["What behavior did you identify — and why did you choose it?","How did it feel to switch contexts deliberately?","What does code-switching your behavior say about your self-awareness?"],reflection:"What does code-switching your behavior look like — and why does it matter?"},
+  {cat:0,num:"M5",title:"The Formal Introduction",challenge:"Introduce yourself to one person you don't know today using a firm handshake, eye contact, and full name. Professional context preferred.",prompts:["What made the introduction feel comfortable or awkward?","How did the other person respond to a confident, formal introduction?","What would you do differently next time?"],reflection:"What made the introduction feel comfortable or uncomfortable?"},
+  {cat:0,num:"M6",title:"The Thank-You Note",challenge:"Handwrite a thank-you note to someone who has helped you recently. No text. No email. Paper and pen. Deliver or mail it.",prompts:["Who did you write to — and what made you choose them?","How did writing by hand feel different from typing?","What did they say when they received it?"],reflection:"Why does a handwritten note communicate something different than a digital message?"},
+
+  // REGULATION CHECK
+  {cat:1,num:"R1",title:"Trigger Map",challenge:"Write down your top 3 personal triggers — the situations, phrases, or people that reliably make you reactive. For each one, write your go-to PLRR response.",prompts:["What pattern do your triggers have in common?","Which trigger is hardest to manage — and why?","How does knowing your triggers in advance change your preparation?"],reflection:"Knowing your triggers in advance: does that change your response in the moment?"},
+  {cat:1,num:"R2",title:"The 6-Second Pause",challenge:"Every time you feel a reactive impulse today — frustration, annoyance, the urge to snap — count to 6 before responding. Track how many times you use it.",prompts:["How many times did you use the pause today?","Was there a situation where 6 seconds wasn't enough?","What happened differently when you paused vs. when you didn't?"],reflection:"What happened in the 6 seconds before you responded?"},
+  {cat:1,num:"R3",title:"Label It",challenge:"Every emotion you experience today, name it out loud or in writing — specifically. Not 'fine' or 'stressed.' Use precise emotional vocabulary. Aim for at least 5 different labels.",prompts:["What were the 5+ emotions you identified today?","Did labeling an emotion change its intensity?","Which emotion was hardest to name precisely — and why?"],reflection:"What happens to the intensity of an emotion when you name it exactly?"},
+  {cat:1,num:"R4",title:"Reframe a Frustration",challenge:"Identify one current frustration in your life. Write the situation as you experience it. Then reframe it — write what is actually happening, stripped of assumption.",prompts:["What assumptions were embedded in your original version?","What changed between the original and the reframe?","Does reframing mean you stop feeling frustrated?"],reflection:"What changed between the original version and the reframe?"},
+  {cat:1,num:"R5",title:"The Grounding Minute",challenge:"Before your first difficult conversation or meeting today, take 60 seconds: 5 things you can see, 4 you can touch, 3 you can hear. Then walk in.",prompts:["How did your readiness level change after grounding?","Was it hard to take 60 seconds before going in? Why?","Would you use this before a high-stakes moment in the future?"],reflection:"What did grounding do to your readiness level going into the conversation?"},
+  {cat:1,num:"R6",title:"Watch Your Tone",challenge:"Record yourself (voice memo) having a casual conversation today. Listen back. Does your tone match your intention? Any sharpness or dismissiveness you didn't notice in the moment?",prompts:["What surprised you most about hearing yourself?","Where was there a gap between your tone and your intention?","What would you adjust?"],reflection:"What surprised you most about hearing yourself?"},
+
+  // DECIDE NOW
+  {cat:2,num:"D1",title:"The 10-10-10 Test",challenge:"Before your next significant decision, apply the 10-10-10 test: How will you feel about this in 10 minutes? 10 months? 10 years? Write your answers before you decide.",prompts:["How did the 10-year lens change the decision?","Which time frame was hardest to imagine — and why?","What did the test reveal that you hadn't considered?"],reflection:"How did the time-shifting change what you chose?"},
+  {cat:2,num:"D2",title:"POCC Live",challenge:"The next time you face a real decision today — big or small — walk through POCC out loud or in writing before you act. All four steps. No skipping.",prompts:["Which step was hardest to complete honestly?","Did going through all four steps slow you down — and was that good or bad?","What would have happened if you'd skipped the framework?"],reflection:"Which step was hardest to complete honestly?"},
+  {cat:2,num:"D3",title:"Options Inventory",challenge:"Take a current dilemma in your life. Write down every possible option — including the ones that seem bad or unrealistic. Aim for at least 6. Then evaluate only the ones you'd actually consider.",prompts:["What options appeared once you forced yourself past the obvious ones?","Did listing more options reduce the pressure of the decision?","Which option surprised you by being more realistic than you first thought?"],reflection:"Did listing more options change what you considered doing?"},
+  {cat:2,num:"D4",title:"Consequence Map",challenge:"Pick one decision you've been avoiding. Draw a consequence map: for each option, write short-term and long-term outcomes, and who is affected. Then make the call.",prompts:["Who did the consequence map reveal as affected that you hadn't fully considered?","Did mapping it make the decision easier or harder?","Why do we often avoid this kind of structured thinking?"],reflection:"Why do we often avoid mapping consequences before deciding?"},
+  {cat:2,num:"D5",title:"The Pressure Test",challenge:"Recall a decision you made under social pressure that you regretted. Replay it using POCC. What would you have chosen with the framework in hand?",prompts:["At which POCC step would the decision have changed?","What was the social pressure actually threatening — belonging, status, safety?","How do you build resistance to pressure before the moment hits?"],reflection:"What does peer pressure actually do to the quality of our decisions?"},
+  {cat:2,num:"D6",title:"Justify It Out Loud",challenge:"For your next significant decision, explain your reasoning out loud to someone else — not to get their opinion, but to hear yourself justify it. Then decide.",prompts:["Did verbalizing change what you chose?","Where did your justification feel thin or uncertain?","What does the act of explaining reveal about your actual reasoning?"],reflection:"Did verbalizing the reasoning change the decision you made?"},
+
+  // DIGITAL LIFE
+  {cat:3,num:"DL1",title:"The Principal Test",challenge:"Go through your last 20 social media posts or messages. Ask: would I say this in front of my principal, supervisor, or a future employer? Flag anything that fails the test.",prompts:["How many posts failed the test?","What pattern do the flagged posts share?","What does your digital presence say about you to someone who doesn't know you?"],reflection:"What do your posts say about who you are — without the context you have in your head?"},
+  {cat:3,num:"DL2",title:"Tone Check",challenge:"Before sending your next 10 digital messages today, read each one out loud as if you were the recipient. Adjust the tone before sending if needed.",prompts:["How often did re-reading change what you sent?","Which message needed the most adjustment — and why?","What does reading as the recipient reveal about your habitual tone?"],reflection:"How often did re-reading change what you sent?"},
+  {cat:3,num:"DL3",title:"The Permanent Print",challenge:"Write down three things you've sent digitally that you wish you could take back. For each, name the real-world consequence — or the one you feared.",prompts:["What do the three have in common?","Did you send them in a regulated or dysregulated state?","What would PLRR have looked like before hitting send?"],reflection:"What is digital permanence — and what does it actually cost?"},
+  {cat:3,num:"DL4",title:"Privacy Audit",challenge:"Review your privacy settings on your two most-used apps. Who can see your content? Who are you connected to that you wouldn't invite to your home?",prompts:["What did you find that surprised you?","Did you make any changes after the audit?","What boundary does your digital life need that your in-person life already has?"],reflection:"What boundary does your digital life need that your in-person life already has?"},
+  {cat:3,num:"DL5",title:"Screen-Free Hour",challenge:"No screens for one hour today — not for entertainment, not for social media. Interact with the people or the space around you. Report what happened.",prompts:["What did you notice about yourself during the hour?","What did you do instead?","Did you feel anxious, relieved, bored, or something else — and what does that reveal?"],reflection:"What did you notice about yourself or others during the screen-free hour?"},
+  {cat:3,num:"DL6",title:"The Post You Didn't Send",challenge:"Write a post or message you've wanted to send but haven't. Walk it through POCC. What do you actually choose — and why?",prompts:["What stopped you from sending it originally?","What did the POCC process reveal?","What's the difference between expression and communication?"],reflection:"What did the framework reveal that you didn't already know?"},
+
+  // REPAIR MOVE
+  {cat:4,num:"RP1",title:"The Overdue Apology",challenge:"Identify one person you owe an apology to — even a small one. Write the apology using: 'I was wrong when I...' + 'The impact on you was...' + 'What I will do differently is...' Then deliver it.",prompts:["What made writing the three-part apology hard?","How did they respond?","What changed in you — or in the relationship — after delivering it?"],reflection:"What made the delivery hard — and what happened after?"},
+  {cat:4,num:"RP2",title:"Own It Without the But",challenge:"Practice saying 'I was wrong. I'm sorry.' — with no 'but' attached. Do it in at least one real interaction today. Write down what happened.",prompts:["Why do we instinctively add 'but'?","What does the 'but' do to the recipient?","How did a clean apology — no qualifier — land differently?"],reflection:"Why do we instinctively add 'but'? What does it do to an apology?"},
+  {cat:4,num:"RP3",title:"The Follow-Through",challenge:"Identify one commitment you made in the last 30 days that you haven't followed through on. Make a specific plan — with a deadline — to complete it. Tell the person.",prompts:["What got in the way of following through?","What did it cost the other person that you didn't?","What does proactively naming the failure and the plan communicate?"],reflection:"What does unfinished follow-through cost in terms of trust?"},
+  {cat:4,num:"RP4",title:"Integrity Inventory",challenge:"List 5 things you've told yourself or others you would do. Check each: done, in progress, or dropped without telling anyone. What do the results reveal?",prompts:["What pattern do the dropped commitments share?","What is the gap between how you see yourself and what the inventory shows?","What is one thing you will complete — or officially let go of — this week?"],reflection:"What is integrity — and where does yours stand right now?"},
+  {cat:4,num:"RP5",title:"The Repair Conversation",challenge:"Initiate a conversation with someone you've had tension with — not to win, not to defend, but to understand. Start with: 'I want to understand your perspective on what happened.'",prompts:["What did you learn that you didn't know before?","What was hardest about listening without defending?","What shifted in the relationship after you listened first?"],reflection:"What changed in the relationship — or in you — after listening first?"},
+  {cat:4,num:"RP6",title:"Growth Target",challenge:"Write one specific, honest growth target: something about how you treat others or yourself that you want to change. Make it measurable. Set a 2-week checkpoint.",prompts:["What makes this target specific rather than vague?","How will you know — concretely — if you've made progress?","Who can hold you accountable to the 2-week check-in?"],reflection:"What makes this growth target different from a vague 'I want to be better'?"},
+
+  // WILD CARD
+  {cat:5,num:"W1",title:"The Comfort Zone Cross",challenge:"Do one thing today that requires respectful communication in an uncomfortable context — introduce yourself to a stranger, ask a question you've been avoiding, or initiate a hard conversation.",prompts:["What did you choose — and why that one?","What was the internal cost of doing it?","What was the result?"],reflection:"What did stepping into discomfort cost — and what did it give you?"},
+  {cat:5,num:"W2",title:"Teach It Back",challenge:"Explain either PLRR or POCC to someone who has never heard of it. Use a real example from your own life. See if they can walk through it on their own afterward.",prompts:["Which framework did you choose — and why?","Where did your explanation get uncertain or unclear?","What does teaching reveal about what you actually know?"],reflection:"What did teaching it reveal about how well you actually understand it?"},
+  {cat:5,num:"W3",title:"The Observation Log",challenge:"For one full day, observe how others around you use (or don't use) respectful communication, regulation, and decision-making. Write 3 specific observations — no names.",prompts:["What pattern appeared across your three observations?","Did watching others change how you behaved?","What did you see that you recognize in yourself?"],reflection:"What did watching others teach you about your own behavior?"},
+  {cat:5,num:"W4",title:"Before & After",challenge:"Think of one interaction from the past week that didn't go well. Replay it using both PLRR and POCC. Write the 'before' version and the version with the frameworks applied.",prompts:["At what exact moment would PLRR have changed the trajectory?","Which POCC step would have been most important?","What specifically would the other person have experienced differently?"],reflection:"What specifically would have been different?"},
+  {cat:5,num:"W5",title:"The Character Question",challenge:"Ask three people who know you well: 'What is one way I could communicate better?' Listen without defending. Write their answers. Look for patterns.",prompts:["What pattern appeared across the three responses?","Was any feedback surprising — and why?","What is the one thing you will act on?"],reflection:"What does honest outside feedback reveal that self-assessment misses?"},
+  {cat:5,num:"W6",title:"Design Your Own",challenge:"Create a personal Manners in Motion challenge for yourself — one that targets your specific growth area from the MMMF curriculum. Write the challenge and the reflection prompt.",prompts:["What growth area are you targeting — and why now?","What makes your challenge measurable?","How will you hold yourself accountable to completing it?"],reflection:"What growth target is this challenge designed to address?"},
+];
+
+let currentFilter = 'all';
+let displayOrder = [...Array(CARDS.length).keys()];
+
+const CAT_COLORS = ['#0D7377','#3B82F6','#C0392B','#7C3AED','#16A34A','#C89B3C'];
+const CAT_TEXT   = ['#5EEAD4','#93C5FD','#FCA5A5','#C4B5FD','#86EFAC','#E8B84B'];
+
+function renderCards() {
+  const grid = document.getElementById('card-grid');
+  const noRes = document.getElementById('no-results');
+  const filtered = displayOrder.filter(i => currentFilter === 'all' || CARDS[i].cat === currentFilter);
+
+  document.getElementById('count-badge').textContent = filtered.length + ' card' + (filtered.length !== 1 ? 's' : '');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    noRes.style.display = 'block';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  grid.innerHTML = filtered.map(i => {
+    const card = CARDS[i];
+    const cat = CATS[card.cat];
+    const color = CAT_COLORS[card.cat];
+    const textColor = CAT_TEXT[card.cat];
+
+    return `
+    <div class="card" id="card-${i}" onclick="flipCard(${i})">
+      <div class="card-front">
+        <div class="card-top" style="background:${color}22; border-bottom:2px solid ${color};">
+          <span class="cat-label" style="color:${textColor};">${cat.icon} ${cat.label}</span>
+          <span class="card-num" style="background:${color}33; color:${textColor};">${card.num}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">${card.title}</div>
+          <div class="card-divider" style="background:${color};"></div>
+          <div class="challenge-label" style="color:${textColor};">CHALLENGE</div>
+          <div class="card-scenario">${card.challenge}</div>
+        </div>
+        <div class="card-prompts-hint">
+          <span>💬</span>
+          <span>Tap to reveal discussion prompts & reflection</span>
+        </div>
+      </div>
+      <div class="card-back">
+        <div class="back-label" style="color:${textColor};">${cat.icon} DISCUSSION PROMPTS</div>
+        <ul class="back-prompts">
+          ${card.prompts.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+        <div class="reflection-box">
+          <div class="rlabel">🪞 Reflection</div>
+          <p>${card.reflection}</p>
+        </div>
+        <button class="unflip-btn" onclick="event.stopPropagation(); unflipCard(${i})">← Back to challenge</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function flipCard(i) {
+  const el = document.getElementById('card-' + i);
+  if (el && !el.classList.contains('flipped')) el.classList.add('flipped');
+}
+function unflipCard(i) {
+  const el = document.getElementById('card-' + i);
+  if (el) el.classList.remove('flipped');
+}
+function filter(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCards();
+}
+function shuffle() {
+  for (let i = displayOrder.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [displayOrder[i], displayOrder[j]] = [displayOrder[j], displayOrder[i]];
+  }
+  renderCards();
+}
+
+renderCards();
+</script>
+</body>
+</html>
