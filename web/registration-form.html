@@ -814,11 +814,11 @@ footer a { color: var(--teal-lt); text-decoration: none; }
           <div class="field">
             <label>How confident are you in your ability to facilitate SEL / life skills content right now?</label>
             <div class="scale-row" id="confidence-scale">
-              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="1">1</button>
-              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="2">2</button>
-              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="3">3</button>
-              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="4">4</button>
-              <button class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="5">5</button>
+              <button type="button" class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="1">1</button>
+              <button type="button" class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="2">2</button>
+              <button type="button" class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="3">3</button>
+              <button type="button" class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="4">4</button>
+              <button type="button" class="scale-btn" onclick="selectScale(this, 'confidence-scale')" data-val="5">5</button>
             </div>
             <div class="scale-labels"><span>Not confident</span><span>Very confident</span></div>
           </div>
@@ -1231,4 +1231,14 @@ function selectPill(label, groupId) {
 }
 function selectScale(btn, groupId) {
   document.querySelectorAll('#' + groupId + ' .scale-btn').forEach(b => b.classList.remove('selected'));
-  btn.
+  btn.classList.add('selected');
+}
+function toggleConsent(label) {
+  setTimeout(() => {
+    const cb = label.querySelector('input[type="checkbox"]');
+    label.classList.toggle('selected', cb.checked);
+  }, 0);
+}
+</script>
+</body>
+</html>
