@@ -1129,44 +1129,37 @@ async function submitForm() {
   collectStep(2);
   collectStep(3);
 
+  const detailedNotes = [
+    `Program: Modern Manners and Mental Fortitude`,
+    `Role: ${formData.role || '—'}`,
+    `Organization: ${formData.org || '—'}`,
+    `Location: ${formData.location || '—'}`,
+    `Referral: ${formData.referral || '—'}`,
+    `Tracks: ${formData.tracks || '—'}`,
+    `Delivery: ${formData.delivery || '—'}`,
+    `Start Date: ${formData.startDate || '—'}`,
+    `Class Size: ${formData.classSize || '—'}`,
+    `Training Status: ${formData.training || '—'}`,
+    `Population: ${formData.population || '—'}`,
+    `Gaps Identified: ${formData.gaps || '—'}`,
+    `SEL Confidence: ${formData.confidence ? formData.confidence + ' / 5' : '—'}`,
+    `Support Needed: ${formData.support || '—'}`,
+    `Additional Notes: ${formData.notes || '—'}`,
+    `Consent Given: ${consent.checked ? 'Yes' : 'No'}`,
+    `Source: mmmf-github-pages-registration-form`
+  ].join(' | ');
+
   const payload = {
     type: 'registration',
-    event: 'registration',
-    form: 'mmmf_registration_form',
-    program: 'Modern Manners and Mental Fortitude',
-    source: 'mmmf-github-pages-registration-form',
-    timestamp: new Date().toISOString(),
-    full_name: `${formData.fname || ''} ${formData.lname || ''}`.trim(),
-    first_name: formData.fname || '',
-    last_name: formData.lname || '',
     name: `${formData.fname || ''} ${formData.lname || ''}`.trim(),
     email: formData.email || '',
     phone: formData.phone || '',
-    role: formData.role || '',
-    organization: formData.org || '',
-    city_state: formData.location || '',
-    referral: formData.referral || '',
-    tracks: formData.tracks || '',
-    delivery: formData.delivery || '',
-    start_date: formData.startDate || '',
-    class_size: formData.classSize || '',
-    training_status: formData.training || '',
-    population: formData.population || '',
-    gaps_identified: formData.gaps || '',
-    sel_confidence: formData.confidence || '',
-    support_needed: formData.support || '',
-    notes: formData.notes || '',
-    consent_given: consent.checked ? 'Yes' : 'No',
+    group: [formData.role || '', formData.tracks || ''].filter(Boolean).join(' | '),
+    notes: detailedNotes,
+    timestamp: new Date().toISOString(),
     notify_email: 'mikeyterry44@gmail.com',
     send_email_notification: 'true',
-    notification_subject: 'New MMMF registration submission',
-    scenario_title: 'MMMF Registration Form',
-    choice: formData.tracks || 'Registration',
-    tool: formData.email || '',
-    concept: formData.role || '',
-    why: formData.notes || '',
-    best_fit: formData.role || '',
-    role_or_level: formData.role || ''
+    notification_subject: 'New MMMF registration submission'
   };
 
   const endpointCandidates = FALLBACK_REGISTRATION_ENDPOINTS.filter(Boolean).filter((url, idx, arr) => arr.indexOf(url) === idx);
