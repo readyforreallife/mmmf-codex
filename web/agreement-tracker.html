@@ -162,7 +162,7 @@ tbody tr:hover { background:#fcfbf8; }
     <section class="admin-gate" id="adminGate">
       <div class="kicker">Teacher Mode</div>
       <h2>Protected issuance access</h2>
-      <p class="locked-copy">Agreement numbers and certification issuance should only be handled from a trusted admin location. Enter your admin access code to unlock the shared registry, assign a unique agreement number, and issue certification without reusing the same number twice.</p>
+      <p class="locked-copy">Agreement numbers and certificate issuance should only be handled from a trusted admin location. Enter your admin access code to unlock the shared registry, assign a unique agreement number, and issue certificates without reusing the same number twice.</p>
       <form id="unlockForm">
         <input id="adminEndpointInput" type="url" placeholder="Paste the Cloudflare Worker URL once">
         <input id="teacherCodeInput" type="password" placeholder="Enter admin access code">
@@ -182,7 +182,7 @@ tbody tr:hover { background:#fcfbf8; }
       <div class="grid">
       <section class="panel">
         <div class="kicker">New Assignment</div>
-        <h2>Issue the next agreement number</h2>
+        <h2>Issue the next certificate number</h2>
         <div class="number-preview">
           Next available agreement number
           <strong id="nextNumber">MMMF-0001</strong>
@@ -204,6 +204,13 @@ tbody tr:hover { background:#fcfbf8; }
           </div>
           <div class="field small-row">
             <div>
+              <label for="certificateType">Credential type</label>
+              <select id="certificateType" name="certificateType">
+                <option value="completion">Program Completion Certificate</option>
+                <option value="facilitator">Facilitator Certification (Teach the Teacher)</option>
+              </select>
+            </div>
+            <div>
               <label for="track">Implementation track</label>
               <select id="track" name="track">
                 <option value="">Select track</option>
@@ -213,9 +220,15 @@ tbody tr:hover { background:#fcfbf8; }
                 <option>Community Adult</option>
               </select>
             </div>
+          </div>
+          <div class="field small-row">
             <div>
               <label for="effectiveDate">Effective date</label>
               <input id="effectiveDate" name="effectiveDate" type="date">
+            </div>
+            <div>
+              <label>&nbsp;</label>
+              <div style="font-size:.82rem;color:var(--muted);padding-top:10px;">Choose facilitator certification only when someone has completed Teach the Teacher and is certified to teach MMMF.</div>
             </div>
           </div>
           <div class="field small-row">
@@ -238,7 +251,7 @@ tbody tr:hover { background:#fcfbf8; }
             <textarea id="notes" name="notes" placeholder="Optional notes for this agreement assignment"></textarea>
           </div>
           <div class="action-row">
-            <button class="btn dark" type="submit">Issue certification</button>
+            <button class="btn dark" type="submit">Issue credential</button>
             <button class="btn" id="clearFormBtn" type="button">Clear form</button>
           </div>
         </form>
@@ -292,7 +305,7 @@ tbody tr:hover { background:#fcfbf8; }
               <thead>
                 <tr>
                   <th>Agreement #</th>
-                  <th>Facilitator</th>
+                  <th>Recipient</th>
                   <th>Track</th>
                   <th>Issued</th>
                   <th>Actions</th>
@@ -350,6 +363,7 @@ tbody tr:hover { background:#fcfbf8; }
     const fullNameInput = document.getElementById('fullName');
     const emailInput = document.getElementById('email');
     const organizationInput = document.getElementById('organization');
+    const certificateTypeInput = document.getElementById('certificateType');
     const trackInput = document.getElementById('track');
     const effectiveDateInput = document.getElementById('effectiveDate');
     const agreementNumberInput = document.getElementById('agreementNumber');
@@ -433,6 +447,7 @@ tbody tr:hover { background:#fcfbf8; }
         entry.fullName,
         entry.email,
         entry.organization,
+        entry.certificateType,
         entry.track,
         entry.status,
         entry.notes
@@ -460,7 +475,7 @@ tbody tr:hover { background:#fcfbf8; }
               ${entry.fullName}<br>
               <span style="color:var(--muted);">${entry.email || 'No email provided'}</span>
             </td>
-            <td>${entry.organization || '—'}<br><span style="color:var(--muted);">${entry.track || 'No track set'}</span></td>
+            <td>${entry.organization || '—'}<br><span style="color:var(--muted);">${entry.certificateType === 'facilitator' ? 'Facilitator Certification' : 'Program Completion'} · ${entry.track || 'No track set'}</span></td>
             <td><span class="tag">${entry.status}</span></td>
             <td>${entry.effectiveDate || '—'}<br><span style="color:var(--muted);">${entry.issuedAt || '—'}</span></td>
             <td class="row-actions">
@@ -488,7 +503,7 @@ tbody tr:hover { background:#fcfbf8; }
           row.innerHTML = `
             <td><strong>${entry.agreementNumber}</strong></td>
             <td>${entry.fullName}</td>
-            <td>${entry.track || '—'}</td>
+            <td>${entry.certificateType === 'facilitator' ? 'Facilitator Certification' : 'Completion'}<br><span style="color:var(--muted);">${entry.track || '—'}</span></td>
             <td>${entry.issuedAt ? new Date(entry.issuedAt).toLocaleString() : '—'}</td>
             <td class="row-actions">
               <a href="certificate-viewer.html?agreement=${encodeURIComponent(entry.agreementNumber)}">Open certificate</a>
@@ -624,6 +639,7 @@ tbody tr:hover { background:#fcfbf8; }
 
     function clearForm() {
       form.reset();
+      certificateTypeInput.value = 'completion';
       effectiveDateInput.valueAsDate = new Date();
       agreementNumberInput.value = '';
       showNotice(duplicateNotice, '');
@@ -645,6 +661,7 @@ tbody tr:hover { background:#fcfbf8; }
             full_name: fullNameInput.value.trim(),
             email: emailInput.value.trim(),
             organization: organizationInput.value.trim(),
+            certificate_type: certificateTypeInput.value,
             track: trackInput.value,
             effective_date: effectiveDateInput.value,
             status: statusInput.value,
@@ -674,6 +691,7 @@ tbody tr:hover { background:#fcfbf8; }
             fullName: fullNameInput.value.trim(),
             email: emailInput.value.trim(),
             organization: organizationInput.value.trim(),
+            certificateType: certificateTypeInput.value,
             track: trackInput.value,
             effectiveDate: effectiveDateInput.value,
             status: statusInput.value,
@@ -763,9 +781,9 @@ tbody tr:hover { background:#fcfbf8; }
     document.getElementById('exportCsvBtn').addEventListener('click', () => {
       const registry = state.registry;
       const rows = [
-        ['agreementNumber','fullName','email','organization','track','effectiveDate','status','notes','issuedAt'],
+        ['agreementNumber','fullName','email','organization','certificateType','track','effectiveDate','status','notes','issuedAt'],
         ...registry.map(entry => [
-          entry.agreementNumber, entry.fullName, entry.email, entry.organization, entry.track,
+          entry.agreementNumber, entry.fullName, entry.email, entry.organization, entry.certificateType || 'completion', entry.track,
           entry.effectiveDate, entry.status, entry.notes, entry.issuedAt
         ])
       ];

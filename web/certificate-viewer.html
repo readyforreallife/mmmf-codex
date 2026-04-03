@@ -65,17 +65,18 @@ h1 { font-family:'Playfair Display',serif; font-size:3rem; margin:0 0 10px; text
     <div class="cert-shell" id="certShell" style="display:none;">
       <div class="certificate">
         <div class="ey">Modern Manners &amp; Mental Fortitude</div>
-        <h1>Facilitator Certification</h1>
-        <p class="sub">This certificate confirms that the named facilitator has been issued an MMMF facilitator certification record through the protected teacher-mode administration system.</p>
-        <div class="recipient" id="recipientName">Facilitator Name</div>
-        <p class="copy">This record recognizes certification issuance for program use, implementation, and licensed facilitation within the approved MMMF track listed below.</p>
+        <h1 id="certificateTitle">MMMF Completion Certificate</h1>
+        <p class="sub" id="certificateSub">This certificate confirms successful completion of the named MMMF track through the protected teacher-mode administration system.</p>
+        <div class="recipient" id="recipientName">Recipient Name</div>
+        <p class="copy" id="certificateCopy">This record recognizes successful completion of the MMMF track listed below.</p>
         <div class="meta-grid">
           <div class="meta-card"><div class="meta-label">Agreement Number</div><div class="meta-value" id="agreementNumber">MMMF-0001</div></div>
           <div class="meta-card"><div class="meta-label">Organization</div><div class="meta-value" id="organization">Organization</div></div>
+          <div class="meta-card"><div class="meta-label">Credential Type</div><div class="meta-value" id="credentialType">Program Completion</div></div>
           <div class="meta-card"><div class="meta-label">Track</div><div class="meta-value" id="track">Track</div></div>
           <div class="meta-card"><div class="meta-label">Status</div><div class="meta-value" id="status">Signed</div></div>
-          <div class="meta-card"><div class="meta-label">Effective Date</div><div class="meta-value" id="effectiveDate">2026-04-03</div></div>
           <div class="meta-card"><div class="meta-label">Issued At</div><div class="meta-value" id="issuedAt">2026-04-03</div></div>
+          <div class="meta-card"><div class="meta-label">Effective Date</div><div class="meta-value" id="effectiveDate">2026-04-03</div></div>
         </div>
         <div class="footer-line">
           <div class="signature">
@@ -125,13 +126,26 @@ h1 { font-family:'Playfair Display',serif; font-size:3rem; margin:0 0 10px; text
         }
 
         const record = data.record;
-        document.getElementById('recipientName').textContent = record.fullName || 'Unnamed facilitator';
+        const certificateType = record.certificateType === 'facilitator' ? 'facilitator' : 'completion';
+        const track = record.track || 'assigned MMMF track';
+        document.getElementById('recipientName').textContent = record.fullName || 'Unnamed recipient';
         document.getElementById('agreementNumber').textContent = record.agreementNumber || '—';
         document.getElementById('organization').textContent = record.organization || '—';
+        document.getElementById('credentialType').textContent = certificateType === 'facilitator' ? 'Facilitator Certification' : 'Program Completion';
         document.getElementById('track').textContent = record.track || '—';
         document.getElementById('status').textContent = record.status || '—';
         document.getElementById('effectiveDate').textContent = record.effectiveDate || '—';
         document.getElementById('issuedAt').textContent = record.issuedAt ? new Date(record.issuedAt).toLocaleString() : '—';
+
+        if (certificateType === 'facilitator') {
+          document.getElementById('certificateTitle').textContent = 'Facilitator Certification';
+          document.getElementById('certificateSub').textContent = 'This certificate confirms that the named recipient completed Teach the Teacher and has been certified to teach MMMF.';
+          document.getElementById('certificateCopy').textContent = `This record recognizes certification to teach MMMF within the approved ${track} implementation track listed below.`;
+        } else {
+          document.getElementById('certificateTitle').textContent = 'MMMF Completion Certificate';
+          document.getElementById('certificateSub').textContent = 'This certificate confirms successful completion of the named MMMF track through the protected teacher-mode administration system.';
+          document.getElementById('certificateCopy').textContent = `This record recognizes successful completion of the ${track} MMMF track listed below.`;
+        }
 
         notice.style.display = 'none';
         certShell.style.display = 'block';

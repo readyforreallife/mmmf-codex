@@ -202,6 +202,10 @@ export default {
         const requestedNumber = normalizeAgreementNumber(payload.agreement_number || nextAgreementNumber(entries));
         const email = String(payload.email || "").trim();
         const organization = String(payload.organization || "").trim();
+        const certificateType =
+          String(payload.certificate_type || "completion").trim().toLowerCase() === "facilitator"
+            ? "facilitator"
+            : "completion";
         const track = String(payload.track || "").trim();
         const effectiveDate = String(payload.effective_date || "").trim();
         const status = String(payload.status || "Issued").trim();
@@ -242,6 +246,7 @@ export default {
           fullName,
           email,
           organization,
+          certificateType,
           track,
           effectiveDate,
           status,
