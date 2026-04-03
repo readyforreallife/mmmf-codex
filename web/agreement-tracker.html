@@ -48,6 +48,22 @@ main { max-width:1200px; margin:0 auto; padding:24px; }
 .search-host { margin-bottom:18px; }
 .toolbar { margin-bottom:18px; }
 .grid { display:grid; grid-template-columns: 420px 1fr; gap:18px; align-items:start; }
+.admin-gate {
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 10px 24px rgba(0,0,0,.04);
+  margin-bottom:18px;
+}
+.admin-gate h2 { font-family:'Playfair Display',serif; color:var(--navy); margin:0 0 10px; }
+.admin-gate form { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.admin-gate input {
+  flex:1; min-width:220px; padding:11px 12px; border:1px solid var(--line); border-radius:10px;
+}
+.locked-copy {
+  font-size:.95rem; color:#334155; line-height:1.7;
+}
 .panel {
   background:var(--white);
   border:1px solid var(--line);
@@ -130,13 +146,29 @@ tbody tr:hover { background:#fcfbf8; }
 
     <div class="toolbar">
       <a class="btn dark" href="../docs/viewer.html?file=MMMF_Facilitator_Certification_Agreement.docx&title=Facilitator%20Certification%20and%20Licensing%20Agreement&type=docx">Certification Agreement</a>
-      <button class="btn" id="exportCsvBtn" type="button">Export CSV</button>
-      <button class="btn" id="exportJsonBtn" type="button">Backup JSON</button>
-      <label class="btn" for="importJsonInput">Import JSON</label>
-      <input id="importJsonInput" type="file" accept="application/json" hidden>
+      <button class="btn" id="lockTeacherModeBtn" type="button" style="display:none;">Lock Teacher Mode</button>
     </div>
 
-    <div class="grid">
+    <section class="admin-gate" id="adminGate">
+      <div class="kicker">Teacher Mode</div>
+      <h2>Protected issuance access</h2>
+      <p class="locked-copy">Agreement numbers and certification issuance should only be handled from a trusted admin location. Enter the teacher-mode access code to unlock the registry, assign a unique agreement number, and issue certification without reusing the same number twice.</p>
+      <form id="unlockForm">
+        <input id="teacherCodeInput" type="password" placeholder="Enter teacher-mode code">
+        <button class="btn dark" type="submit">Enter Teacher Mode</button>
+      </form>
+      <div id="unlockNotice" class="notice warn" style="display:none;"></div>
+    </section>
+
+    <div id="adminShell" style="display:none;">
+      <div class="toolbar" style="margin-top:0;">
+        <button class="btn" id="exportCsvBtn" type="button">Export CSV</button>
+        <button class="btn" id="exportJsonBtn" type="button">Backup JSON</button>
+        <label class="btn" for="importJsonInput">Import JSON</label>
+        <input id="importJsonInput" type="file" accept="application/json" hidden>
+      </div>
+
+      <div class="grid">
       <section class="panel">
         <div class="kicker">New Assignment</div>
         <h2>Issue the next agreement number</h2>
@@ -236,11 +268,14 @@ tbody tr:hover { background:#fcfbf8; }
         <div id="emptyState" class="empty">No agreement numbers have been assigned yet.</div>
       </section>
     </div>
+    </div>
   </main>
 
   <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
   <script>
     const STORAGE_KEY = 'mmmf_agreement_registry_v1';
+    const ADMIN_MODE_KEY = 'mmmf_agreement_admin_mode_v1';
+    const ADMIN_ACCESS_CODE = 'MMMF-TEACHER-2026';
     const PREFIX = 'MMMF-';
     const START_NUMBER = 1;
 
@@ -263,6 +298,12 @@ tbody tr:hover { background:#fcfbf8; }
     const totalSignedEl = document.getElementById('totalSigned');
     const totalPendingEl = document.getElementById('totalPending');
     const highestNumberEl = document.getElementById('highestNumber');
+    const adminGate = document.getElementById('adminGate');
+    const adminShell = document.getElementById('adminShell');
+    const unlockForm = document.getElementById('unlockForm');
+    const teacherCodeInput = document.getElementById('teacherCodeInput');
+    const unlockNotice = document.getElementById('unlockNotice');
+    const lockTeacherModeBtn = document.getElementById('lockTeacherModeBtn');
 
     function loadRegistry() {
       try {
@@ -361,6 +402,13 @@ tbody tr:hover { background:#fcfbf8; }
       el.style.display = 'block';
     }
 
+    function setTeacherMode(enabled) {
+      sessionStorage.setItem(ADMIN_MODE_KEY, enabled ? 'true' : 'false');
+      adminGate.style.display = enabled ? 'none' : 'block';
+      adminShell.style.display = enabled ? 'block' : 'none';
+      lockTeacherModeBtn.style.display = enabled ? 'inline-flex' : 'none';
+    }
+
     function clearForm() {
       form.reset();
       effectiveDateInput.valueAsDate = new Date();
@@ -410,6 +458,22 @@ tbody tr:hover { background:#fcfbf8; }
       renderRegistry();
       showNotice(successNotice, `Assigned ${requestedNumber} to ${fullNameInput.value.trim()}. This number is now stored in the agreement registry and will not be issued again from this tracker.`);
       clearForm();
+    });
+
+    unlockForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (teacherCodeInput.value.trim() !== ADMIN_ACCESS_CODE) {
+        showNotice(unlockNotice, 'That teacher-mode code is not correct.');
+        return;
+      }
+      showNotice(unlockNotice, '');
+      teacherCodeInput.value = '';
+      setTeacherMode(true);
+    });
+
+    lockTeacherModeBtn.addEventListener('click', () => {
+      setTeacherMode(false);
+      showNotice(successNotice, '');
     });
 
     document.getElementById('clearFormBtn').addEventListener('click', clearForm);
@@ -489,6 +553,7 @@ tbody tr:hover { background:#fcfbf8; }
     });
 
     effectiveDateInput.valueAsDate = new Date();
+    setTeacherMode(sessionStorage.getItem(ADMIN_MODE_KEY) === 'true');
     renderRegistry();
   </script>
 </body>

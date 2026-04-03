@@ -122,9 +122,42 @@
       text-transform:uppercase;
     }
     .viewer-frame-wrap {
+      position: relative;
       height:calc(100vh - 250px);
       min-height:640px;
       background:#eef2f7;
+    }
+    .viewer-watermark {
+      position:absolute;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:
+        repeating-linear-gradient(
+          -28deg,
+          rgba(255,255,255,0.0) 0 60px,
+          rgba(196,149,64,0.08) 60px 120px
+        );
+      pointer-events:none;
+      z-index:2;
+      overflow:hidden;
+    }
+    .viewer-watermark::before {
+      content:'COPY ONLY    COPY ONLY    COPY ONLY    COPY ONLY    COPY ONLY';
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(37,48,68,0.18);
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem, 5vw, 4.8rem);
+      letter-spacing:.14em;
+      transform:rotate(-24deg);
+      text-transform:uppercase;
+      text-align:center;
+      padding:20px;
     }
     iframe {
       width:100%;
@@ -181,6 +214,7 @@
       </div>
       <div class="viewer-frame-wrap">
         <iframe id="viewerFrame" title="MMMF document viewer"></iframe>
+        <div id="viewerWatermark" class="viewer-watermark" aria-hidden="true"></div>
       </div>
       <div class="fallback">
         <p id="fallbackText">If the preview does not load, use the buttons below, or contact <a href="mailto:readyforreal.life44@gmail.com">readyforreal.life44@gmail.com</a>.</p>
@@ -207,6 +241,7 @@
     const frame = document.getElementById('viewerFrame');
     const downloadBtn = document.getElementById('downloadBtn');
     const openDirectBtn = document.getElementById('openDirectBtn');
+    const viewerWatermark = document.getElementById('viewerWatermark');
 
     if (!file) {
       titleEl.textContent = 'Document unavailable';
@@ -233,19 +268,23 @@
       }
 
       if (title.toLowerCase().includes('certification') || file.toLowerCase().includes('certification_agreement')) {
+        viewerWatermark.style.display = 'flex';
+        downloadBtn.style.display = 'none';
+        openDirectBtn.style.display = 'none';
         const trackerBtn = document.createElement('a');
         trackerBtn.className = 'btn';
         trackerBtn.href = '../web/agreement-tracker.html';
-        trackerBtn.textContent = 'Agreement Tracker';
+        trackerBtn.textContent = 'Teacher Mode';
         document.querySelector('.header-actions').appendChild(trackerBtn);
 
         const trackerLink = document.createElement('a');
         trackerLink.className = 'btn';
         trackerLink.href = '../web/agreement-tracker.html';
-        trackerLink.textContent = 'Open Agreement Tracker';
+        trackerLink.textContent = 'Issue Certification';
         document.querySelector('.fallback-actions').appendChild(trackerLink);
 
-        subEl.textContent = 'This agreement can be paired with the MMMF Agreement Tracker so each facilitator receives a unique number only once.';
+        subEl.textContent = 'Public view is copy-only. Use Teacher Mode to assign an agreement number and issue certification from the protected tracker.';
+        document.getElementById('fallbackText').innerHTML = 'Public visitors can view a watermarked copy only. To assign an agreement number, prevent duplicates, and issue certification, enter Teacher Mode.';
       }
     }
   </script>
