@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MMMF Document Viewer</title>
+  <link rel="stylesheet" href="../assets/site-search.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap');
     :root {
@@ -94,6 +95,9 @@
       padding:24px;
       flex:1;
     }
+    .search-host {
+      margin-bottom:18px;
+    }
     .viewer-shell {
       background:var(--white);
       border:1px solid var(--line);
@@ -168,6 +172,7 @@
   </header>
 
   <main>
+    <div class="search-host"></div>
     <div class="viewer-shell">
       <div class="viewer-meta">
         <strong id="docType">Document</strong>
@@ -186,6 +191,7 @@
     </div>
   </main>
 
+  <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const file = params.get('file');
