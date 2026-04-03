@@ -284,8 +284,10 @@ tbody tr:hover { background:#fcfbf8; }
     const ADMIN_MODE_KEY = 'mmmf_agreement_admin_mode_v2';
     const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
     const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
+    const LOCAL_REGISTRY_KEY = 'mmmf_agreement_registry_local_v3';
+    const MAIN_TEACHER_PIN = '4429';
     const PREFIX = 'MMMF-';
-    const state = { registry: [] };
+    const state = { registry: [], mode: 'local' };
 
     const form = document.getElementById('agreementForm');
     const fullNameInput = document.getElementById('fullName');
@@ -334,6 +336,18 @@ tbody tr:hover { background:#fcfbf8; }
     function nextAvailableNumber(registry) {
       const highest = registry.reduce((max, entry) => Math.max(max, numberDigits(entry.agreementNumber)), 0);
       return formatNumber(Math.max(highest + 1, 1));
+    }
+
+    function loadLocalRegistry() {
+      try {
+        return JSON.parse(localStorage.getItem(LOCAL_REGISTRY_KEY) || '[]');
+      } catch (_error) {
+        return [];
+      }
+    }
+
+    function saveLocalRegistry(registry) {
+      localStorage.setItem(LOCAL_REGISTRY_KEY, JSON.stringify(registry));
     }
 
     function renderSummary(registry) {
@@ -459,6 +473,13 @@ tbody tr:hover { background:#fcfbf8; }
     async function refreshRegistryFromBackend() {
       const data = await postAdminAction('agreement_list', { session_token: getSessionToken() });
       state.registry = Array.isArray(data.entries) ? data.entries : [];
+      state.mode = 'backend';
+      renderRegistry();
+    }
+
+    function refreshRegistryFromLocal() {
+      state.registry = loadLocalRegistry();
+      state.mode = 'local';
       renderRegistry();
     }
 
@@ -478,21 +499,52 @@ tbody tr:hover { background:#fcfbf8; }
 
       try {
         const requestedNumber = normalizeNumber(agreementNumberInput.value || nextAvailableNumber(state.registry));
-        const result = await postAdminAction('agreement_issue', {
-          session_token: getSessionToken(),
-          agreement_number: requestedNumber,
-          full_name: fullNameInput.value.trim(),
-          email: emailInput.value.trim(),
-          organization: organizationInput.value.trim(),
-          track: trackInput.value,
-          effective_date: effectiveDateInput.value,
-          status: statusInput.value,
-          notes: notesInput.value.trim()
-        });
+        if (state.mode === 'backend' && getSessionToken()) {
+          const result = await postAdminAction('agreement_issue', {
+            session_token: getSessionToken(),
+            agreement_number: requestedNumber,
+            full_name: fullNameInput.value.trim(),
+            email: emailInput.value.trim(),
+            organization: organizationInput.value.trim(),
+            track: trackInput.value,
+            effective_date: effectiveDateInput.value,
+            status: statusInput.value,
+            notes: notesInput.value.trim()
+          });
 
-        state.registry = Array.isArray(result.entries) ? result.entries : state.registry;
-        renderRegistry();
-        showNotice(successNotice, `Issued ${requestedNumber} to ${fullNameInput.value.trim()}. The shared MMMF registry now holds that number so it will not be reused.`);
+          state.registry = Array.isArray(result.entries) ? result.entries : state.registry;
+          renderRegistry();
+          showNotice(successNotice, `Issued ${requestedNumber} to ${fullNameInput.value.trim()}. The shared MMMF registry now holds that number so it will not be reused.`);
+        } else {
+          const duplicateNumber = state.registry.find(entry => entry.agreementNumber === requestedNumber);
+          if (duplicateNumber) {
+            throw new Error(`Agreement number ${requestedNumber} has already been assigned to ${duplicateNumber.fullName}.`);
+          }
+
+          const duplicatePerson = state.registry.find(entry =>
+            entry.fullName.toLowerCase() === fullNameInput.value.trim().toLowerCase() &&
+            entry.email.toLowerCase() === emailInput.value.trim().toLowerCase() &&
+            entry.email
+          );
+          if (duplicatePerson) {
+            throw new Error(`${duplicatePerson.fullName} already has agreement number ${duplicatePerson.agreementNumber}.`);
+          }
+
+          state.registry.push({
+            agreementNumber: requestedNumber,
+            fullName: fullNameInput.value.trim(),
+            email: emailInput.value.trim(),
+            organization: organizationInput.value.trim(),
+            track: trackInput.value,
+            effectiveDate: effectiveDateInput.value,
+            status: statusInput.value,
+            notes: notesInput.value.trim(),
+            issuedAt: new Date().toISOString()
+          });
+          saveLocalRegistry(state.registry);
+          renderRegistry();
+          showNotice(successNotice, `Issued ${requestedNumber} to ${fullNameInput.value.trim()}. This browser is currently using local safe mode until the shared admin backend is connected.`);
+        }
         clearForm();
       } catch (error) {
         showNotice(duplicateNotice, error.message);
@@ -504,8 +556,22 @@ tbody tr:hover { background:#fcfbf8; }
       showNotice(unlockNotice, '');
 
       try {
-        localStorage.setItem(ADMIN_ENDPOINT_KEY, getAdminEndpoint());
-        const data = await postAdminAction('admin_login', { access_code: teacherCodeInput.value.trim() });
+        const enteredCode = teacherCodeInput.value.trim();
+        const endpoint = getAdminEndpoint();
+
+        if (!endpoint) {
+          if (enteredCode !== MAIN_TEACHER_PIN) {
+            throw new Error('That teacher code is not correct.');
+          }
+          teacherCodeInput.value = '';
+          setTeacherMode(true);
+          refreshRegistryFromLocal();
+          showNotice(successNotice, 'Teacher Mode unlocked in local safe mode. Add the redeployed Apps Script URL later to use the shared registry across devices.');
+          return;
+        }
+
+        localStorage.setItem(ADMIN_ENDPOINT_KEY, endpoint);
+        const data = await postAdminAction('admin_login', { access_code: enteredCode });
         sessionStorage.setItem(ADMIN_SESSION_KEY, data.session_token);
         teacherCodeInput.value = '';
         setTeacherMode(true);
@@ -530,8 +596,13 @@ tbody tr:hover { background:#fcfbf8; }
       showNotice(successNotice, '');
       showNotice(duplicateNotice, '');
       try {
-        await refreshRegistryFromBackend();
-        showNotice(successNotice, 'Registry refreshed from the shared admin backend.');
+        if (state.mode === 'backend' && getSessionToken()) {
+          await refreshRegistryFromBackend();
+          showNotice(successNotice, 'Registry refreshed from the shared admin backend.');
+        } else {
+          refreshRegistryFromLocal();
+          showNotice(successNotice, 'Registry refreshed from local safe mode on this device.');
+        }
       } catch (error) {
         showNotice(duplicateNotice, error.message);
       }
@@ -594,7 +665,7 @@ tbody tr:hover { background:#fcfbf8; }
         }
       } else {
         setTeacherMode(false);
-        renderRegistry();
+        refreshRegistryFromLocal();
       }
     })();
   </script>
