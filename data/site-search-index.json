@@ -104,6 +104,14 @@
     "keywords": ["certification", "licensing", "agreement", "facilitator"]
   },
   {
+    "title": "Agreement number tracker",
+    "page": "Program Hub",
+    "section": "Agreement Registry",
+    "url": "web/agreement-tracker.html",
+    "snippet": "Assign unique MMMF agreement numbers, prevent duplicates, and track who each number was issued to.",
+    "keywords": ["agreement number", "tracker", "registry", "licensing", "facilitator agreement", "assign number"]
+  },
+  {
     "title": "Scenario cards",
     "page": "Documents Library",
     "section": "Cards",

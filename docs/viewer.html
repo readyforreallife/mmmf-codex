@@ -231,6 +231,22 @@
       } else {
         frame.src = file;
       }
+
+      if (title.toLowerCase().includes('certification') || file.toLowerCase().includes('certification_agreement')) {
+        const trackerBtn = document.createElement('a');
+        trackerBtn.className = 'btn';
+        trackerBtn.href = '../web/agreement-tracker.html';
+        trackerBtn.textContent = 'Agreement Tracker';
+        document.querySelector('.header-actions').appendChild(trackerBtn);
+
+        const trackerLink = document.createElement('a');
+        trackerLink.className = 'btn';
+        trackerLink.href = '../web/agreement-tracker.html';
+        trackerLink.textContent = 'Open Agreement Tracker';
+        document.querySelector('.fallback-actions').appendChild(trackerLink);
+
+        subEl.textContent = 'This agreement can be paired with the MMMF Agreement Tracker so each facilitator receives a unique number only once.';
+      }
     }
   </script>
 </body>
