@@ -161,11 +161,11 @@ tbody tr:hover { background:#fcfbf8; }
       <h2>Protected issuance access</h2>
       <p class="locked-copy">Agreement numbers and certification issuance should only be handled from a trusted admin location. Enter your admin access code to unlock the shared registry, assign a unique agreement number, and issue certification without reusing the same number twice.</p>
       <form id="unlockForm">
-        <input id="adminEndpointInput" type="url" placeholder="Paste the redeployed MMMF Apps Script admin URL once">
+        <input id="adminEndpointInput" type="url" placeholder="Paste the Cloudflare Worker URL once">
         <input id="teacherCodeInput" type="password" placeholder="Enter admin access code">
         <button class="btn dark" type="submit">Enter Teacher Mode</button>
       </form>
-      <p class="gate-note">This admin page is ready for the shared registry backend, but it should only be pointed at the updated Apps Script deployment that includes the agreement-admin routes.</p>
+      <p class="gate-note">This admin page is ready for the shared registry backend, but it should only be pointed at the MMMF agreement admin Cloudflare Worker. If you leave the Worker URL blank, this page will use local safe mode on this device only.</p>
       <div id="unlockNotice" class="notice warn" style="display:none;"></div>
     </section>
 
@@ -280,7 +280,7 @@ tbody tr:hover { background:#fcfbf8; }
   <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
   <script>
     const DEFAULT_ADMIN_ENDPOINT = '';
-    const ENDPOINT_PLACEHOLDER = 'https://script.google.com/macros/s/AKfycbxlTRb17ZVUbZ6J1VHxjD8vbi87eECXBgOLgNjgYo3APLj491jNfhPeBRPWObz3lMf9/exec';
+    const ENDPOINT_PLACEHOLDER = 'https://mmmf-agreement-admin.your-subdomain.workers.dev';
     const ADMIN_MODE_KEY = 'mmmf_agreement_admin_mode_v2';
     const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
     const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
@@ -436,7 +436,7 @@ tbody tr:hover { background:#fcfbf8; }
     async function postAdminAction(action, payload = {}) {
       const endpoint = getAdminEndpoint();
       if (!endpoint) {
-        throw new Error('Paste the redeployed MMMF Apps Script admin URL first. The current public site should not guess at the old registration endpoint.');
+        throw new Error('Paste the Cloudflare Worker admin URL first, or leave it blank and use local safe mode on this device.');
       }
 
       const response = await fetch(endpoint, {
@@ -450,7 +450,7 @@ tbody tr:hover { background:#fcfbf8; }
       try {
         data = JSON.parse(text);
       } catch (_error) {
-        throw new Error('The admin endpoint did not return valid JSON. Redeploy the MMMF Apps Script web app, then paste that updated URL here.');
+        throw new Error('The Worker endpoint did not return valid JSON. Make sure you deployed the MMMF agreement admin Worker and pasted the correct Worker URL.');
       }
 
       if (!response.ok || !data.ok) {
@@ -458,13 +458,13 @@ tbody tr:hover { background:#fcfbf8; }
       }
 
       if (action === 'admin_login' && !data.session_token) {
-        throw new Error('This endpoint is still on the old deployment. Redeploy the updated Apps Script and paste that new URL here.');
+        throw new Error('This endpoint is not returning an admin session. Make sure you deployed the MMMF agreement admin Worker and pasted the Worker URL.');
       }
       if (action === 'agreement_list' && !Array.isArray(data.entries)) {
-        throw new Error('This endpoint does not expose the agreement registry yet. Redeploy the updated Apps Script and try again.');
+        throw new Error('This Worker endpoint does not expose the agreement registry yet. Make sure the Worker code was pasted in full and redeployed.');
       }
       if (action === 'agreement_issue' && !Array.isArray(data.entries)) {
-        throw new Error('This endpoint is not returning agreement records yet. Redeploy the updated Apps Script and try again.');
+        throw new Error('This Worker endpoint is not returning agreement records yet. Make sure the Worker code was pasted in full and redeployed.');
       }
 
       return data;
@@ -566,7 +566,7 @@ tbody tr:hover { background:#fcfbf8; }
           teacherCodeInput.value = '';
           setTeacherMode(true);
           refreshRegistryFromLocal();
-          showNotice(successNotice, 'Teacher Mode unlocked in local safe mode. Add the redeployed Apps Script URL later to use the shared registry across devices.');
+          showNotice(successNotice, 'Teacher Mode unlocked in local safe mode. Add the Cloudflare Worker URL later to use the shared registry across devices.');
           return;
         }
 
