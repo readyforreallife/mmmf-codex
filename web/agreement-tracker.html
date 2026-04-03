@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MMMF Agreement Number Tracker</title>
+<title>MMMF Certification Admin</title>
 <link rel="stylesheet" href="../assets/site-search.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap');
@@ -60,6 +60,12 @@ main { max-width:1200px; margin:0 auto; padding:24px; }
 .admin-gate form { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
 .admin-gate input {
   flex:1; min-width:220px; padding:11px 12px; border:1px solid var(--line); border-radius:10px;
+}
+.gate-note {
+  margin-top:12px;
+  font-size:.86rem;
+  color:var(--muted);
+  line-height:1.6;
 }
 .locked-copy {
   font-size:.95rem; color:#334155; line-height:1.7;
@@ -129,14 +135,14 @@ tbody tr:hover { background:#fcfbf8; }
   <header>
     <div class="wrap topbar">
       <div>
-        <div class="eyebrow">Agreement Number Tracker</div>
-        <h1>Assign Agreement Numbers Once</h1>
-        <p class="sub">This page gives each facilitator agreement a unique MMMF number, stores the assignment, and prevents the same number from being issued twice in this browser. Use one designated admin browser as the source of truth unless you later move this into a shared backend.</p>
+        <div class="eyebrow">Certification Admin</div>
+        <h1>Protected Certification Issuance</h1>
+        <p class="sub">This admin page is designed to sign you in, pull one shared agreement registry, and issue each facilitator certification number only once. Public visitors should never issue from here.</p>
       </div>
       <div class="header-actions">
         <a class="btn secondary" href="https://readyforreal.life/">Main Homepage</a>
         <a class="btn secondary" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
-        <a class="btn" href="../docs/viewer.html?file=MMMF_Facilitator_Certification_Agreement.docx&title=Facilitator%20Certification%20and%20Licensing%20Agreement&type=docx">Open Agreement</a>
+        <a class="btn" href="../docs/viewer.html?file=MMMF_Facilitator_Certification_Agreement.docx&title=Facilitator%20Certification%20and%20Licensing%20Agreement&type=docx">Open Public View</a>
       </div>
     </div>
   </header>
@@ -146,17 +152,20 @@ tbody tr:hover { background:#fcfbf8; }
 
     <div class="toolbar">
       <a class="btn dark" href="../docs/viewer.html?file=MMMF_Facilitator_Certification_Agreement.docx&title=Facilitator%20Certification%20and%20Licensing%20Agreement&type=docx">Certification Agreement</a>
+      <button class="btn" id="refreshRegistryBtn" type="button" style="display:none;">Refresh Registry</button>
       <button class="btn" id="lockTeacherModeBtn" type="button" style="display:none;">Lock Teacher Mode</button>
     </div>
 
     <section class="admin-gate" id="adminGate">
       <div class="kicker">Teacher Mode</div>
       <h2>Protected issuance access</h2>
-      <p class="locked-copy">Agreement numbers and certification issuance should only be handled from a trusted admin location. Enter the teacher-mode access code to unlock the registry, assign a unique agreement number, and issue certification without reusing the same number twice.</p>
+      <p class="locked-copy">Agreement numbers and certification issuance should only be handled from a trusted admin location. Enter your admin access code to unlock the shared registry, assign a unique agreement number, and issue certification without reusing the same number twice.</p>
       <form id="unlockForm">
-        <input id="teacherCodeInput" type="password" placeholder="Enter teacher-mode code">
+        <input id="adminEndpointInput" type="url" placeholder="Paste the redeployed MMMF Apps Script admin URL once">
+        <input id="teacherCodeInput" type="password" placeholder="Enter admin access code">
         <button class="btn dark" type="submit">Enter Teacher Mode</button>
       </form>
+      <p class="gate-note">This admin page is ready for the shared registry backend, but it should only be pointed at the updated Apps Script deployment that includes the agreement-admin routes.</p>
       <div id="unlockNotice" class="notice warn" style="display:none;"></div>
     </section>
 
@@ -164,8 +173,6 @@ tbody tr:hover { background:#fcfbf8; }
       <div class="toolbar" style="margin-top:0;">
         <button class="btn" id="exportCsvBtn" type="button">Export CSV</button>
         <button class="btn" id="exportJsonBtn" type="button">Backup JSON</button>
-        <label class="btn" for="importJsonInput">Import JSON</label>
-        <input id="importJsonInput" type="file" accept="application/json" hidden>
       </div>
 
       <div class="grid">
@@ -227,7 +234,7 @@ tbody tr:hover { background:#fcfbf8; }
             <textarea id="notes" name="notes" placeholder="Optional notes for this agreement assignment"></textarea>
           </div>
           <div class="action-row">
-            <button class="btn dark" type="submit">Assign number</button>
+            <button class="btn dark" type="submit">Issue certification</button>
             <button class="btn" id="clearFormBtn" type="button">Clear form</button>
           </div>
         </form>
@@ -247,7 +254,6 @@ tbody tr:hover { background:#fcfbf8; }
 
         <div class="table-actions" style="margin-bottom:12px;">
           <input id="searchInput" style="flex:1; min-width:220px; padding:11px 12px; border:1px solid var(--line); border-radius:10px;" placeholder="Search by number, name, email, or organization">
-          <button class="btn" id="clearRegistryBtn" type="button">Clear registry</button>
         </div>
 
         <div style="overflow:auto;">
@@ -273,11 +279,13 @@ tbody tr:hover { background:#fcfbf8; }
 
   <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
   <script>
-    const STORAGE_KEY = 'mmmf_agreement_registry_v1';
-    const ADMIN_MODE_KEY = 'mmmf_agreement_admin_mode_v1';
-    const ADMIN_ACCESS_CODE = 'MMMF-TEACHER-2026';
+    const DEFAULT_ADMIN_ENDPOINT = '';
+    const ENDPOINT_PLACEHOLDER = 'https://script.google.com/macros/s/AKfycbxlTRb17ZVUbZ6J1VHxjD8vbi87eECXBgOLgNjgYo3APLj491jNfhPeBRPWObz3lMf9/exec';
+    const ADMIN_MODE_KEY = 'mmmf_agreement_admin_mode_v2';
+    const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
+    const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
     const PREFIX = 'MMMF-';
-    const START_NUMBER = 1;
+    const state = { registry: [] };
 
     const form = document.getElementById('agreementForm');
     const fullNameInput = document.getElementById('fullName');
@@ -301,21 +309,11 @@ tbody tr:hover { background:#fcfbf8; }
     const adminGate = document.getElementById('adminGate');
     const adminShell = document.getElementById('adminShell');
     const unlockForm = document.getElementById('unlockForm');
+    const adminEndpointInput = document.getElementById('adminEndpointInput');
     const teacherCodeInput = document.getElementById('teacherCodeInput');
     const unlockNotice = document.getElementById('unlockNotice');
     const lockTeacherModeBtn = document.getElementById('lockTeacherModeBtn');
-
-    function loadRegistry() {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      } catch (error) {
-        return [];
-      }
-    }
-
-    function saveRegistry(registry) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(registry));
-    }
+    const refreshRegistryBtn = document.getElementById('refreshRegistryBtn');
 
     function normalizeNumber(value) {
       const trimmed = String(value || '').trim().toUpperCase();
@@ -335,7 +333,7 @@ tbody tr:hover { background:#fcfbf8; }
 
     function nextAvailableNumber(registry) {
       const highest = registry.reduce((max, entry) => Math.max(max, numberDigits(entry.agreementNumber)), 0);
-      return formatNumber(Math.max(highest + 1, START_NUMBER));
+      return formatNumber(Math.max(highest + 1, 1));
     }
 
     function renderSummary(registry) {
@@ -361,7 +359,7 @@ tbody tr:hover { background:#fcfbf8; }
     }
 
     function renderRegistry() {
-      const registry = loadRegistry();
+      const registry = state.registry;
       renderSummary(registry);
 
       const query = searchInput.value.trim();
@@ -382,10 +380,9 @@ tbody tr:hover { background:#fcfbf8; }
             </td>
             <td>${entry.organization || '—'}<br><span style="color:var(--muted);">${entry.track || 'No track set'}</span></td>
             <td><span class="tag">${entry.status}</span></td>
-            <td>${entry.effectiveDate || '—'}<br><span style="color:var(--muted);">${entry.createdAt}</span></td>
+            <td>${entry.effectiveDate || '—'}<br><span style="color:var(--muted);">${entry.issuedAt || '—'}</span></td>
             <td class="row-actions">
               <button type="button" data-number="${entry.agreementNumber}" data-action="copy">Copy #</button>
-              <button type="button" data-number="${entry.agreementNumber}" data-action="delete">Delete</button>
             </td>
           `;
           registryBody.appendChild(row);
@@ -407,6 +404,62 @@ tbody tr:hover { background:#fcfbf8; }
       adminGate.style.display = enabled ? 'none' : 'block';
       adminShell.style.display = enabled ? 'block' : 'none';
       lockTeacherModeBtn.style.display = enabled ? 'inline-flex' : 'none';
+      refreshRegistryBtn.style.display = enabled ? 'inline-flex' : 'none';
+    }
+
+    function getSessionToken() {
+      return sessionStorage.getItem(ADMIN_SESSION_KEY) || '';
+    }
+
+    function clearSession() {
+      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    }
+
+    function getAdminEndpoint() {
+      return (adminEndpointInput.value || localStorage.getItem(ADMIN_ENDPOINT_KEY) || DEFAULT_ADMIN_ENDPOINT || '').trim();
+    }
+
+    async function postAdminAction(action, payload = {}) {
+      const endpoint = getAdminEndpoint();
+      if (!endpoint) {
+        throw new Error('Paste the redeployed MMMF Apps Script admin URL first. The current public site should not guess at the old registration endpoint.');
+      }
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action, ...payload })
+      });
+
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (_error) {
+        throw new Error('The admin endpoint did not return valid JSON. Redeploy the MMMF Apps Script web app, then paste that updated URL here.');
+      }
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || 'The admin request failed.');
+      }
+
+      if (action === 'admin_login' && !data.session_token) {
+        throw new Error('This endpoint is still on the old deployment. Redeploy the updated Apps Script and paste that new URL here.');
+      }
+      if (action === 'agreement_list' && !Array.isArray(data.entries)) {
+        throw new Error('This endpoint does not expose the agreement registry yet. Redeploy the updated Apps Script and try again.');
+      }
+      if (action === 'agreement_issue' && !Array.isArray(data.entries)) {
+        throw new Error('This endpoint is not returning agreement records yet. Redeploy the updated Apps Script and try again.');
+      }
+
+      return data;
+    }
+
+    async function refreshRegistryFromBackend() {
+      const data = await postAdminAction('agreement_list', { session_token: getSessionToken() });
+      state.registry = Array.isArray(data.entries) ? data.entries : [];
+      renderRegistry();
     }
 
     function clearForm() {
@@ -415,63 +468,57 @@ tbody tr:hover { background:#fcfbf8; }
       agreementNumberInput.value = '';
       showNotice(duplicateNotice, '');
       showNotice(successNotice, '');
-      nextNumberEl.textContent = nextAvailableNumber(loadRegistry());
+      nextNumberEl.textContent = nextAvailableNumber(state.registry);
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       showNotice(duplicateNotice, '');
       showNotice(successNotice, '');
 
-      const registry = loadRegistry();
-      const requestedNumber = normalizeNumber(agreementNumberInput.value || nextAvailableNumber(registry));
+      try {
+        const requestedNumber = normalizeNumber(agreementNumberInput.value || nextAvailableNumber(state.registry));
+        const result = await postAdminAction('agreement_issue', {
+          session_token: getSessionToken(),
+          agreement_number: requestedNumber,
+          full_name: fullNameInput.value.trim(),
+          email: emailInput.value.trim(),
+          organization: organizationInput.value.trim(),
+          track: trackInput.value,
+          effective_date: effectiveDateInput.value,
+          status: statusInput.value,
+          notes: notesInput.value.trim()
+        });
 
-      const duplicateNumber = registry.find(entry => entry.agreementNumber === requestedNumber);
-      if (duplicateNumber) {
-        showNotice(duplicateNotice, `Agreement number ${requestedNumber} has already been assigned to ${duplicateNumber.fullName}. Use the next available number or search the registry first.`);
-        return;
+        state.registry = Array.isArray(result.entries) ? result.entries : state.registry;
+        renderRegistry();
+        showNotice(successNotice, `Issued ${requestedNumber} to ${fullNameInput.value.trim()}. The shared MMMF registry now holds that number so it will not be reused.`);
+        clearForm();
+      } catch (error) {
+        showNotice(duplicateNotice, error.message);
       }
-
-      const duplicatePerson = registry.find(entry =>
-        entry.fullName.toLowerCase() === fullNameInput.value.trim().toLowerCase() &&
-        entry.email.toLowerCase() === emailInput.value.trim().toLowerCase() &&
-        entry.email
-      );
-      if (duplicatePerson) {
-        showNotice(duplicateNotice, `${duplicatePerson.fullName} already has agreement number ${duplicatePerson.agreementNumber} in this registry. This helps you avoid issuing the same person a second number by accident.`);
-        return;
-      }
-
-      registry.push({
-        agreementNumber: requestedNumber,
-        fullName: fullNameInput.value.trim(),
-        email: emailInput.value.trim(),
-        organization: organizationInput.value.trim(),
-        track: trackInput.value,
-        effectiveDate: effectiveDateInput.value,
-        status: statusInput.value,
-        notes: notesInput.value.trim(),
-        createdAt: new Date().toLocaleDateString()
-      });
-
-      saveRegistry(registry);
-      renderRegistry();
-      showNotice(successNotice, `Assigned ${requestedNumber} to ${fullNameInput.value.trim()}. This number is now stored in the agreement registry and will not be issued again from this tracker.`);
-      clearForm();
     });
 
-    unlockForm.addEventListener('submit', (event) => {
+    unlockForm.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (teacherCodeInput.value.trim() !== ADMIN_ACCESS_CODE) {
-        showNotice(unlockNotice, 'That teacher-mode code is not correct.');
-        return;
-      }
       showNotice(unlockNotice, '');
-      teacherCodeInput.value = '';
-      setTeacherMode(true);
+
+      try {
+        localStorage.setItem(ADMIN_ENDPOINT_KEY, getAdminEndpoint());
+        const data = await postAdminAction('admin_login', { access_code: teacherCodeInput.value.trim() });
+        sessionStorage.setItem(ADMIN_SESSION_KEY, data.session_token);
+        teacherCodeInput.value = '';
+        setTeacherMode(true);
+        await refreshRegistryFromBackend();
+      } catch (error) {
+        clearSession();
+        setTeacherMode(false);
+        showNotice(unlockNotice, error.message);
+      }
     });
 
     lockTeacherModeBtn.addEventListener('click', () => {
+      clearSession();
       setTeacherMode(false);
       showNotice(successNotice, '');
     });
@@ -479,42 +526,36 @@ tbody tr:hover { background:#fcfbf8; }
     document.getElementById('clearFormBtn').addEventListener('click', clearForm);
     searchInput.addEventListener('input', renderRegistry);
 
+    refreshRegistryBtn.addEventListener('click', async () => {
+      showNotice(successNotice, '');
+      showNotice(duplicateNotice, '');
+      try {
+        await refreshRegistryFromBackend();
+        showNotice(successNotice, 'Registry refreshed from the shared admin backend.');
+      } catch (error) {
+        showNotice(duplicateNotice, error.message);
+      }
+    });
+
     registryBody.addEventListener('click', async (event) => {
       const target = event.target;
       const number = target.dataset.number;
       const action = target.dataset.action;
       if (!number || !action) return;
 
-      const registry = loadRegistry();
-
       if (action === 'copy') {
         await navigator.clipboard.writeText(number);
         showNotice(successNotice, `Copied ${number} to the clipboard.`);
-        return;
       }
-
-      if (action === 'delete') {
-        const remaining = registry.filter(entry => entry.agreementNumber !== number);
-        saveRegistry(remaining);
-        renderRegistry();
-        showNotice(successNotice, `Deleted ${number} from the registry.`);
-      }
-    });
-
-    document.getElementById('clearRegistryBtn').addEventListener('click', () => {
-      if (!confirm('Clear the full agreement registry from this browser? This cannot be undone unless you have exported a backup.')) return;
-      localStorage.removeItem(STORAGE_KEY);
-      renderRegistry();
-      showNotice(successNotice, 'Agreement registry cleared from this browser.');
     });
 
     document.getElementById('exportCsvBtn').addEventListener('click', () => {
-      const registry = loadRegistry();
+      const registry = state.registry;
       const rows = [
-        ['agreementNumber','fullName','email','organization','track','effectiveDate','status','notes','createdAt'],
+        ['agreementNumber','fullName','email','organization','track','effectiveDate','status','notes','issuedAt'],
         ...registry.map(entry => [
           entry.agreementNumber, entry.fullName, entry.email, entry.organization, entry.track,
-          entry.effectiveDate, entry.status, entry.notes, entry.createdAt
+          entry.effectiveDate, entry.status, entry.notes, entry.issuedAt
         ])
       ];
       const csv = rows.map(row => row.map(value => `"${String(value || '').replace(/"/g, '""')}"`).join(',')).join('\n');
@@ -528,7 +569,7 @@ tbody tr:hover { background:#fcfbf8; }
     });
 
     document.getElementById('exportJsonBtn').addEventListener('click', () => {
-      const blob = new Blob([JSON.stringify(loadRegistry(), null, 2)], { type: 'application/json' });
+      const blob = new Blob([JSON.stringify(state.registry, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -537,24 +578,25 @@ tbody tr:hover { background:#fcfbf8; }
       URL.revokeObjectURL(url);
     });
 
-    document.getElementById('importJsonInput').addEventListener('change', async (event) => {
-      const file = event.target.files?.[0];
-      if (!file) return;
-      const text = await file.text();
-      const incoming = JSON.parse(text);
-      if (!Array.isArray(incoming)) {
-        showNotice(duplicateNotice, 'That file is not a valid agreement registry backup.');
-        return;
-      }
-      saveRegistry(incoming);
-      renderRegistry();
-      showNotice(successNotice, 'Agreement registry imported successfully.');
-      event.target.value = '';
-    });
-
     effectiveDateInput.valueAsDate = new Date();
-    setTeacherMode(sessionStorage.getItem(ADMIN_MODE_KEY) === 'true');
-    renderRegistry();
+    adminEndpointInput.placeholder = ENDPOINT_PLACEHOLDER;
+    adminEndpointInput.value = localStorage.getItem(ADMIN_ENDPOINT_KEY) || DEFAULT_ADMIN_ENDPOINT;
+    (async () => {
+      if (sessionStorage.getItem(ADMIN_MODE_KEY) === 'true' && getSessionToken()) {
+        try {
+          setTeacherMode(true);
+          await refreshRegistryFromBackend();
+        } catch (error) {
+          clearSession();
+          setTeacherMode(false);
+          showNotice(unlockNotice, error.message);
+          renderRegistry();
+        }
+      } else {
+        setTeacherMode(false);
+        renderRegistry();
+      }
+    })();
   </script>
 </body>
 </html>

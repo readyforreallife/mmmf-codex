@@ -1,7 +1,22 @@
 function doPost(e) {
   try {
     var payload = parsePayload_(e);
+    var action = normalizeRoute_(payload.action || '');
     var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+    if (action === 'admin_login') {
+      return jsonResponse_(handleAdminLogin_(payload));
+    }
+
+    if (action === 'agreement_list') {
+      requireAgreementAdmin_(payload);
+      return jsonResponse_(buildAgreementRegistryResponse_(ss));
+    }
+
+    if (action === 'agreement_issue') {
+      requireAgreementAdmin_(payload);
+      return jsonResponse_(handleAgreementIssue_(ss, payload));
+    }
 
     if (String(payload.type || '').toLowerCase() === 'registration' && String(payload.registration_kind || '').toLowerCase() === 'mmmf') {
       var result = handleMmmfRegistration_(ss, payload);
@@ -20,6 +35,210 @@ function parsePayload_(e) {
   var raw = e && e.postData && e.postData.contents ? e.postData.contents : '{}';
   var payload = JSON.parse(raw);
   return payload && typeof payload === 'object' ? payload : {};
+}
+
+function normalizeRoute_(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function getSetting_(key, fallback) {
+  var value = PropertiesService.getScriptProperties().getProperty(key);
+  return value == null || value === '' ? fallback : value;
+}
+
+function handleAdminLogin_(payload) {
+  var expectedCode = getSetting_('MMMF_ADMIN_CODE', '');
+  if (!expectedCode) {
+    return {
+      ok: false,
+      error: 'The admin access code has not been configured in Script Properties yet.'
+    };
+  }
+
+  if (String(payload.access_code || '') !== String(expectedCode)) {
+    return { ok: false, error: 'Incorrect access code.' };
+  }
+
+  var token = Utilities.getUuid();
+  var cache = CacheService.getScriptCache();
+  var expiresInSeconds = 21600;
+  cache.put('mmmf_admin_session_' + token, JSON.stringify({ issuedAt: new Date().toISOString() }), expiresInSeconds);
+
+  return {
+    ok: true,
+    session_token: token,
+    expires_in_seconds: expiresInSeconds
+  };
+}
+
+function requireAgreementAdmin_(payload) {
+  var token = String(payload.session_token || '').trim();
+  if (!token) throw new Error('Missing admin session.');
+
+  var cache = CacheService.getScriptCache();
+  var session = cache.get('mmmf_admin_session_' + token);
+  if (!session) throw new Error('Your admin session expired. Sign in again.');
+
+  cache.put('mmmf_admin_session_' + token, session, 21600);
+}
+
+function agreementHeaders_() {
+  return [
+    'agreement_number',
+    'full_name',
+    'email',
+    'organization',
+    'track',
+    'effective_date',
+    'status',
+    'notes',
+    'issued_at'
+  ];
+}
+
+function getAgreementSheet_(ss) {
+  var sheetName = getSetting_('MMMF_AGREEMENT_SHEET', 'MMMF Agreements');
+  var sheet = ss.getSheetByName(sheetName) || ss.insertSheet(sheetName);
+  ensureHeaders_(sheet, agreementHeaders_());
+  return sheet;
+}
+
+function normalizeAgreementNumber_(value) {
+  var trimmed = String(value || '').trim().toUpperCase();
+  if (!trimmed) return '';
+  if (trimmed.indexOf('MMMF-') === 0) return trimmed;
+  return 'MMMF-' + trimmed.replace(/^MMMF-?/i, '');
+}
+
+function agreementNumberDigits_(value) {
+  var match = String(value || '').match(/(\d+)$/);
+  return match ? parseInt(match[1], 10) : 0;
+}
+
+function formatAgreementNumber_(number) {
+  return 'MMMF-' + ('0000' + String(number)).slice(-4);
+}
+
+function mapAgreementEntries_(sheet) {
+  var values = sheet.getDataRange().getValues();
+  if (values.length <= 1) return [];
+  return values.slice(1).map(function(row) {
+    return {
+      agreementNumber: String(row[0] || ''),
+      fullName: String(row[1] || ''),
+      email: String(row[2] || ''),
+      organization: String(row[3] || ''),
+      track: String(row[4] || ''),
+      effectiveDate: String(row[5] || ''),
+      status: String(row[6] || ''),
+      notes: String(row[7] || ''),
+      issuedAt: String(row[8] || '')
+    };
+  }).filter(function(entry) {
+    return entry.agreementNumber || entry.fullName || entry.email;
+  });
+}
+
+function nextAgreementNumber_(entries) {
+  var highest = entries.reduce(function(max, entry) {
+    return Math.max(max, agreementNumberDigits_(entry.agreementNumber));
+  }, 0);
+  return formatAgreementNumber_(Math.max(highest + 1, 1));
+}
+
+function buildAgreementRegistryResponse_(ss) {
+  var sheet = getAgreementSheet_(ss);
+  var entries = mapAgreementEntries_(sheet);
+  return {
+    ok: true,
+    entries: entries,
+    next_number: nextAgreementNumber_(entries),
+    summary: {
+      total_issued: entries.length,
+      total_signed: entries.filter(function(entry) { return entry.status === 'Signed'; }).length,
+      total_pending: entries.filter(function(entry) { return entry.status === 'Pending signature'; }).length,
+      highest_number: ('0000' + String(entries.reduce(function(max, entry) {
+        return Math.max(max, agreementNumberDigits_(entry.agreementNumber));
+      }, 0))).slice(-4)
+    }
+  };
+}
+
+function handleAgreementIssue_(ss, payload) {
+  var fullName = String(payload.full_name || '').trim();
+  if (!fullName) return { ok: false, error: 'Full name is required.' };
+
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+
+  try {
+    var sheet = getAgreementSheet_(ss);
+    var entries = mapAgreementEntries_(sheet);
+    var requestedNumber = normalizeAgreementNumber_(payload.agreement_number || nextAgreementNumber_(entries));
+    var email = String(payload.email || '').trim();
+    var organization = String(payload.organization || '').trim();
+    var track = String(payload.track || '').trim();
+    var effectiveDate = String(payload.effective_date || '').trim();
+    var status = String(payload.status || 'Issued').trim();
+    var notes = String(payload.notes || '').trim();
+
+    var duplicateNumber = entries.find(function(entry) {
+      return entry.agreementNumber === requestedNumber;
+    });
+    if (duplicateNumber) {
+      return {
+        ok: false,
+        error: 'Agreement number ' + requestedNumber + ' has already been assigned to ' + duplicateNumber.fullName + '.',
+        conflict_type: 'agreement_number'
+      };
+    }
+
+    var duplicatePerson = entries.find(function(entry) {
+      var sameName = String(entry.fullName || '').toLowerCase() === fullName.toLowerCase();
+      var sameEmail = email && String(entry.email || '').toLowerCase() === email.toLowerCase();
+      return sameName && sameEmail;
+    });
+    if (duplicatePerson) {
+      return {
+        ok: false,
+        error: duplicatePerson.fullName + ' already has agreement number ' + duplicatePerson.agreementNumber + '.',
+        conflict_type: 'person'
+      };
+    }
+
+    var issuedAt = new Date().toISOString();
+    sheet.appendRow([
+      requestedNumber,
+      fullName,
+      email,
+      organization,
+      track,
+      effectiveDate,
+      status,
+      notes,
+      issuedAt
+    ]);
+
+    var updatedEntries = mapAgreementEntries_(sheet);
+    return {
+      ok: true,
+      record: {
+        agreementNumber: requestedNumber,
+        fullName: fullName,
+        email: email,
+        organization: organization,
+        track: track,
+        effectiveDate: effectiveDate,
+        status: status,
+        notes: notes,
+        issuedAt: issuedAt
+      },
+      entries: updatedEntries,
+      next_number: nextAgreementNumber_(updatedEntries)
+    };
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function handleGenericRegistration_(ss, payload) {

@@ -104,12 +104,12 @@
     "keywords": ["certification", "licensing", "agreement", "facilitator"]
   },
   {
-    "title": "Agreement number tracker",
+    "title": "Certification admin",
     "page": "Program Hub",
     "section": "Agreement Registry",
     "url": "web/agreement-tracker.html",
-    "snippet": "Assign unique MMMF agreement numbers, prevent duplicates, and track who each number was issued to.",
-    "keywords": ["agreement number", "tracker", "registry", "licensing", "facilitator agreement", "assign number"]
+    "snippet": "Protected teacher-mode admin page for issuing unique MMMF agreement numbers and preventing duplicate certification assignments.",
+    "keywords": ["agreement number", "admin", "teacher mode", "registry", "licensing", "facilitator agreement", "assign number", "issue certification"]
   },
   {
     "title": "Scenario cards",
