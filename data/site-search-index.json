@@ -112,6 +112,22 @@
     "keywords": ["agreement number", "admin", "teacher mode", "registry", "licensing", "facilitator agreement", "assign number", "issue certification"]
   },
   {
+    "title": "Certificate folder",
+    "page": "Program Hub",
+    "section": "Teacher Mode",
+    "url": "web/agreement-tracker.html",
+    "snippet": "Teacher-mode certificate folder for reopening, printing, and saving every certificate record that has been issued.",
+    "keywords": ["certificate folder", "issued certificates", "print certificate", "teacher mode", "certificate record"]
+  },
+  {
+    "title": "Registration folder",
+    "page": "Program Hub",
+    "section": "Teacher Mode",
+    "url": "web/agreement-tracker.html",
+    "snippet": "Protected registration folder that stores every signup submitted through the public MMMF registration form.",
+    "keywords": ["registration folder", "signups", "teacher mode", "submitted registrations", "registration records"]
+  },
+  {
     "title": "Scenario cards",
     "page": "Documents Library",
     "section": "Cards",

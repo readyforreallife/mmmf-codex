@@ -898,7 +898,7 @@ footer a { color: var(--teal-lt); text-decoration: none; }
           <label class="check-option" id="consent-check" onclick="toggleConsent(this)" style="align-items:flex-start; gap:0.75rem;">
             <input type="checkbox" id="consent">
             <div class="opt-text" style="font-size:0.78rem;color:var(--gray-lt);line-height:1.6;">
-              I understand that by submitting this form I am requesting enrollment in the MMMF program. My information will be used solely by Michael R. Terry to process my registration and follow up regarding my program onboarding. I have read and agree to the <strong style="color:var(--gold);">MMMF program terms</strong> available at readyforreal.life.
+              I understand that by submitting this form I am requesting enrollment in the MMMF program. My information will be used by the MMMF founders and program team to process my registration and follow up regarding my program onboarding. I have read and agree to the <strong style="color:var(--gold);">MMMF program terms</strong> available at readyforreal.life.
             </div>
           </label>
         </div>
@@ -1100,12 +1100,11 @@ function buildReview() {
 }
 
 // ── Submit ────────────────────────────────────────────────────────
-const DEFAULT_REGISTRATION_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxlTRb17ZVUbZ6J1VHxjD8vbi87eECXBgOLgNjgYo3APLj491jNfhPeBRPWObz3lMf9/exec';
+const DEFAULT_REGISTRATION_ENDPOINT = 'https://flat-flower-4af8mmmf-agreement-admin.mikeyterry44.workers.dev';
 const FALLBACK_REGISTRATION_ENDPOINTS = [
   DEFAULT_REGISTRATION_ENDPOINT
 ];
 const REGISTRATION_QUEUE_KEY = 'mmmf_registration_queue';
-const REGISTRATION_SECRET = '4429-DECISION-LAB';
 let submitInFlight = false;
 
 function showSubmitStatus(message, kind) {
@@ -1117,11 +1116,10 @@ function showSubmitStatus(message, kind) {
 
 async function trySubmitToEndpoint(url, payload) {
   if (!url) return false;
-  const outbound = { ...payload, secret: payload.secret || REGISTRATION_SECRET };
-  const body = JSON.stringify(outbound);
+  const body = JSON.stringify(payload);
   const opts = {
     method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    headers: { 'Content-Type': 'application/json' },
     body
   };
   try {
@@ -1187,15 +1185,16 @@ async function submitForm() {
   ].join(' | ');
 
   const payload = {
+    action: 'registration_submit',
     type: 'registration',
     form: 'mmmf_registration_form',
     program: 'Modern Manners and Mental Fortitude',
     registration_kind: 'mmmf',
-    sheet_name: 'MMMF Registrations',
     name: `${formData.fname || ''} ${formData.lname || ''}`.trim(),
     email: formData.email || '',
     phone: formData.phone || '',
     group: [formData.role || '', formData.tracks || ''].filter(Boolean).join(' | '),
+    organization: formData.org || '',
     notes: detailedNotes,
     details_json: JSON.stringify({
       role: formData.role || '',
@@ -1213,10 +1212,7 @@ async function submitForm() {
       support: formData.support || '',
       extraNotes: formData.notes || ''
     }),
-    timestamp: new Date().toISOString(),
-    notify_email: 'readyforreal.life44@gmail.com',
-    send_email_notification: 'true',
-    notification_subject: 'New MMMF registration submission'
+    timestamp: new Date().toISOString()
   };
 
   const endpointCandidates = FALLBACK_REGISTRATION_ENDPOINTS.filter(Boolean).filter((url, idx, arr) => arr.indexOf(url) === idx);
@@ -1226,7 +1222,7 @@ async function submitForm() {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting...';
   }
-  showSubmitStatus('Submitting your registration now. This will route to the MMMF intake sheet and trigger follow-up notification handling.', '');
+  showSubmitStatus('Submitting your registration now. This will route directly into the protected MMMF registration folder for follow-up.', '');
 
   try {
     let sent = false;
@@ -1237,7 +1233,7 @@ async function submitForm() {
 
     if (!sent) throw new Error('All endpoints failed');
 
-    showSubmitStatus('Submitted successfully. Your registration has been routed for intake and follow-up.', 'success');
+    showSubmitStatus('Submitted successfully. Your registration is now stored in the MMMF registration folder for follow-up.', 'success');
     document.getElementById('form-card').style.display = 'none';
     document.querySelector('.progress-wrap').style.display = 'none';
     const sp = document.getElementById('success-panel');
@@ -1251,7 +1247,7 @@ async function submitForm() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (_err) {
     queueRegistration(payload);
-    showSubmitStatus('We could not confirm a live delivery to the intake endpoint, so a backup copy was saved on this device. Please retry once, or contact Michael directly if needed.', 'error');
+    showSubmitStatus('We could not confirm a live delivery to the MMMF registration folder, so a backup copy was saved on this device. Please retry once, or contact the founders directly if needed.', 'error');
   } finally {
     submitInFlight = false;
     if (submitBtn) {

@@ -95,6 +95,33 @@ function buildRegistryResponse(entries) {
   };
 }
 
+async function readRegistrations(env) {
+  const raw = await env.AGREEMENT_REGISTRY.get("registrations");
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+async function writeRegistrations(env, entries) {
+  await env.AGREEMENT_REGISTRY.put("registrations", JSON.stringify(entries, null, 2));
+}
+
+function buildRegistrationResponse(entries) {
+  return {
+    ok: true,
+    entries,
+    summary: {
+      total_registrations: entries.length,
+      newest_at: entries.length ? entries[0].submittedAt : "",
+      newest_name: entries.length ? entries[0].name : ""
+    }
+  };
+}
+
 export default {
   async fetch(request, env) {
     const headers = corsHeaders(env, request);
@@ -150,6 +177,17 @@ export default {
         await requireSession(env, payload.session_token);
         const entries = await readRegistry(env);
         return json(buildRegistryResponse(entries), 200, headers);
+      }
+
+      if (action === "certificate_get") {
+        await requireSession(env, payload.session_token);
+        const agreementNumber = normalizeAgreementNumber(payload.agreement_number || "");
+        const entries = await readRegistry(env);
+        const record = entries.find((entry) => entry.agreementNumber === agreementNumber);
+        if (!record) {
+          return json({ ok: false, error: "Certificate record not found." }, 404, headers);
+        }
+        return json({ ok: true, record }, 200, headers);
       }
 
       if (action === "agreement_issue") {
@@ -224,6 +262,46 @@ export default {
           200,
           headers
         );
+      }
+
+      if (action === "registration_submit") {
+        const registrations = await readRegistrations(env);
+        const name = String(payload.name || "").trim();
+        const email = String(payload.email || "").trim();
+        const phone = String(payload.phone || "").trim();
+        const submittedAt = String(payload.timestamp || new Date().toISOString());
+        const registrationId = crypto.randomUUID();
+
+        registrations.unshift({
+          registrationId,
+          name,
+          email,
+          phone,
+          role: String(payload.group || "").trim(),
+          organization: String(payload.organization || "").trim(),
+          program: String(payload.program || "Modern Manners and Mental Fortitude").trim(),
+          notes: String(payload.notes || "").trim(),
+          detailsJson: String(payload.details_json || "").trim(),
+          submittedAt,
+          status: "New"
+        });
+
+        await writeRegistrations(env, registrations);
+
+        return json(
+          {
+            ok: true,
+            registration_id: registrationId
+          },
+          200,
+          headers
+        );
+      }
+
+      if (action === "registration_list") {
+        await requireSession(env, payload.session_token);
+        const registrations = await readRegistrations(env);
+        return json(buildRegistrationResponse(registrations), 200, headers);
       }
 
       return json({ ok: false, error: "Unknown action." }, 400, headers);

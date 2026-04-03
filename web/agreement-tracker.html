@@ -107,12 +107,14 @@ main { max-width:1200px; margin:0 auto; padding:24px; }
 .summary-card {
   background:#fbfaf7; border:1px solid var(--line); border-radius:12px; padding:14px;
 }
+.admin-sections { display:grid; gap:18px; margin-top:18px; }
 .summary-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:6px; }
 .summary-card .value { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--navy); }
 table { width:100%; border-collapse:collapse; }
 th, td { padding:12px 10px; border-top:1px solid var(--line); text-align:left; vertical-align:top; font-size:.92rem; }
 th { font-size:.76rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); background:#f7f3ea; }
 tbody tr:hover { background:#fcfbf8; }
+.mini-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:16px; }
 .tag {
   display:inline-flex; padding:4px 8px; border-radius:999px; font-size:.76rem; font-weight:700;
   background:#eef2ff; color:#334155;
@@ -125,6 +127,7 @@ tbody tr:hover { background:#fcfbf8; }
 @media (max-width: 980px) {
   .grid { grid-template-columns:1fr; }
   .summary-grid { grid-template-columns:1fr 1fr; }
+  .mini-grid { grid-template-columns:1fr; }
 }
 @media (max-width: 640px) {
   .summary-grid, .field.small-row { grid-template-columns:1fr; }
@@ -173,6 +176,7 @@ tbody tr:hover { background:#fcfbf8; }
       <div class="toolbar" style="margin-top:0;">
         <button class="btn" id="exportCsvBtn" type="button">Export CSV</button>
         <button class="btn" id="exportJsonBtn" type="button">Backup JSON</button>
+        <button class="btn" id="exportRegistrationsBtn" type="button">Export Registrations</button>
       </div>
 
       <div class="grid">
@@ -273,6 +277,59 @@ tbody tr:hover { background:#fcfbf8; }
         </div>
         <div id="emptyState" class="empty">No agreement numbers have been assigned yet.</div>
       </section>
+      <div class="admin-sections">
+        <section class="panel">
+          <div class="kicker">Issued Certificates</div>
+          <h2>Certificate folder</h2>
+          <p>Every certification issued through Teacher Mode is listed here so you can reopen, print, and save certificate records later.</p>
+          <div class="mini-grid">
+            <div class="summary-card"><div class="label">Certificates stored</div><div class="value" id="certTotal">0</div></div>
+            <div class="summary-card"><div class="label">Latest certificate</div><div class="value" id="certLatest">—</div></div>
+            <div class="summary-card"><div class="label">Latest recipient</div><div class="value" id="certLatestPerson">—</div></div>
+          </div>
+          <div style="overflow:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Agreement #</th>
+                  <th>Facilitator</th>
+                  <th>Track</th>
+                  <th>Issued</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="certificateBody"></tbody>
+            </table>
+          </div>
+          <div id="certificateEmptyState" class="empty">No certificates have been issued yet.</div>
+        </section>
+
+        <section class="panel">
+          <div class="kicker">Registrations</div>
+          <h2>Registration folder</h2>
+          <p>Every program signup submitted through the public registration form is stored here, without the old Google Sheet dependency.</p>
+          <div class="mini-grid">
+            <div class="summary-card"><div class="label">Total signups</div><div class="value" id="registrationTotal">0</div></div>
+            <div class="summary-card"><div class="label">Latest signup</div><div class="value" id="registrationLatest">—</div></div>
+            <div class="summary-card"><div class="label">Latest person</div><div class="value" id="registrationLatestPerson">—</div></div>
+          </div>
+          <div style="overflow:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Organization</th>
+                  <th>Submitted</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="registrationBody"></tbody>
+            </table>
+          </div>
+          <div id="registrationEmptyState" class="empty">No registrations have been submitted yet.</div>
+        </section>
+      </div>
     </div>
     </div>
   </main>
@@ -287,7 +344,7 @@ tbody tr:hover { background:#fcfbf8; }
     const LOCAL_REGISTRY_KEY = 'mmmf_agreement_registry_local_v3';
     const MAIN_TEACHER_PIN = '4429';
     const PREFIX = 'MMMF-';
-    const state = { registry: [], mode: 'local' };
+    const state = { registry: [], registrations: [], mode: 'local' };
 
     const form = document.getElementById('agreementForm');
     const fullNameInput = document.getElementById('fullName');
@@ -308,6 +365,16 @@ tbody tr:hover { background:#fcfbf8; }
     const totalSignedEl = document.getElementById('totalSigned');
     const totalPendingEl = document.getElementById('totalPending');
     const highestNumberEl = document.getElementById('highestNumber');
+    const certificateBody = document.getElementById('certificateBody');
+    const certificateEmptyState = document.getElementById('certificateEmptyState');
+    const certTotal = document.getElementById('certTotal');
+    const certLatest = document.getElementById('certLatest');
+    const certLatestPerson = document.getElementById('certLatestPerson');
+    const registrationBody = document.getElementById('registrationBody');
+    const registrationEmptyState = document.getElementById('registrationEmptyState');
+    const registrationTotal = document.getElementById('registrationTotal');
+    const registrationLatest = document.getElementById('registrationLatest');
+    const registrationLatestPerson = document.getElementById('registrationLatestPerson');
     const adminGate = document.getElementById('adminGate');
     const adminShell = document.getElementById('adminShell');
     const unlockForm = document.getElementById('unlockForm');
@@ -316,6 +383,7 @@ tbody tr:hover { background:#fcfbf8; }
     const unlockNotice = document.getElementById('unlockNotice');
     const lockTeacherModeBtn = document.getElementById('lockTeacherModeBtn');
     const refreshRegistryBtn = document.getElementById('refreshRegistryBtn');
+    const exportRegistrationsBtn = document.getElementById('exportRegistrationsBtn');
 
     function normalizeNumber(value) {
       const trimmed = String(value || '').trim().toUpperCase();
@@ -403,6 +471,61 @@ tbody tr:hover { background:#fcfbf8; }
         });
     }
 
+    function renderCertificates() {
+      const registry = state.registry;
+      certTotal.textContent = registry.length;
+      certLatest.textContent = registry.length ? registry[0].agreementNumber : '—';
+      certLatestPerson.textContent = registry.length ? registry[0].fullName : '—';
+
+      certificateBody.innerHTML = '';
+      certificateEmptyState.style.display = registry.length ? 'none' : 'block';
+
+      registry
+        .slice()
+        .sort((a, b) => numberDigits(b.agreementNumber) - numberDigits(a.agreementNumber))
+        .forEach(entry => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><strong>${entry.agreementNumber}</strong></td>
+            <td>${entry.fullName}</td>
+            <td>${entry.track || '—'}</td>
+            <td>${entry.issuedAt ? new Date(entry.issuedAt).toLocaleString() : '—'}</td>
+            <td class="row-actions">
+              <a href="certificate-viewer.html?agreement=${encodeURIComponent(entry.agreementNumber)}">Open certificate</a>
+            </td>
+          `;
+          certificateBody.appendChild(row);
+        });
+    }
+
+    function renderRegistrations() {
+      const registrations = state.registrations || [];
+      registrationTotal.textContent = registrations.length;
+      registrationLatest.textContent = registrations.length ? new Date(registrations[0].submittedAt).toLocaleDateString() : '—';
+      registrationLatestPerson.textContent = registrations.length ? registrations[0].name : '—';
+
+      registrationBody.innerHTML = '';
+      registrationEmptyState.style.display = registrations.length ? 'none' : 'block';
+
+      registrations.forEach(entry => {
+        let details = {};
+        try {
+          details = entry.detailsJson ? JSON.parse(entry.detailsJson) : {};
+        } catch (_error) {
+          details = {};
+        }
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${entry.name || '—'}</strong><br><span style="color:var(--muted);">${details.tracks || 'No track selected'}</span></td>
+          <td>${entry.email || '—'}<br><span style="color:var(--muted);">${entry.phone || 'No phone provided'}</span></td>
+          <td>${details.organization || entry.organization || '—'}<br><span style="color:var(--muted);">${details.location || '—'}</span></td>
+          <td>${entry.submittedAt ? new Date(entry.submittedAt).toLocaleString() : '—'}</td>
+          <td><span class="tag">${entry.status || 'New'}</span></td>
+        `;
+        registrationBody.appendChild(row);
+      });
+    }
+
     function showNotice(el, message) {
       if (!message) {
         el.style.display = 'none';
@@ -475,12 +598,28 @@ tbody tr:hover { background:#fcfbf8; }
       state.registry = Array.isArray(data.entries) ? data.entries : [];
       state.mode = 'backend';
       renderRegistry();
+      renderCertificates();
+      await refreshRegistrationsFromBackend();
     }
 
     function refreshRegistryFromLocal() {
       state.registry = loadLocalRegistry();
       state.mode = 'local';
       renderRegistry();
+      renderCertificates();
+      state.registrations = [];
+      renderRegistrations();
+    }
+
+    async function refreshRegistrationsFromBackend() {
+      if (!(state.mode === 'backend' && getSessionToken())) {
+        state.registrations = [];
+        renderRegistrations();
+        return;
+      }
+      const data = await postAdminAction('registration_list', { session_token: getSessionToken() });
+      state.registrations = Array.isArray(data.entries) ? data.entries : [];
+      renderRegistrations();
     }
 
     function clearForm() {
@@ -543,6 +682,7 @@ tbody tr:hover { background:#fcfbf8; }
           });
           saveLocalRegistry(state.registry);
           renderRegistry();
+          renderCertificates();
           showNotice(successNotice, `Issued ${requestedNumber} to ${fullNameInput.value.trim()}. This browser is currently using local safe mode until the shared admin backend is connected.`);
         }
         clearForm();
@@ -598,10 +738,10 @@ tbody tr:hover { background:#fcfbf8; }
       try {
         if (state.mode === 'backend' && getSessionToken()) {
           await refreshRegistryFromBackend();
-          showNotice(successNotice, 'Registry refreshed from the shared admin backend.');
+          showNotice(successNotice, 'Teacher Mode folders refreshed from the shared admin backend.');
         } else {
           refreshRegistryFromLocal();
-          showNotice(successNotice, 'Registry refreshed from local safe mode on this device.');
+          showNotice(successNotice, 'Teacher Mode folders refreshed from local safe mode on this device.');
         }
       } catch (error) {
         showNotice(duplicateNotice, error.message);
@@ -645,6 +785,16 @@ tbody tr:hover { background:#fcfbf8; }
       const a = document.createElement('a');
       a.href = url;
       a.download = 'mmmf-agreement-registry.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    exportRegistrationsBtn.addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(state.registrations || [], null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mmmf-registration-folder.json';
       a.click();
       URL.revokeObjectURL(url);
     });
