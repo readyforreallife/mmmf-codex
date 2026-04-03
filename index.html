@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modern Manners & Mental Fortitude</title>
+  <link rel="stylesheet" href="assets/site-search.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap');
     :root {
@@ -41,6 +42,7 @@
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:700;border:1px solid var(--line)}
     .btn.primary{background:var(--gold);color:#172640;border-color:transparent}
     .btn.secondary{background:rgba(255,255,255,.06);color:#fff}
+    .back-row{margin-bottom:18px}
     .hero-panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 40px rgba(0,0,0,.22)}
     .hero-panel h2{font-family:'Playfair Display',serif;font-size:1.5rem;margin:10px 0 10px}
     .hero-panel p{color:#cad2df;line-height:1.8;margin:0}
@@ -87,8 +89,11 @@
   </header>
 
   <main class="wrap">
-    <section class="hero">
+    <section class="hero" id="site-hero">
       <div class="hero-copy">
+        <div class="back-row">
+          <a class="btn secondary" href="javascript:history.back()">← Back</a>
+        </div>
         <div class="ey">School and Community Implementation Resource</div>
         <h1>A program for the skills students must <em>live</em>, not just learn.</h1>
         <p class="lede">Modern Manners &amp; Mental Fortitude is a real-world life skills program built for schools, community organizations, and families who want practical tools for communication, regulation, decision-making, and accountability. This repository brings the core materials together in one public-facing home for review, planning, and adoption conversations.</p>
@@ -96,7 +101,6 @@
           <a class="btn primary" href="schools.html">Start Here for Schools</a>
           <a class="btn secondary" href="web/index.html">Review the Program Hub</a>
           <a class="btn secondary" href="docs/index.html">Open the Deliverables Library</a>
-          <a class="btn secondary" href="data/mmmf-curriculum.json">View Curriculum Data</a>
         </div>
         <div style="margin-top:18px;color:#c8d1df;line-height:1.85;">School adoption, speaking, and partnership inquiries: <a class="inline" href="mailto:mikeyterry44@gmail.com">mikeyterry44@gmail.com</a> · <a class="inline" href="tel:+14358401896">(435) 840-1896</a></div>
       </div>
@@ -108,12 +112,12 @@
           <div class="stat"><div class="stat-num">4</div><div class="stat-label">Core pillars</div></div>
           <div class="stat"><div class="stat-num">8</div><div class="stat-label">Primary deliverables</div></div>
           <div class="stat"><div class="stat-num">3</div><div class="stat-label">Web-based tools</div></div>
-          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Structured curriculum dataset</div></div>
+          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Program implementation pathway</div></div>
         </div>
       </div>
     </section>
 
-    <section>
+    <section id="review-actions">
       <div class="ey">For Review and Adoption</div>
       <h2 class="section-title">What decision-makers can do here.</h2>
       <p class="section-copy">This landing page is designed for principals, district leaders, school boards, community partners, and family stakeholders who need a clear view of the program before implementation.</p>
@@ -131,15 +135,15 @@
           <a class="linkline" href="docs/index.html">Open the library →</a>
         </div>
         <div class="card">
-          <span class="chip">Evaluate</span>
-          <h3>Inspect the Curriculum Data</h3>
-          <p>Use the structured JSON file to review the program architecture, support planning, or build future tools around the curriculum.</p>
-          <a class="linkline" href="data/mmmf-curriculum.json">Open the data →</a>
+          <span class="chip">Plan</span>
+          <h3>Review Program Fit</h3>
+          <p>Use the school review path and deliverables library to understand implementation, training materials, and adoption readiness.</p>
+          <a class="linkline" href="schools.html">Review the school path →</a>
         </div>
       </div>
     </section>
 
-    <section>
+    <section id="audience-fit">
       <div class="ey">Who It Serves</div>
       <h2 class="section-title">Built for schools, partners, and families.</h2>
       <div class="aud-grid">
@@ -176,7 +180,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="core-materials">
       <div class="ey">Core Materials</div>
       <h2 class="section-title">What is included in this repository.</h2>
       <div class="resource-grid">
@@ -205,5 +209,6 @@
   </main>
 
   <footer class="wrap">© Michael R. Terry · Modern Manners &amp; Mental Fortitude · Public repository landing page for schools, partners, and families.</footer>
+  <script src="assets/site-search.js" data-search-index="data/site-search-index.json" defer></script>
 </body>
 </html>

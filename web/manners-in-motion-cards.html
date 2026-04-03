@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MMMF — Manners in Motion Challenge Cards</title>
+<link rel="stylesheet" href="../assets/site-search.css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -48,6 +49,29 @@
   .logo h1 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); }
   .logo h1 em { color: var(--gold); font-style: italic; }
   .header-right { font-size: 0.72rem; color: var(--gray); text-align: right; line-height: 1.7; }
+  .header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.55rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(200,155,60,0.28);
+    background: rgba(255,255,255,0.05);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.74rem;
+    font-weight: 600;
+  }
+  .back-link:hover,
+  .back-link:focus-visible {
+    background: rgba(255,255,255,0.1);
+  }
 
   /* CONTROLS */
   .controls {
@@ -253,10 +277,13 @@
     <div class="eyebrow">Modern Manners & Mental Fortitude</div>
     <h1><em>Manners in Motion</em> Challenge Cards</h1>
   </div>
-  <div class="header-right">Michael R. Terry · Founder<br>readyforreal.life · 36 Cards · 6 Categories</div>
+  <div class="header-actions">
+    <a class="back-link" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
+    <div class="header-right">Michael R. Terry · Founder<br>readyforreal.life · 36 Cards · 6 Categories</div>
+  </div>
 </header>
 
-<div class="controls">
+<div class="controls" id="card-filters">
   <span class="filter-label">Filter:</span>
   <button class="filter-btn active" data-cat="all" onclick="filter('all', this)">All 36</button>
   <button class="filter-btn" data-cat="0" onclick="filter(0, this)">🤝 Manners in Action</button>
@@ -277,7 +304,7 @@
 </main>
 
 <footer>
-  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="https://readyforreal.life" target="_blank">readyforreal.life</a></p>
+  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="../index.html">readyforreal.life</a></p>
   <p style="margin-top:0.25rem;color:#374151;">Click any card to reveal discussion prompts. Protected intellectual property.</p>
 </footer>
 
@@ -343,6 +370,7 @@ const CARDS = [
 
 let currentFilter = 'all';
 let displayOrder = [...Array(CARDS.length).keys()];
+const CAT_SLUGS = ['manners-in-action', 'regulation-check', 'decide-now', 'digital-life', 'repair-move', 'wild-card'];
 
 const CAT_COLORS = ['#0D7377','#3B82F6','#C0392B','#7C3AED','#16A34A','#C89B3C'];
 const CAT_TEXT   = ['#5EEAD4','#93C5FD','#FCA5A5','#C4B5FD','#86EFAC','#E8B84B'];
@@ -411,7 +439,11 @@ function unflipCard(i) {
 function filter(cat, btn) {
   currentFilter = cat;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
+  const url = new URL(window.location.href);
+  if (cat === 'all') url.searchParams.delete('cat');
+  else url.searchParams.set('cat', CAT_SLUGS[cat]);
+  window.history.replaceState({}, '', url);
   renderCards();
 }
 function shuffle() {
@@ -422,7 +454,20 @@ function shuffle() {
   renderCards();
 }
 
-renderCards();
+function applyCardsLocation() {
+  const url = new URL(window.location.href);
+  const slug = url.searchParams.get('cat');
+  const index = CAT_SLUGS.indexOf(slug);
+  const filterValue = index >= 0 ? index : 'all';
+  const button = document.querySelector('.filter-btn[data-cat="' + filterValue + '"]');
+  currentFilter = filterValue;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (button) button.classList.add('active');
+  renderCards();
+}
+
+applyCardsLocation();
 </script>
+<script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
 </body>
 </html>

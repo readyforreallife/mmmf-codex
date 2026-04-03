@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MMMF for Schools</title>
+  <link rel="stylesheet" href="assets/site-search.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap');
     :root{--navy:#10203a;--navy2:#1d3354;--gold:#c89b3c;--gold2:#e5be66;--paper:#f7f2e9;--ink:#1f2937;--muted:#64748b;--line:#d9cfbd;--panel:#ffffff}
@@ -50,14 +51,14 @@
 
   <main>
     <div class="toolbar">
+      <a class="btn" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
       <a class="btn" href="index.html">Repository Landing</a>
       <a class="btn" href="web/index.html">Program Hub</a>
       <a class="btn" href="docs/index.html">Deliverables Library</a>
-      <a class="btn" href="data/mmmf-curriculum.json">Curriculum JSON</a>
     </div>
 
     <div class="hero">
-      <div class="panel">
+      <div class="panel" id="school-review-path">
         <div class="ey">School Review Path</div>
         <h2>What school leaders should review first.</h2>
         <p class="lead">This page is a short path for principals, district leaders, curriculum teams, and board members who want to understand what MMMF is, why a school might use it, and which materials to review next.</p>
@@ -68,14 +69,14 @@
           <li>Reach out for adoption, presentation, or implementation discussion</li>
         </ul>
       </div>
-      <div class="panel">
+      <div class="panel" id="school-fit">
         <div class="ey">Program Fit</div>
         <h2>Designed for practical school use.</h2>
         <p>MMMF is built to help schools teach conduct, communication, regulation, and decision-making as explicit skills. The materials in this repository are organized to support review, pilot planning, and facilitator preparation.</p>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="school-review-steps">
       <div class="grid">
         <div class="card">
           <div class="ey">Step 1</div>
@@ -91,14 +92,14 @@
         </div>
         <div class="card">
           <div class="ey">Step 3</div>
-          <h3>Review Data</h3>
-          <p>Inspect the structured curriculum file if your team wants a machine-readable view of the program architecture.</p>
-          <p style="margin-top:14px;"><a href="data/mmmf-curriculum.json" style="color:#8a6424;font-weight:700;text-decoration:none;">Open Curriculum JSON →</a></p>
+          <h3>Plan Next Steps</h3>
+          <p>Use the review materials to decide on pilot fit, facilitator preparation, and the best starting point for your school team.</p>
+          <p style="margin-top:14px;"><a href="docs/index.html" style="color:#8a6424;font-weight:700;text-decoration:none;">Open Deliverables Library →</a></p>
         </div>
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="school-review-order">
       <div class="ey">Recommended Materials</div>
       <h2>Suggested review order for school teams.</h2>
       <div class="resource-list">
@@ -109,12 +110,13 @@
       </div>
     </div>
 
-    <div class="cta">
+    <div class="cta" id="school-adoption">
       <div class="ey">Next Step</div>
       <h2 style="margin:8px 0 8px;">Interested in school adoption or a presentation?</h2>
       <p style="margin:0 0 14px;color:#4b5563;">Reach out directly to discuss fit, implementation, or how MMMF could be presented to your team.</p>
       <a class="btn primary" href="mailto:mikeyterry44@gmail.com">Email Michael Terry</a>
     </div>
   </main>
+  <script src="assets/site-search.js" data-search-index="data/site-search-index.json" defer></script>
 </body>
 </html>

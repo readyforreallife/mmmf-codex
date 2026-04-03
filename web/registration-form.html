@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MMMF — Program Registration & Intake Form</title>
+<link rel="stylesheet" href="../assets/site-search.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
@@ -90,6 +91,29 @@ body::before {
   color: var(--gray);
   text-align: right;
   line-height: 1.7;
+}
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(200,155,60,0.28);
+  background: rgba(255,255,255,0.05);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+.back-link:hover,
+.back-link:focus-visible {
+  background: rgba(255,255,255,0.1);
 }
 
 /* ── HERO ────────────────────────────────────────────────────────── */
@@ -563,11 +587,14 @@ footer a { color: var(--teal-lt); text-decoration: none; }
       <div class="eyebrow">Modern Manners & Mental Fortitude</div>
       <h1><em>MMMF</em> Program Registration</h1>
     </div>
-    <div class="header-tag">readyforreal.life<br>Michael R. Terry</div>
+    <div class="header-actions">
+      <a class="back-link" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
+      <div class="header-tag">readyforreal.life<br>Michael R. Terry</div>
+    </div>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="registration-hero">
   <div class="hero-eyebrow">📋 Registration & Intake</div>
   <h2>Register for <em>MMMF</em></h2>
   <p>Complete this form to enroll in the Modern Manners & Mental Fortitude program. Michael R. Terry will follow up within 2 business days to confirm your spot and next steps.</p>
@@ -904,14 +931,14 @@ footer a { color: var(--teal-lt); text-decoration: none; }
       </ul>
     </div>
     <div style="margin-top:2rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
-      <a href="https://readyforreal.life" class="btn btn-primary" target="_blank">Visit readyforreal.life</a>
+      <a href="../index.html" class="btn btn-primary">Return to site</a>
       <button class="btn btn-ghost" onclick="resetForm()">Submit Another Registration</button>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="https://readyforreal.life" target="_blank">readyforreal.life</a> · (435) 840-1896 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ec818587899598899e9e95d8d8ac8b818d8580c28f8381">[email&#160;protected]</a></p>
+  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="../index.html">readyforreal.life</a> · (435) 840-1896 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ec818587899598899e9e95d8d8ac8b818d8580c28f8381">[email&#160;protected]</a></p>
   <p style="margin-top:0.3rem;color:#374151;">Protected intellectual property. Registration data is used solely for program enrollment purposes.</p>
 </footer>
 
@@ -937,7 +964,11 @@ function focusFirstError(stepNumber) {
   if (first && typeof first.focus === 'function') first.focus();
 }
 
-function goToStep(n) {
+function goToStep(n, options = {}) {
+  const settings = {
+    updateHash: options.updateHash !== false,
+    scroll: options.scroll !== false
+  };
   document.getElementById('step-' + currentStep).classList.remove('active');
   // update nodes
   for (let i = 1; i <= totalSteps; i++) {
@@ -948,7 +979,14 @@ function goToStep(n) {
   }
   currentStep = n;
   document.getElementById('step-' + n).classList.add('active');
-  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (settings.updateHash) {
+    const url = new URL(window.location.href);
+    url.hash = 'step-' + n;
+    window.history.replaceState({}, '', url);
+  }
+  if (settings.scroll) {
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 // ── Validation ────────────────────────────────────────────────────
@@ -1230,6 +1268,15 @@ function resetForm() {
   goToStep(1);
 }
 
+function applyRegistrationLocation() {
+  const match = window.location.hash.match(/^#step-([1-4])$/);
+  if (!match) return;
+  const nextStep = Number(match[1]);
+  if (nextStep !== currentStep) {
+    goToStep(nextStep, { updateHash: false, scroll: false });
+  }
+}
+
 // ── UI helpers ────────────────────────────────────────────────────
 function toggleCheck(label) {
   setTimeout(() => {
@@ -1251,6 +1298,10 @@ function toggleConsent(label) {
     label.classList.toggle('selected', cb.checked);
   }, 0);
 }
+
+document.addEventListener('DOMContentLoaded', applyRegistrationLocation);
+window.addEventListener('hashchange', applyRegistrationLocation);
 </script>
+<script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
 </body>
 </html>

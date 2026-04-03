@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MMMF Documents Library</title>
+  <link rel="stylesheet" href="../assets/site-search.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap');
     :root { --navy:#18304f; --navy2:#274061; --gold:#c89b3c; --paper:#f7f2e9; --ink:#1e293b; --muted:#64748b; --line:#d9cfbd; --white:#ffffff; }
@@ -42,14 +43,14 @@
   </header>
   <main>
     <div class="toolbar">
+      <a class="btn" href="../index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
       <a class="btn" href="../index.html">Repository Landing</a>
       <a class="btn" href="../web/index.html">Program Hub</a>
-      <a class="btn" href="../data/mmmf-curriculum.json">Curriculum JSON</a>
     </div>
 
     <p class="intro">This library is organized to make formal review easier. Each item includes a plain-language description and direct actions to open or download the file. For school adoption, implementation planning, or presentation requests, contact <a href="mailto:mikeyterry44@gmail.com" style="color:#6a4f18;font-weight:700;text-decoration:none;">mikeyterry44@gmail.com</a>.</p>
 
-    <div class="library">
+    <div class="library" id="documents-library">
       <div class="row head">
         <div>Category</div>
         <div>Document</div>
@@ -57,64 +58,65 @@
         <div style="text-align:right;">Actions</div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-teach-the-teacher">
         <div class="cat">Training</div>
         <div class="title">Teach-the-Teacher Slide Deck</div>
         <div class="desc">Presentation deck for facilitator onboarding, teacher training, and implementation review conversations.</div>
-        <div class="actions"><a class="action open" href="MMMF_Teach_the_Teacher.pptx">Open</a><a class="action download" href="MMMF_Teach_the_Teacher.pptx" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Teach_the_Teacher.pptx&amp;title=Teach-the-Teacher%20Slide%20Deck&amp;type=pptx">Open</a><a class="action download" href="MMMF_Teach_the_Teacher.pptx" download>Download</a></div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-facilitator-handbook">
         <div class="cat">Facilitator</div>
         <div class="title">Facilitator Handbook</div>
         <div class="desc">Primary delivery guide with structure, support notes, and practical implementation guidance.</div>
-        <div class="actions"><a class="action open" href="MMMF_Facilitator_Handbook.docx">Open</a><a class="action download" href="MMMF_Facilitator_Handbook.docx" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Facilitator_Handbook.docx&amp;title=Facilitator%20Handbook&amp;type=docx">Open</a><a class="action download" href="MMMF_Facilitator_Handbook.docx" download>Download</a></div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-participant-workbook">
         <div class="cat">Participant</div>
         <div class="title">Participant Workbook</div>
         <div class="desc">Learner-facing workbook with activities, reflection pages, and guided participation materials.</div>
-        <div class="actions"><a class="action open" href="MMMF_Participant_Workbook.docx">Open</a><a class="action download" href="MMMF_Participant_Workbook.docx" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Participant_Workbook.docx&amp;title=Participant%20Workbook&amp;type=docx">Open</a><a class="action download" href="MMMF_Participant_Workbook.docx" download>Download</a></div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-certification-agreement">
         <div class="cat">Agreement</div>
         <div class="title">Facilitator Certification and Licensing Agreement</div>
         <div class="desc">Certification and licensing agreement governing facilitator use, distribution, and implementation boundaries.</div>
-        <div class="actions"><a class="action open" href="MMMF_Facilitator_Certification_Agreement.docx">Open</a><a class="action download" href="MMMF_Facilitator_Certification_Agreement.docx" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Facilitator_Certification_Agreement.docx&amp;title=Facilitator%20Certification%20and%20Licensing%20Agreement&amp;type=docx">Open</a><a class="action download" href="MMMF_Facilitator_Certification_Agreement.docx" download>Download</a></div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-scenario-cards">
         <div class="cat">Cards</div>
         <div class="title">Scenario Cards</div>
         <div class="desc">Printable scenario prompts for guided discussion, transfer practice, and facilitated reflection.</div>
-        <div class="actions"><a class="action open" href="MMMF_Scenario_Cards.pdf">Open</a><a class="action download" href="MMMF_Scenario_Cards.pdf" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Scenario_Cards.pdf&amp;title=Scenario%20Cards&amp;type=pdf">Open</a><a class="action download" href="MMMF_Scenario_Cards.pdf" download>Download</a></div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-manners-cards">
         <div class="cat">Cards</div>
         <div class="title">Manners in Motion Cards</div>
         <div class="desc">Printable challenge cards for repeated facilitation, discussion, and behavior practice across settings.</div>
-        <div class="actions"><a class="action open" href="MMMF_Manners_in_Motion_Cards.pdf">Open</a><a class="action download" href="MMMF_Manners_in_Motion_Cards.pdf" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Manners_in_Motion_Cards.pdf&amp;title=Manners%20in%20Motion%20Cards&amp;type=pdf">Open</a><a class="action download" href="MMMF_Manners_in_Motion_Cards.pdf" download>Download</a></div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-community-one-pager">
         <div class="cat">Outreach</div>
         <div class="title">Community One-Pager</div>
         <div class="desc">Concise program overview for school leaders, families, board members, and community partners.</div>
-        <div class="actions"><a class="action open" href="MMMF_Community_OnePager.pdf">Open</a><a class="action download" href="MMMF_Community_OnePager.pdf" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Community_OnePager.pdf&amp;title=Community%20One-Pager&amp;type=pdf">Open</a><a class="action download" href="MMMF_Community_OnePager.pdf" download>Download</a></div>
       </div>
 
-      <div class="row">
+      <div class="row" id="doc-registration-form">
         <div class="cat">Enrollment</div>
         <div class="title">Printable Registration and Intake Form</div>
         <div class="desc">Paper-friendly participant intake form for offline collection, handout use, and non-digital registration settings.</div>
-        <div class="actions"><a class="action open" href="MMMF_Registration_Form_Printable.pdf">Open</a><a class="action download" href="MMMF_Registration_Form_Printable.pdf" download>Download</a></div>
+        <div class="actions"><a class="action open" href="viewer.html?file=MMMF_Registration_Form_Printable.pdf&amp;title=Printable%20Registration%20and%20Intake%20Form&amp;type=pdf">Open</a><a class="action download" href="MMMF_Registration_Form_Printable.pdf" download>Download</a></div>
       </div>
     </div>
 
     <p class="contact-note">Questions about school adoption, facilitator training, or program fit can be directed to <a href="mailto:mikeyterry44@gmail.com" style="color:#6a4f18;font-weight:700;text-decoration:none;">mikeyterry44@gmail.com</a>.</p>
   </main>
+  <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
 </body>
 </html>

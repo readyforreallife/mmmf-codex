@@ -1,0 +1,378 @@
+[
+  {
+    "title": "Program repository home",
+    "page": "Landing Page",
+    "section": "Hero",
+    "url": "index.html#site-hero",
+    "snippet": "Overview of Modern Manners & Mental Fortitude for schools, partners, and families.",
+    "keywords": ["home", "landing", "overview", "program", "mmmf"]
+  },
+  {
+    "title": "Decision-maker review actions",
+    "page": "Landing Page",
+    "section": "What decision-makers can do here",
+    "url": "index.html#review-actions",
+    "snippet": "Fast path for reviewing the hub, deliverables library, and curriculum data.",
+    "keywords": ["review", "decision-makers", "leaders", "adoption", "explore"]
+  },
+  {
+    "title": "Audience fit for schools, partners, and families",
+    "page": "Landing Page",
+    "section": "Built for schools, partners, and families",
+    "url": "index.html#audience-fit",
+    "snippet": "Shows how MMMF supports school implementation, community partnerships, and family understanding.",
+    "keywords": ["schools", "partners", "families", "audience", "fit"]
+  },
+  {
+    "title": "Core repository materials",
+    "page": "Landing Page",
+    "section": "What is included in this repository",
+    "url": "index.html#core-materials",
+    "snippet": "Lists the slide deck, handbook, workbook, certification agreement, cards, one-pager, and registration materials.",
+    "keywords": ["materials", "documents", "workbook", "handbook", "cards", "one-pager"]
+  },
+  {
+    "title": "School leader review path",
+    "page": "Schools",
+    "section": "What school leaders should review first",
+    "url": "schools.html#school-review-path",
+    "snippet": "Short review path for principals, district leaders, curriculum teams, and board members.",
+    "keywords": ["schools", "principals", "district", "board", "review path"]
+  },
+  {
+    "title": "Program fit for schools",
+    "page": "Schools",
+    "section": "Designed for practical school use",
+    "url": "schools.html#school-fit",
+    "snippet": "Explains how MMMF teaches conduct, communication, regulation, and decision-making as explicit skills.",
+    "keywords": ["fit", "practical", "implementation", "school use"]
+  },
+  {
+    "title": "Suggested review order for school teams",
+    "page": "Schools",
+    "section": "Recommended Materials",
+    "url": "schools.html#school-review-order",
+    "snippet": "Recommended sequence: community one-pager, slide deck, facilitator handbook, and participant workbook.",
+    "keywords": ["review order", "one-pager", "slide deck", "handbook", "participant workbook"]
+  },
+  {
+    "title": "School adoption contact",
+    "page": "Schools",
+    "section": "Next Step",
+    "url": "schools.html#school-adoption",
+    "snippet": "Contact point for school adoption, presentation requests, and implementation conversations.",
+    "keywords": ["contact", "adoption", "presentation", "implementation", "email"]
+  },
+  {
+    "title": "Formal program documents library",
+    "page": "Documents Library",
+    "section": "Library Overview",
+    "url": "docs/index.html#documents-library",
+    "snippet": "Review-ready library of the primary MMMF documents and printable materials.",
+    "keywords": ["documents", "library", "print materials", "deliverables"]
+  },
+  {
+    "title": "Teach-the-Teacher slide deck",
+    "page": "Documents Library",
+    "section": "Training",
+    "url": "docs/index.html#doc-teach-the-teacher",
+    "snippet": "Presentation deck for facilitator onboarding, teacher training, and implementation review conversations.",
+    "keywords": ["slide deck", "training", "teach the teacher", "presentation"]
+  },
+  {
+    "title": "Facilitator handbook",
+    "page": "Documents Library",
+    "section": "Facilitator",
+    "url": "docs/index.html#doc-facilitator-handbook",
+    "snippet": "Primary delivery guide with structure, support notes, and practical implementation guidance.",
+    "keywords": ["handbook", "facilitator", "delivery guide", "implementation"]
+  },
+  {
+    "title": "Participant workbook",
+    "page": "Documents Library",
+    "section": "Participant",
+    "url": "docs/index.html#doc-participant-workbook",
+    "snippet": "Learner-facing workbook with activities, reflection pages, and guided participation materials.",
+    "keywords": ["workbook", "participant", "learner", "activities", "reflection"]
+  },
+  {
+    "title": "Facilitator certification agreement",
+    "page": "Documents Library",
+    "section": "Agreement",
+    "url": "docs/index.html#doc-certification-agreement",
+    "snippet": "Certification and licensing agreement governing facilitator use and distribution.",
+    "keywords": ["certification", "licensing", "agreement", "facilitator"]
+  },
+  {
+    "title": "Scenario cards",
+    "page": "Documents Library",
+    "section": "Cards",
+    "url": "docs/index.html#doc-scenario-cards",
+    "snippet": "Printable scenario prompts for guided discussion, transfer practice, and facilitated reflection.",
+    "keywords": ["scenario cards", "printable", "discussion", "transfer"]
+  },
+  {
+    "title": "Manners in Motion printable cards",
+    "page": "Documents Library",
+    "section": "Cards",
+    "url": "docs/index.html#doc-manners-cards",
+    "snippet": "Printable challenge cards for facilitation, discussion, and behavior practice.",
+    "keywords": ["manners in motion", "cards", "printable challenge cards"]
+  },
+  {
+    "title": "Community one-pager",
+    "page": "Documents Library",
+    "section": "Outreach",
+    "url": "docs/index.html#doc-community-one-pager",
+    "snippet": "Concise overview for school leaders, families, board members, and community partners.",
+    "keywords": ["one-pager", "community", "overview", "stakeholders"]
+  },
+  {
+    "title": "Printable registration and intake form",
+    "page": "Documents Library",
+    "section": "Enrollment",
+    "url": "docs/index.html#doc-registration-form",
+    "snippet": "Paper-friendly intake form for offline collection and non-digital registration settings.",
+    "keywords": ["registration", "intake", "printable", "enrollment"]
+  },
+  {
+    "title": "Program hub home",
+    "page": "Program Hub",
+    "section": "Hero",
+    "url": "web/index.html#hub-hero",
+    "snippet": "Everything needed to teach MMMF well in one place.",
+    "keywords": ["hub", "program hub", "teach it well", "overview"]
+  },
+  {
+    "title": "Web applications",
+    "page": "Program Hub",
+    "section": "Web Applications",
+    "url": "web/index.html#hub-web-apps",
+    "snippet": "Links to the Teach the Teacher portal, Manners in Motion cards, and the registration form.",
+    "keywords": ["web apps", "portal", "cards", "registration form"]
+  },
+  {
+    "title": "Documents and print materials",
+    "page": "Program Hub",
+    "section": "Documents & Print Materials",
+    "url": "web/index.html#hub-documents",
+    "snippet": "Direct links to the deck, handbook, workbook, agreement, cards, and printable registration form.",
+    "keywords": ["documents", "print materials", "downloads", "pdf", "docx"]
+  },
+  {
+    "title": "Teach the Teacher portal overview",
+    "page": "Teach the Teacher Portal",
+    "section": "Overview",
+    "url": "web/teach-the-teacher-portal.html?tab=overview#portal-overview",
+    "snippet": "Portal overview for the three-day training program and its implementation purpose.",
+    "keywords": ["portal", "teach the teacher", "overview", "training"]
+  },
+  {
+    "title": "The Gap and The Response",
+    "page": "Teach the Teacher Portal",
+    "section": "Overview",
+    "url": "web/teach-the-teacher-portal.html?tab=overview#portal-gap-response",
+    "snippet": "Explains why soft skills are assumed instead of taught and how MMMF addresses that gap.",
+    "keywords": ["gap", "response", "soft skills", "transfer"]
+  },
+  {
+    "title": "Michael R. Terry founder profile",
+    "page": "Teach the Teacher Portal",
+    "section": "Overview",
+    "url": "web/teach-the-teacher-portal.html?tab=overview#portal-founder",
+    "snippet": "Founder background, awards, experience, and professional credentials.",
+    "keywords": ["michael terry", "founder", "bio", "awards", "experience"]
+  },
+  {
+    "title": "Four core pillars",
+    "page": "Teach the Teacher Portal",
+    "section": "Pillars & Modules",
+    "url": "web/teach-the-teacher-portal.html?tab=pillars#portal-pillars",
+    "snippet": "Respectful communication, emotional regulation, wise decision-making, and personal accountability.",
+    "keywords": ["pillars", "respectful communication", "emotional regulation", "decision making", "accountability"]
+  },
+  {
+    "title": "Five modules",
+    "page": "Teach the Teacher Portal",
+    "section": "Pillars & Modules",
+    "url": "web/teach-the-teacher-portal.html?tab=pillars#portal-modules",
+    "snippet": "Module breakdown for the curriculum structure across the training.",
+    "keywords": ["modules", "curriculum modules", "five modules"]
+  },
+  {
+    "title": "PLRR and POCC frameworks",
+    "page": "Teach the Teacher Portal",
+    "section": "Frameworks",
+    "url": "web/teach-the-teacher-portal.html?tab=frameworks#framework-plrr-pocc",
+    "snippet": "The two core frameworks used for regulation and decision-making in MMMF.",
+    "keywords": ["plrr", "pocc", "frameworks", "pause label reframe respond"]
+  },
+  {
+    "title": "Unit inquiry",
+    "page": "Teach the Teacher Portal",
+    "section": "Frameworks",
+    "url": "web/teach-the-teacher-portal.html?tab=frameworks#framework-unit-inquiry",
+    "snippet": "Inquiry framing and transfer questions that support the training design.",
+    "keywords": ["unit inquiry", "inquiry", "transfer questions"]
+  },
+  {
+    "title": "Implementation tracks",
+    "page": "Teach the Teacher Portal",
+    "section": "Implementation Tracks",
+    "url": "web/teach-the-teacher-portal.html?tab=tracks#portal-tracks",
+    "snippet": "Four implementation tracks for grades 7–8, 9–12, community youth, and community adult settings.",
+    "keywords": ["tracks", "implementation", "grades 7 8", "grades 9 12", "community youth", "community adult"]
+  },
+  {
+    "title": "Curriculum overview and philosophy",
+    "page": "Teach the Teacher Portal",
+    "section": "Day 1",
+    "url": "web/teach-the-teacher-portal.html?tab=day1#day1-philosophy",
+    "snippet": "Day 1 focus on curriculum overview, philosophy, and program framing.",
+    "keywords": ["day 1", "curriculum overview", "philosophy"]
+  },
+  {
+    "title": "Module-by-module deep dive",
+    "page": "Teach the Teacher Portal",
+    "section": "Day 2",
+    "url": "web/teach-the-teacher-portal.html?tab=day2#day2-deep-dive",
+    "snippet": "Day 2 deep dive into modules and facilitation details.",
+    "keywords": ["day 2", "deep dive", "module by module"]
+  },
+  {
+    "title": "Facilitation practice and assessment",
+    "page": "Teach the Teacher Portal",
+    "section": "Day 3",
+    "url": "web/teach-the-teacher-portal.html?tab=day3#day3-assessment-practice",
+    "snippet": "Day 3 focuses on facilitation practice, assessment, and readiness for delivery.",
+    "keywords": ["day 3", "facilitation practice", "assessment training"]
+  },
+  {
+    "title": "How learning is measured",
+    "page": "Teach the Teacher Portal",
+    "section": "Assessment",
+    "url": "web/teach-the-teacher-portal.html?tab=assessment#assessment-measurement",
+    "snippet": "Assessment approach for how MMMF measures understanding and transfer.",
+    "keywords": ["assessment", "learning measured", "measurement"]
+  },
+  {
+    "title": "How I Handle It capstone",
+    "page": "Teach the Teacher Portal",
+    "section": "Assessment",
+    "url": "web/teach-the-teacher-portal.html?tab=assessment#assessment-capstone",
+    "snippet": "Capstone performance task and rubric for facilitator evaluation.",
+    "keywords": ["capstone", "how i handle it", "rubric", "performance task"]
+  },
+  {
+    "title": "Reflection journal prompts",
+    "page": "Teach the Teacher Portal",
+    "section": "Assessment",
+    "url": "web/teach-the-teacher-portal.html?tab=assessment#assessment-journal-prompts",
+    "snippet": "Weekly formative reflection prompts aligned to Dewey and real-world application.",
+    "keywords": ["reflection journal", "journal prompts", "weekly reflection"]
+  },
+  {
+    "title": "Readiness checklist",
+    "page": "Teach the Teacher Portal",
+    "section": "Readiness Check",
+    "url": "web/teach-the-teacher-portal.html?tab=readiness#readiness-checklist",
+    "snippet": "Teacher readiness checklist for receiving MMMF Licensed Facilitator status.",
+    "keywords": ["readiness", "facilitator status", "checklist", "licensed facilitator"]
+  },
+  {
+    "title": "Registration form overview",
+    "page": "Registration Form",
+    "section": "Hero",
+    "url": "web/registration-form.html#registration-hero",
+    "snippet": "MMMF program registration and intake form for enrollment and implementation planning.",
+    "keywords": ["registration", "intake", "enrollment", "form"]
+  },
+  {
+    "title": "Step 1 participant and organization details",
+    "page": "Registration Form",
+    "section": "Step 1",
+    "url": "web/registration-form.html#step-1",
+    "snippet": "Basic registrant details, role, organization, and contact information.",
+    "keywords": ["step 1", "name", "email", "role", "organization"]
+  },
+  {
+    "title": "Step 2 implementation details",
+    "page": "Registration Form",
+    "section": "Step 2",
+    "url": "web/registration-form.html#step-2",
+    "snippet": "Tracks, delivery format, class size, training status, and implementation context.",
+    "keywords": ["step 2", "tracks", "delivery", "class size", "training status"]
+  },
+  {
+    "title": "Step 3 support and needs",
+    "page": "Registration Form",
+    "section": "Step 3",
+    "url": "web/registration-form.html#step-3",
+    "snippet": "Support needs, gaps identified, and confidence in implementation.",
+    "keywords": ["step 3", "support", "gaps", "confidence", "needs"]
+  },
+  {
+    "title": "Step 4 review and submit",
+    "page": "Registration Form",
+    "section": "Step 4",
+    "url": "web/registration-form.html#step-4",
+    "snippet": "Review intake details, confirm consent, and submit the registration.",
+    "keywords": ["step 4", "review", "consent", "submit"]
+  },
+  {
+    "title": "Manners in Motion card deck",
+    "page": "Manners in Motion Cards",
+    "section": "All Cards",
+    "url": "web/manners-in-motion-cards.html",
+    "snippet": "Interactive challenge cards for practice, reflection, and discussion across all categories.",
+    "keywords": ["cards", "manners in motion", "challenge cards", "all cards"]
+  },
+  {
+    "title": "Manners in Action cards",
+    "page": "Manners in Motion Cards",
+    "section": "Category",
+    "url": "web/manners-in-motion-cards.html?cat=manners-in-action",
+    "snippet": "Challenges focused on respectful communication, introductions, gratitude, and phone-free presence.",
+    "keywords": ["manners in action", "greeting", "gratitude", "communication"]
+  },
+  {
+    "title": "Regulation Check cards",
+    "page": "Manners in Motion Cards",
+    "section": "Category",
+    "url": "web/manners-in-motion-cards.html?cat=regulation-check",
+    "snippet": "Challenges focused on triggers, grounding, labeling emotions, and tone control.",
+    "keywords": ["regulation check", "triggers", "grounding", "tone", "emotion"]
+  },
+  {
+    "title": "Decide Now cards",
+    "page": "Manners in Motion Cards",
+    "section": "Category",
+    "url": "web/manners-in-motion-cards.html?cat=decide-now",
+    "snippet": "Decision-making challenges using POCC, consequence mapping, and the 10-10-10 test.",
+    "keywords": ["decide now", "decision making", "pocc", "consequence map"]
+  },
+  {
+    "title": "Digital Life cards",
+    "page": "Manners in Motion Cards",
+    "section": "Category",
+    "url": "web/manners-in-motion-cards.html?cat=digital-life",
+    "snippet": "Challenges about messaging tone, privacy, screen-free time, and digital permanence.",
+    "keywords": ["digital life", "social media", "privacy", "screen free", "digital tone"]
+  },
+  {
+    "title": "Repair Move cards",
+    "page": "Manners in Motion Cards",
+    "section": "Category",
+    "url": "web/manners-in-motion-cards.html?cat=repair-move",
+    "snippet": "Challenges focused on apology, follow-through, repair conversations, and integrity.",
+    "keywords": ["repair move", "apology", "integrity", "follow through", "repair conversation"]
+  },
+  {
+    "title": "Wild Card challenges",
+    "page": "Manners in Motion Cards",
+    "section": "Category",
+    "url": "web/manners-in-motion-cards.html?cat=wild-card",
+    "snippet": "Challenge prompts for discomfort, observation, feedback, and designing your own growth task.",
+    "keywords": ["wild card", "feedback", "observation", "growth target", "design your own"]
+  }
+]

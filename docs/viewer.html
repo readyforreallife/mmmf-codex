@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMMF Document Viewer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap');
+    :root {
+      --navy:#18304f;
+      --navy2:#274061;
+      --gold:#c89b3c;
+      --paper:#f7f2e9;
+      --ink:#1e293b;
+      --muted:#64748b;
+      --line:#d9cfbd;
+      --white:#ffffff;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family:'DM Sans',sans-serif;
+      background:var(--paper);
+      color:var(--ink);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    header {
+      background:linear-gradient(135deg,var(--navy),var(--navy2));
+      color:#fff;
+      padding:24px;
+      border-bottom:4px solid var(--gold);
+    }
+    .wrap {
+      max-width:1200px;
+      margin:0 auto;
+      width:100%;
+    }
+    .topbar {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .eyebrow {
+      font-size:.76rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#e8c778;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+    h1 {
+      font-family:'Playfair Display',serif;
+      margin:0 0 8px;
+      font-size:2rem;
+    }
+    .sub {
+      margin:0;
+      color:#d7deea;
+      line-height:1.7;
+      max-width:720px;
+    }
+    .header-actions {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      background:var(--white);
+      color:var(--navy);
+      text-decoration:none;
+      border:1px solid var(--line);
+      font-weight:700;
+      white-space:nowrap;
+    }
+    .btn.secondary {
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      border-color:rgba(255,255,255,0.22);
+    }
+    main {
+      max-width:1200px;
+      margin:0 auto;
+      width:100%;
+      padding:24px;
+      flex:1;
+    }
+    .viewer-shell {
+      background:var(--white);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:0 14px 30px rgba(0,0,0,.05);
+      overflow:hidden;
+    }
+    .viewer-meta {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      padding:14px 18px;
+      background:#f2ecdf;
+      border-bottom:1px solid var(--line);
+    }
+    .viewer-meta strong {
+      color:#6c5b31;
+      font-size:.8rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .viewer-frame-wrap {
+      height:calc(100vh - 250px);
+      min-height:640px;
+      background:#eef2f7;
+    }
+    iframe {
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+    }
+    .fallback {
+      padding:20px 18px 26px;
+      color:var(--muted);
+      line-height:1.75;
+    }
+    .fallback p {
+      margin:0 0 14px;
+    }
+    .fallback-actions {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    @media (max-width:800px) {
+      .viewer-frame-wrap {
+        height:70vh;
+        min-height:520px;
+      }
+      h1 {
+        font-size:1.55rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div>
+        <div class="eyebrow">MMMF Document Viewer</div>
+        <h1 id="docTitle">Opening document...</h1>
+        <p class="sub" id="docSub">This page keeps the document experience inside the MMMF site.</p>
+      </div>
+      <div class="header-actions">
+        <a class="btn secondary" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
+        <a class="btn" id="downloadBtn" href="#">Download file</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="viewer-shell">
+      <div class="viewer-meta">
+        <strong id="docType">Document</strong>
+        <span id="docFile" style="color:#64748b;font-size:.92rem;"></span>
+      </div>
+      <div class="viewer-frame-wrap">
+        <iframe id="viewerFrame" title="MMMF document viewer"></iframe>
+      </div>
+      <div class="fallback">
+        <p id="fallbackText">If the preview does not load, use the buttons below.</p>
+        <div class="fallback-actions">
+          <a class="btn secondary" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back to library</a>
+          <a class="btn" id="openDirectBtn" href="#">Open file directly</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get('file');
+    const title = params.get('title') || 'MMMF Document';
+    const type = (params.get('type') || '').toLowerCase();
+
+    const titleEl = document.getElementById('docTitle');
+    const typeEl = document.getElementById('docType');
+    const fileEl = document.getElementById('docFile');
+    const subEl = document.getElementById('docSub');
+    const frame = document.getElementById('viewerFrame');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const openDirectBtn = document.getElementById('openDirectBtn');
+
+    if (!file) {
+      titleEl.textContent = 'Document unavailable';
+      subEl.textContent = 'No document was selected.';
+      frame.remove();
+    } else {
+      const absoluteFileUrl = new URL(file, window.location.href).href;
+      const officeViewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absoluteFileUrl);
+
+      titleEl.textContent = title;
+      typeEl.textContent = type ? type.toUpperCase() : 'DOCUMENT';
+      fileEl.textContent = file.split('/').pop();
+      subEl.textContent = 'This page keeps the document experience inside the MMMF site and gives visitors a clear way back.';
+      downloadBtn.href = file;
+      downloadBtn.setAttribute('download', '');
+      openDirectBtn.href = file;
+
+      if (type === 'pdf') {
+        frame.src = file + '#view=FitH';
+      } else if (type === 'docx' || type === 'pptx') {
+        frame.src = officeViewerUrl;
+      } else {
+        frame.src = file;
+      }
+    }
+  </script>
+</body>
+</html>

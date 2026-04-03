@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MMMF — Teach the Teacher Training Portal</title>
+<link rel="stylesheet" href="../assets/site-search.css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -71,6 +72,29 @@
     color: var(--gray);
     text-align: right;
     line-height: 1.7;
+  }
+  .header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.55rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(200,155,60,0.28);
+    background: rgba(255,255,255,0.05);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.74rem;
+    font-weight: 600;
+  }
+  .back-link:hover,
+  .back-link:focus-visible {
+    background: rgba(255,255,255,0.1);
   }
 
   /* ── NAV TABS ───────────────────────────────────────────── */
@@ -388,23 +412,26 @@
       <div class="eyebrow">Modern Manners & Mental Fortitude</div>
       <h1><em>Teach the Teacher</em> Training Portal</h1>
     </div>
-    <div class="header-meta">
-      Michael R. Terry · Founder<br>
-      readyforreal.life · Kappa Delta Pi
+    <div class="header-actions">
+      <a class="back-link" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
+      <div class="header-meta">
+        Michael R. Terry · Founder<br>
+        readyforreal.life · Kappa Delta Pi
+      </div>
     </div>
   </div>
 </header>
 
 <nav class="nav-tabs" role="tablist">
-  <button class="nav-tab active" onclick="showTab('overview')" role="tab">Overview</button>
-  <button class="nav-tab" onclick="showTab('pillars')" role="tab">Pillars & Modules</button>
-  <button class="nav-tab" onclick="showTab('frameworks')" role="tab">Frameworks</button>
-  <button class="nav-tab" onclick="showTab('tracks')" role="tab">Implementation Tracks</button>
-  <button class="nav-tab" onclick="showTab('day1')" role="tab">Day 1</button>
-  <button class="nav-tab" onclick="showTab('day2')" role="tab">Day 2</button>
-  <button class="nav-tab" onclick="showTab('day3')" role="tab">Day 3</button>
-  <button class="nav-tab" onclick="showTab('assessment')" role="tab">Assessment</button>
-  <button class="nav-tab" onclick="showTab('readiness')" role="tab">Readiness Check</button>
+  <button class="nav-tab active" data-tab="overview" onclick="showTab('overview', this)" role="tab">Overview</button>
+  <button class="nav-tab" data-tab="pillars" onclick="showTab('pillars', this)" role="tab">Pillars & Modules</button>
+  <button class="nav-tab" data-tab="frameworks" onclick="showTab('frameworks', this)" role="tab">Frameworks</button>
+  <button class="nav-tab" data-tab="tracks" onclick="showTab('tracks', this)" role="tab">Implementation Tracks</button>
+  <button class="nav-tab" data-tab="day1" onclick="showTab('day1', this)" role="tab">Day 1</button>
+  <button class="nav-tab" data-tab="day2" onclick="showTab('day2', this)" role="tab">Day 2</button>
+  <button class="nav-tab" data-tab="day3" onclick="showTab('day3', this)" role="tab">Day 3</button>
+  <button class="nav-tab" data-tab="assessment" onclick="showTab('assessment', this)" role="tab">Assessment</button>
+  <button class="nav-tab" data-tab="readiness" onclick="showTab('readiness', this)" role="tab">Readiness Check</button>
 </nav>
 
 <main>
@@ -412,7 +439,7 @@
   <!-- ── OVERVIEW ─────────────────────────────────────────── -->
   <div id="tab-overview" class="tab-content active">
     <div class="hero-banner">
-      <div>
+      <div id="portal-overview" data-search-tab="overview">
         <p class="section-eyebrow">3-Day Intensive Training</p>
         <h2><em>Teach the Teacher</em><br>Training Program</h2>
         <p>Modern Manners & Mental Fortitude (MMMF) is a real-world life skills curriculum for Grades 7–12 and community programs. This portal guides licensed facilitators through every element of the 3-day Teach the Teacher training.</p>
@@ -433,7 +460,7 @@
     </div>
 
     <div class="section-eyebrow">Why This Course Exists</div>
-    <div class="section-title">The Gap & The Response</div>
+    <div class="section-title" id="portal-gap-response" data-search-tab="overview">The Gap & The Response</div>
     <p class="section-sub">Academic achievement dominates curricula while students navigate complex social, digital, and emotional landscapes with few tools. MMMF makes soft skills explicit, measurable, and transferable.</p>
 
     <div class="card-grid card-grid-3" style="margin-bottom:2rem;">
@@ -458,7 +485,7 @@
     </div>
 
     <div class="section-eyebrow">About the Founder</div>
-    <div class="section-title">Michael R. Terry</div>
+    <div class="section-title" id="portal-founder" data-search-tab="overview">Michael R. Terry</div>
     <div class="card-grid card-grid-2" style="margin-bottom:2rem;">
       <div class="card">
         <ul>
@@ -491,7 +518,7 @@
   <!-- ── PILLARS & MODULES ─────────────────────────────────── -->
   <div id="tab-pillars" class="tab-content">
     <div class="section-eyebrow">Curriculum Foundation</div>
-    <div class="section-title">Four Core <em>Pillars</em></div>
+    <div class="section-title" id="portal-pillars" data-search-tab="pillars">Four Core <em>Pillars</em></div>
     <p class="section-sub">Every module and every lesson orbits around these four anchoring concepts. All four pillars are revisited in every module at increasing levels of complexity.</p>
 
     <div class="card-grid card-grid-2" style="margin-bottom:2.5rem;">
@@ -544,7 +571,7 @@
     <hr class="divider">
 
     <div class="section-eyebrow">Content Strands</div>
-    <div class="section-title">Five <em>Modules</em></div>
+    <div class="section-title" id="portal-modules" data-search-tab="pillars">Five <em>Modules</em></div>
     <p class="section-sub">One cohesive program. Every module reinforces all four pillars at increasing complexity — exactly as Bruner's spiral curriculum model intended.</p>
 
     <div class="card-grid card-grid-3">
@@ -624,7 +651,7 @@
   <!-- ── FRAMEWORKS ────────────────────────────────────────── -->
   <div id="tab-frameworks" class="tab-content">
     <div class="section-eyebrow">Student-Facing Thinking Tools</div>
-    <div class="section-title">The Two Core <em>Frameworks</em></div>
+    <div class="section-title" id="framework-plrr-pocc" data-search-tab="frameworks">The Two Core <em>Frameworks</em></div>
     <p class="section-sub">Know these cold before Day 2. Every module applies one or both. Introduce PLRR first — students must regulate before they can decide well.</p>
 
     <div class="framework-row">
@@ -685,7 +712,7 @@
     <hr class="divider">
 
     <div class="section-eyebrow">Compelling Questions · Stern et al. (2021)</div>
-    <div class="section-title">Unit <em>Inquiry</em></div>
+    <div class="section-title" id="framework-unit-inquiry" data-search-tab="frameworks">Unit <em>Inquiry</em></div>
     <div class="card-grid card-grid-2">
       <div class="card"><p>"How do my everyday choices shape how others trust me — and the opportunities I get?"</p></div>
       <div class="card"><p>"What does respect look like when no one is watching?"</p></div>
@@ -697,7 +724,7 @@
   <!-- ── TRACKS ─────────────────────────────────────────────── -->
   <div id="tab-tracks" class="tab-content">
     <div class="section-eyebrow">Who You Will Teach</div>
-    <div class="section-title">Four Implementation <em>Tracks</em></div>
+    <div class="section-title" id="portal-tracks" data-search-tab="tracks">Four Implementation <em>Tracks</em></div>
     <p class="section-sub">MMMF is designed to work across multiple delivery contexts. Every track uses the same frameworks — the scenarios, complexity, and pacing differ.</p>
 
     <div class="track-cards" style="margin-bottom:2rem;">
@@ -779,7 +806,7 @@
       <div style="width:48px; height:48px; background:var(--teal); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; font-family:'Playfair Display',serif; color:var(--white); flex-shrink:0;">1</div>
       <div>
         <div class="section-eyebrow">Day 1 of 3</div>
-        <div class="section-title" style="margin-bottom:0;">Curriculum Overview & <em>Philosophy</em></div>
+        <div class="section-title" id="day1-philosophy" data-search-tab="day1" style="margin-bottom:0;">Curriculum Overview & <em>Philosophy</em></div>
       </div>
     </div>
     <p class="section-sub">Objective: Participants understand MMMF's purpose, theoretical foundation, and four core pillars, and can articulate how the curriculum serves their specific track.</p>
@@ -849,7 +876,7 @@
       <div style="width:48px; height:48px; background:var(--gold); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; font-family:'Playfair Display',serif; color:var(--navy-dk); flex-shrink:0;">2</div>
       <div>
         <div class="section-eyebrow">Day 2 of 3</div>
-        <div class="section-title" style="margin-bottom:0;">Module-by-Module <em>Deep Dive</em></div>
+        <div class="section-title" id="day2-deep-dive" data-search-tab="day2" style="margin-bottom:0;">Module-by-Module <em>Deep Dive</em></div>
       </div>
     </div>
     <p class="section-sub">Objective: Participants can describe and deliver each of the five modules, apply PLRR and POCC in live scenarios, and begin a track-specific pacing plan.</p>
@@ -924,7 +951,7 @@
       <div style="width:48px; height:48px; background:var(--red); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; font-family:'Playfair Display',serif; color:var(--white); flex-shrink:0;">3</div>
       <div>
         <div class="section-eyebrow">Day 3 of 3</div>
-        <div class="section-title" style="margin-bottom:0;">Facilitation Practice & <em>Assessment</em></div>
+        <div class="section-title" id="day3-assessment-practice" data-search-tab="day3" style="margin-bottom:0;">Facilitation Practice & <em>Assessment</em></div>
       </div>
     </div>
     <p class="section-sub">Objective: Participants demonstrate readiness to deliver MMMF, calibrate on rubrics, complete the Teacher Readiness Checklist, and receive MMMF Licensed Facilitator status.</p>
@@ -996,7 +1023,7 @@
   <!-- ── ASSESSMENT ────────────────────────────────────────── -->
   <div id="tab-assessment" class="tab-content">
     <div class="section-eyebrow">Assessment Framework · Tyler (1949) & Dewey (1938)</div>
-    <div class="section-title">How Learning Is <em>Measured</em></div>
+    <div class="section-title" id="assessment-measurement" data-search-tab="assessment">How Learning Is <em>Measured</em></div>
     <p class="section-sub">Four formative tools and two summative tasks. All aligned to the six learning targets and Utah CASEL/CCA Core Standards.</p>
 
     <div class="card-grid card-grid-3" style="margin-bottom:2rem;">
@@ -1041,7 +1068,7 @@
     <hr class="divider">
 
     <div class="section-eyebrow">Summative Rubric</div>
-    <div class="section-title">Capstone: <em>"How I Handle It"</em></div>
+    <div class="section-title" id="assessment-capstone" data-search-tab="assessment">Capstone: <em>"How I Handle It"</em></div>
     <p class="section-sub">Use this rubric to evaluate student capstone presentations. Calibrate with your cohort on Day 3 using sample student responses.</p>
 
     <div style="overflow-x:auto; margin-top:1rem;">
@@ -1092,7 +1119,7 @@
     <hr class="divider">
 
     <div class="section-eyebrow">Weekly Formative Practice · Dewey (1938)</div>
-    <div class="section-title">Reflection Journal <em>Prompts</em></div>
+    <div class="section-title" id="assessment-journal-prompts" data-search-tab="assessment">Reflection Journal <em>Prompts</em></div>
     <div class="card-grid card-grid-3" style="margin-top:1rem;">
       <div class="card"><span class="card-icon">💡</span><p>What was one skill or idea you practiced this week?</p></div>
       <div class="card"><span class="card-icon">🌍</span><p>How did it go when you applied it outside the classroom?</p></div>
@@ -1105,7 +1132,7 @@
   <!-- ── READINESS CHECKLIST ───────────────────────────────── -->
   <div id="tab-readiness" class="tab-content">
     <div class="section-eyebrow">Teacher Readiness Checklist</div>
-    <div class="section-title">Are You Ready to <em>Facilitate?</em></div>
+    <div class="section-title" id="readiness-checklist" data-search-tab="readiness">Are You Ready to <em>Facilitate?</em></div>
     <p class="section-sub">Complete this before receiving MMMF Licensed Facilitator status. Be honest — areas marked not yet become your immediate growth targets.</p>
 
     <div id="progress-wrap" style="margin-bottom:1.5rem;">
@@ -1177,18 +1204,32 @@
 </main>
 
 <footer>
-  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="https://readyforreal.life" target="_blank">readyforreal.life</a></p>
+  <p>© Michael R. Terry · Modern Manners & Mental Fortitude · <a href="../index.html">readyforreal.life</a></p>
   <p style="margin-top:0.3rem; color:#374151;">Protected intellectual property. Unauthorized copying, redistribution, and derivative reuse are prohibited.</p>
   <p style="margin-top:0.5rem; color:#374151; font-size:0.65rem;">Bruner (1960) · CASEL (2020) · Dewey (1938) · Lang (2021) · Skinner (1953) · Stern et al. (2021) · Tyler (1949) · Wiles & Bondi (2015)</p>
 </footer>
 
 <script>
-  function showTab(id) {
+  function showTab(id, triggerEl, options = {}) {
+    const settings = {
+      updateUrl: options.updateUrl !== false,
+      scroll: options.scroll !== false
+    };
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    event.target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const tab = document.getElementById('tab-' + id);
+    if (!tab) return;
+    tab.classList.add('active');
+    const button = triggerEl || document.querySelector('.nav-tab[data-tab="' + id + '"]');
+    if (button) button.classList.add('active');
+    if (settings.updateUrl) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('tab', id);
+      window.history.replaceState({}, '', url);
+    }
+    if (settings.scroll) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   function toggleCheck(el) {
@@ -1207,6 +1248,24 @@
     document.getElementById('progress-label').textContent = checked.length + ' of ' + all.length + ' complete';
     document.getElementById('certified-msg').style.display = checked.length === all.length ? 'block' : 'none';
   }
+
+  function applyPortalLocation() {
+    const url = new URL(window.location.href);
+    const hashId = window.location.hash.replace('#', '');
+    const hashEl = hashId ? document.getElementById(hashId) : null;
+    const tabFromHash = hashEl && hashEl.dataset.searchTab ? hashEl.dataset.searchTab : (document.getElementById('tab-' + hashId) ? hashId : null);
+    const targetTab = url.searchParams.get('tab') || tabFromHash || 'overview';
+    showTab(targetTab, null, { updateUrl: false, scroll: !hashEl && !tabFromHash });
+    if (hashEl) {
+      setTimeout(() => {
+        hashEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', applyPortalLocation);
+  window.addEventListener('hashchange', applyPortalLocation);
 </script>
+<script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
 </body>
 </html>
