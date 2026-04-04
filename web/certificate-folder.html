@@ -65,6 +65,7 @@ main { max-width:1400px; margin:0 auto; padding:24px; }
   font-size:.95rem; line-height:1.6;
 }
 .notice.warn { background:var(--warn-bg); color:var(--warn); border:1px solid #f0d89d; }
+.notice.ok { background:var(--teal-bg); color:var(--teal); border:1px solid #c8e5e0; }
 .summary-grid {
   display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:16px;
 }
@@ -178,6 +179,7 @@ tbody tr:hover { background:#fcfbf8; }
       <div class="search-line">
         <input id="searchInput" type="search" placeholder="Search by agreement number, recipient, email, organization, credential type, track, or status">
       </div>
+      <div id="folderNotice" class="notice ok" style="display:none;margin-bottom:12px;"></div>
 
       <div class="sheet-shell">
         <div class="sheet-wrap">
@@ -224,6 +226,7 @@ tbody tr:hover { background:#fcfbf8; }
     const exportBtn = document.getElementById('exportBtn');
     const lockBtn = document.getElementById('lockBtn');
     const searchInput = document.getElementById('searchInput');
+    const folderNotice = document.getElementById('folderNotice');
     const certificateBody = document.getElementById('certificateBody');
     const emptyState = document.getElementById('emptyState');
     const certificateTotal = document.getElementById('certificateTotal');
@@ -328,6 +331,7 @@ tbody tr:hover { background:#fcfbf8; }
           <td class="row-actions">
             <a href="certificate-viewer.html?agreement=${encodeURIComponent(entry.agreementNumber)}">Open</a>
             <button type="button" data-number="${entry.agreementNumber}">Copy #</button>
+            <button type="button" data-delete="${entry.agreementNumber}">Delete</button>
           </td>
         `;
         certificateBody.appendChild(row);
@@ -361,6 +365,7 @@ tbody tr:hover { background:#fcfbf8; }
 
     refreshBtn.addEventListener('click', async () => {
       showNotice(unlockNotice, '');
+      showNotice(folderNotice, '');
       try {
         await refreshCertificates();
       } catch (error) {
@@ -384,9 +389,29 @@ tbody tr:hover { background:#fcfbf8; }
     });
 
     certificateBody.addEventListener('click', async (event) => {
+      const deleteNumber = event.target.dataset.delete;
+      if (deleteNumber) {
+        const confirmed = window.confirm(`Delete certificate record ${deleteNumber}? This cannot be undone.`);
+        if (!confirmed) return;
+        showNotice(unlockNotice, '');
+        showNotice(folderNotice, '');
+        try {
+          const data = await postAdminAction('agreement_delete', {
+            session_token: getSessionToken(),
+            agreement_number: deleteNumber
+          });
+          state.registry = Array.isArray(data.entries) ? data.entries : [];
+          renderCertificates();
+          showNotice(folderNotice, `${deleteNumber} was deleted from the certificate folder.`);
+        } catch (error) {
+          showNotice(unlockNotice, error.message);
+        }
+        return;
+      }
       const number = event.target.dataset.number;
       if (!number) return;
       await navigator.clipboard.writeText(number);
+      showNotice(folderNotice, `${number} copied to the clipboard.`);
     });
 
     searchInput.addEventListener('input', renderCertificates);

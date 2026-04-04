@@ -424,6 +424,21 @@ export default {
         );
       }
 
+      if (action === "agreement_delete") {
+        await requireSession(env, payload.session_token);
+        const agreementNumber = normalizeAgreementNumber(payload.agreement_number || "");
+        if (!agreementNumber) {
+          return json({ ok: false, error: "Agreement number is required." }, 400, headers);
+        }
+        const entries = await readRegistry(env);
+        const nextEntries = entries.filter((entry) => entry.agreementNumber !== agreementNumber);
+        if (nextEntries.length === entries.length) {
+          return json({ ok: false, error: "Certificate record not found." }, 404, headers);
+        }
+        await writeRegistry(env, nextEntries);
+        return json(buildRegistryResponse(nextEntries), 200, headers);
+      }
+
       if (action === "registration_submit") {
         const registrations = await readRegistrations(env);
         const name = String(payload.name || "").trim();
@@ -469,6 +484,21 @@ export default {
         await requireSession(env, payload.session_token);
         const registrations = await readRegistrations(env);
         return json(buildRegistrationResponse(registrations), 200, headers);
+      }
+
+      if (action === "registration_delete") {
+        await requireSession(env, payload.session_token);
+        const registrationId = String(payload.registration_id || "").trim();
+        if (!registrationId) {
+          return json({ ok: false, error: "Registration ID is required." }, 400, headers);
+        }
+        const registrations = await readRegistrations(env);
+        const nextRegistrations = registrations.filter((entry) => String(entry.registrationId || "") !== registrationId);
+        if (nextRegistrations.length === registrations.length) {
+          return json({ ok: false, error: "Registration record not found." }, 404, headers);
+        }
+        await writeRegistrations(env, nextRegistrations);
+        return json(buildRegistrationResponse(nextRegistrations), 200, headers);
       }
 
       return json({ ok: false, error: "Unknown action." }, 400, headers);

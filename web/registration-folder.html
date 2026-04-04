@@ -110,6 +110,15 @@ tbody tr:hover { background:#fcfbf8; }
 }
 .muted { color:var(--muted); }
 .empty { padding:18px; color:var(--muted); }
+.row-actions button {
+  border:none;
+  background:none;
+  color:var(--navy);
+  font-weight:700;
+  cursor:pointer;
+  padding:0;
+  text-decoration:underline;
+}
 @media (max-width: 900px) {
   .summary-grid { grid-template-columns:1fr 1fr; }
 }
@@ -188,6 +197,7 @@ tbody tr:hover { background:#fcfbf8; }
                 <th>Submitted</th>
                 <th>Status</th>
                 <th>Notes</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="registrationBody"></tbody>
@@ -218,6 +228,11 @@ tbody tr:hover { background:#fcfbf8; }
     const exportBtn = document.getElementById('exportBtn');
     const lockBtn = document.getElementById('lockBtn');
     const searchInput = document.getElementById('searchInput');
+    const folderNotice = document.createElement('div');
+    folderNotice.id = 'folderNotice';
+    folderNotice.className = 'notice ok';
+    folderNotice.style.display = 'none';
+    document.querySelector('.search-line').insertAdjacentElement('afterend', folderNotice);
     const registrationBody = document.getElementById('registrationBody');
     const emptyState = document.getElementById('emptyState');
     const registrationTotal = document.getElementById('registrationTotal');
@@ -329,6 +344,7 @@ tbody tr:hover { background:#fcfbf8; }
           <td>${entry.submittedAt ? new Date(entry.submittedAt).toLocaleString() : '—'}</td>
           <td><span class="tag">${entry.status || 'New'}</span></td>
           <td>${entry.notes || details.notes || '<span class="muted">—</span>'}</td>
+          <td class="row-actions"><button type="button" data-delete="${entry.registrationId || ''}">Delete</button></td>
         `;
         registrationBody.appendChild(row);
       });
@@ -361,6 +377,7 @@ tbody tr:hover { background:#fcfbf8; }
 
     refreshBtn.addEventListener('click', async () => {
       showNotice(unlockNotice, '');
+      showNotice(folderNotice, '');
       try {
         await refreshRegistrations();
       } catch (error) {
@@ -381,6 +398,26 @@ tbody tr:hover { background:#fcfbf8; }
       a.download = 'mmmf-registration-folder.json';
       a.click();
       URL.revokeObjectURL(url);
+    });
+
+    registrationBody.addEventListener('click', async (event) => {
+      const registrationId = event.target.dataset.delete;
+      if (!registrationId) return;
+      const confirmed = window.confirm('Delete this registration record? This cannot be undone.');
+      if (!confirmed) return;
+      showNotice(unlockNotice, '');
+      showNotice(folderNotice, '');
+      try {
+        const data = await postAdminAction('registration_delete', {
+          session_token: getSessionToken(),
+          registration_id: registrationId
+        });
+        state.registrations = Array.isArray(data.entries) ? data.entries : [];
+        renderRegistrations();
+        showNotice(folderNotice, 'Registration deleted from the folder.');
+      } catch (error) {
+        showNotice(unlockNotice, error.message);
+      }
     });
 
     searchInput.addEventListener('input', renderRegistrations);

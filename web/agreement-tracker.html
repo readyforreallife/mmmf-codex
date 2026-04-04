@@ -293,56 +293,14 @@ tbody tr:hover { background:#fcfbf8; }
         <div id="emptyState" class="empty">No agreement numbers have been assigned yet.</div>
       </section>
       <div class="admin-sections">
-        <section class="panel" id="certificate-folder">
-          <div class="kicker">Issued Certificates</div>
-          <h2>Certificate folder</h2>
-          <p>Every certification issued through Teacher Mode is listed here so you can reopen, print, and save certificate records later.</p>
-          <div class="mini-grid">
-            <div class="summary-card"><div class="label">Certificates stored</div><div class="value" id="certTotal">0</div></div>
-            <div class="summary-card"><div class="label">Latest certificate</div><div class="value" id="certLatest">—</div></div>
-            <div class="summary-card"><div class="label">Latest recipient</div><div class="value" id="certLatestPerson">—</div></div>
+        <section class="panel">
+          <div class="kicker">Dedicated Folders</div>
+          <h2>Folder management moved</h2>
+          <p>The certificate and registration folders now live on their own pages so they can be easier to read, search, and manage like tailored spreadsheet screens.</p>
+          <div class="action-row">
+            <a class="btn dark" href="certificate-folder.html">Open Certificate Folder</a>
+            <a class="btn" href="registration-folder.html">Open Registration Folder</a>
           </div>
-          <div style="overflow:auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Agreement #</th>
-                  <th>Recipient</th>
-                  <th>Track</th>
-                  <th>Issued</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="certificateBody"></tbody>
-            </table>
-          </div>
-          <div id="certificateEmptyState" class="empty">No certificates have been issued yet.</div>
-        </section>
-
-        <section class="panel" id="registration-folder">
-          <div class="kicker">Registrations</div>
-          <h2>Registration folder</h2>
-          <p>Every program signup submitted through the public registration form is stored here, without the old Google Sheet dependency.</p>
-          <div class="mini-grid">
-            <div class="summary-card"><div class="label">Total signups</div><div class="value" id="registrationTotal">0</div></div>
-            <div class="summary-card"><div class="label">Latest signup</div><div class="value" id="registrationLatest">—</div></div>
-            <div class="summary-card"><div class="label">Latest person</div><div class="value" id="registrationLatestPerson">—</div></div>
-          </div>
-          <div style="overflow:auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Contact</th>
-                  <th>Organization</th>
-                  <th>Submitted</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="registrationBody"></tbody>
-            </table>
-          </div>
-          <div id="registrationEmptyState" class="empty">No registrations have been submitted yet.</div>
         </section>
       </div>
     </div>
@@ -381,16 +339,6 @@ tbody tr:hover { background:#fcfbf8; }
     const totalSignedEl = document.getElementById('totalSigned');
     const totalPendingEl = document.getElementById('totalPending');
     const highestNumberEl = document.getElementById('highestNumber');
-    const certificateBody = document.getElementById('certificateBody');
-    const certificateEmptyState = document.getElementById('certificateEmptyState');
-    const certTotal = document.getElementById('certTotal');
-    const certLatest = document.getElementById('certLatest');
-    const certLatestPerson = document.getElementById('certLatestPerson');
-    const registrationBody = document.getElementById('registrationBody');
-    const registrationEmptyState = document.getElementById('registrationEmptyState');
-    const registrationTotal = document.getElementById('registrationTotal');
-    const registrationLatest = document.getElementById('registrationLatest');
-    const registrationLatestPerson = document.getElementById('registrationLatestPerson');
     const adminGate = document.getElementById('adminGate');
     const adminShell = document.getElementById('adminShell');
     const unlockForm = document.getElementById('unlockForm');
@@ -488,61 +436,6 @@ tbody tr:hover { background:#fcfbf8; }
         });
     }
 
-    function renderCertificates() {
-      const registry = state.registry;
-      certTotal.textContent = registry.length;
-      certLatest.textContent = registry.length ? registry[0].agreementNumber : '—';
-      certLatestPerson.textContent = registry.length ? registry[0].fullName : '—';
-
-      certificateBody.innerHTML = '';
-      certificateEmptyState.style.display = registry.length ? 'none' : 'block';
-
-      registry
-        .slice()
-        .sort((a, b) => numberDigits(b.agreementNumber) - numberDigits(a.agreementNumber))
-        .forEach(entry => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td><strong>${entry.agreementNumber}</strong></td>
-            <td>${entry.fullName}</td>
-            <td>${entry.certificateType === 'facilitator' ? 'Facilitator Certification' : 'Completion'}<br><span style="color:var(--muted);">${entry.track || '—'}</span></td>
-            <td>${entry.issuedAt ? new Date(entry.issuedAt).toLocaleString() : '—'}</td>
-            <td class="row-actions">
-              <a href="certificate-viewer.html?agreement=${encodeURIComponent(entry.agreementNumber)}">Open certificate</a>
-            </td>
-          `;
-          certificateBody.appendChild(row);
-        });
-    }
-
-    function renderRegistrations() {
-      const registrations = state.registrations || [];
-      registrationTotal.textContent = registrations.length;
-      registrationLatest.textContent = registrations.length ? new Date(registrations[0].submittedAt).toLocaleDateString() : '—';
-      registrationLatestPerson.textContent = registrations.length ? registrations[0].name : '—';
-
-      registrationBody.innerHTML = '';
-      registrationEmptyState.style.display = registrations.length ? 'none' : 'block';
-
-      registrations.forEach(entry => {
-        let details = {};
-        try {
-          details = entry.detailsJson ? JSON.parse(entry.detailsJson) : {};
-        } catch (_error) {
-          details = {};
-        }
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td><strong>${entry.name || '—'}</strong><br><span style="color:var(--muted);">${details.tracks || 'No track selected'}</span></td>
-          <td>${entry.email || '—'}<br><span style="color:var(--muted);">${entry.phone || 'No phone provided'}</span></td>
-          <td>${details.organization || entry.organization || '—'}<br><span style="color:var(--muted);">${details.location || '—'}</span></td>
-          <td>${entry.submittedAt ? new Date(entry.submittedAt).toLocaleString() : '—'}</td>
-          <td><span class="tag">${entry.status || 'New'}</span></td>
-        `;
-        registrationBody.appendChild(row);
-      });
-    }
-
     function showNotice(el, message) {
       if (!message) {
         el.style.display = 'none';
@@ -615,28 +508,12 @@ tbody tr:hover { background:#fcfbf8; }
       state.registry = Array.isArray(data.entries) ? data.entries : [];
       state.mode = 'backend';
       renderRegistry();
-      renderCertificates();
-      await refreshRegistrationsFromBackend();
     }
 
     function refreshRegistryFromLocal() {
       state.registry = loadLocalRegistry();
       state.mode = 'local';
       renderRegistry();
-      renderCertificates();
-      state.registrations = [];
-      renderRegistrations();
-    }
-
-    async function refreshRegistrationsFromBackend() {
-      if (!(state.mode === 'backend' && getSessionToken())) {
-        state.registrations = [];
-        renderRegistrations();
-        return;
-      }
-      const data = await postAdminAction('registration_list', { session_token: getSessionToken() });
-      state.registrations = Array.isArray(data.entries) ? data.entries : [];
-      renderRegistrations();
     }
 
     function clearForm() {
