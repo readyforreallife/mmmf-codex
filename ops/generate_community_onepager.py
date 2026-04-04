@@ -112,6 +112,20 @@ def draw_bullet_list(draw, x, y, items, width):
     return y
 
 
+def draw_measure_tags(draw, x, y, items, max_width):
+    cx = x
+    cy = y
+    for item in items:
+        w = int(draw.textlength(item, font=F_SANS_28)) + 58
+        if cx + w > x + max_width:
+            cx = x
+            cy += 46
+        draw.text((cx, cy), "□", font=F_SANS_28, fill=WHITE)
+        draw.text((cx + 26, cy), item, font=F_SANS_28, fill=WHITE)
+        cx += w
+    return cy
+
+
 def main():
     img = Image.new("RGB", (PAGE_W, PAGE_H), PAPER)
     draw = ImageDraw.Draw(img)
@@ -210,44 +224,59 @@ def main():
         draw_wrapped(draw, body2, (x + 22, fw_y + 114), F_SANS_28, MUTED, box_w - 44, line_gap=6)
     y = fw_y + 210
 
-    # modules and audience
+    # modules
     draw.text((RIGHT_X + 40, y + 10), "FIVE MODULES", font=F_SANS_32, fill=GOLD_2)
-    draw.text((RIGHT_X + 450, y + 10), "WHO IS THIS FOR?", font=F_SANS_32, fill=GOLD_2)
-    modules_x = RIGHT_X + 40
     cards_y = y + 62
-    mod_w = 150
-    modules = [("01", "Modern\nManners"), ("02", "Emotional\nIntelligence"), ("03", "Conflict\nNavigation"), ("04", "Digital\nCitizenship"), ("05", "Personal\nGrowth")]
+    mod_w = 170
+    mod_h = 142
+    mod_gap = 14
+    modules = [
+        ("01", "Modern\nManners"),
+        ("02", "Emotional\nIntelligence"),
+        ("03", "Conflict\nNavigation"),
+        ("04", "Digital\nCitizenship"),
+        ("05", "Personal\nGrowth"),
+    ]
     for idx, (num, label) in enumerate(modules):
-        x = modules_x + idx * (mod_w + 10)
-        draw.rounded_rectangle((x, cards_y, x + mod_w, cards_y + 150), radius=18, fill=NAVY_2)
-        draw.text((x + 18, cards_y + 18), num, font=F_SANS_48, fill=GOLD_2)
-        draw.multiline_text((x + 18, cards_y + 70), label, font=F_SANS_28, fill=WHITE, spacing=4)
+        row = 0 if idx < 3 else 1
+        col = idx if idx < 3 else idx - 3
+        x = RIGHT_X + 40 + col * (mod_w + mod_gap)
+        if row == 1:
+            x += (mod_w + mod_gap) // 2
+        top = cards_y + row * (mod_h + 14)
+        draw.rounded_rectangle((x, top, x + mod_w, top + mod_h), radius=18, fill=NAVY_2)
+        draw.text((x + 16, top + 14), num, font=F_SANS_48, fill=GOLD_2)
+        draw.multiline_text((x + 16, top + 60), label, font=F_SANS_28, fill=WHITE, spacing=3)
+    y = cards_y + mod_h * 2 + 36
 
-    audience_x = RIGHT_X + 450
-    audience_y = y + 60
+    # audience
+    draw.text((RIGHT_X + 40, y + 8), "WHO IS THIS FOR?", font=F_SANS_32, fill=GOLD_2)
+    audience_y = y + 56
     audience = [
         ("Grades 7–8", "Foundational. 1-term intro."),
         ("Grades 9–12", "Levels up each year."),
         ("Community Youth", "After-school, faith orgs."),
         ("Community Adults", "Workplace & family contexts."),
     ]
+    aud_w = (RIGHT_W - 100) // 2
+    aud_h = 88
     for idx, (title, desc) in enumerate(audience):
-        ay = audience_y + idx * 76
-        draw.ellipse((audience_x, ay + 10, audience_x + 18, ay + 28), fill=GOLD_2 if idx % 2 else GREEN)
-        draw.text((audience_x + 30, ay), title, font=F_SANS_34, fill=WHITE)
-        draw.text((audience_x + 260, ay + 2), desc, font=F_SANS_30, fill=MUTED)
-    y = cards_y + 178
+        row = idx // 2
+        col = idx % 2
+        ax = RIGHT_X + 40 + col * (aud_w + 20)
+        ay = audience_y + row * (aud_h + 16)
+        draw.rounded_rectangle((ax, ay, ax + aud_w, ay + aud_h), radius=18, fill=NAVY_2)
+        dot = GOLD_2 if idx % 2 else GREEN
+        draw.ellipse((ax + 18, ay + 18, ax + 36, ay + 36), fill=dot)
+        draw.text((ax + 48, ay + 10), title, font=F_SANS_34, fill=WHITE)
+        draw.text((ax + 48, ay + 46), desc, font=F_SANS_28, fill=MUTED)
+    y = audience_y + aud_h * 2 + 38
 
     # measured
-    draw.rounded_rectangle((RIGHT_X + 40, y, PAGE_W - MARGIN - 40, y + 132), radius=18, fill=NAVY_2)
+    draw.rounded_rectangle((RIGHT_X + 40, y, PAGE_W - MARGIN - 40, y + 156), radius=18, fill=NAVY_2)
     draw.text((RIGHT_X + 60, y + 20), "HOW LEARNING IS MEASURED", font=F_SANS_32, fill=GOLD_2)
-    mx = RIGHT_X + 60
-    my = y + 68
-    for txt in ["Weekly Journals", "Role-Play Rubrics", "Pre/Post Surveys", "Capstone Presentation", "Novel Scenario Task"]:
-        draw.text((mx, my), "□", font=F_SANS_28, fill=WHITE)
-        draw.text((mx + 28, my), txt, font=F_SANS_28, fill=WHITE)
-        mx += int(draw.textlength(txt, font=F_SANS_28)) + 96
-    y += 162
+    draw_measure_tags(draw, RIGHT_X + 60, y + 68, ["Weekly Journals", "Role-Play Rubrics", "Pre/Post Surveys", "Capstone Presentation", "Novel Scenario Task"], RIGHT_W - 120)
+    y += 184
 
     draw.text((RIGHT_X + 40, y), "WHAT STUDENTS WILL BE ABLE TO DO", font=F_SANS_32, fill=GOLD_2)
     y = draw_bullet_list(draw, RIGHT_X + 40, y + 48, [
