@@ -49,6 +49,8 @@ F_SANS_48 = font("Arial Bold.ttf", 48)
 F_SANS_52 = font("Arial Bold.ttf", 52)
 F_SANS_60 = font("Arial Bold.ttf", 60)
 F_SANS_66 = font("Arial Bold.ttf", 66)
+F_SANS_24 = font("Arial.ttf", 24)
+F_SANS_26 = font("Arial.ttf", 26)
 
 
 def wrap(draw, text, font_obj, width):
@@ -92,9 +94,37 @@ def circle_headshot(path: Path, size: int, border=8):
 
 
 def draw_stat(draw, x, y, label, value):
-    draw.rounded_rectangle((x, y, x + 165, y + 120), radius=18, fill=NAVY_2)
-    draw.text((x + 18, y + 16), label, font=F_SANS_28, fill=GOLD_2)
-    draw.text((x + 18, y + 56), value, font=F_SANS_42, fill=WHITE)
+    w = 180
+    h = 126
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=18, fill=NAVY_2)
+    draw.text((x + 16, y + 14), label, font=F_SANS_24, fill=GOLD_2)
+    value_font = F_SANS_38
+    if len(value) > 12:
+        value_font = F_SANS_30
+    elif len(value) > 9:
+        value_font = F_SANS_34
+    max_width = w - 28
+    value_lines = wrap(draw, value, value_font, max_width)
+    vy = y + 52
+    for line in value_lines[:2]:
+        draw.text((x + 16, vy), line, font=value_font, fill=WHITE)
+        vy += value_font.size + 2
+
+
+def draw_left_snapshot(draw, x, y, width):
+    draw.rounded_rectangle((x, y, x + width, y + 242), radius=20, fill=NAVY_2)
+    draw.text((x + 24, y + 22), "PROGRAM SNAPSHOT", font=F_SANS_28, fill=GOLD_2)
+    lines = [
+        "Built for school, family, workplace, and community use.",
+        "Designed to teach life skills explicitly, not assume them.",
+        "Structured for transfer to real situations, not just coverage.",
+        "Flexible enough for pilot, classroom, workshop, or licensing use.",
+    ]
+    cy = y + 70
+    for idx, line in enumerate(lines):
+        color = GREEN if idx % 2 == 0 else GOLD_2
+        draw.ellipse((x + 24, cy + 10, x + 40, cy + 26), fill=color)
+        cy = draw_wrapped(draw, line, (x + 54, cy), F_SANS_28, WHITE, width - 78, line_gap=4) + 10
 
 
 def draw_tag(draw, x, y, text, fill):
@@ -148,15 +178,19 @@ def main():
     draw.text((title_x, MARGIN + 464), "Fortitude", font=F_SERIF_74, fill=WHITE)
 
     stats_y = MARGIN + 630
+    stat_gap = 18
+    stat_w = 180
     draw_stat(draw, title_x, stats_y, "GRADES", "7–12")
-    draw_stat(draw, title_x + 186, stats_y, "TERM", "16 Weeks")
+    draw_stat(draw, title_x + stat_w + stat_gap, stats_y, "TERM", "16 Weeks")
     draw_stat(draw, title_x, stats_y + 146, "FORMAT", "2x / Week")
-    draw_stat(draw, title_x + 186, stats_y + 146, "CLASS", "20–25")
-    draw_stat(draw, title_x, stats_y + 292, "ALIGNED", "UT CASEL")
-    draw_stat(draw, title_x + 186, stats_y + 292, "WEBSITE", "readyforreal.life")
+    draw_stat(draw, title_x + stat_w + stat_gap, stats_y + 146, "CLASS", "20–25")
+    draw_stat(draw, title_x, stats_y + 292, "ALIGNED", "Utah CASEL")
+    draw_stat(draw, title_x + stat_w + stat_gap, stats_y + 292, "WEBSITE", "readyforreal.life")
+
+    draw_left_snapshot(draw, title_x, stats_y + 454, LEFT_W - 96)
 
     # founders panel
-    founders_y = PAGE_H - MARGIN - 620
+    founders_y = PAGE_H - MARGIN - 520
     draw.rounded_rectangle((MARGIN + 26, founders_y, MARGIN + LEFT_W - 26, PAGE_H - MARGIN - 26), radius=20, fill=NAVY_2)
     draw.text((MARGIN + 52, founders_y + 26), "FOUNDED BY", font=F_SANS_32, fill=GOLD_2)
 
