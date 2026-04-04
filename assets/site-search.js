@@ -53,9 +53,15 @@
   }
 
   async function init() {
-    const anchor = document.querySelector("header, .site-header");
+    const utilityBar = document.querySelector(".utility-bar");
+    const anchor = utilityBar || document.querySelector("header, .site-header");
     const shell = buildMarkup();
-    if (anchor && anchor.parentNode) anchor.insertAdjacentElement("afterend", shell);
+    if (utilityBar) {
+      shell.classList.add("site-search-inline");
+      utilityBar.insertAdjacentElement("afterbegin", shell);
+    } else if (anchor && anchor.parentNode) {
+      anchor.insertAdjacentElement("afterend", shell);
+    }
     else document.body.insertAdjacentElement("afterbegin", shell);
 
     const input = document.getElementById("site-search-input");
