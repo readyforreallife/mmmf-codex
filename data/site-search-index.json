@@ -115,17 +115,17 @@
     "title": "Certificate folder",
     "page": "Program Hub",
     "section": "Teacher Mode",
-    "url": "web/agreement-tracker.html",
-    "snippet": "Teacher-mode certificate folder for reopening, printing, and saving every certificate record that has been issued.",
-    "keywords": ["certificate folder", "issued certificates", "print certificate", "teacher mode", "certificate record"]
+    "url": "web/certificate-folder.html",
+    "snippet": "Teacher-mode certificate folder laid out like a management spreadsheet for reopening, printing, and saving every certificate record that has been issued.",
+    "keywords": ["certificate folder", "issued certificates", "print certificate", "teacher mode", "certificate record", "spreadsheet"]
   },
   {
     "title": "Registration folder",
     "page": "Program Hub",
     "section": "Teacher Mode",
-    "url": "web/agreement-tracker.html",
-    "snippet": "Protected registration folder that stores every signup submitted through the public MMMF registration form.",
-    "keywords": ["registration folder", "signups", "teacher mode", "submitted registrations", "registration records"]
+    "url": "web/registration-folder.html",
+    "snippet": "Protected registration folder laid out like a management spreadsheet that stores every signup submitted through the public MMMF registration form.",
+    "keywords": ["registration folder", "signups", "teacher mode", "submitted registrations", "registration records", "spreadsheet"]
   },
   {
     "title": "Scenario cards",

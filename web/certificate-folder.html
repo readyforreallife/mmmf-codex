@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMMF Certificate Folder</title>
+<link rel="stylesheet" href="../assets/site-search.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap');
+:root {
+  --navy:#18304f;
+  --navy2:#274061;
+  --gold:#c89b3c;
+  --paper:#f7f2e9;
+  --ink:#1e293b;
+  --muted:#64748b;
+  --line:#d9cfbd;
+  --white:#ffffff;
+  --teal:#1d6b69;
+  --teal-bg:#eef7f6;
+  --warn:#8a5a14;
+  --warn-bg:#fff6e5;
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--ink); }
+header {
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  color:#fff;
+  padding:24px;
+  border-bottom:4px solid var(--gold);
+}
+.wrap { max-width:1400px; margin:0 auto; }
+.topbar { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+.eyebrow { font-size:.76rem; letter-spacing:.16em; text-transform:uppercase; color:#e8c778; font-weight:700; margin-bottom:8px; }
+h1 { font-family:'Playfair Display',serif; margin:0 0 8px; font-size:2rem; }
+.sub { margin:0; color:#d7deea; line-height:1.7; max-width:900px; }
+.header-actions,.toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:999px; text-decoration:none;
+  border:1px solid var(--line); font-weight:700; white-space:nowrap;
+  background:var(--white); color:var(--navy); cursor:pointer;
+}
+.btn.secondary { background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.22); }
+.btn.dark { background:var(--navy); color:#fff; border-color:var(--navy); }
+main { max-width:1400px; margin:0 auto; padding:24px; }
+.search-host,.toolbar { margin-bottom:18px; }
+.admin-gate,.panel {
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 10px 24px rgba(0,0,0,.04);
+}
+.admin-gate h2,.panel h2 { font-family:'Playfair Display',serif; color:var(--navy); margin:0 0 10px; }
+.kicker { font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.locked-copy,.panel p { line-height:1.7; color:#334155; }
+.admin-gate form { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.admin-gate input,.search-line input {
+  flex:1; min-width:220px; padding:11px 12px; border:1px solid var(--line); border-radius:10px;
+}
+.gate-note { margin-top:12px; font-size:.86rem; color:var(--muted); line-height:1.6; }
+.notice {
+  border-radius:12px; padding:12px 14px; margin-top:12px;
+  font-size:.95rem; line-height:1.6;
+}
+.notice.warn { background:var(--warn-bg); color:var(--warn); border:1px solid #f0d89d; }
+.summary-grid {
+  display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:16px;
+}
+.summary-card { background:#fbfaf7; border:1px solid var(--line); border-radius:12px; padding:14px; }
+.summary-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:6px; }
+.summary-card .value { font-family:'Playfair Display',serif; font-size:1.45rem; color:var(--navy); }
+.search-line { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.sheet-shell {
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:#fffdfa;
+}
+.sheet-wrap { overflow:auto; max-height:68vh; }
+table { width:100%; border-collapse:collapse; min-width:1280px; }
+th, td {
+  padding:12px 10px;
+  border-top:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+  font-size:.92rem;
+}
+th {
+  position:sticky;
+  top:0;
+  z-index:1;
+  font-size:.76rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted);
+  background:#f7f3ea;
+}
+tbody tr:hover { background:#fcfbf8; }
+.tag {
+  display:inline-flex;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:.76rem;
+  font-weight:700;
+  background:#eef2ff;
+  color:#334155;
+}
+.empty { padding:18px; color:var(--muted); }
+.row-actions a, .row-actions button {
+  border:none;
+  background:none;
+  color:var(--navy);
+  font-weight:700;
+  cursor:pointer;
+  padding:0;
+  text-decoration:underline;
+}
+@media (max-width: 900px) {
+  .summary-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .summary-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div>
+        <div class="eyebrow">Teacher Mode Folder</div>
+        <h1>MMMF Certificate Folder</h1>
+        <p class="sub">This page stores every issued MMMF certificate in one spreadsheet-style view. You can search, reopen certificate records, copy agreement numbers, and export the full folder as a backup.</p>
+      </div>
+      <div class="header-actions">
+        <a class="btn secondary" href="https://readyforreal.life/">Main Homepage</a>
+        <a class="btn secondary" href="agreement-tracker.html">&larr; Back to Teacher Mode</a>
+        <a class="btn" href="registration-folder.html">Registration Folder</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="search-host"></div>
+
+    <div class="toolbar">
+      <button class="btn dark" id="refreshBtn" type="button" style="display:none;">Refresh Folder</button>
+      <button class="btn" id="exportBtn" type="button" style="display:none;">Export JSON</button>
+      <button class="btn" id="lockBtn" type="button" style="display:none;">Lock Teacher Mode</button>
+    </div>
+
+    <section class="admin-gate" id="adminGate">
+      <div class="kicker">Teacher Mode</div>
+      <h2>Unlock the certificate folder</h2>
+      <p class="locked-copy">Enter your Worker URL and teacher code to load the shared certificate registry. This page uses the same protected Teacher Mode session as the rest of MMMF admin.</p>
+      <form id="unlockForm">
+        <input id="adminEndpointInput" type="url" placeholder="Paste the Cloudflare Worker URL once">
+        <input id="teacherCodeInput" type="password" placeholder="Enter admin access code">
+        <button class="btn dark" type="submit">Open Certificate Folder</button>
+      </form>
+      <p class="gate-note">Once you unlock Teacher Mode, this page should reopen automatically until you lock it again or the admin session expires.</p>
+      <div id="unlockNotice" class="notice warn" style="display:none;"></div>
+    </section>
+
+    <section class="panel" id="folderShell" style="display:none;">
+      <div class="kicker">Shared Registry</div>
+      <h2>Issued certificate records</h2>
+      <p>Each row reflects a stored certificate record. Completion certificates and facilitator certifications are clearly separated so the folder stays accurate.</p>
+
+      <div class="summary-grid">
+        <div class="summary-card"><div class="label">Certificates stored</div><div class="value" id="certificateTotal">0</div></div>
+        <div class="summary-card"><div class="label">Latest certificate</div><div class="value" id="certificateLatest">—</div></div>
+        <div class="summary-card"><div class="label">Latest recipient</div><div class="value" id="certificateLatestPerson">—</div></div>
+        <div class="summary-card"><div class="label">Facilitator credentials</div><div class="value" id="certificateFacilitators">0</div></div>
+      </div>
+
+      <div class="search-line">
+        <input id="searchInput" type="search" placeholder="Search by agreement number, recipient, email, organization, credential type, track, or status">
+      </div>
+
+      <div class="sheet-shell">
+        <div class="sheet-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Agreement #</th>
+                <th>Recipient</th>
+                <th>Email</th>
+                <th>Organization</th>
+                <th>Credential</th>
+                <th>Track</th>
+                <th>Effective date</th>
+                <th>Status</th>
+                <th>Issued</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="certificateBody"></tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="empty">No certificates have been issued yet.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
+  <script>
+    const DEFAULT_ADMIN_ENDPOINT = '';
+    const ENDPOINT_PLACEHOLDER = 'https://mmmf-agreement-admin.your-subdomain.workers.dev';
+    const ADMIN_MODE_KEY = 'mmmf_agreement_admin_mode_v2';
+    const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
+    const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
+
+    const state = { registry: [] };
+
+    const adminGate = document.getElementById('adminGate');
+    const folderShell = document.getElementById('folderShell');
+    const unlockForm = document.getElementById('unlockForm');
+    const adminEndpointInput = document.getElementById('adminEndpointInput');
+    const teacherCodeInput = document.getElementById('teacherCodeInput');
+    const unlockNotice = document.getElementById('unlockNotice');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const lockBtn = document.getElementById('lockBtn');
+    const searchInput = document.getElementById('searchInput');
+    const certificateBody = document.getElementById('certificateBody');
+    const emptyState = document.getElementById('emptyState');
+    const certificateTotal = document.getElementById('certificateTotal');
+    const certificateLatest = document.getElementById('certificateLatest');
+    const certificateLatestPerson = document.getElementById('certificateLatestPerson');
+    const certificateFacilitators = document.getElementById('certificateFacilitators');
+
+    function getSessionToken() {
+      return sessionStorage.getItem(ADMIN_SESSION_KEY) || '';
+    }
+
+    function getAdminEndpoint() {
+      return (adminEndpointInput.value || localStorage.getItem(ADMIN_ENDPOINT_KEY) || DEFAULT_ADMIN_ENDPOINT || '').trim();
+    }
+
+    function showNotice(el, message) {
+      if (!message) {
+        el.style.display = 'none';
+        el.textContent = '';
+        return;
+      }
+      el.textContent = message;
+      el.style.display = 'block';
+    }
+
+    function setTeacherMode(enabled) {
+      sessionStorage.setItem(ADMIN_MODE_KEY, enabled ? 'true' : 'false');
+      adminGate.style.display = enabled ? 'none' : 'block';
+      folderShell.style.display = enabled ? 'block' : 'none';
+      refreshBtn.style.display = enabled ? 'inline-flex' : 'none';
+      exportBtn.style.display = enabled ? 'inline-flex' : 'none';
+      lockBtn.style.display = enabled ? 'inline-flex' : 'none';
+    }
+
+    function clearSession() {
+      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    }
+
+    async function postAdminAction(action, payload = {}) {
+      const endpoint = getAdminEndpoint();
+      if (!endpoint) throw new Error('Paste the Cloudflare Worker admin URL first.');
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action, ...payload })
+      });
+
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (_error) {
+        throw new Error('The Worker endpoint did not return valid JSON.');
+      }
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || 'The admin request failed.');
+      }
+      return data;
+    }
+
+    function rowMatches(entry, query) {
+      if (!query) return true;
+      return [
+        entry.agreementNumber,
+        entry.fullName,
+        entry.email,
+        entry.organization,
+        entry.certificateType,
+        entry.track,
+        entry.status,
+        entry.effectiveDate,
+        entry.issuedAt
+      ].join(' ').toLowerCase().includes(query.toLowerCase());
+    }
+
+    function renderCertificates() {
+      const query = searchInput.value.trim();
+      const filtered = state.registry.filter(entry => rowMatches(entry, query));
+
+      certificateTotal.textContent = state.registry.length;
+      certificateLatest.textContent = state.registry.length ? state.registry[0].agreementNumber : '—';
+      certificateLatestPerson.textContent = state.registry.length ? state.registry[0].fullName : '—';
+      certificateFacilitators.textContent = state.registry.filter(entry => entry.certificateType === 'facilitator').length;
+
+      certificateBody.innerHTML = '';
+      emptyState.style.display = filtered.length ? 'none' : 'block';
+
+      filtered.forEach(entry => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${entry.agreementNumber || '—'}</strong></td>
+          <td>${entry.fullName || '—'}</td>
+          <td>${entry.email || '—'}</td>
+          <td>${entry.organization || '—'}</td>
+          <td>${entry.certificateType === 'facilitator' ? 'Facilitator Certification' : 'Program Completion'}</td>
+          <td>${entry.track || '—'}</td>
+          <td>${entry.effectiveDate || '—'}</td>
+          <td><span class="tag">${entry.status || 'Issued'}</span></td>
+          <td>${entry.issuedAt ? new Date(entry.issuedAt).toLocaleString() : '—'}</td>
+          <td class="row-actions">
+            <a href="certificate-viewer.html?agreement=${encodeURIComponent(entry.agreementNumber)}">Open</a>
+            <button type="button" data-number="${entry.agreementNumber}">Copy #</button>
+          </td>
+        `;
+        certificateBody.appendChild(row);
+      });
+    }
+
+    async function refreshCertificates() {
+      const data = await postAdminAction('agreement_list', { session_token: getSessionToken() });
+      state.registry = Array.isArray(data.entries) ? data.entries : [];
+      renderCertificates();
+    }
+
+    unlockForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showNotice(unlockNotice, '');
+      try {
+        const endpoint = getAdminEndpoint();
+        if (!endpoint) throw new Error('Paste the Cloudflare Worker admin URL first.');
+        localStorage.setItem(ADMIN_ENDPOINT_KEY, endpoint);
+        const data = await postAdminAction('admin_login', { access_code: teacherCodeInput.value.trim() });
+        sessionStorage.setItem(ADMIN_SESSION_KEY, data.session_token);
+        teacherCodeInput.value = '';
+        setTeacherMode(true);
+        await refreshCertificates();
+      } catch (error) {
+        clearSession();
+        setTeacherMode(false);
+        showNotice(unlockNotice, error.message);
+      }
+    });
+
+    refreshBtn.addEventListener('click', async () => {
+      showNotice(unlockNotice, '');
+      try {
+        await refreshCertificates();
+      } catch (error) {
+        showNotice(unlockNotice, error.message);
+      }
+    });
+
+    lockBtn.addEventListener('click', () => {
+      clearSession();
+      setTeacherMode(false);
+    });
+
+    exportBtn.addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(state.registry, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mmmf-certificate-folder.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    certificateBody.addEventListener('click', async (event) => {
+      const number = event.target.dataset.number;
+      if (!number) return;
+      await navigator.clipboard.writeText(number);
+    });
+
+    searchInput.addEventListener('input', renderCertificates);
+
+    adminEndpointInput.placeholder = ENDPOINT_PLACEHOLDER;
+    adminEndpointInput.value = localStorage.getItem(ADMIN_ENDPOINT_KEY) || DEFAULT_ADMIN_ENDPOINT;
+
+    (async () => {
+      if (sessionStorage.getItem(ADMIN_MODE_KEY) === 'true' && getSessionToken()) {
+        try {
+          setTeacherMode(true);
+          await refreshCertificates();
+        } catch (error) {
+          clearSession();
+          setTeacherMode(false);
+          showNotice(unlockNotice, error.message);
+        }
+      } else {
+        setTeacherMode(false);
+      }
+    })();
+  </script>
+</body>
+</html>
