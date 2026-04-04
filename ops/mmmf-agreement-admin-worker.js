@@ -9,9 +9,20 @@ const json = (body, status = 200, headers = {}) =>
 
 function corsHeaders(env, request) {
   const origin = request.headers.get("Origin") || "";
-  const allowed = (env.ALLOWED_ORIGIN || "").trim();
+  const configured = String(env.ALLOWED_ORIGIN || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const defaults = [
+    "https://readyforreal.life",
+    "https://readyforreallife.github.io"
+  ];
+  const allowedOrigins = new Set([...defaults, ...configured]);
+  const allowed = allowedOrigins.has(origin)
+    ? origin
+    : (configured[0] || defaults[0]);
   return {
-    "Access-Control-Allow-Origin": allowed || origin || "*",
+    "Access-Control-Allow-Origin": allowed,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age": "86400"
