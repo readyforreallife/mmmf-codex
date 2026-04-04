@@ -168,6 +168,13 @@ function resolveEmailLogoUrl(env) {
   return legacyLogos.includes(configured) ? fallbackUrl : configured;
 }
 
+function resolveFounderPhotoUrls() {
+  return {
+    michael: "https://readyforreal.life/docs/michael-terry-headshot.jpg",
+    mekenzi: "https://readyforreal.life/docs/mekenzi-terry-headshot.png"
+  };
+}
+
 async function sendRegistrationConfirmation(env, record) {
   if (!record.email) {
     return { configured: false, sent: false, reason: "No recipient email provided." };
@@ -179,6 +186,7 @@ async function sendRegistrationConfirmation(env, record) {
 
   const details = parseDetails(record.detailsJson);
   const logoUrl = resolveEmailLogoUrl(env);
+  const founderPhotos = resolveFounderPhotoUrls();
   const replyTo = String(env.RESEND_REPLY_TO || "readyforreal.life44@gmail.com").trim();
   const fromName = String(env.RESEND_FROM_NAME || "Modern Manners & Mental Fortitude").trim();
   const trackLine = details.tracks || record.role || "Track to be confirmed";
@@ -191,7 +199,19 @@ async function sendRegistrationConfirmation(env, record) {
       <div style="max-width:680px;margin:0 auto;padding:28px 16px;">
         <div style="background:#ffffff;border:1px solid #d9cfbd;border-radius:20px;overflow:hidden;">
           <div style="background:#18304f;padding:28px 28px 20px;border-bottom:4px solid #c89b3c;text-align:center;">
-            <img src="${escapeHtml(logoUrl)}" alt="Modern Manners & Mental Fortitude" style="width:128px;height:128px;display:block;margin:0 auto 18px;border-radius:24px;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin:0 auto 18px;max-width:420px;">
+              <tr>
+                <td align="center" valign="middle" style="width:116px;padding-right:10px;">
+                  <img src="${escapeHtml(founderPhotos.michael)}" alt="Michael Terry" style="width:84px;height:84px;display:block;margin:0 auto;border-radius:999px;border:3px solid #c89b3c;object-fit:cover;">
+                </td>
+                <td align="center" valign="middle" style="width:188px;">
+                  <img src="${escapeHtml(logoUrl)}" alt="Modern Manners & Mental Fortitude" style="width:116px;height:116px;display:block;margin:0 auto;border-radius:24px;">
+                </td>
+                <td align="center" valign="middle" style="width:116px;padding-left:10px;">
+                  <img src="${escapeHtml(founderPhotos.mekenzi)}" alt="Mekenzi Terry" style="width:84px;height:84px;display:block;margin:0 auto;border-radius:999px;border:3px solid #c89b3c;object-fit:cover;">
+                </td>
+              </tr>
+            </table>
             <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#e8c778;font-weight:700;">Registration Confirmation</div>
             <h1 style="margin:10px 0 0;color:#ffffff;font-size:32px;line-height:1.2;">Modern Manners & Mental Fortitude</h1>
           </div>
