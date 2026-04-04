@@ -264,18 +264,6 @@ def main():
     draw_tag(draw, right_x, tag_y, "Emotional Regulation", NAVY_2)
     draw_tag(draw, left_x, tag_y + 64, "Decision-Making", NAVY_2)
     draw_tag(draw, right_x, tag_y + 64, "Accountability & Repair", NAVY_2)
-    draw_info_panel(
-        draw,
-        RIGHT_X + 1030,
-        tag_y - 4,
-        RIGHT_W - 1070,
-        132,
-        "SCHOOL VALUE",
-        [
-            "Clearer expectations for conduct, communication, and accountability.",
-            "Real-world SEL designed for implementation, transfer, and measurable use.",
-        ],
-    )
     y = tag_y + 142
 
     # frameworks
@@ -316,19 +304,6 @@ def main():
         draw.rounded_rectangle((x, top, x + mod_w, top + mod_h), radius=18, fill=NAVY_2)
         draw.text((x + 16, top + 14), num, font=F_SANS_48, fill=GOLD_2)
         draw.multiline_text((x + 16, top + 60), label, font=F_SANS_28, fill=WHITE, spacing=3)
-    draw_info_panel(
-        draw,
-        RIGHT_X + 1030,
-        cards_y,
-        RIGHT_W - 1070,
-        214,
-        "HOW SCHOOLS CAN USE IT",
-        [
-            "Pilot as a term course, workshop series, advisory support, or facilitator preparation pathway.",
-            "Review materials with leadership teams, families, or partners before implementation.",
-            "Match the entry point to your age group, setting, and staffing model.",
-        ],
-    )
     y = cards_y + mod_h * 2 + 36
 
     # audience
@@ -353,6 +328,22 @@ def main():
         draw.text((ax + 48, ay + 10), title, font=F_SANS_34, fill=WHITE)
         draw.text((ax + 48, ay + 46), desc, font=F_SANS_28, fill=MUTED)
     y = audience_y + aud_h * 2 + 38
+
+    panel_h = 150
+    draw_info_panel(
+        draw,
+        RIGHT_X + 40,
+        y,
+        RIGHT_W - 80,
+        panel_h,
+        "SCHOOL VALUE AND IMPLEMENTATION",
+        [
+            "Clearer expectations for conduct, communication, and accountability across school culture.",
+            "Real-world SEL designed for implementation, transfer, and measurable use.",
+            "Schools can pilot MMMF as a term course, workshop series, advisory support, or facilitator preparation pathway.",
+        ],
+    )
+    y += panel_h + 26
 
     # measured
     draw.rounded_rectangle((RIGHT_X + 40, y, PAGE_W - MARGIN - 40, y + 156), radius=18, fill=NAVY_2)
