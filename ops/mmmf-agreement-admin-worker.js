@@ -133,6 +133,151 @@ function buildRegistrationResponse(entries) {
   };
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function parseDetails(detailsJson) {
+  try {
+    const parsed = JSON.parse(String(detailsJson || "{}"));
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+async function sendRegistrationConfirmation(env, record) {
+  if (!record.email) {
+    return { configured: false, sent: false, reason: "No recipient email provided." };
+  }
+
+  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL) {
+    return { configured: false, sent: false, reason: "Email service is not configured yet." };
+  }
+
+  const details = parseDetails(record.detailsJson);
+  const logoUrl = String(env.EMAIL_LOGO_URL || "https://readyforreal.life/assets/logo-square.png").trim();
+  const replyTo = String(env.RESEND_REPLY_TO || "readyforreal.life44@gmail.com").trim();
+  const fromName = String(env.RESEND_FROM_NAME || "Modern Manners & Mental Fortitude").trim();
+  const trackLine = details.tracks || record.role || "Track to be confirmed";
+  const organizationLine = details.organization || record.organization || "Independent Registration";
+  const supportLine = details.support || "We will follow up with next-step guidance based on your registration.";
+  const locationLine = details.location || "Location to be confirmed";
+  const subject = "Your MMMF registration was received";
+
+  const html = `
+    <div style="margin:0;padding:0;background:#f7f2e9;font-family:Arial,sans-serif;color:#1e293b;">
+      <div style="max-width:680px;margin:0 auto;padding:28px 16px;">
+        <div style="background:#ffffff;border:1px solid #d9cfbd;border-radius:20px;overflow:hidden;">
+          <div style="background:#18304f;padding:28px 28px 20px;border-bottom:4px solid #c89b3c;text-align:center;">
+            <img src="${escapeHtml(logoUrl)}" alt="Modern Manners & Mental Fortitude" style="width:88px;height:88px;object-fit:contain;display:block;margin:0 auto 16px;">
+            <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#e8c778;font-weight:700;">Registration Confirmation</div>
+            <h1 style="margin:10px 0 0;color:#ffffff;font-size:32px;line-height:1.2;">Modern Manners & Mental Fortitude</h1>
+          </div>
+          <div style="padding:28px;">
+            <p style="margin:0 0 16px;font-size:17px;line-height:1.7;">Hi ${escapeHtml(record.name || "there")}, we received your registration for <strong>Modern Manners & Mental Fortitude</strong>.</p>
+            <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">Your information is now stored in our protected registration folder, and we can begin the next-step follow-up process from Teacher Mode.</p>
+            <div style="background:#fbfaf7;border:1px solid #d9cfbd;border-radius:16px;padding:18px 18px 8px;margin-bottom:20px;">
+              <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:12px;">Registration Summary</div>
+              <p style="margin:0 0 10px;font-size:15px;"><strong>Name:</strong> ${escapeHtml(record.name || "—")}</p>
+              <p style="margin:0 0 10px;font-size:15px;"><strong>Email:</strong> ${escapeHtml(record.email || "—")}</p>
+              <p style="margin:0 0 10px;font-size:15px;"><strong>Organization:</strong> ${escapeHtml(organizationLine)}</p>
+              <p style="margin:0 0 10px;font-size:15px;"><strong>Program / Track:</strong> ${escapeHtml(trackLine)}</p>
+              <p style="margin:0 0 10px;font-size:15px;"><strong>Location:</strong> ${escapeHtml(locationLine)}</p>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:12px;">What You Signed Up For</div>
+              <p style="margin:0 0 10px;font-size:15px;line-height:1.7;">You registered interest in the MMMF program and its training or implementation pathway. Depending on your role, this may lead to program enrollment, track placement, scheduling, support planning, or Teach the Teacher follow-up.</p>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:12px;">Next Steps</div>
+              <ol style="margin:0;padding-left:20px;color:#334155;">
+                <li style="margin-bottom:8px;line-height:1.7;">We will review your registration details and confirm fit, track, and implementation needs.</li>
+                <li style="margin-bottom:8px;line-height:1.7;">If more information is needed, we will reach out using this email address or the phone number you provided.</li>
+                <li style="margin-bottom:8px;line-height:1.7;">If your registration moves forward, we will send the next practical step, which may include training, scheduling, payment, onboarding, or certificate-related follow-up.</li>
+              </ol>
+            </div>
+            <div style="background:#eef7f6;border:1px solid #c8e5e0;border-radius:14px;padding:16px;margin-bottom:20px;">
+              <p style="margin:0;font-size:15px;line-height:1.7;"><strong>Support notes:</strong> ${escapeHtml(supportLine)}</p>
+            </div>
+            <p style="margin:0 0 8px;font-size:15px;line-height:1.7;">Questions can be sent to <a href="mailto:readyforreal.life44@gmail.com" style="color:#18304f;font-weight:700;">readyforreal.life44@gmail.com</a>.</p>
+            <p style="margin:0;font-size:14px;color:#64748b;line-height:1.7;">Michael R. Terry &amp; Mekenzi G. Terry · Founders · readyforreal.life</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const text = [
+    `Hi ${record.name || "there"},`,
+    "",
+    "We received your registration for Modern Manners & Mental Fortitude.",
+    "",
+    "What you signed up for:",
+    "You registered interest in the MMMF program and its training or implementation pathway.",
+    "",
+    "Registration summary:",
+    `Name: ${record.name || "—"}`,
+    `Email: ${record.email || "—"}`,
+    `Organization: ${organizationLine}`,
+    `Program / Track: ${trackLine}`,
+    `Location: ${locationLine}`,
+    "",
+    "Next steps:",
+    "1. We will review your registration details.",
+    "2. We may follow up for any missing information.",
+    "3. If your registration moves forward, we will send the next practical step.",
+    "",
+    `Support notes: ${supportLine}`,
+    "",
+    "Questions: readyforreal.life44@gmail.com",
+    "Michael R. Terry & Mekenzi G. Terry · Founders"
+  ].join("\n");
+
+  const resendResponse = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: `${fromName} <${env.RESEND_FROM_EMAIL}>`,
+      to: [record.email],
+      reply_to: replyTo,
+      subject,
+      html,
+      text
+    })
+  });
+
+  const raw = await resendResponse.text();
+  let parsed = null;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    parsed = null;
+  }
+
+  if (!resendResponse.ok) {
+    return {
+      configured: true,
+      sent: false,
+      reason: (parsed && (parsed.message || parsed.error)) || raw || "Email request failed."
+    };
+  }
+
+  return {
+    configured: true,
+    sent: true,
+    id: parsed && parsed.id ? parsed.id : ""
+  };
+}
+
 export default {
   async fetch(request, env) {
     const headers = corsHeaders(env, request);
@@ -288,7 +433,7 @@ export default {
         const submittedAt = String(payload.timestamp || new Date().toISOString());
         const registrationId = crypto.randomUUID();
 
-        registrations.unshift({
+        const record = {
           registrationId,
           name,
           email,
@@ -300,14 +445,21 @@ export default {
           detailsJson: String(payload.details_json || "").trim(),
           submittedAt,
           status: "New"
-        });
+        };
+
+        registrations.unshift(record);
 
         await writeRegistrations(env, registrations);
+        const emailResult = await sendRegistrationConfirmation(env, record);
 
         return json(
           {
             ok: true,
-            registration_id: registrationId
+            registration_id: registrationId,
+            email_sent: !!emailResult.sent,
+            email_service_configured: !!emailResult.configured,
+            email_error: emailResult.sent ? "" : String(emailResult.reason || ""),
+            email_id: String(emailResult.id || "")
           },
           200,
           headers

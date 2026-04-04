@@ -1124,19 +1124,22 @@ async function trySubmitToEndpoint(url, payload) {
   };
   try {
     const res = await fetch(url, opts);
-    if (res.ok) return true;
+    const text = await res.text();
+    let data = null;
+    try { data = text ? JSON.parse(text) : null; } catch (_err) {}
+    if (res.ok) return { ok: true, data };
   } catch (_err) {}
   try {
     if (navigator.sendBeacon) {
       const sent = navigator.sendBeacon(url, new Blob([body], { type: 'text/plain;charset=utf-8' }));
-      if (sent) return true;
+      if (sent) return { ok: true, data: null };
     }
   } catch (_err) {}
   try {
     await fetch(url, { ...opts, mode: 'no-cors' });
-    return true;
+    return { ok: true, data: null };
   } catch (_err) {}
-  return false;
+  return { ok: false, data: null };
 }
 
 function queueRegistration(payload) {
@@ -1225,25 +1228,39 @@ async function submitForm() {
   showSubmitStatus('Submitting your registration now. This will route directly into the protected MMMF registration folder for follow-up.', '');
 
   try {
-    let sent = false;
+    let result = { ok: false, data: null };
     for (const url of endpointCandidates) {
-      sent = await trySubmitToEndpoint(url, payload);
-      if (sent) break;
+      result = await trySubmitToEndpoint(url, payload);
+      if (result.ok) break;
     }
 
-    if (!sent) throw new Error('All endpoints failed');
+    if (!result.ok) throw new Error('All endpoints failed');
 
-    showSubmitStatus('Submitted successfully. Your registration is now stored in the MMMF registration folder for follow-up.', 'success');
+    const emailSent = !!(result.data && result.data.email_sent);
+    const emailConfigured = !!(result.data && result.data.email_service_configured);
+    const submitMessage = emailSent
+      ? 'Submitted successfully. Your registration is stored in the MMMF registration folder, and a confirmation email is on its way.'
+      : (emailConfigured
+        ? 'Submitted successfully. Your registration is stored, but the confirmation email could not be sent yet.'
+        : 'Submitted successfully. Your registration is now stored in the MMMF registration folder for follow-up.');
+
+    showSubmitStatus(submitMessage, 'success');
     document.getElementById('form-card').style.display = 'none';
     document.querySelector('.progress-wrap').style.display = 'none';
     const sp = document.getElementById('success-panel');
     sp.style.display = 'block';
+    const emailStatusLine = emailSent
+      ? '<div class="det"><strong>Email Status:</strong> Confirmation email sent</div>'
+      : (emailConfigured
+        ? '<div class="det"><strong>Email Status:</strong> Registration saved, but confirmation email was not sent</div>'
+        : '<div class="det"><strong>Email Status:</strong> Registration saved</div>');
     document.getElementById('success-summary').innerHTML = `
       <div class="det"><strong>Name:</strong> ${formData.fname} ${formData.lname}</div>
       <div class="det"><strong>Email:</strong> ${formData.email}</div>
       <div class="det"><strong>Organization:</strong> ${formData.org}</div>
       <div class="det"><strong>Track(s):</strong> ${formData.tracks}</div>
-      <div class="det"><strong>Delivery:</strong> ${formData.delivery || 'TBD'}</div>`;
+      <div class="det"><strong>Delivery:</strong> ${formData.delivery || 'TBD'}</div>
+      ${emailStatusLine}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (_err) {
     queueRegistration(payload);
