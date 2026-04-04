@@ -73,6 +73,36 @@ main { max-width:1400px; margin:0 auto; padding:24px; }
 .summary-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:6px; }
 .summary-card .value { font-family:'Playfair Display',serif; font-size:1.45rem; color:var(--navy); }
 .search-line { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.bulk-bar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fbfaf7;
+}
+.bulk-copy {
+  font-size:.92rem;
+  color:#334155;
+}
+.bulk-actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.btn.danger {
+  background:#8f2d2d;
+  color:#fff;
+  border-color:#8f2d2d;
+}
+.btn:disabled {
+  opacity:.45;
+  cursor:not-allowed;
+}
 .sheet-shell {
   border:1px solid var(--line);
   border-radius:16px;
@@ -99,6 +129,15 @@ th {
   background:#f7f3ea;
 }
 tbody tr:hover { background:#fcfbf8; }
+tbody tr.selected-row { background:#f7f3ea; }
+.select-cell {
+  width:44px;
+  text-align:center;
+}
+.select-cell input {
+  width:16px;
+  height:16px;
+}
 .tag {
   display:inline-flex;
   padding:4px 8px;
@@ -179,6 +218,13 @@ tbody tr:hover { background:#fcfbf8; }
       <div class="search-line">
         <input id="searchInput" type="search" placeholder="Search by agreement number, recipient, email, organization, credential type, track, or status">
       </div>
+      <div class="bulk-bar">
+        <div class="bulk-copy"><strong id="selectedCount">0</strong> selected</div>
+        <div class="bulk-actions">
+          <button class="btn" id="clearSelectionBtn" type="button" disabled>Clear Selection</button>
+          <button class="btn danger" id="deleteSelectedBtn" type="button" disabled>Delete Selected</button>
+        </div>
+      </div>
       <div id="folderNotice" class="notice ok" style="display:none;margin-bottom:12px;"></div>
 
       <div class="sheet-shell">
@@ -186,6 +232,7 @@ tbody tr:hover { background:#fcfbf8; }
           <table>
             <thead>
               <tr>
+                <th class="select-cell"><input id="selectAllCheckbox" type="checkbox" aria-label="Select all visible certificates"></th>
                 <th>Agreement #</th>
                 <th>Recipient</th>
                 <th>Email</th>
@@ -214,7 +261,10 @@ tbody tr:hover { background:#fcfbf8; }
     const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
     const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
 
-    const state = { registry: [] };
+    const state = {
+      registry: [],
+      selectedAgreementNumbers: new Set()
+    };
 
     const adminGate = document.getElementById('adminGate');
     const folderShell = document.getElementById('folderShell');
@@ -226,6 +276,10 @@ tbody tr:hover { background:#fcfbf8; }
     const exportBtn = document.getElementById('exportBtn');
     const lockBtn = document.getElementById('lockBtn');
     const searchInput = document.getElementById('searchInput');
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+    const selectedCount = document.getElementById('selectedCount');
     const folderNotice = document.getElementById('folderNotice');
     const certificateBody = document.getElementById('certificateBody');
     const emptyState = document.getElementById('emptyState');
@@ -233,6 +287,21 @@ tbody tr:hover { background:#fcfbf8; }
     const certificateLatest = document.getElementById('certificateLatest');
     const certificateLatestPerson = document.getElementById('certificateLatestPerson');
     const certificateFacilitators = document.getElementById('certificateFacilitators');
+
+    function getFilteredCertificates() {
+      const query = searchInput.value.trim();
+      return state.registry.filter(entry => rowMatches(entry, query));
+    }
+
+    function syncBulkControls(filtered) {
+      const visibleNumbers = filtered.map(entry => entry.agreementNumber).filter(Boolean);
+      const selectedVisible = visibleNumbers.filter(number => state.selectedAgreementNumbers.has(number));
+      selectedCount.textContent = state.selectedAgreementNumbers.size;
+      clearSelectionBtn.disabled = state.selectedAgreementNumbers.size === 0;
+      deleteSelectedBtn.disabled = state.selectedAgreementNumbers.size === 0;
+      selectAllCheckbox.checked = visibleNumbers.length > 0 && selectedVisible.length === visibleNumbers.length;
+      selectAllCheckbox.indeterminate = selectedVisible.length > 0 && selectedVisible.length < visibleNumbers.length;
+    }
 
     function getSessionToken() {
       return sessionStorage.getItem(ADMIN_SESSION_KEY) || '';
@@ -305,8 +374,7 @@ tbody tr:hover { background:#fcfbf8; }
     }
 
     function renderCertificates() {
-      const query = searchInput.value.trim();
-      const filtered = state.registry.filter(entry => rowMatches(entry, query));
+      const filtered = getFilteredCertificates();
 
       certificateTotal.textContent = state.registry.length;
       certificateLatest.textContent = state.registry.length ? state.registry[0].agreementNumber : '—';
@@ -318,7 +386,12 @@ tbody tr:hover { background:#fcfbf8; }
 
       filtered.forEach(entry => {
         const row = document.createElement('tr');
+        const agreementNumber = entry.agreementNumber || '';
+        if (agreementNumber && state.selectedAgreementNumbers.has(agreementNumber)) {
+          row.classList.add('selected-row');
+        }
         row.innerHTML = `
+          <td class="select-cell"><input type="checkbox" data-select="${agreementNumber}" ${agreementNumber && state.selectedAgreementNumbers.has(agreementNumber) ? 'checked' : ''} aria-label="Select ${entry.fullName || 'certificate'}"></td>
           <td><strong>${entry.agreementNumber || '—'}</strong></td>
           <td>${entry.fullName || '—'}</td>
           <td>${entry.email || '—'}</td>
@@ -336,6 +409,7 @@ tbody tr:hover { background:#fcfbf8; }
         `;
         certificateBody.appendChild(row);
       });
+      syncBulkControls(filtered);
     }
 
     async function refreshCertificates() {
@@ -388,7 +462,45 @@ tbody tr:hover { background:#fcfbf8; }
       URL.revokeObjectURL(url);
     });
 
+    clearSelectionBtn.addEventListener('click', () => {
+      state.selectedAgreementNumbers.clear();
+      renderCertificates();
+    });
+
+    deleteSelectedBtn.addEventListener('click', async () => {
+      const numbers = Array.from(state.selectedAgreementNumbers);
+      if (!numbers.length) return;
+      const confirmed = window.confirm(`Delete ${numbers.length} selected certificate record${numbers.length === 1 ? '' : 's'}? This cannot be undone.`);
+      if (!confirmed) return;
+      showNotice(unlockNotice, '');
+      showNotice(folderNotice, '');
+      let deleted = 0;
+      try {
+        for (const agreementNumber of numbers) {
+          const data = await postAdminAction('agreement_delete', {
+            session_token: getSessionToken(),
+            agreement_number: agreementNumber
+          });
+          state.registry = Array.isArray(data.entries) ? data.entries : [];
+          deleted += 1;
+        }
+        state.selectedAgreementNumbers.clear();
+        renderCertificates();
+        showNotice(folderNotice, `${deleted} certificate record${deleted === 1 ? '' : 's'} deleted from the folder.`);
+      } catch (error) {
+        renderCertificates();
+        showNotice(unlockNotice, deleted ? `${error.message} ${deleted} record${deleted === 1 ? '' : 's'} deleted before the error.` : error.message);
+      }
+    });
+
     certificateBody.addEventListener('click', async (event) => {
+      const selectNumber = event.target.dataset.select;
+      if (selectNumber) {
+        if (event.target.checked) state.selectedAgreementNumbers.add(selectNumber);
+        else state.selectedAgreementNumbers.delete(selectNumber);
+        renderCertificates();
+        return;
+      }
       const deleteNumber = event.target.dataset.delete;
       if (deleteNumber) {
         const confirmed = window.confirm(`Delete certificate record ${deleteNumber}? This cannot be undone.`);
@@ -401,6 +513,7 @@ tbody tr:hover { background:#fcfbf8; }
             agreement_number: deleteNumber
           });
           state.registry = Array.isArray(data.entries) ? data.entries : [];
+          state.selectedAgreementNumbers.delete(deleteNumber);
           renderCertificates();
           showNotice(folderNotice, `${deleteNumber} was deleted from the certificate folder.`);
         } catch (error) {
@@ -412,6 +525,16 @@ tbody tr:hover { background:#fcfbf8; }
       if (!number) return;
       await navigator.clipboard.writeText(number);
       showNotice(folderNotice, `${number} copied to the clipboard.`);
+    });
+
+    selectAllCheckbox.addEventListener('change', () => {
+      const visibleNumbers = getFilteredCertificates().map(entry => entry.agreementNumber).filter(Boolean);
+      if (selectAllCheckbox.checked) {
+        visibleNumbers.forEach(number => state.selectedAgreementNumbers.add(number));
+      } else {
+        visibleNumbers.forEach(number => state.selectedAgreementNumbers.delete(number));
+      }
+      renderCertificates();
     });
 
     searchInput.addEventListener('input', renderCertificates);

@@ -73,6 +73,36 @@ main { max-width:1400px; margin:0 auto; padding:24px; }
 .summary-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:6px; }
 .summary-card .value { font-family:'Playfair Display',serif; font-size:1.45rem; color:var(--navy); }
 .search-line { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.bulk-bar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fbfaf7;
+}
+.bulk-copy {
+  font-size:.92rem;
+  color:#334155;
+}
+.bulk-actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.btn.danger {
+  background:#8f2d2d;
+  color:#fff;
+  border-color:#8f2d2d;
+}
+.btn:disabled {
+  opacity:.45;
+  cursor:not-allowed;
+}
 .sheet-shell {
   border:1px solid var(--line);
   border-radius:16px;
@@ -99,6 +129,15 @@ th {
   background:#f7f3ea;
 }
 tbody tr:hover { background:#fcfbf8; }
+tbody tr.selected-row { background:#f7f3ea; }
+.select-cell {
+  width:44px;
+  text-align:center;
+}
+.select-cell input {
+  width:16px;
+  height:16px;
+}
 .tag {
   display:inline-flex;
   padding:4px 8px;
@@ -180,12 +219,20 @@ tbody tr:hover { background:#fcfbf8; }
       <div class="search-line">
         <input id="searchInput" type="search" placeholder="Search by name, email, phone, role, organization, program, track, or status">
       </div>
+      <div class="bulk-bar">
+        <div class="bulk-copy"><strong id="selectedCount">0</strong> selected</div>
+        <div class="bulk-actions">
+          <button class="btn" id="clearSelectionBtn" type="button" disabled>Clear Selection</button>
+          <button class="btn danger" id="deleteSelectedBtn" type="button" disabled>Delete Selected</button>
+        </div>
+      </div>
 
       <div class="sheet-shell">
         <div class="sheet-wrap">
           <table>
             <thead>
               <tr>
+                <th class="select-cell"><input id="selectAllCheckbox" type="checkbox" aria-label="Select all visible registrations"></th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -216,7 +263,10 @@ tbody tr:hover { background:#fcfbf8; }
     const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
     const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
 
-    const state = { registrations: [] };
+    const state = {
+      registrations: [],
+      selectedRegistrationIds: new Set()
+    };
 
     const adminGate = document.getElementById('adminGate');
     const folderShell = document.getElementById('folderShell');
@@ -228,6 +278,10 @@ tbody tr:hover { background:#fcfbf8; }
     const exportBtn = document.getElementById('exportBtn');
     const lockBtn = document.getElementById('lockBtn');
     const searchInput = document.getElementById('searchInput');
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+    const selectedCount = document.getElementById('selectedCount');
     const folderNotice = document.createElement('div');
     folderNotice.id = 'folderNotice';
     folderNotice.className = 'notice ok';
@@ -239,6 +293,21 @@ tbody tr:hover { background:#fcfbf8; }
     const registrationLatest = document.getElementById('registrationLatest');
     const registrationLatestPerson = document.getElementById('registrationLatestPerson');
     const registrationOrganizations = document.getElementById('registrationOrganizations');
+
+    function getFilteredRegistrations() {
+      const query = searchInput.value.trim();
+      return state.registrations.filter(entry => rowMatches(entry, query));
+    }
+
+    function syncBulkControls(filtered) {
+      const visibleIds = filtered.map(entry => entry.registrationId).filter(Boolean);
+      const selectedVisible = visibleIds.filter(id => state.selectedRegistrationIds.has(id));
+      selectedCount.textContent = state.selectedRegistrationIds.size;
+      clearSelectionBtn.disabled = state.selectedRegistrationIds.size === 0;
+      deleteSelectedBtn.disabled = state.selectedRegistrationIds.size === 0;
+      selectAllCheckbox.checked = visibleIds.length > 0 && selectedVisible.length === visibleIds.length;
+      selectAllCheckbox.indeterminate = selectedVisible.length > 0 && selectedVisible.length < visibleIds.length;
+    }
 
     function getSessionToken() {
       return sessionStorage.getItem(ADMIN_SESSION_KEY) || '';
@@ -311,8 +380,7 @@ tbody tr:hover { background:#fcfbf8; }
     }
 
     function renderRegistrations() {
-      const query = searchInput.value.trim();
-      const filtered = state.registrations.filter(entry => rowMatches(entry, query));
+      const filtered = getFilteredRegistrations();
       const orgs = new Set(state.registrations.map(entry => entry.organization || '').filter(Boolean));
 
       registrationTotal.textContent = state.registrations.length;
@@ -332,7 +400,12 @@ tbody tr:hover { background:#fcfbf8; }
         }
 
         const row = document.createElement('tr');
+        const registrationId = entry.registrationId || '';
+        if (registrationId && state.selectedRegistrationIds.has(registrationId)) {
+          row.classList.add('selected-row');
+        }
         row.innerHTML = `
+          <td class="select-cell"><input type="checkbox" data-select="${registrationId}" ${registrationId && state.selectedRegistrationIds.has(registrationId) ? 'checked' : ''} aria-label="Select ${entry.name || 'registration'}"></td>
           <td><strong>${entry.name || '—'}</strong></td>
           <td>${entry.email || '—'}</td>
           <td>${entry.phone || '—'}</td>
@@ -344,10 +417,11 @@ tbody tr:hover { background:#fcfbf8; }
           <td>${entry.submittedAt ? new Date(entry.submittedAt).toLocaleString() : '—'}</td>
           <td><span class="tag">${entry.status || 'New'}</span></td>
           <td>${entry.notes || details.notes || '<span class="muted">—</span>'}</td>
-          <td class="row-actions"><button type="button" data-delete="${entry.registrationId || ''}">Delete</button></td>
+          <td class="row-actions"><button type="button" data-delete="${registrationId}">Delete</button></td>
         `;
         registrationBody.appendChild(row);
       });
+      syncBulkControls(filtered);
     }
 
     async function refreshRegistrations() {
@@ -400,7 +474,45 @@ tbody tr:hover { background:#fcfbf8; }
       URL.revokeObjectURL(url);
     });
 
+    clearSelectionBtn.addEventListener('click', () => {
+      state.selectedRegistrationIds.clear();
+      renderRegistrations();
+    });
+
+    deleteSelectedBtn.addEventListener('click', async () => {
+      const ids = Array.from(state.selectedRegistrationIds);
+      if (!ids.length) return;
+      const confirmed = window.confirm(`Delete ${ids.length} selected registration record${ids.length === 1 ? '' : 's'}? This cannot be undone.`);
+      if (!confirmed) return;
+      showNotice(unlockNotice, '');
+      showNotice(folderNotice, '');
+      let deleted = 0;
+      try {
+        for (const registrationId of ids) {
+          const data = await postAdminAction('registration_delete', {
+            session_token: getSessionToken(),
+            registration_id: registrationId
+          });
+          state.registrations = Array.isArray(data.entries) ? data.entries : [];
+          deleted += 1;
+        }
+        state.selectedRegistrationIds.clear();
+        renderRegistrations();
+        showNotice(folderNotice, `${deleted} registration record${deleted === 1 ? '' : 's'} deleted from the folder.`);
+      } catch (error) {
+        renderRegistrations();
+        showNotice(unlockNotice, deleted ? `${error.message} ${deleted} record${deleted === 1 ? '' : 's'} deleted before the error.` : error.message);
+      }
+    });
+
     registrationBody.addEventListener('click', async (event) => {
+      const selectId = event.target.dataset.select;
+      if (selectId) {
+        if (event.target.checked) state.selectedRegistrationIds.add(selectId);
+        else state.selectedRegistrationIds.delete(selectId);
+        renderRegistrations();
+        return;
+      }
       const registrationId = event.target.dataset.delete;
       if (!registrationId) return;
       const confirmed = window.confirm('Delete this registration record? This cannot be undone.');
@@ -413,11 +525,22 @@ tbody tr:hover { background:#fcfbf8; }
           registration_id: registrationId
         });
         state.registrations = Array.isArray(data.entries) ? data.entries : [];
+        state.selectedRegistrationIds.delete(registrationId);
         renderRegistrations();
         showNotice(folderNotice, 'Registration deleted from the folder.');
       } catch (error) {
         showNotice(unlockNotice, error.message);
       }
+    });
+
+    selectAllCheckbox.addEventListener('change', () => {
+      const visibleIds = getFilteredRegistrations().map(entry => entry.registrationId).filter(Boolean);
+      if (selectAllCheckbox.checked) {
+        visibleIds.forEach(id => state.selectedRegistrationIds.add(id));
+      } else {
+        visibleIds.forEach(id => state.selectedRegistrationIds.delete(id));
+      }
+      renderRegistrations();
     });
 
     searchInput.addEventListener('input', renderRegistrations);
