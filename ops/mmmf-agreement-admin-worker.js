@@ -151,20 +151,6 @@ function parseDetails(detailsJson) {
   }
 }
 
-function resolveEmailLogoUrl(env) {
-  const fallbackUrl = "https://readyforreal.life/assets/mmmf-email-avatar.png";
-  const configured = String(env.EMAIL_LOGO_URL || "").trim();
-  if (!configured) return fallbackUrl;
-
-  const legacyLogos = [
-    "https://readyforreal.life/assets/logo-square.png",
-    "https://readyforreal.life/assets/app-icon.png",
-    "https://readyforreal.life/assets/mmmf-site-mark.svg"
-  ];
-
-  return legacyLogos.includes(configured) ? fallbackUrl : configured;
-}
-
 async function sendRegistrationConfirmation(env, record) {
   if (!record.email) {
     return { configured: false, sent: false, reason: "No recipient email provided." };
@@ -175,7 +161,6 @@ async function sendRegistrationConfirmation(env, record) {
   }
 
   const details = parseDetails(record.detailsJson);
-  const logoUrl = resolveEmailLogoUrl(env);
   const replyTo = String(env.RESEND_REPLY_TO || "readyforreal.life44@gmail.com").trim();
   const fromName = String(env.RESEND_FROM_NAME || "Modern Manners & Mental Fortitude").trim();
   const trackLine = details.tracks || record.role || "Track to be confirmed";
@@ -188,7 +173,11 @@ async function sendRegistrationConfirmation(env, record) {
       <div style="max-width:680px;margin:0 auto;padding:28px 16px;">
         <div style="background:#ffffff;border:1px solid #d9cfbd;border-radius:20px;overflow:hidden;">
           <div style="background:#18304f;padding:28px 28px 20px;border-bottom:4px solid #c89b3c;text-align:center;">
-            <img src="${escapeHtml(logoUrl)}" alt="Modern Manners & Mental Fortitude" style="width:132px;height:132px;object-fit:contain;display:block;margin:0 auto 16px;">
+            <div style="width:160px;height:160px;margin:0 auto 16px;background:#23395d;border:4px solid #d7ab50;border-radius:28px;box-sizing:border-box;padding:18px 12px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+              <div style="font-size:64px;line-height:1;font-weight:800;letter-spacing:2px;color:#ffffff;margin-bottom:10px;">MMMF</div>
+              <div style="font-size:18px;line-height:1.2;font-weight:700;color:#e8c778;">Modern Manners</div>
+              <div style="font-size:16px;line-height:1.2;font-weight:700;color:#f4e2b2;">&amp; Mental Fortitude</div>
+            </div>
             <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#e8c778;font-weight:700;">Registration Confirmation</div>
             <h1 style="margin:10px 0 0;color:#ffffff;font-size:32px;line-height:1.2;">Modern Manners & Mental Fortitude</h1>
           </div>
