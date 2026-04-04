@@ -98,10 +98,11 @@ def draw_stat(draw, x, y, label, value):
 
 
 def draw_tag(draw, x, y, text, fill):
-    w = int(draw.textlength(text, font=F_SANS_32)) + 48
-    draw.rounded_rectangle((x, y, x + w, y + 54), radius=22, fill=fill)
-    draw.text((x + 22, y + 11), text, font=F_SANS_32, fill=WHITE)
-    return x + w + 14
+    w = int(draw.textlength(text, font=F_SANS_28)) + 42
+    h = 50
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=20, fill=fill)
+    draw.text((x + 18, y + 10), text, font=F_SANS_28, fill=WHITE)
+    return x + w + 12
 
 
 def draw_bullet_list(draw, x, y, items, width):
@@ -199,15 +200,13 @@ def main():
     # pillars
     draw.text((RIGHT_X + 40, y + 10), "FOUR CORE PILLARS", font=F_SANS_32, fill=GOLD_2)
     tag_y = y + 62
-    tag_x = RIGHT_X + 40
-    for txt, fill in [
-        ("Respectful Communication", NAVY_2),
-        ("Emotional Regulation", NAVY_2),
-        ("Decision-Making", NAVY_2),
-        ("Accountability & Repair", NAVY_2),
-    ]:
-        tag_x = draw_tag(draw, tag_x, tag_y, txt, fill)
-    y = tag_y + 88
+    left_x = RIGHT_X + 40
+    right_x = RIGHT_X + 470
+    draw_tag(draw, left_x, tag_y, "Respectful Communication", NAVY_2)
+    draw_tag(draw, right_x, tag_y, "Emotional Regulation", NAVY_2)
+    draw_tag(draw, left_x, tag_y + 64, "Decision-Making", NAVY_2)
+    draw_tag(draw, right_x, tag_y + 64, "Accountability & Repair", NAVY_2)
+    y = tag_y + 142
 
     # frameworks
     draw.text((RIGHT_X + 40, y + 10), "TWO STUDENT FRAMEWORKS", font=F_SANS_32, fill=GOLD_2)
