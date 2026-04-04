@@ -157,6 +157,17 @@ def draw_measure_tags(draw, x, y, items, max_width):
     return cy
 
 
+def draw_info_panel(draw, x, y, w, h, title, lines):
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=18, fill=NAVY_2)
+    draw.text((x + 18, y + 16), title, font=F_SANS_28, fill=GOLD_2)
+    cy = y + 56
+    for idx, line in enumerate(lines):
+        dot = GREEN if idx % 2 == 0 else GOLD_2
+        draw.ellipse((x + 18, cy + 10, x + 32, cy + 24), fill=dot)
+        cy = draw_wrapped(draw, line, (x + 46, cy), F_SANS_28, WHITE, w - 64, line_gap=4) + 8
+    return cy
+
+
 def main():
     img = Image.new("RGB", (PAGE_W, PAGE_H), PAPER)
     draw = ImageDraw.Draw(img)
@@ -188,9 +199,22 @@ def main():
     draw_stat(draw, title_x + stat_w + stat_gap, stats_y + 292, "WEBSITE", "readyforreal.life")
 
     draw_left_snapshot(draw, title_x, stats_y + 454, LEFT_W - 96)
+    draw_info_panel(
+        draw,
+        title_x,
+        stats_y + 724,
+        LEFT_W - 96,
+        188,
+        "WHY THIS MATTERS",
+        [
+            "Students need more than information. They need tools for communication, regulation, and responsible action.",
+            "MMMF gives schools a practical way to teach those habits directly instead of assuming them.",
+            "That supports school climate, personal responsibility, and real-world readiness.",
+        ],
+    )
 
     # founders panel
-    founders_y = PAGE_H - MARGIN - 520
+    founders_y = PAGE_H - MARGIN - 300
     draw.rounded_rectangle((MARGIN + 26, founders_y, MARGIN + LEFT_W - 26, PAGE_H - MARGIN - 26), radius=20, fill=NAVY_2)
     draw.text((MARGIN + 52, founders_y + 26), "FOUNDED BY", font=F_SANS_32, fill=GOLD_2)
 
@@ -240,6 +264,18 @@ def main():
     draw_tag(draw, right_x, tag_y, "Emotional Regulation", NAVY_2)
     draw_tag(draw, left_x, tag_y + 64, "Decision-Making", NAVY_2)
     draw_tag(draw, right_x, tag_y + 64, "Accountability & Repair", NAVY_2)
+    draw_info_panel(
+        draw,
+        RIGHT_X + 1030,
+        tag_y - 4,
+        RIGHT_W - 1070,
+        132,
+        "SCHOOL VALUE",
+        [
+            "Clearer expectations for conduct, communication, and accountability.",
+            "Real-world SEL designed for implementation, transfer, and measurable use.",
+        ],
+    )
     y = tag_y + 142
 
     # frameworks
@@ -280,6 +316,19 @@ def main():
         draw.rounded_rectangle((x, top, x + mod_w, top + mod_h), radius=18, fill=NAVY_2)
         draw.text((x + 16, top + 14), num, font=F_SANS_48, fill=GOLD_2)
         draw.multiline_text((x + 16, top + 60), label, font=F_SANS_28, fill=WHITE, spacing=3)
+    draw_info_panel(
+        draw,
+        RIGHT_X + 1030,
+        cards_y,
+        RIGHT_W - 1070,
+        214,
+        "HOW SCHOOLS CAN USE IT",
+        [
+            "Pilot as a term course, workshop series, advisory support, or facilitator preparation pathway.",
+            "Review materials with leadership teams, families, or partners before implementation.",
+            "Match the entry point to your age group, setting, and staffing model.",
+        ],
+    )
     y = cards_y + mod_h * 2 + 36
 
     # audience
