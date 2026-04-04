@@ -121,6 +121,32 @@ async function writeRegistrations(env, entries) {
   await env.AGREEMENT_REGISTRY.put("registrations", JSON.stringify(entries, null, 2));
 }
 
+async function readPublicAccessState(env) {
+  const raw = await env.AGREEMENT_REGISTRY.get("public_access_state");
+  if (!raw) {
+    return {
+      publicUnlocked: false,
+      updatedAt: ""
+    };
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    return {
+      publicUnlocked: !!parsed.publicUnlocked,
+      updatedAt: String(parsed.updatedAt || "")
+    };
+  } catch {
+    return {
+      publicUnlocked: false,
+      updatedAt: ""
+    };
+  }
+}
+
+async function writePublicAccessState(env, nextState) {
+  await env.AGREEMENT_REGISTRY.put("public_access_state", JSON.stringify(nextState, null, 2));
+}
+
 function buildRegistrationResponse(entries) {
   return {
     ok: true,
@@ -515,6 +541,26 @@ export default {
           200,
           headers
         );
+      }
+
+      if (action === "public_access_get") {
+        const state = await readPublicAccessState(env);
+        return json({ ok: true, ...state }, 200, headers);
+      }
+
+      if (action === "public_access_set") {
+        if (!env.ADMIN_CODE) {
+          return json({ ok: false, error: "ADMIN_CODE secret is missing from this Worker." }, 500, headers);
+        }
+        if (String(payload.access_code || "").trim() !== String(env.ADMIN_CODE)) {
+          return json({ ok: false, error: "Incorrect access code." }, 401, headers);
+        }
+        const nextState = {
+          publicUnlocked: !!payload.public_unlocked,
+          updatedAt: new Date().toISOString()
+        };
+        await writePublicAccessState(env, nextState);
+        return json({ ok: true, ...nextState }, 200, headers);
       }
 
       if (action === "registration_list") {
