@@ -170,8 +170,8 @@ function resolveEmailLogoUrl(env) {
 
 function resolveFounderPhotoUrls() {
   return {
-    michael: "https://readyforreal.life/docs/michael-terry-headshot.jpg",
-    mekenzi: "https://readyforreal.life/docs/mekenzi-terry-headshot.png"
+    michael: "https://readyforreal.life/michael-terry-headshot.jpg",
+    mekenzi: "https://readyforreal.life/mekenzi-terry-headshot.png"
   };
 }
 
