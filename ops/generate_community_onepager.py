@@ -214,7 +214,7 @@ def main():
     )
 
     # founders panel
-    founders_y = PAGE_H - MARGIN - 300
+    founders_y = PAGE_H - MARGIN - 620
     draw.rounded_rectangle((MARGIN + 26, founders_y, MARGIN + LEFT_W - 26, PAGE_H - MARGIN - 26), radius=20, fill=NAVY_2)
     draw.text((MARGIN + 52, founders_y + 26), "FOUNDED BY", font=F_SANS_32, fill=GOLD_2)
 
@@ -224,12 +224,12 @@ def main():
     img.paste(mek, (MARGIN + 222, founders_y + 84), mek)
 
     draw.text((MARGIN + 52, founders_y + 254), "Michael R. Terry", font=F_SERIF_36, fill=WHITE)
-    draw.text((MARGIN + 52, founders_y + 302), "Founder · Educator · Curriculum Designer", font=F_SANS_28, fill=MUTED)
-    draw.text((MARGIN + 52, founders_y + 346), "Mekenzi G. Terry", font=F_SERIF_36, fill=WHITE)
-    draw.text((MARGIN + 52, founders_y + 394), "Founder · Coach · Director · Community Builder", font=F_SANS_28, fill=MUTED)
-    draw.text((MARGIN + 52, founders_y + 454), "readyforreal.life", font=F_SANS_32, fill=TEAL)
-    draw.text((MARGIN + 52, founders_y + 496), "readyforreal.life44@gmail.com", font=F_SANS_32, fill=TEAL)
-    draw.text((MARGIN + 52, founders_y + 548), "© Michael R. Terry & Mekenzi G. Terry · Protected Intellectual Property", font=F_SANS_28, fill="#7f93ba")
+    draw.text((MARGIN + 52, founders_y + 302), "Founder · Educator · Curriculum Designer", font=F_SANS_26, fill=MUTED)
+    draw.text((MARGIN + 52, founders_y + 342), "Mekenzi G. Terry", font=F_SERIF_36, fill=WHITE)
+    draw.text((MARGIN + 52, founders_y + 390), "Founder · Coach · Director · Community Builder", font=F_SANS_26, fill=MUTED)
+    draw.text((MARGIN + 52, founders_y + 450), "readyforreal.life", font=F_SANS_32, fill=TEAL)
+    draw.text((MARGIN + 52, founders_y + 492), "readyforreal.life44@gmail.com", font=F_SANS_32, fill=TEAL)
+    draw.text((MARGIN + 52, founders_y + 542), "© Michael R. Terry & Mekenzi G. Terry · Protected Intellectual Property", font=F_SANS_24, fill="#7f93ba")
 
     # right area top branding
     logo_path = SITE_ROOT / "docs" / "assets" / "logo-square.png"
