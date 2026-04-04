@@ -173,10 +173,11 @@ async function sendRegistrationConfirmation(env, record) {
       <div style="max-width:680px;margin:0 auto;padding:28px 16px;">
         <div style="background:#ffffff;border:1px solid #d9cfbd;border-radius:20px;overflow:hidden;">
           <div style="background:#18304f;padding:28px 28px 20px;border-bottom:4px solid #c89b3c;text-align:center;">
-            <div style="width:160px;height:160px;margin:0 auto 16px;background:#23395d;border:4px solid #d7ab50;border-radius:28px;box-sizing:border-box;padding:18px 12px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
-              <div style="font-size:64px;line-height:1;font-weight:800;letter-spacing:2px;color:#ffffff;margin-bottom:10px;">MMMF</div>
-              <div style="font-size:18px;line-height:1.2;font-weight:700;color:#e8c778;">Modern Manners</div>
-              <div style="font-size:16px;line-height:1.2;font-weight:700;color:#f4e2b2;">&amp; Mental Fortitude</div>
+            <div style="width:320px;max-width:100%;margin:0 auto 18px;background:#23395d;border:3px solid #c89b3c;border-radius:24px;padding:18px 16px 16px;box-sizing:border-box;">
+              <div style="height:0;border-top:5px solid #d7ab50;border-radius:999px;width:86%;margin:0 auto 18px;"></div>
+              <div style="font-family:Georgia,Times New Roman,serif;font-size:42px;line-height:1.02;font-weight:700;color:#ffffff;">Modern Manners</div>
+              <div style="font-family:Georgia,Times New Roman,serif;font-size:31px;line-height:1.08;font-weight:700;color:#f4e2b2;margin-top:2px;">&amp; Mental Fortitude</div>
+              <div style="height:0;border-top:5px solid #d7ab50;border-radius:999px;width:86%;margin:18px auto 0;"></div>
             </div>
             <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#e8c778;font-weight:700;">Registration Confirmation</div>
             <h1 style="margin:10px 0 0;color:#ffffff;font-size:32px;line-height:1.2;">Modern Manners & Mental Fortitude</h1>
