@@ -152,7 +152,7 @@ function parseDetails(detailsJson) {
 }
 
 function resolveEmailLogoUrl(env) {
-  const fallbackUrl = "https://raw.githubusercontent.com/readyforreallife/readyforreal.life/main/assets/mmmf-email-avatar.png";
+  const fallbackUrl = "https://readyforreal.life/assets/mmmf-sender-icon.png";
   const configured = String(env.EMAIL_LOGO_URL || "").trim();
   if (!configured) return fallbackUrl;
 
@@ -161,7 +161,7 @@ function resolveEmailLogoUrl(env) {
     "https://readyforreal.life/assets/app-icon.png",
     "https://readyforreal.life/assets/mmmf-site-mark.svg",
     "https://readyforreal.life/assets/mmmf-email-avatar.png",
-    "https://readyforreal.life/assets/mmmf-sender-icon.png",
+    "https://raw.githubusercontent.com/readyforreallife/readyforreal.life/main/assets/mmmf-email-avatar.png",
     "https://readyforreal.life/assets/icons/icon-192-v2.png"
   ];
 
