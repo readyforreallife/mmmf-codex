@@ -92,40 +92,26 @@
       max-width:1200px;
       margin:0 auto;
       width:100%;
-      padding:24px;
+      padding:20px 24px 28px;
       flex:1;
     }
     .search-host {
-      margin-bottom:18px;
+      margin-bottom:14px;
     }
     .viewer-shell {
-      background:var(--white);
-      border:1px solid var(--line);
-      border-radius:18px;
-      box-shadow:0 14px 30px rgba(0,0,0,.05);
-      overflow:hidden;
-    }
-    .viewer-meta {
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
-      padding:14px 18px;
-      background:#f2ecdf;
-      border-bottom:1px solid var(--line);
-    }
-    .viewer-meta strong {
-      color:#6c5b31;
-      font-size:.8rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+      flex-direction:column;
+      gap:12px;
     }
     .viewer-frame-wrap {
       position: relative;
       height:calc(100vh - 250px);
       min-height:640px;
-      background:#eef2f7;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 14px 30px rgba(0,0,0,.05);
     }
     .viewer-watermark {
       position:absolute;
@@ -166,12 +152,17 @@
       background:#fff;
     }
     .fallback {
-      padding:20px 18px 26px;
       color:var(--muted);
       line-height:1.75;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      padding:0 4px;
     }
     .fallback p {
-      margin:0 0 14px;
+      margin:0;
     }
     .fallback-actions {
       display:flex;
@@ -185,6 +176,9 @@
       }
       h1 {
         font-size:1.55rem;
+      }
+      .fallback {
+        padding:0;
       }
     }
   </style>
@@ -208,10 +202,6 @@
   <main>
     <div class="search-host"></div>
     <div class="viewer-shell">
-      <div class="viewer-meta">
-        <strong id="docType">Document</strong>
-        <span id="docFile" style="color:#64748b;font-size:.92rem;"></span>
-      </div>
       <div class="viewer-frame-wrap">
         <iframe id="viewerFrame" title="MMMF document viewer"></iframe>
         <div id="viewerWatermark" class="viewer-watermark" aria-hidden="true"></div>
@@ -236,8 +226,6 @@
     const type = (params.get('type') || '').toLowerCase();
 
     const titleEl = document.getElementById('docTitle');
-    const typeEl = document.getElementById('docType');
-    const fileEl = document.getElementById('docFile');
     const subEl = document.getElementById('docSub');
     const frame = document.getElementById('viewerFrame');
     const downloadBtn = document.getElementById('downloadBtn');
@@ -253,9 +241,9 @@
       const officeViewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absoluteFileUrl);
 
       titleEl.textContent = title;
-      typeEl.textContent = type ? type.toUpperCase() : 'DOCUMENT';
-      fileEl.textContent = file.split('/').pop();
-      subEl.textContent = 'This page keeps the document experience inside the MMMF site and gives visitors a clear way back.';
+      const typeLabel = type ? type.toUpperCase() : 'DOCUMENT';
+      const fileLabel = file.split('/').pop();
+      subEl.textContent = `Viewing ${typeLabel} · ${fileLabel} inside the MMMF site with a clean in-page reader.`;
       downloadBtn.href = file;
       downloadBtn.setAttribute('download', '');
       openDirectBtn.href = file;
