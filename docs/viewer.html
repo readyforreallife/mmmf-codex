@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MMMF Document Viewer</title>
   <link rel="stylesheet" href="../assets/site-search.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.min.js" defer></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap');
     :root {
@@ -151,6 +152,50 @@
       border:0;
       background:#fff;
     }
+    .pdf-stack {
+      width:100%;
+      height:100%;
+      overflow:auto;
+      padding:22px;
+      background:#eef2f7;
+      display:none;
+    }
+    .pdf-pages {
+      max-width:900px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .pdf-page {
+      background:#fff;
+      border:1px solid #d8dde6;
+      border-radius:14px;
+      box-shadow:0 8px 22px rgba(0,0,0,.08);
+      overflow:hidden;
+    }
+    .pdf-page canvas {
+      display:block;
+      width:100%;
+      height:auto;
+      background:#fff;
+    }
+    .pdf-loading,
+    .pdf-error {
+      max-width:900px;
+      margin:0 auto;
+      padding:24px 28px;
+      border-radius:14px;
+      background:#fff;
+      border:1px solid #d8dde6;
+      box-shadow:0 8px 22px rgba(0,0,0,.08);
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .pdf-error strong,
+    .pdf-loading strong {
+      color:var(--navy);
+    }
     .fallback {
       color:var(--muted);
       line-height:1.75;
@@ -204,6 +249,9 @@
     <div class="viewer-shell">
       <div class="viewer-frame-wrap">
         <iframe id="viewerFrame" title="MMMF document viewer"></iframe>
+        <div id="pdfStack" class="pdf-stack">
+          <div id="pdfPages" class="pdf-pages"></div>
+        </div>
         <div id="viewerWatermark" class="viewer-watermark" aria-hidden="true"></div>
       </div>
       <div class="fallback">
@@ -228,9 +276,46 @@
     const titleEl = document.getElementById('docTitle');
     const subEl = document.getElementById('docSub');
     const frame = document.getElementById('viewerFrame');
+    const pdfStack = document.getElementById('pdfStack');
+    const pdfPages = document.getElementById('pdfPages');
     const downloadBtn = document.getElementById('downloadBtn');
     const openDirectBtn = document.getElementById('openDirectBtn');
     const viewerWatermark = document.getElementById('viewerWatermark');
+
+    async function renderPdfDocument(url) {
+      if (!window.pdfjsLib) {
+        throw new Error('PDF renderer did not load.');
+      }
+
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js';
+
+      frame.style.display = 'none';
+      pdfStack.style.display = 'block';
+      pdfPages.innerHTML = '<div class="pdf-loading"><strong>Loading PDF preview...</strong><br>This document is being rendered inside the page for a cleaner reading experience.</div>';
+
+      const pdf = await window.pdfjsLib.getDocument(url).promise;
+      pdfPages.innerHTML = '';
+
+      const targetWidth = Math.min(pdfPages.clientWidth || 900, 900);
+
+      for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+        const page = await pdf.getPage(pageNumber);
+        const unscaledViewport = page.getViewport({ scale: 1 });
+        const scale = targetWidth / unscaledViewport.width;
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const pageShell = document.createElement('div');
+        pageShell.className = 'pdf-page';
+        pageShell.appendChild(canvas);
+        pdfPages.appendChild(pageShell);
+
+        await page.render({ canvasContext: context, viewport }).promise;
+      }
+    }
 
     if (!file) {
       titleEl.textContent = 'Document unavailable';
@@ -249,7 +334,10 @@
       openDirectBtn.href = file;
 
       if (type === 'pdf') {
-        frame.src = file + '#view=FitH';
+        renderPdfDocument(file).catch(() => {
+          pdfStack.style.display = 'block';
+          pdfPages.innerHTML = '<div class="pdf-error"><strong>The custom PDF preview could not load.</strong><br>Use the buttons below to open or download the file directly.</div>';
+        });
       } else if (type === 'docx' || type === 'pptx') {
         frame.src = officeViewerUrl;
       } else {
