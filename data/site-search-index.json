@@ -96,6 +96,22 @@
     "keywords": ["workbook", "participant", "learner", "activities", "reflection"]
   },
   {
+    "title": "Instructor guide",
+    "page": "Documents Library",
+    "section": "Facilitator",
+    "url": "docs/index.html#doc-instructor-guide",
+    "snippet": "Instructor-facing guide for delivering MMMF sessions with structured support, pacing, and implementation notes.",
+    "keywords": ["instructor guide", "guide", "facilitator", "teaching guide", "implementation notes"]
+  },
+  {
+    "title": "CASEL survey",
+    "page": "Documents Library",
+    "section": "Assessment",
+    "url": "docs/index.html#doc-casel-survey",
+    "snippet": "Survey instrument aligned to MMMF outcomes and CASEL-related review needs for reflection, feedback, and program evaluation.",
+    "keywords": ["casel", "survey", "assessment", "feedback", "evaluation", "utah casel"]
+  },
+  {
     "title": "Facilitator certification agreement",
     "page": "Documents Library",
     "section": "Agreement",
