@@ -289,12 +289,11 @@
 
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js';
 
-      frame.style.display = 'none';
       pdfStack.style.display = 'block';
-      pdfPages.innerHTML = '<div class="pdf-loading"><strong>Loading PDF preview...</strong><br>This document is being rendered inside the page for a cleaner reading experience.</div>';
+      pdfPages.innerHTML = '<div class="pdf-loading"><strong>Loading cleaner PDF preview...</strong><br>The standard preview stays visible until this version is ready.</div>';
 
       const pdf = await window.pdfjsLib.getDocument(url).promise;
-      pdfPages.innerHTML = '';
+      const renderedPages = [];
 
       const targetWidth = Math.min(pdfPages.clientWidth || 900, 900);
 
@@ -311,10 +310,14 @@
         const pageShell = document.createElement('div');
         pageShell.className = 'pdf-page';
         pageShell.appendChild(canvas);
-        pdfPages.appendChild(pageShell);
+        renderedPages.push(pageShell);
 
         await page.render({ canvasContext: context, viewport }).promise;
       }
+
+      pdfPages.innerHTML = '';
+      renderedPages.forEach((pageShell) => pdfPages.appendChild(pageShell));
+      frame.style.display = 'none';
     }
 
     if (!file) {
@@ -334,9 +337,10 @@
       openDirectBtn.href = file;
 
       if (type === 'pdf') {
+        frame.src = file + '#view=FitH';
         renderPdfDocument(file).catch(() => {
-          pdfStack.style.display = 'block';
-          pdfPages.innerHTML = '<div class="pdf-error"><strong>The custom PDF preview could not load.</strong><br>Use the buttons below to open or download the file directly.</div>';
+          pdfStack.style.display = 'none';
+          frame.style.display = 'block';
         });
       } else if (type === 'docx' || type === 'pptx') {
         frame.src = officeViewerUrl;
