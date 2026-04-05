@@ -104,6 +104,9 @@
       flex-direction:column;
       gap:12px;
     }
+    .viewer-shell.pdf-mode {
+      gap:8px;
+    }
     .viewer-frame-wrap {
       position: relative;
       height:calc(100vh - 250px);
@@ -113,6 +116,20 @@
       border-radius:18px;
       overflow:hidden;
       box-shadow:0 14px 30px rgba(0,0,0,.05);
+    }
+    .viewer-shell.pdf-mode .viewer-frame-wrap {
+      border:none;
+      border-radius:0;
+      box-shadow:none;
+      background:transparent;
+      overflow:visible;
+      height:calc(100vh - 220px);
+      min-height:700px;
+    }
+    .viewer-shell.pdf-mode iframe {
+      border-radius:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      background:#fff;
     }
     .viewer-watermark {
       position:absolute;
@@ -206,6 +223,9 @@
       flex-wrap:wrap;
       padding:0 4px;
     }
+    .viewer-shell.pdf-mode .fallback {
+      padding:0;
+    }
     .fallback p {
       margin:0;
     }
@@ -275,6 +295,7 @@
 
     const titleEl = document.getElementById('docTitle');
     const subEl = document.getElementById('docSub');
+    const viewerShell = document.querySelector('.viewer-shell');
     const frame = document.getElementById('viewerFrame');
     const pdfStack = document.getElementById('pdfStack');
     const pdfPages = document.getElementById('pdfPages');
@@ -337,6 +358,7 @@
       openDirectBtn.href = file;
 
       if (type === 'pdf') {
+        viewerShell.classList.add('pdf-mode');
         frame.src = file + '#view=FitH';
         renderPdfDocument(file).catch(() => {
           pdfStack.style.display = 'none';
