@@ -341,7 +341,9 @@
       frame.style.display = 'none';
     }
 
-    if (!file) {
+    if (file === 'MMMF_Registration_Form_Printable.pdf') {
+      window.location.replace('registration-intake-form.html');
+    } else if (!file) {
       titleEl.textContent = 'Document unavailable';
       subEl.textContent = 'No document was selected.';
       frame.remove();
