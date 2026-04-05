@@ -275,12 +275,133 @@
       }
     }
     @media print {
+      @page {
+        size: letter;
+        margin: .26in .3in;
+      }
       body { background:#fff; }
       header, .search-host, .footer-note { display:none; }
       main { padding:0; max-width:none; }
       .form-shell { border:none; box-shadow:none; }
-      .pages { padding:0; gap:0; background:#fff; }
-      .page { border:none; border-radius:0; break-after:page; min-height:100vh; }
+      .doc-head {
+        background:#fff;
+        color:var(--navy);
+        padding:0 0 6px;
+        border-bottom:2px solid var(--gold);
+      }
+      .doc-head h2 {
+        font-size:1rem;
+        margin:0;
+      }
+      .doc-meta {
+        display:none;
+      }
+      .doc-page-pill { display:none; }
+      .pages {
+        display:block;
+        padding:0;
+        gap:0;
+        background:#fff;
+      }
+      .page {
+        border:none;
+        border-radius:0;
+        break-after:page;
+        min-height:auto;
+        padding:8px 0 0;
+      }
+      .page:first-child {
+        padding-top:6px;
+      }
+      .page:last-child {
+        break-after:auto;
+      }
+      .page:first-child .field-grid {
+        gap:6px 10px;
+        margin-bottom:6px;
+      }
+      .page:first-child .label {
+        font-size:.62rem;
+        line-height:1.1;
+      }
+      .page:first-child .line {
+        min-height:12px;
+      }
+      .page:first-child .check-grid,
+      .page:first-child .check-grid.three {
+        gap:1px 10px;
+        margin:3px 0 6px;
+      }
+      .page:first-child .check-item {
+        gap:4px;
+        min-height:12px;
+        font-size:.62rem;
+      }
+      .section-bar {
+        margin:0 0 8px;
+        padding:6px 9px;
+        font-size:.68rem;
+        border-radius:7px;
+      }
+      .field-grid {
+        gap:8px 12px;
+        margin-bottom:8px;
+      }
+      .field {
+        gap:3px;
+      }
+      .label {
+        font-size:.66rem;
+        line-height:1.18;
+      }
+      .line {
+        min-height:14px;
+      }
+      .check-grid,
+      .check-grid.three,
+      .check-grid.four {
+        gap:2px 12px;
+        margin:4px 0 8px;
+      }
+      .check-item {
+        gap:5px;
+        min-height:14px;
+        font-size:.66rem;
+        line-height:1.12;
+      }
+      .box {
+        width:9px;
+        height:9px;
+        flex-basis:9px;
+        border-width:1px;
+        margin-top:1px;
+      }
+      .scale-row {
+        gap:5px;
+        margin:5px 0 4px;
+      }
+      .scale-box {
+        width:20px;
+        height:20px;
+        font-size:.64rem;
+        border-width:1px;
+      }
+      .scale-caption {
+        font-size:.58rem;
+        max-width:168px;
+        gap:8px;
+      }
+      .textarea {
+        min-height:44px;
+        border-width:1.2px;
+        border-radius:8px;
+        background:linear-gradient(180deg,#fff 0,#fff 15px,#f8fafc 15px,#f8fafc 16px,#fff 16px);
+        background-size:100% 15px;
+      }
+      .signature-grid {
+        gap:10px;
+        margin-top:6px;
+      }
     }
   </style>
 </head>
