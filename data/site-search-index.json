@@ -176,6 +176,22 @@
     "keywords": ["registration", "intake", "printable", "enrollment"]
   },
   {
+    "title": "Community revenue projection",
+    "page": "Documents Library",
+    "section": "Revenue",
+    "url": "docs/index.html#doc-community-revenue",
+    "snippet": "Teacher-facing community pricing and revenue planning sheet for rollout and partnership conversations.",
+    "keywords": ["revenue", "community revenue", "pricing", "teacher mode", "planning", "projection"]
+  },
+  {
+    "title": "School revenue projection",
+    "page": "Documents Library",
+    "section": "Revenue",
+    "url": "docs/index.html#doc-school-revenue",
+    "snippet": "Teacher-facing school pricing and revenue planning sheet for implementation and presentation discussions.",
+    "keywords": ["revenue", "school revenue", "pricing", "teacher mode", "planning", "projection"]
+  },
+  {
     "title": "Program hub home",
     "page": "Program Hub",
     "section": "Hero",
