@@ -60,6 +60,11 @@ main{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
 .info-bar{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
 .info-bar .ib-item{font-size:.78rem;color:var(--gray-lt);display:flex;align-items:center;gap:.4rem;}
 .info-bar .ib-item strong{color:var(--white);}
+.info-bar a.ib-item{text-decoration:none;padding:.15rem 0;border-radius:8px;transition:color .18s ease,transform .18s ease;}
+.info-bar a.ib-item:hover,
+.info-bar a.ib-item:focus-visible{color:var(--white);transform:translateY(-1px);}
+.info-bar a.ib-item:hover strong,
+.info-bar a.ib-item:focus-visible strong{color:var(--gold-lt);}
 footer{text-align:center;padding:1.5rem 2rem;font-size:.68rem;color:var(--gray);border-top:1px solid var(--border);}
 footer a{color:var(--teal-lt);text-decoration:none;}
 @media (max-width:800px){.header-inner{flex-direction:column;align-items:flex-start}.htag{text-align:left}}
@@ -94,12 +99,12 @@ footer a{color:var(--teal-lt);text-decoration:none;}
   </div>
 
   <div class="info-bar">
-    <div class="ib-item">📁 <strong>11</strong> total repository assets</div>
-    <div class="ib-item">🌐 <strong>3</strong> browser-based tools</div>
-    <div class="ib-item">📄 <strong>4</strong> Word documents</div>
-    <div class="ib-item">🖨️ <strong>4</strong> print-ready PDFs</div>
-    <div class="ib-item">📊 <strong>1</strong> presentation deck</div>
-    <div class="ib-item">🎓 <strong>4</strong> implementation tracks</div>
+    <a class="ib-item" href="../docs/index.html#documents-library">📁 <strong>11</strong> total repository assets</a>
+    <a class="ib-item" href="#hub-web-apps">🌐 <strong>3</strong> browser-based tools</a>
+    <a class="ib-item" href="../docs/index.html#group-training">📄 <strong>4</strong> Word documents</a>
+    <a class="ib-item" href="../docs/index.html#group-outreach">🖨️ <strong>4</strong> print-ready PDFs</a>
+    <a class="ib-item" href="../docs/index.html#doc-teach-the-teacher">📊 <strong>1</strong> presentation deck</a>
+    <a class="ib-item" href="teach-the-teacher-portal.html">🎓 <strong>4</strong> implementation tracks</a>
   </div>
 
   <div class="section-label" id="hub-web-apps">Web Applications — Open in Browser</div>
