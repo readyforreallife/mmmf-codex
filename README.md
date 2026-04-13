@@ -1,6 +1,6 @@
-# Modern Manners & Mental Fortitude
+# Ready for Real Life Instruction and Education
 
-Program repository for the MMMF curriculum, facilitator tools, printable resources, and web-based delivery materials.
+Program repository for Ready for Real Life Instruction and Education (MMMF), including facilitator tools, printable resources, and web-based delivery materials.
 
 ## Quick Links
 
@@ -35,7 +35,7 @@ Program repository for the MMMF curriculum, facilitator tools, printable resourc
 
 ## Program Summary
 
-Modern Manners & Mental Fortitude is a real-world life skills program built around four core pillars:
+Ready for Real Life Instruction and Education (MMMF) is a real-world life skills program built around four core pillars:
 
 1. Respectful communication
 2. Emotional regulation
