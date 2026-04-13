@@ -1,11 +1,11 @@
 {
   "program": {
-    "name": "Modern Manners & Mental Fortitude",
+    "name": "Ready for Real Life Instruction and Education",
     "abbreviation": "MMMF",
     "version": "1.0",
     "founder": {
       "name": "Michael R. Terry",
-      "title": "Founders, MMMF Leadership Team",
+      "title": "Founders, Ready for Real Life Instruction and Education | MMMF LLC",
       "organization": "Columbia College of Missouri",
       "honor_society": "Kappa Delta Pi (KDP)",
       "website": "readyforreal.life",
@@ -18,7 +18,7 @@
     "class_size": "20–25 students",
     "standards_alignment": ["Utah CASEL", "Utah CCA Core Standards"],
     "submitted": "August 2025",
-    "copyright": "© Michael R. Terry. This material is protected intellectual property."
+    "copyright": "Ready for Real Life Instruction and Education | MMMF LLC — © Michael R. Terry and Mekenzi G. Terry"
   },
 
   "implementation_tracks": [

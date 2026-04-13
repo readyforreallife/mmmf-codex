@@ -214,11 +214,11 @@ async function sendRegistrationConfirmation(env, record) {
   const logoUrl = resolveEmailLogoUrl(env);
   const founderPhotos = resolveFounderPhotoUrls();
   const replyTo = String(env.RESEND_REPLY_TO || "readyforreal.life44@gmail.com").trim();
-  const fromName = String(env.RESEND_FROM_NAME || "Modern Manners & Mental Fortitude").trim();
+  const fromName = String(env.RESEND_FROM_NAME || "Ready for Real Life Instruction and Education").trim();
   const trackLine = details.tracks || record.role || "Track to be confirmed";
   const organizationLine = details.organization || record.organization || "Independent Registration";
   const locationLine = details.location || "Location to be confirmed";
-  const subject = "Your MMMF registration was received";
+  const subject = "Your Ready for Real Life Instruction and Education registration was received";
 
   const html = `
     <div style="margin:0;padding:0;background:#f7f2e9;font-family:Arial,sans-serif;color:#1e293b;">
@@ -231,7 +231,7 @@ async function sendRegistrationConfirmation(env, record) {
                   <img src="${escapeHtml(founderPhotos.michael)}" alt="Michael Terry" style="width:84px;height:84px;display:block;margin:0 auto;border-radius:999px;border:3px solid #c89b3c;object-fit:cover;">
                 </td>
                 <td align="center" valign="middle" style="width:188px;">
-                  <img src="${escapeHtml(logoUrl)}" alt="Modern Manners & Mental Fortitude" style="width:116px;height:116px;display:block;margin:0 auto;border-radius:24px;">
+                  <img src="${escapeHtml(logoUrl)}" alt="Ready for Real Life Instruction and Education" style="width:116px;height:116px;display:block;margin:0 auto;border-radius:24px;">
                 </td>
                 <td align="center" valign="middle" style="width:116px;padding-left:10px;">
                   <img src="${escapeHtml(founderPhotos.mekenzi)}" alt="Mekenzi Terry" style="width:84px;height:84px;display:block;margin:0 auto;border-radius:999px;border:3px solid #c89b3c;object-fit:cover;">
@@ -239,11 +239,12 @@ async function sendRegistrationConfirmation(env, record) {
               </tr>
             </table>
             <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#e8c778;font-weight:700;">Registration Confirmation</div>
-            <h1 style="margin:10px 0 0;color:#ffffff;font-size:32px;line-height:1.2;">Modern Manners & Mental Fortitude</h1>
+            <h1 style="margin:10px 0 0;color:#ffffff;font-size:32px;line-height:1.2;">Ready for Real Life Instruction and Education</h1>
+            <div style="margin:8px 0 0;color:#d9cfbd;font-size:13px;line-height:1.5;">Modern Manners and Mental Fortitude (MMMF) LLC</div>
           </div>
           <div style="padding:28px;">
             <p style="margin:0 0 16px;font-size:17px;line-height:1.7;">Hi ${escapeHtml(record.name || "there")},</p>
-            <p style="margin:0 0 8px;font-size:16px;line-height:1.7;">We&rsquo;re glad you&rsquo;re here. We received your registration for <strong>Modern Manners &amp; Mental Fortitude</strong> and are excited to connect with you.</p>
+            <p style="margin:0 0 8px;font-size:16px;line-height:1.7;">We&rsquo;re glad you&rsquo;re here. We received your registration for <strong>Ready for Real Life Instruction and Education</strong> and are excited to connect with you.</p>
             <p style="margin:0 0 20px;font-size:16px;line-height:1.7;">&mdash; Mike &amp; Mekenzi</p>
             <div style="background:#fbfaf7;border:1px solid #d9cfbd;border-radius:16px;padding:18px 18px 8px;margin-bottom:20px;">
               <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:12px;">Registration Summary</div>
@@ -255,7 +256,7 @@ async function sendRegistrationConfirmation(env, record) {
             </div>
             <div style="margin-bottom:20px;">
               <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:12px;">What You Signed Up For</div>
-              <p style="margin:0 0 10px;font-size:15px;line-height:1.7;">You registered interest in the MMMF program and its training or implementation pathway. Depending on your role, this may lead to program enrollment, track placement, scheduling, support planning, or Teach the Teacher follow-up.</p>
+              <p style="margin:0 0 10px;font-size:15px;line-height:1.7;">You registered interest in Ready for Real Life Instruction and Education (MMMF) and its training or implementation pathway. Depending on your role, this may lead to program enrollment, track placement, scheduling, support planning, or Teach the Teacher follow-up.</p>
             </div>
             <div style="margin-bottom:20px;">
               <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:12px;">What Happens Next</div>
@@ -264,7 +265,7 @@ async function sendRegistrationConfirmation(env, record) {
             </div>
             <p style="margin:0 0 12px;font-size:15px;line-height:1.7;">If you have any questions in the meantime, feel free to reach out to us at <a href="mailto:readyforreal.life44@gmail.com" style="color:#18304f;font-weight:700;">readyforreal.life44@gmail.com</a>.</p>
             <p style="margin:0;font-size:15px;line-height:1.7;">We&rsquo;re looking forward to working with you.</p>
-            <p style="margin:16px 0 0;font-size:14px;color:#64748b;line-height:1.7;">Mike Terry &amp; Mekenzi Terry<br>Founders · readyforreal.life</p>
+            <p style="margin:16px 0 0;font-size:14px;color:#64748b;line-height:1.7;">Mike Terry &amp; Mekenzi Terry<br>Founders, Ready for Real Life Instruction and Education | MMMF LLC</p>
           </div>
         </div>
       </div>
@@ -274,7 +275,7 @@ async function sendRegistrationConfirmation(env, record) {
   const text = [
     `Hi ${record.name || "there"},`,
     "",
-    "We’re glad you’re here. We received your registration for Modern Manners & Mental Fortitude and are excited to connect with you.",
+    "We’re glad you’re here. We received your registration for Ready for Real Life Instruction and Education and are excited to connect with you.",
     "",
     "— Mike & Mekenzi",
     "",
@@ -286,7 +287,7 @@ async function sendRegistrationConfirmation(env, record) {
     `Location: ${locationLine}`,
     "",
     "What You Signed Up For:",
-    "You registered interest in the MMMF program and its training or implementation pathway. Depending on your role, this may lead to program enrollment, track placement, scheduling, support planning, or Teach the Teacher follow-up.",
+    "You registered interest in Ready for Real Life Instruction and Education (MMMF) and its training or implementation pathway. Depending on your role, this may lead to program enrollment, track placement, scheduling, support planning, or Teach the Teacher follow-up.",
     "",
     "What Happens Next:",
     "We’ll take a look at your registration and follow up with the next step that fits your goals. This could include training details, scheduling options, onboarding information, or program placement.",
@@ -298,7 +299,7 @@ async function sendRegistrationConfirmation(env, record) {
     "We’re looking forward to working with you.",
     "",
     "Mike Terry & Mekenzi Terry",
-    "Founders · readyforreal.life"
+    "Founders, Ready for Real Life Instruction and Education | MMMF LLC"
   ].join("\n");
 
   const resendResponse = await fetch("https://api.resend.com/emails", {
@@ -517,7 +518,7 @@ export default {
           phone,
           role: String(payload.group || "").trim(),
           organization: String(payload.organization || "").trim(),
-          program: String(payload.program || "Modern Manners and Mental Fortitude").trim(),
+          program: String(payload.program || "Ready for Real Life Instruction and Education").trim(),
           notes: String(payload.notes || "").trim(),
           detailsJson: String(payload.details_json || "").trim(),
           submittedAt,
