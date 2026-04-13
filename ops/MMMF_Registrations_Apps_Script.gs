@@ -280,7 +280,7 @@ function handleMmmfRegistration_(ss, payload) {
     payload.email || '',
     payload.phone || '',
     payload.group || '',
-    payload.program || 'Modern Manners and Mental Fortitude',
+    payload.program || 'Ready for Real Life Instruction and Education',
     details.organization || '',
     details.location || '',
     details.referral || '',
@@ -307,9 +307,9 @@ function maybeSendMmmfNotification_(payload, result) {
   var recipient = payload.notify_email || Session.getActiveUser().getEmail();
   if (!recipient) return;
 
-  var subject = payload.notification_subject || 'New MMMF registration submission';
+  var subject = payload.notification_subject || 'New Ready for Real Life Instruction and Education registration submission';
   var body = [
-    'A new MMMF registration was submitted.',
+    'A new Ready for Real Life Instruction and Education registration was submitted.',
     '',
     'Sheet: ' + result.sheetName,
     'Row: ' + result.rowNumber,
@@ -362,7 +362,10 @@ function migrateMalformedMmmfRows_() {
   for (var i = 1; i < values.length; i += 1) {
     var row = values[i];
     var notes = String(row[4] || '');
-    var looksLikeMmmf = notes.indexOf('Program: Modern Manners and Mental Fortitude') !== -1 || notes.indexOf('Source: mmmf-github-pages-registration-form') !== -1;
+    var looksLikeMmmf =
+      notes.indexOf('Program: Ready for Real Life Instruction and Education') !== -1 ||
+      notes.indexOf('Program: Modern Manners and Mental Fortitude') !== -1 ||
+      notes.indexOf('Source: mmmf-github-pages-registration-form') !== -1;
     if (!looksLikeMmmf) continue;
 
     var parsed = parseDetailedNotes_(notes);
@@ -372,7 +375,7 @@ function migrateMalformedMmmfRows_() {
       row[1] || '',
       row[2] || '',
       row[3] || '',
-      'Modern Manners and Mental Fortitude',
+      'Ready for Real Life Instruction and Education',
       parsed.organization || '',
       parsed.location || '',
       parsed.referral || '',
