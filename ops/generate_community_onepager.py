@@ -285,9 +285,9 @@ def main():
     # modules
     draw.text((RIGHT_X + 40, y + 10), "FIVE MODULES", font=F_SANS_32, fill=GOLD_2)
     cards_y = y + 62
-    mod_w = 170
+    mod_gap = 12
+    mod_w = int((RIGHT_W - 80 - (mod_gap * 4)) / 5)
     mod_h = 142
-    mod_gap = 14
     modules = [
         ("01", "Modern\nManners"),
         ("02", "Emotional\nIntelligence"),
@@ -296,16 +296,12 @@ def main():
         ("05", "Personal\nGrowth"),
     ]
     for idx, (num, label) in enumerate(modules):
-        row = 0 if idx < 3 else 1
-        col = idx if idx < 3 else idx - 3
-        x = RIGHT_X + 40 + col * (mod_w + mod_gap)
-        if row == 1:
-            x += (mod_w + mod_gap) // 2
-        top = cards_y + row * (mod_h + 14)
+        x = RIGHT_X + 40 + idx * (mod_w + mod_gap)
+        top = cards_y
         draw.rounded_rectangle((x, top, x + mod_w, top + mod_h), radius=18, fill=NAVY_2)
         draw.text((x + 16, top + 14), num, font=F_SANS_48, fill=GOLD_2)
-        draw.multiline_text((x + 16, top + 60), label, font=F_SANS_28, fill=WHITE, spacing=3)
-    y = cards_y + mod_h * 2 + 36
+        draw.multiline_text((x + 14, top + 62), label, font=F_SANS_24, fill=WHITE, spacing=2)
+    y = cards_y + mod_h + 32
 
     # audience
     draw.text((RIGHT_X + 40, y + 8), "WHO IS THIS FOR?", font=F_SANS_32, fill=GOLD_2)
