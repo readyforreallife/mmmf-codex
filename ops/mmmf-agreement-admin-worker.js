@@ -147,6 +147,204 @@ async function writePublicAccessState(env, nextState) {
   await env.AGREEMENT_REGISTRY.put("public_access_state", JSON.stringify(nextState, null, 2));
 }
 
+function createChallengeCode() {
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "";
+  for (let index = 0; index < 6; index += 1) {
+    code += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+  return code;
+}
+
+async function readChallengeSession(env, code) {
+  const normalized = String(code || "").trim().toUpperCase();
+  if (!normalized) return null;
+  const raw = await env.AGREEMENT_REGISTRY.get(`challenge:${normalized}`);
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+async function writeChallengeSession(env, session) {
+  const code = String(session.code || "").trim().toUpperCase();
+  if (!code) {
+    throw new Error("Challenge session code is missing.");
+  }
+  session.updatedAt = new Date().toISOString();
+  await env.AGREEMENT_REGISTRY.put(`challenge:${code}`, JSON.stringify(session, null, 2), {
+    expirationTtl: 60 * 60 * 24
+  });
+}
+
+function summarizeVotes(session) {
+  const votes = session.currentVotes || {};
+  const counts = {};
+  Object.values(votes).forEach((value) => {
+    const key = String(value);
+    counts[key] = (counts[key] || 0) + 1;
+  });
+  return counts;
+}
+
+function buildChallengeResponse(session, options = {}) {
+  const {
+    includeHostKey = false,
+    includeAnswer = false,
+    participantId = ""
+  } = options;
+
+  const question = session.questions[session.currentIndex] || null;
+  const activeTeam = session.teams[session.turnIndex] || null;
+  const participants = Array.isArray(session.participants) ? session.participants : [];
+  const me = participants.find((entry) => entry.id === participantId) || null;
+
+  return {
+    ok: true,
+    session: {
+      code: session.code,
+      hostName: session.hostName,
+      started: !!session.started,
+      completed: !!session.completed,
+      theme: session.theme,
+      questionCount: session.questionCount,
+      timerSeconds: session.timerSeconds,
+      currentIndex: session.currentIndex,
+      updatedAt: session.updatedAt,
+      activeTeam: activeTeam ? activeTeam.name : "",
+      teams: session.teams,
+      participants: participants.map((entry) => ({
+        id: entry.id,
+        name: entry.name,
+        teamName: entry.teamName
+      })),
+      voteCounts: summarizeVotes(session),
+      currentQuestion: question
+        ? {
+            prompt: question.prompt,
+            choices: question.choices,
+            category: question.category,
+            theme: question.theme,
+            bloom: question.bloom,
+            objective: question.objective,
+            explanation: session.revealed ? question.explanation : "",
+            correctAnswer: includeAnswer || session.revealed ? question.correctAnswer : "",
+            answer: includeAnswer || session.revealed ? question.answer : -1
+          }
+        : null,
+      revealed: !!session.revealed,
+      selectedAnswer: typeof session.selectedAnswer === "number" ? session.selectedAnswer : -1,
+      me
+    },
+    ...(includeHostKey ? { host_key: session.hostKey } : {})
+  };
+}
+
+function normalizeChallengeTeams(rawTeams) {
+  const seen = new Set();
+  return (Array.isArray(rawTeams) ? rawTeams : [])
+    .map((entry, index) => {
+      const name = String((entry && entry.name) || entry || "").trim() || `Team ${index + 1}`;
+      return {
+        id: String(index + 1),
+        name,
+        score: Number((entry && entry.score) || 0) || 0,
+        correct: Number((entry && entry.correct) || 0) || 0
+      };
+    })
+    .filter((entry) => {
+      const key = entry.name.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+}
+
+function normalizeChallengeQuestions(rawQuestions) {
+  return (Array.isArray(rawQuestions) ? rawQuestions : [])
+    .map((question, index) => ({
+      id: String(question && question.id ? question.id : index + 1),
+      prompt: String((question && question.prompt) || "").trim(),
+      choices: Array.isArray(question && question.choices)
+        ? question.choices.map((choice) => String(choice || "").trim()).filter(Boolean).slice(0, 4)
+        : [],
+      answer: Number(question && question.answer),
+      correctAnswer: String((question && question.correctAnswer) || "").trim(),
+      explanation: String((question && question.explanation) || "").trim(),
+      bloom: String((question && question.bloom) || "").trim(),
+      bloomExplanation: String((question && question.bloomExplanation) || "").trim(),
+      objective: String((question && question.objective) || "").trim(),
+      category: String((question && question.category) || "").trim(),
+      theme: String((question && question.theme) || "").trim()
+    }))
+    .filter((question) => question.prompt && question.choices.length >= 2 && Number.isInteger(question.answer) && question.answer >= 0 && question.answer < question.choices.length);
+}
+
+async function createChallengeSessionRecord(env, payload) {
+  const hostName = String(payload.host_name || "").trim() || "Teacher";
+  const theme = String(payload.theme || "Mixed").trim() || "Mixed";
+  const questionCount = Math.max(1, Math.min(20, Number(payload.question_count) || 10));
+  const timerSeconds = Math.max(10, Math.min(90, Number(payload.timer_seconds) || 20));
+  const questions = normalizeChallengeQuestions(payload.questions).slice(0, questionCount);
+  if (!questions.length) {
+    throw new Error("Challenge session needs at least one question.");
+  }
+
+  const teams = normalizeChallengeTeams(payload.teams);
+  if (!teams.length) {
+    throw new Error("Challenge session needs at least one team.");
+  }
+
+  let code = "";
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    code = createChallengeCode();
+    const exists = await readChallengeSession(env, code);
+    if (!exists) break;
+    code = "";
+  }
+  if (!code) {
+    throw new Error("Could not create a live challenge code. Try again.");
+  }
+
+  const session = {
+    code,
+    hostKey: crypto.randomUUID(),
+    hostName,
+    theme,
+    questionCount: questions.length,
+    timerSeconds,
+    questions,
+    currentIndex: 0,
+    started: false,
+    completed: false,
+    revealed: false,
+    selectedAnswer: -1,
+    turnIndex: 0,
+    teams,
+    participants: [],
+    currentVotes: {},
+    updatedAt: new Date().toISOString()
+  };
+
+  await writeChallengeSession(env, session);
+  return session;
+}
+
+function requireChallengeHost(session, hostKey) {
+  if (String(hostKey || "").trim() !== String(session.hostKey || "").trim()) {
+    throw new Error("This live challenge host key is not valid.");
+  }
+}
+
+function resetChallengeRoundVotes(session) {
+  session.currentVotes = {};
+  session.revealed = false;
+  session.selectedAnswer = -1;
+}
+
 function buildRegistrationResponse(entries) {
   return {
     ok: true,
@@ -583,6 +781,172 @@ export default {
         }
         await writeRegistrations(env, nextRegistrations);
         return json(buildRegistrationResponse(nextRegistrations), 200, headers);
+      }
+
+      if (action === "challenge_create") {
+        const session = await createChallengeSessionRecord(env, payload);
+        return json(buildChallengeResponse(session, { includeHostKey: true }), 200, headers);
+      }
+
+      if (action === "challenge_get") {
+        const session = await readChallengeSession(env, payload.code);
+        if (!session) {
+          return json({ ok: false, error: "Live challenge not found." }, 404, headers);
+        }
+        const includeHostKey = String(payload.host_key || "").trim() === String(session.hostKey || "").trim();
+        const includeAnswer = includeHostKey && !!session.revealed;
+        return json(
+          buildChallengeResponse(session, {
+            includeHostKey,
+            includeAnswer,
+            participantId: String(payload.participant_id || "").trim()
+          }),
+          200,
+          headers
+        );
+      }
+
+      if (action === "challenge_join") {
+        const session = await readChallengeSession(env, payload.code);
+        if (!session) {
+          return json({ ok: false, error: "Live challenge not found." }, 404, headers);
+        }
+
+        const participantName = String(payload.name || "").trim();
+        if (!participantName) {
+          return json({ ok: false, error: "Participant name is required." }, 400, headers);
+        }
+
+        const teamName = String(payload.team_name || "").trim();
+        const teamMatch = session.teams.find((entry) => entry.name === teamName) || session.teams[0];
+        if (!teamMatch) {
+          return json({ ok: false, error: "No team is available for this live challenge." }, 400, headers);
+        }
+
+        const participantId = crypto.randomUUID();
+        session.participants = Array.isArray(session.participants) ? session.participants : [];
+        session.participants.push({
+          id: participantId,
+          name: participantName,
+          teamName: teamMatch.name,
+          joinedAt: new Date().toISOString()
+        });
+        await writeChallengeSession(env, session);
+
+        return json(
+          buildChallengeResponse(session, {
+            participantId
+          }),
+          200,
+          headers
+        );
+      }
+
+      if (action === "challenge_start") {
+        const session = await readChallengeSession(env, payload.code);
+        if (!session) {
+          return json({ ok: false, error: "Live challenge not found." }, 404, headers);
+        }
+        requireChallengeHost(session, payload.host_key);
+        session.started = true;
+        session.completed = false;
+        session.currentIndex = 0;
+        session.turnIndex = 0;
+        session.teams = normalizeChallengeTeams(session.teams);
+        session.teams.forEach((team) => {
+          team.score = 0;
+          team.correct = 0;
+        });
+        resetChallengeRoundVotes(session);
+        await writeChallengeSession(env, session);
+        return json(buildChallengeResponse(session, { includeHostKey: true }), 200, headers);
+      }
+
+      if (action === "challenge_submit_vote") {
+        const session = await readChallengeSession(env, payload.code);
+        if (!session) {
+          return json({ ok: false, error: "Live challenge not found." }, 404, headers);
+        }
+        if (!session.started || session.completed) {
+          return json({ ok: false, error: "This live challenge is not accepting votes right now." }, 400, headers);
+        }
+        if (session.revealed) {
+          return json({ ok: false, error: "Voting for this question is closed." }, 400, headers);
+        }
+
+        const participantId = String(payload.participant_id || "").trim();
+        const participant = (session.participants || []).find((entry) => entry.id === participantId);
+        if (!participant) {
+          return json({ ok: false, error: "Participant not found for this live challenge." }, 404, headers);
+        }
+
+        const choice = Number(payload.choice_index);
+        const question = session.questions[session.currentIndex];
+        if (!question || !Number.isInteger(choice) || choice < 0 || choice >= question.choices.length) {
+          return json({ ok: false, error: "That vote is not valid for this question." }, 400, headers);
+        }
+
+        session.currentVotes = session.currentVotes || {};
+        session.currentVotes[participantId] = choice;
+        await writeChallengeSession(env, session);
+        return json(buildChallengeResponse(session, { participantId }), 200, headers);
+      }
+
+      if (action === "challenge_host_answer") {
+        const session = await readChallengeSession(env, payload.code);
+        if (!session) {
+          return json({ ok: false, error: "Live challenge not found." }, 404, headers);
+        }
+        requireChallengeHost(session, payload.host_key);
+        if (!session.started || session.completed) {
+          return json({ ok: false, error: "This live challenge is not active." }, 400, headers);
+        }
+
+        const question = session.questions[session.currentIndex];
+        if (!question) {
+          return json({ ok: false, error: "No active question found." }, 404, headers);
+        }
+
+        const selectedAnswer = Number(payload.selected_answer);
+        if (!Number.isInteger(selectedAnswer) || selectedAnswer < 0 || selectedAnswer >= question.choices.length) {
+          return json({ ok: false, error: "Selected answer is not valid." }, 400, headers);
+        }
+
+        session.selectedAnswer = selectedAnswer;
+        session.revealed = true;
+        const activeTeam = session.teams[session.turnIndex] || null;
+        if (activeTeam && selectedAnswer === question.answer) {
+          const participantCount = Object.keys(session.currentVotes || {}).length;
+          const awarded = 500 + participantCount * 75;
+          activeTeam.score += awarded;
+          activeTeam.correct += 1;
+        }
+        await writeChallengeSession(env, session);
+        return json(buildChallengeResponse(session, { includeHostKey: true, includeAnswer: true }), 200, headers);
+      }
+
+      if (action === "challenge_next") {
+        const session = await readChallengeSession(env, payload.code);
+        if (!session) {
+          return json({ ok: false, error: "Live challenge not found." }, 404, headers);
+        }
+        requireChallengeHost(session, payload.host_key);
+        if (!session.started) {
+          return json({ ok: false, error: "This live challenge has not started yet." }, 400, headers);
+        }
+
+        if (session.currentIndex >= session.questions.length - 1) {
+          session.completed = true;
+          session.revealed = true;
+          await writeChallengeSession(env, session);
+          return json(buildChallengeResponse(session, { includeHostKey: true, includeAnswer: true }), 200, headers);
+        }
+
+        session.currentIndex += 1;
+        session.turnIndex = session.teams.length ? (session.turnIndex + 1) % session.teams.length : 0;
+        resetChallengeRoundVotes(session);
+        await writeChallengeSession(env, session);
+        return json(buildChallengeResponse(session, { includeHostKey: true }), 200, headers);
       }
 
       return json({ ok: false, error: "Unknown action." }, 400, headers);
