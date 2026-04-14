@@ -179,14 +179,15 @@ def main():
     draw.rounded_rectangle((RIGHT_X, MARGIN, PAGE_W - MARGIN, PAGE_H - MARGIN), radius=22, fill=NAVY_3)
 
     # left column top
-    draw.text((MARGIN + 44, MARGIN + 48), "MMMF", font=F_SANS_66, fill=GOLD_2)
-    draw.text((MARGIN + 44, MARGIN + 124), "REAL-WORLD SKILLS", font=F_SANS_32, fill=GOLD_2)
+    draw.text((MARGIN + 44, MARGIN + 48), "READY FOR REAL LIFE", font=F_SANS_48, fill=GOLD_2)
+    draw.text((MARGIN + 44, MARGIN + 108), "INSTRUCTION & EDUCATION", font=F_SANS_32, fill=GOLD_2)
+    draw.text((MARGIN + 44, MARGIN + 154), "Modern Manners and Mental Fortitude (MMMF) LLC", font=F_SANS_24, fill=MUTED)
 
     title_x = MARGIN + 44
-    draw.text((title_x, MARGIN + 220), "Modern", font=F_SERIF_74, fill=WHITE)
-    draw.text((title_x, MARGIN + 300), "Manners", font=F_SERIF_74, fill=WHITE)
-    draw.text((title_x, MARGIN + 382), "& Mental", font=F_SERIF_74, fill=GOLD_2)
-    draw.text((title_x, MARGIN + 464), "Fortitude", font=F_SERIF_74, fill=WHITE)
+    draw.text((title_x, MARGIN + 238), "Ready for", font=F_SERIF_58, fill=WHITE)
+    draw.text((title_x, MARGIN + 306), "Real Life", font=F_SERIF_58, fill=GOLD_2)
+    draw.text((title_x, MARGIN + 374), "Instruction &", font=F_SERIF_58, fill=WHITE)
+    draw.text((title_x, MARGIN + 442), "Education", font=F_SERIF_58, fill=WHITE)
 
     stats_y = MARGIN + 630
     stat_gap = 18
@@ -208,7 +209,7 @@ def main():
         "WHY THIS MATTERS",
         [
             "Students need more than information. They need tools for communication, regulation, and responsible action.",
-            "MMMF gives schools a practical way to teach those habits directly instead of assuming them.",
+            "Ready for Real Life Instruction and Education gives schools a practical way to teach those habits directly instead of assuming them.",
             "That supports school climate, personal responsibility, and real-world readiness.",
         ],
     )
