@@ -1,93 +1,1200 @@
 %PDF-1.4
-%“Œ‹ž ReportLab Generated PDF document (opensource)
+%âãÏÓ
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R
+/Producer (pypdf)
 >>
 endobj
 2 0 obj
 <<
-/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 10 0 R ]
 >>
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/Type /Catalog
+/Pages 2 0 R
 >>
 endobj
 4 0 obj
 <<
-/Contents 9 0 R /MediaBox [ 0 0 612 792 ] /Parent 8 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/Contents 5 0 R
+/MediaBox [ 0 0 612 792 ]
+/Resources <<
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+/F2 8 0 R
+/F2-0 9 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
 >>
 endobj
 5 0 obj
 <<
-/Contents 10 0 R /MediaBox [ 0 0 612 792 ] /Parent 8 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/Length 9249
 >>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 60 706 cm
+q
+BT 1 0 0 1 0 4 Tm 26 TL /F2 22 Tf .105882 .164706 .290196 rg (Modern Manners & Mental Fortitude) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 686 cm
+q
+BT 1 0 0 1 0 5 Tm 16 TL /F1 11 Tf .352941 .392157 .470588 rg (Community & Workshop Revenue Potential \227 readyforreal.life) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 680 cm
+Q
+q
+1 0 0 1 60 678 cm
+q
+1 w
+1 J
+.113725 .619608 .458824 RG
+n 0 0 m 492 0 l S
+Q
+Q
+q
+1 0 0 1 60 648 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 9 Tf 12 TL (EARNING POTENTIAL SUMMARY) Tj T* ET
+Q
+Q
+q
+1 0 0 1 54 571 cm
+q
+.956863 .964706 .980392 rg
+n 0 69 504 -69 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 12 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 20 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL 77.178 0 Td ($4,000) Tj T* -77.178 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL 66.464 0 Td (Single workshop floor) Tj T* -66.464 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 174 12 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 20 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL 72.174 0 Td ($48,000) Tj T* -72.174 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL 68.908 0 Td (Year 1 target \(1/mo\)) Tj T* -68.908 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 342 12 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 20 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL 72.93 0 Td ($150K+) Tj T* -72.93 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL 76.912 0 Td (Year 3-5 ceiling) Tj T* -76.912 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 J
+1 j
+.815686 .847059 .909804 RG
+.5 w
+n 168 0 m 168 69 l S
+n 336 0 m 336 69 l S
+Q
+Q
+Q
+q
+1 0 0 1 60 541 cm
+q
+BT 1 0 0 1 0 3 Tm 12 TL /F2 9 Tf .352941 .392157 .470588 rg (COMMUNITY & GROUP WORKSHOPS) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 385 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.113725 .619608 .458824 rg
+n
+14 124 m
+86.899 124 l
+89.1102 124 90.899 125.7888 90.899 128 c
+90.899 134 l
+90.899 136.2112 89.1102 138 86.899 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (In-person workshop) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Half-day workshop) Tj T* ET
+.113725 .619608 .458824 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($150-$200) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per attendee / 3-4 hours) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.113725 .619608 .458824 rg
+n
+12 58 m
+75.8 58 l
+76.9056 58 77.8 58.8944 77.8 60 c
+77.8 61 l
+77.8 62.1056 76.9056 63 75.8 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm (-> 20 attendees x $175 avg = $3,500/event) Tj T* ET
+BT 1 0 0 1 10 19 Tm (-> Church groups, youth orgs, PTSO) Tj T* ET
+BT 1 0 0 1 10 6 Tm (-> Community centers, rec programs) Tj T* ET
+BT 1 0 0 1 10 -7 Tm (-> No school contract required) Tj T* ET
+Q
+q
+1 0 0 1 246 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.729412 .458824 .090196 rg
+n
+14 124 m
+81.845 124 l
+84.0562 124 85.845 125.7888 85.845 128 c
+85.845 134 l
+85.845 136.2112 84.0562 138 81.845 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Full-day workshop) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Full-day workshop) Tj T* ET
+.729412 .458824 .090196 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($200-$300) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per attendee / 6-8 hours) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.729412 .458824 .090196 rg
+n
+12 58 m
+109.7 58 l
+110.8056 58 111.7 58.8944 111.7 60 c
+111.7 61 l
+111.7 62.1056 110.8056 63 109.7 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm (-> 20 attendees x $250 avg = $5,000/event) Tj T* ET
+BT 1 0 0 1 10 19 Tm (-> Deeper curriculum coverage) Tj T* ET
+BT 1 0 0 1 10 6 Tm (-> Includes workbook materials) Tj T* ET
+BT 1 0 0 1 10 -7 Tm (-> Suitable for teen leadership programs) Tj T* ET
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 60 355 cm
+q
+BT 1 0 0 1 0 3 Tm 12 TL /F2 9 Tf .352941 .392157 .470588 rg (ONLINE & SELF-PACED) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 199 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.196078 .4 .678431 rg
+n
+14 124 m
+80.298 124 l
+82.5092 124 84.298 125.7888 84.298 128 c
+84.298 134 l
+84.298 136.2112 82.5092 138 80.298 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Self-paced course) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Individual online course) Tj T* ET
+.196078 .4 .678431 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($99-$297) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per person / self-paced) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.196078 .4 .678431 rg
+n
+12 58 m
+64.5 58 l
+65.6056 58 66.5 58.8944 66.5 60 c
+66.5 61 l
+66.5 62.1056 65.6056 63 64.5 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm (-> Parents, homeschool families, individuals) Tj T* ET
+BT 1 0 0 1 10 19 Tm (-> No live facilitation required) Tj T* ET
+BT 1 0 0 1 10 6 Tm (-> Evergreen revenue once built) Tj T* ET
+BT 1 0 0 1 10 -7 Tm (-> Scales without added time cost) Tj T* ET
+Q
+q
+1 0 0 1 246 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.32549 .290196 .717647 rg
+n
+14 124 m
+77.169 124 l
+79.3802 124 81.169 125.7888 81.169 128 c
+81.169 134 l
+81.169 136.2112 79.3802 138 77.169 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Coaching add-on) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Course + coaching bundle) Tj T* ET
+.32549 .290196 .717647 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($500-$1,000) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per person / course + sessions) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.32549 .290196 .717647 rg
+n
+12 58 m
+132.3 58 l
+133.4056 58 134.3 58.8944 134.3 60 c
+134.3 61 l
+134.3 62.1056 133.4056 63 132.3 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm (-> Online course + live accountability sessions) Tj T* ET
+BT 1 0 0 1 10 19 Tm (-> Small groups of 4-6 participants) Tj T* ET
+BT 1 0 0 1 10 6 Tm (-> Higher price point, lower volume) Tj T* ET
+BT 1 0 0 1 10 -7 Tm (-> Builds referral network) Tj T* ET
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 60 169 cm
+q
+BT 1 0 0 1 0 3 Tm 12 TL /F2 9 Tf .352941 .392157 .470588 rg (CORPORATE & ORGANIZATION CONTRACTS) Tj T* ET
+Q
+Q
+ 
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+1 1 1 rg
+n
+42 684 430 62 re
+f*
+0.145098 0.227451 0.356863 rg
+BT
+/F2-0 18 Tf
+21.6 TL
+ET
+BT
+1 0 0 1 58 724 Tm
+(Ready for Real Life Instruction and Education) Tj
+T*
+ET
+0.431373 0.462745 0.52549 rg
+BT
+/F1-0 8.5 Tf
+10.2 TL
+ET
+BT
+1 0 0 1 58 710 Tm
+(Modern Manners and Mental Fortitude \050MMMF\051 LLC) Tj
+T*
+ET
+0.431373 0.462745 0.52549 rg
+BT
+/F1-0 10 Tf
+12 TL
+ET
+BT
+1 0 0 1 58 694 Tm
+(Community \046 Workshop Revenue Potential \227 readyforreal\056life) Tj
+T*
+ET
+Q
+
+
+endstream
 endobj
 6 0 obj
 <<
-/PageMode /UseNone /Pages 8 0 R /Type /Catalog
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 7 0 obj
 <<
-/Author (\(anonymous\)) /CreationDate (D:20260407163534+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260407163534+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
-  /Subject (\(unspecified\)) /Title (\(anonymous\)) /Trapped /False
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 8 0 obj
 <<
-/Count 2 /Kids [ 4 0 R 5 0 R ] /Type /Pages
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 9 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2422
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
 >>
-stream
-Gb"/(>BAQ-&q8H9fE]_?2mm#n]K_q333JgN[3\mPVNWf]@44ZU99BQM3q^6P]-'A\Xshn=4O(AVN=@EFllGt3,lnuM6N9h^!3`;>H7;*MR*J"-b_>9r>YKL:HGZcU3<\-X`V9jCMj=Ar?%MW^_s+!#WECpk]eG[1qCZVp1?'MKTj5D'FYQg+%bG]lX)\=BJSUNPE<_au=f#+];r>C_(RVo\q*3j$Sdp4Z:Bur&&4Qm]6YIJ[:I_M&0p9B]J>"<gPh+g+=KUjNXmT$`cUIZqAm)3DXDV$E/%@#Xe0mbN5"HPVWT)Ue]I7dD=I.5Sd>o:D];IsIBJ&-urr(2R69'PgJGJCD*hmQ5/f2NGHF_n@!]Q9%Ah_m_`&6nm9t]p:L\sNeM0++k3U6D!Cci[Ghn[KMH81p"cE:RGmeZcrr4^WDcNPs57Wd^"/0&&[M/X/Le:L)P"b$RqGG1(-WF5_*a#/oI0c_LQ<TS\(d6fMF$!SZ6>'8u`StmZfLlcjRbqfWm^d+TX)&sa/-_,8DMZ3%Uho?`Xr+G"45YJ"s]`R)(Y4!:nP;HWW$9m4oS7b8f[`[qhD3aq]JPm\2s#s4N7cLNt_u$UlH21.:$sCMc+Q'60`0F>-/lVurNlC7_q!cPZQTJtEIHe94n+:2P=B>ijs7kua-gdttEFe"68B>(,3dhMOQ"HDU>;^S)m;_(qq"IFBKn9X9Y`Rp9=>)X7$siCjLK-(LqAnk<7jF</WdHfdNisPQBHB>G%MhIY'mibC>LWeQXaLF?@<?qrDE+#t7o4Fd*kf1:T1@o`-Z;L6P=$YR$,%]u7YA9CdKeAglC4Ag6;P2"1W.UK:?*tk@[]#9FJPKP3;.#"R'<!HH-P&dPAlB:H;&Y!*cZ&7KF#<J`&4Fq:%N?6DacMc4[i"ibMMPdSWH<kckBB:>VmVr=VsSraEh9JS%-sI`6A[N"X+)GV+F6O34,_4HmT#C\)lV&@+dWKMhF-%Rh-$)U+e"_:-Ef8-.daSAn!T1GG01LIkhbDX::[0["Nth*4D32SKno#ArM"[4NRD8]^HP[>Ldq\l>VI(,sgF&KYujl.JOE4Od*=p2XeuO]DY&W,@lLA9-iD1$:jQ"),u=d7rhh^M>+h9e!?8Tq0P+,;KG;46!WC9CShf9@^0o]=k)PF=-,E]/0]A&mN4OsD44&c696M3<DR88j,n,*U81-Yk(i9f\PK3*-UP#TM/3s:]C:8:XDg^d2ia+H%1=FXEP$q%U<+[Q2i2'VfaT"!')aalFSNWg9*10.N@@h<N?rfe$![+ld'bbe18^HWea,b)=EAg9CC\iJ\#Jg%E'BS.nha+?PlJ_(ELNunIn*%Fo4A*>_3#!cLi4+!?T<($4O-aeC1$A(d=]m]=[qSt\kJEo.#WDb3J"f:Y*MnK$_6*J-_jEHI`nDO//"2'#Q=iZ^^7*c@St.G9dbRB?o\W'fHeY7a<2r&Wf3,K3IIjU;U+XGck]EUcG)b8$-Wu?#D;QT../::5U/FM-n`F8D%J#cbR7@q>FLe`KLV2lY_Zc!&>C$8?Ql.KelgR0lb="(*#-gATVhet@S-U@H%&$Kqr(0PP_8/<=<`".K#SQlN/T??EcW`s;q`9K'mdQb=p=;2XZ&!5-NK(s\-3Y/]%T@W/DhsHadCRhR3m&WYHYUqW\RnZa"_.e-WrT""m?AD/;deC'dL)]EV;olA5]=*r%V,(01r1-ars^R%$>7lY4po'^'9tY*7+K`4k=:k2&KY-K/L3L]'S=ESR6boW4*CaRK'b*_J663&pb1/MccJhnIPg`(AQ7.TO]+)$jaH,K`sb8CCi=UA"^.O/-oE3"G2C,<sXBkKal?h:=K[_'NTDM*$@5^BBa7oX5aVG4A0b':Y*5k4UhUj#hu@-GSUuM^#ph\>)0db&F;G-`X(J@A$<$(4m!\.Hs])p.M/;uBP(dF1G`4fNMro?p(DB6-8#n^Y^'@e.qRFsH+ZbU<8ka%4V-?K["U\[BX77GnL%(NIhc$6-K:V_V??cL&1/2>iDsZATIKG"_8eU]\q,&1rfT5ckY*M>q,J!PAlpO_F@Bhe;uOTp.S"f&eCHo$L]Asc""^.<3dgf>>nA_<1geX=/(D59=CQ!(-&-*;`"E7d=tYj7ntLF(ojPsf&LYaY?VlpXMu5SsjBU^LI#H*ZA::QN=`t<I3eR&]2"@ND'"^BA4:e)1ete;ZD"),Qd,sW?dBUBM,FN%f/&u)$mB%@05;iR"eaune<;0G<eEU[jPM2Ji9>m4FmSsVc7tX4"+J!#[6;V[20;lBhB!R<#b^=I:`>m[I&*pa,dNi,=Lh2Vlc.d?FUs-gg9u4D3oBHIai\Nd0/[/aNmaS[Yo,:J?[R$^XX0T\0@]h1qg)b19W$ZtMT<Q<oU[d$%3ipa(c.R(*^U*041kbJJE&p0ET0E0!$[VgXO]>^i~>endstream
 endobj
 10 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2610
+/Contents 11 0 R
+/MediaBox [ 0 0 612 792 ]
+/Resources <<
+/Font <<
+/F1 6 0 R
+/F1-0 12 0 R
+/F2 8 0 R
+/F2-0 13 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+11 0 obj
+<<
+/Length 9580
 >>
 stream
-Gb!Sm>Ar9+&q9SYR"o(3/Rh_U/s]fZV_-><[bE]Wia&3B?5/g9eOlR&P+;4EqOQS6G21_icV]7G_FR'mSG@F*AqiZ-nF=Qks1ADX3JHY")))QL3O$j<@JU`lVkZIHbk@!DLlr<2A"0[Ve7.LWHnE@Q&i/aW8jD\2,qOq;(q_,ape_B)lDKI\_Y(Z6?3L"tH5*,B2<#cNQM:m$JAhgqGSgPWi[!Hn(dgK]-O[KQ8#=<!m=eY5'jj2s;66DBf-m>M^D6=IVAuKL@irI@1(S-=R>dH,Qd8,BNh6Og:IFUg$RS!1WRW4/iY$o(qNQ=m)!OXQ8jb7h@]jK\CgTTe,Y=/9S]9hBJX1>Af]*AV[au.bPZ8fe'S-HF/]N`EWo8F!P.DW2:L=3hVI2p@9B#+$ph?&cBA5SuHd#nb>Fb?(^fIqdCn_Y?.lb:AMl\Q1cItV9ONY48=l0,de'B^r7T(<!UEng.DD;cSehQi#)XkHqVPt8Sr"1(LLI).95o&^e'd2$.SqEtBV;)?aMtH3[3=n=kmQW`O*tj3G`\2_s+.l!ofN#'(1@Tm[ZY0C]E>dAICC^`N:N6Z$BqK@HI3fS`HBBdI-0c6nYu%`1mD;u[n5;Tj2+qG/Jei%0`mG^H:iL1pc0?FG`Jpk:"+#2`)MYgC'6SGKl(2#8VK4C*#=,<YOcs[1&l4GnXPg=R#Sic$;sYG]3@lNh&YJ:%V:%Y^Z'/R/Yd'T#$U\iAVa7c%SVX90WRrEDrH6MIbt6BG[F4M#Td+G+,WA1bd3Ve=q6<c5c2UD*^sH]k$bYhpU)$HJRL?'*]i&lWZrio47Csh'BQdLbB0N:nnk"#lEngr.0'WTHolb[a3d/AY]!\Jp;SYu587"(FkF_qneHTtT$^F_IeVkkNc`=3_AVF=1@P(Du/sS/D#.bPV&qXE$qm[;AaPm/TTk.\M4X;tCk2Q.7EAtUbkVj.k?Xb\Z;]B'Vqng;g=4cu]<_Rm\'c15I(5abGrVp;R\QOdU$P@RJ3PS(+q+Y[?M:(EF1_t$HjmX=>>BkuQ\-1\B\?,F*kJrE,8$0_T,UG)-WMCt`gP-F"f<%e4eP&Lg73,9"d14J/j.Ng"+#0G$P4`'.;<JWj<gf]R86md4'NCO(W\D#S&5caA!UEDoU4KocADO=0NR/Ah$cqTNi)t"Nb,9m8eJr'+PTlSS'E[F&/EQgI6d35C?^dfr_4?g$PG^g9QX*I_Si]@c=;O\O=-Q.cfo%=%p$Z=l'A6XRpaU1qSU_j)qU9:6F<6E+?,!h'lcVLFhuA-3+0Mg(>eZ[+HM.:"_$G4h&N;uJ#5bVlX/Rlf-pj5YH%=9YG+GX^*CTVo`4kqC@TbsnDtG3pE*Br*TBlkHd$LtT;hm.hU((<;]X;'&4ciT?n7DX]hIqP7+Fnh18S%,U/s*1GK7h`Da"0>WXi3Rg(8RNd']LrJ$dg$6iXB,0:oj@5oFp^;CR5:b!q`De:c&:p7V9H#Z<6Q7n].gc-'%JMKhpFSK:t\F./cS)e.W,?',2>hlAY8HF2Hu0)$l4W8'r<-#!r]]UM,ZP_k=tYUkFXO(uJk0@PS+tlr54&bdoiBMV5h^,`k\(isn<!SRIW*q#:62UXU.e/FlSFc9PdZEA1%U@DK%qU;,&i+IgWom%Vf9*]oMNo-X/9j%XK_2o?c/Ku[9Hnn'#Ka`3JIh@'P,pdrCA#45UTSPo0E"nE:%`H88k%S'B^ef?pj,S1*2nKpBDRphDMEWMIb"+d9rq3urNn3DC/Dh^Qi(7:;bXFsca'X'bYD0Atrc119;&&sq!#qn*UP/aC[R:3PM5D^onJN[EGcGp=oG!j1j?fF1B/uu"QnVDS2^V%CtcR2s[Qo).taVpH.k+U?.12[#C(4W6CH2Fupje]C#97<kuU\NTXQue]c/@[U^.npru>T7:;V@<nCh/i)B/j9Z1B*W%,gNT/B:LDaTY.4(`5.bh+c4o*H7rAihM*A$/jn1aqG.XBf_`9Zd0bmB&I.A(TIE?5#*\\thpG>S$8G:a0@G8QnM`]V"cn:$ad+99&'.[N*rLL]e1SJQ.QdrK?%K$@t0YjC:H7`-$[,"D@J`e=enb?FH06h*O7@gDENpj8CbWo)bn&heb\]d-MOu6dN'aDeubX>boKri=[5%e.\*hOsFQ"+oojiiiMf,lXuoMni(bikQD'Im4C;Qf5XfRrF312rjCmNpl:Q)r?[AuaVdH<\82Atf;da->Mr7ht]%Wn`!+'7[-;107]`M3DaZe`CYG:g^)1LQ+5J05r?m.nO6gdT_C'a[0plD_Br(rf"Wq-$20Lp[n,*X6F-V12B^YXF">;G1I,B"1[G`E:IRBXB)-oT`rI-"C78>RVe_n;Nt_p71FR"b$n+IE,B5OmEc*5(-Zq:Mchm^YUX[,7,-/CeUq45RKh'L=Oa]+;Sa!pqgK5R^6GqYK$q:j37.o$LV(tmj>_iTiP+QL)B=VH]\*',ZVA&=ST&TFJK4Aap?SCg,>6EW\-l^:<e5Boed8&/*&().npT!:XhGTSj.rkIKQtEo3i"IkecC5Z_h2:U\(u;5#<*^6NO'(3"`:08\+>n[kg""J3=PqqW3W/iE03k]g[d+TOCLlGO'.XcHclbkIfM/+VRQ~>endstream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 60 584 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.6 .235294 .113725 rg
+n
+14 124 m
+92.345 124 l
+94.5562 124 96.345 125.7888 96.345 128 c
+96.345 134 l
+96.345 136.2112 94.5562 138 92.345 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Organization contract) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Private org / employer) Tj T* ET
+.6 .235294 .113725 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($2,000-$5,000) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per engagement / group) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.6 .235294 .113725 rg
+n
+12 58 m
+143.6 58 l
+144.7056 58 145.6 58.8944 145.6 60 c
+145.6 61 l
+145.6 62.1056 144.7056 63 143.6 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm (-> Businesses, nonprofits, faith orgs) Tj T* ET
+BT 1 0 0 1 10 19 Tm (-> Youth-serving organizations) Tj T* ET
+BT 1 0 0 1 10 6 Tm (-> Juvenile detention / reentry programs) Tj T* ET
+BT 1 0 0 1 10 -7 Tm (-> Custom delivery for groups up to 30) Tj T* ET
+Q
+q
+1 0 0 1 246 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.729412 .458824 .090196 rg
+n
+14 124 m
+94.298 124 l
+96.5092 124 98.298 125.7888 98.298 128 c
+98.298 134 l
+98.298 136.2112 96.5092 138 94.298 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Speaking engagement) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Keynote / speaking) Tj T* ET
+.729412 .458824 .090196 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($500-$3,000) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per event) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.729412 .458824 .090196 rg
+n
+12 58 m
+98.4 58 l
+99.5056 58 100.4 58.8944 100.4 60 c
+100.4 61 l
+100.4 62.1056 99.5056 63 98.4 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm (-> Conferences, parent nights, summits) Tj T* ET
+BT 1 0 0 1 10 19 Tm (-> Fee varies by audience size and travel) Tj T* ET
+BT 1 0 0 1 10 6 Tm (-> Often leads to follow-on workshop bookings) Tj T* ET
+BT 1 0 0 1 10 -7 Tm (-> Builds brand visibility) Tj T* ET
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 60 554 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 9 Tf 12 TL (5-YEAR REVENUE PROJECTIONS) Tj T* ET
+Q
+Q
+q
+1 0 0 1 54 388 cm
+q
+.105882 .164706 .290196 rg
+n 0 158 504 -23 re f*
+1 1 1 rg
+n 0 135 504 -27 re f*
+.956863 .964706 .980392 rg
+n 0 108 504 -27 re f*
+1 1 1 rg
+n 0 81 504 -27 re f*
+.956863 .964706 .980392 rg
+n 0 54 504 -27 re f*
+1 1 1 rg
+n 0 27 504 -27 re f*
+1 1 1 rg
+BT /F2 9 Tf 12 TL ET
+q
+1 0 0 1 8 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Year) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Conservative) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Target) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (High Path) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Key activity) Tj T* ET
+Q
+Q
+0 0 0 rg
+BT /F1 9 Tf 12 TL ET
+q
+1 0 0 1 8 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($12,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($24,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($48,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (6-12 workshops, online course launched) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 2) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($25,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($50,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($80,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Org contracts added, speaking bookings) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 3) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($40,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($75,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($120,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Recurring org clients, course revenue) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 4) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($50,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($90,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($135,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Referral network established) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 5) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($60,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($100,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($150,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Stable recurring community revenue) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.815686 .847059 .909804 RG
+.4 w
+n 0 158 m 504 158 l S
+n 0 0 m 504 0 l S
+n 0 0 m 0 158 l S
+n 504 0 m 504 158 l S
+n 0 135 m 504 135 l S
+n 0 108 m 504 108 l S
+n 0 81 m 504 81 l S
+n 0 54 m 504 54 l S
+n 0 27 m 504 27 l S
+n 50.4 0 m 50.4 158 l S
+n 131.04 0 m 131.04 158 l S
+n 211.68 0 m 211.68 158 l S
+n 292.32 0 m 292.32 158 l S
+Q
+Q
+Q
+q
+1 0 0 1 60 374 cm
+Q
+q
+1 0 0 1 54 252 cm
+q
+.956863 .964706 .980392 rg
+n 0 122 504 -122 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 14 12 cm
+q
+BT 1 0 0 1 0 89 Tm 14 TL /F2 9 Tf .105882 .164706 .290196 rg (About the program) Tj /F1 9 Tf  T*  T* (Modern Manners & Mental Fortitude is a 16-week, scenario-based curriculum focused on applied decision-making,) Tj T* (real-world communication, and character development. The program was developed from nearly two decades of law) Tj T* (enforcement experience and is structured around Social Emotional Learning \(SEL\) frameworks with an emphasis on) Tj T* (transfer \227 equipping students to apply skills in real-life situations, not just academic settings. It is designed for high) Tj T* (school students and young adults and can be delivered in school, community, and organizational settings.) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.113725 .619608 .458824 RG
+3 w
+n 0 0 m 0 122 l S
+Q
+Q
+Q
+q
+1 0 0 1 60 242 cm
+Q
+q
+1 0 0 1 60 240.5 cm
+q
+.5 w
+1 J
+.815686 .847059 .909804 RG
+n 0 0 m 492 0 l S
+Q
+Q
+q
+1 0 0 1 60 223.5 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL (readyforreal.life \177 readyforreal.life44@gmail.com \177 \(435\) 840-1896) Tj T* ET
+Q
+Q
+ 
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+1 1 1 rg
+n
+36 46 540 150 re
+f*
+0.145098 0.227451 0.356863 rg
+BT
+/F2-0 12 Tf
+14.4 TL
+ET
+BT
+1 0 0 1 42 175 Tm
+(About the program) Tj
+T*
+ET
+0.121569 0.168627 0.239216 rg
+BT
+/F1-0 9 Tf
+10.8 TL
+ET
+BT
+1 0 0 1 42 159 Tm
+(Ready for Real Life Instruction and Education \050MMMF\051 is a 16\055week\054 scenario\055based curriculum focused on applied) Tj
+T*
+ET
+BT
+1 0 0 1 42 147 Tm
+(decision\055making\054 real\055world communication\054 and character development\056 The program is built around social and emotional learning\054) Tj
+T*
+ET
+BT
+1 0 0 1 42 135 Tm
+(transfer design\054 and practical implementation for school\054 community\054 and organizational settings\056) Tj
+T*
+ET
+0.431373 0.462745 0.52549 rg
+BT
+/F1-0 8 Tf
+9.6 TL
+ET
+BT
+1 0 0 1 42 54 Tm
+(Community and workshop revenue planning) Tj
+T*
+ET
+Q
+
+
+endstream
+endobj
+12 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+13 0 obj
+<<
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
 endobj
 xref
-0 11
+0 14
 0000000000 65535 f 
-0000000061 00000 n 
-0000000102 00000 n 
-0000000209 00000 n 
-0000000321 00000 n 
-0000000514 00000 n 
-0000000708 00000 n 
-0000000776 00000 n 
-0000001056 00000 n 
-0000001121 00000 n 
-0000003634 00000 n 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000120 00000 n 
+0000000169 00000 n 
+0000000414 00000 n 
+0000009715 00000 n 
+0000009822 00000 n 
+0000009929 00000 n 
+0000010041 00000 n 
+0000010153 00000 n 
+0000010402 00000 n 
+0000020035 00000 n 
+0000020143 00000 n 
 trailer
 <<
-/ID 
-[<34993d693f8c411e75bbd3d1f706c6f5><34993d693f8c411e75bbd3d1f706c6f5>]
-% ReportLab generated PDF document -- digest (opensource)
-
-/Info 7 0 R
-/Root 6 0 R
-/Size 11
+/Size 14
+/Root 3 0 R
+/Info 1 0 R
 >>
 startxref
-6336
+20256
 %%EOF

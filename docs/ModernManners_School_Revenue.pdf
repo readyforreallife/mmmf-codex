@@ -1,105 +1,1282 @@
 %PDF-1.4
-%“Œ‹ž ReportLab Generated PDF document (opensource)
+%âãÏÓ
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R
+/Producer (pypdf)
 >>
 endobj
 2 0 obj
 <<
-/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+/Type /Pages
+/Count 2
+/Kids [ 4 0 R 12 0 R ]
 >>
 endobj
 3 0 obj
 <<
-/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+/Type /Catalog
+/Pages 2 0 R
 >>
 endobj
 4 0 obj
 <<
-/BaseFont /ZapfDingbats /Name /F3 /Subtype /Type1 /Type /Font
+/Contents 5 0 R
+/MediaBox [ 0 0 612 792 ]
+/Resources <<
+/Font <<
+/F1 6 0 R
+/F1-0 7 0 R
+/F2 8 0 R
+/F2-0 9 0 R
+/F3 10 0 R
+/F4 11 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
 >>
 endobj
 5 0 obj
 <<
-/BaseFont /Symbol /Name /F4 /Subtype /Type1 /Type /Font
+/Length 10669
 >>
+stream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 60 706 cm
+q
+BT 1 0 0 1 0 4 Tm 26 TL /F2 22 Tf .105882 .164706 .290196 rg (Modern Manners & Mental Fortitude) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 686 cm
+q
+BT 1 0 0 1 0 5 Tm 16 TL /F1 11 Tf .352941 .392157 .470588 rg (School & District Revenue Potential \227 readyforreal.life) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 680 cm
+Q
+q
+1 0 0 1 60 678 cm
+q
+1 w
+1 J
+.196078 .4 .678431 RG
+n 0 0 m 492 0 l S
+Q
+Q
+q
+1 0 0 1 60 648 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 9 Tf 12 TL (EARNING POTENTIAL SUMMARY) Tj T* ET
+Q
+Q
+q
+1 0 0 1 54 571 cm
+q
+%begin table rect clip
+n 0 0 m 504 0 l 504 69 l 6 69 l 2.6832 69 0 66.3168 0 63 c 0 0 l h W* n
+%end table rect clip
+.956863 .964706 .980392 rg
+n 0 69 504 -69 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 12 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 20 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL 77.178 0 Td ($7,500) Tj T* -77.178 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL 84.024 0 Td (Year 1 floor) Tj T* -84.024 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 174 12 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 20 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL 72.174 0 Td ($50,000) Tj T* -72.174 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL 81.576 0 Td (Year 2 target) Tj T* -81.576 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 342 12 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 20 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 4 Tm /F2 18 Tf 22 TL 72.93 0 Td ($250K+) Tj T* -72.93 0 Td ET
+Q
+Q
+q
+1 0 0 1 6 3 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL 76.02 0 Td (Year 3\2265 ceiling) Tj T* -76.02 0 Td ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 J
+1 j
+.815686 .847059 .909804 RG
+.5 w
+n 168 0 m 168 69 l S
+n 336 0 m 336 69 l S
+Q
+Q
+Q
+q
+1 0 0 1 60 567 cm
+Q
+q
+1 0 0 1 54 556 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 0 cm
+q
+.196078 .4 .678431 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL /F3 8 Tf 11 TL (n) Tj /F1 8 Tf 11 TL ( Conservative path) Tj T* ET
+Q
+Q
+q
+1 0 0 1 174 0 cm
+q
+.113725 .619608 .458824 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL /F3 8 Tf 11 TL (n) Tj /F1 8 Tf 11 TL ( Target path) Tj T* ET
+Q
+Q
+q
+1 0 0 1 342 0 cm
+q
+.729412 .458824 .090196 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL /F3 8 Tf 11 TL (n) Tj /F1 8 Tf 11 TL ( High path \(cert + districts\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 60 526 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 9 Tf 12 TL (PHASE 1 \227 PROVING IT WORKS \(NOW ) Tj /F4 9 Tf 12 TL (\256) Tj /F2 9 Tf 12 TL ( 12 MONTHS\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 370 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.196078 .4 .678431 rg
+n
+14 124 m
+60.453 124 l
+62.6642 124 64.453 125.7888 64.453 128 c
+64.453 134 l
+64.453 136.2112 62.6642 138 60.453 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Pilot pricing) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Single class pilot) Tj T* ET
+.196078 .4 .678431 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($2,500) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (one-time / one class) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.196078 .4 .678431 rg
+n
+12 58 m
+64.5 58 l
+65.6056 58 66.5 58.8944 66.5 60 c
+66.5 61 l
+66.5 62.1056 65.6056 63 64.5 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( 3 pilots = $7,500 in Year 1) Tj T* ET
+BT 1 0 0 1 10 19 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Low commitment for school admin) Tj T* ET
+BT 1 0 0 1 10 6 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Generates testimonials & outcome data) Tj T* ET
+BT 1 0 0 1 10 -7 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Standard entry point for curriculum pilots) Tj T* ET
+Q
+q
+1 0 0 1 246 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.113725 .619608 .458824 rg
+n
+14 124 m
+104.805 124 l
+107.0162 124 108.805 125.7888 108.805 128 c
+108.805 134 l
+108.805 136.2112 107.0162 138 104.805 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Individual / parent market) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Self-paced online course) Tj T* ET
+.113725 .619608 .458824 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($99\226$497) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per individual / one-time) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.113725 .619608 .458824 rg
+n
+12 58 m
+48.68 58 l
+49.7856 58 50.68 58.8944 50.68 60 c
+50.68 61 l
+50.68 62.1056 49.7856 63 48.68 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Entry-level access to the curriculum) Tj T* ET
+BT 1 0 0 1 10 19 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Parents, homeschool families, individuals) Tj T* ET
+BT 1 0 0 1 10 6 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( No school contract required) Tj T* ET
+BT 1 0 0 1 10 -7 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Separate revenue stream from school licensing) Tj T* ET
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 60 340 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 9 Tf 12 TL (PHASE 2 \227 BUILDING RECURRING REVENUE \(YEAR 2\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 60 184 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.113725 .619608 .458824 rg
+n
+14 124 m
+69.021 124 l
+71.2322 124 73.021 125.7888 73.021 128 c
+73.021 134 l
+73.021 136.2112 71.2322 138 69.021 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (School license) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Full school \227 annual) Tj T* ET
+.113725 .619608 .458824 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($4,000\226$6,000) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per school / per year) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.113725 .619608 .458824 rg
+n
+12 58 m
+121 58 l
+122.1056 58 123 58.8944 123 60 c
+123 61 l
+123 62.1056 122.1056 63 121 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( 10 schools = $40K\226$60K/yr) Tj T* ET
+BT 1 0 0 1 10 19 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Annual license creates recurring revenue) Tj T* ET
+BT 1 0 0 1 10 6 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Includes curriculum + pacing guides) Tj T* ET
+BT 1 0 0 1 10 -7 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Standard school licensing model) Tj T* ET
+Q
+q
+1 0 0 1 246 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.729412 .458824 .090196 rg
+n
+14 124 m
+88.467 124 l
+90.6782 124 92.467 125.7888 92.467 128 c
+92.467 134 l
+92.467 136.2112 90.6782 138 88.467 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Teacher certification) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Teach the teacher) Tj T* ET
+.729412 .458824 .090196 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($1,500\226$3,000) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per educator / one-time) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.729412 .458824 .090196 rg
+n
+12 58 m
+87.1 58 l
+88.2056 58 89.1 58.8944 89.1 60 c
+89.1 61 l
+89.1 62.1056 88.2056 63 87.1 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Teachers deliver the program independently) Tj T* ET
+BT 1 0 0 1 10 19 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( 5 teachers = $7,500\226$15,000) Tj T* ET
+BT 1 0 0 1 10 6 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Stacks on top of school license fee) Tj T* ET
+BT 1 0 0 1 10 -7 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Enables growth without direct delivery) Tj T* ET
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 60 154 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 9 Tf 12 TL (PHASE 3 \227 SCALE \(YEAR 3\2265\)) Tj T* ET
+Q
+Q
+ 
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+1 1 1 rg
+n
+42 684 430 62 re
+f*
+0.145098 0.227451 0.356863 rg
+BT
+/F2-0 18 Tf
+21.6 TL
+ET
+BT
+1 0 0 1 58 724 Tm
+(Ready for Real Life Instruction and Education) Tj
+T*
+ET
+0.431373 0.462745 0.52549 rg
+BT
+/F1-0 8.5 Tf
+10.2 TL
+ET
+BT
+1 0 0 1 58 710 Tm
+(Modern Manners and Mental Fortitude \050MMMF\051 LLC) Tj
+T*
+ET
+0.431373 0.462745 0.52549 rg
+BT
+/F1-0 10 Tf
+12 TL
+ET
+BT
+1 0 0 1 58 694 Tm
+(School \046 District Revenue Potential \227 readyforreal\056life) Tj
+T*
+ET
+Q
+
+
+endstream
 endobj
 6 0 obj
 <<
-/Contents 11 0 R /MediaBox [ 0 0 612 792 ] /Parent 10 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 7 0 obj
 <<
-/Contents 12 0 R /MediaBox [ 0 0 612 792 ] /Parent 10 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 8 0 obj
 <<
-/PageMode /UseNone /Pages 10 0 R /Type /Catalog
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 9 0 obj
 <<
-/Author (\(anonymous\)) /CreationDate (D:20260407163353+00'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260407163353+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
-  /Subject (\(unspecified\)) /Title (\(anonymous\)) /Trapped /False
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 10 0 obj
 <<
-/Count 2 /Kids [ 6 0 R 7 0 R ] /Type /Pages
+/BaseFont /ZapfDingbats
+/Name /F3
+/Subtype /Type1
+/Type /Font
 >>
 endobj
 11 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2617
+/BaseFont /Symbol
+/Name /F4
+/Subtype /Type1
+/Type /Font
 >>
-stream
-Gb"/)9lo&I'>Ed6llget9k#"@8WZ(,i1tDQ`a>!qAhoPX90sCuMGu%I)?9U%!['qbP#AuUVO=sSYlKm$IURGm?.g27rc%h(9EAIZi8fh!(GHa0pDa]5(XO8srp"L8;_eWG`6J&cGOq+#DOlB@FPu4RJC#P]cMT@13(f6l3?hopP#0uOd:J`GWdr:&-r`'Zs1tN]l8XR*ZDt6WOfBL3oEU>H'E;G0B13"BY*6[L)7Yq4e_jU8f,'RiEJt%p")q'L'M?P&9I=>=,O_82H!OuQ%0LaNMM6YOZ:8ghPin5A!E:ODn&K!nA+&F2p^=s$2'4sj66e7@chRB1cTt2XI#(gHn>5;g(qf)JqSX)\8DolQE".6A;VJ5+Wa/l8$f+FNmo>I#Nr#Z+X7NANE-"2-?]E?,04=SSo($nlEMI9_#CaGtlQ:RW[oi`Sr-PTn3bZ&LcXs<O54c/R1s-(OdL=!TTdsf:C.QD,18L<GM*@<E"?nr'UA'9idRV6HaN&XO_256P73P%C8R:>67#B_SNg54do,c@;NA7e)Ybh2s:/)8,>!!]9b[/.U+(#[(F9t&TRR5I3!f%"kJl)kFc[qKI@u^;F]C-fQ).)V.ir^8XG7'<;#X*qLcZ9&aiX0mio<PH$)7hn5)1HuV$P0n"c[`kUp==aXHc`i7m(>HB"hEXuZ>2aWDHkqsH>17AQAm554n3HZ0QJ*?$D5"Yd5>>'l7ho>,l1ToHnM:#ksM2N4=b<9Jh6YuZ/IA2qa\s=3TUKb64tEXoY<.HGa)/J+*2<#-JM5eW70-*+1eW)%r&B]+5RLi>[I[GF#p-b?g`;Sm?KiWrr9oE-YI=@GuSGj4kOiZYKLCXWk5ddmM*n)HEo9)RfK];EAnFmb!WIsB]N.L533^If[qeg`BkeH5b99*8K>1qYJ3Du\(U.:b6+As&lmKO!`E52bWl($8B>qV+lj^&pu^u.Y`Gu1\T'F8rf+/XHitOo#OdBqgXYs%YSqa:#<rN%g)$e(BtV*m)SI/odA%r$)mC?RfT_<(U`\Cl`Q7B0&F0WuK0503"9$*#9i4/SZt,4eN]rQZR;_f-LU]h^VT5J[on[r(&R)F#+f6\7W1(XfXCYrIB#:f3l+MDW+Wu[a-ZJZRHHFMC?+n=+&kPWb['@F:ljM\W6G2c1XlZks=.a4CdLdH.gJW%]PU5eH.:VS*>+?P#[)2]R:[5J\4.0]FRu*E'4b_<eq+45\M:t&?G:Xl0.h:<#^Z24Sd"KeHO)D89`1Y):ki?:0]cD8QcKGn2]8g"2!'fra0c2*?/G5/gT$Lh7gfCq$aHW-E<^<ms)DDF+rF_j/=V8o\U"UiMaH:8[#""M*$[#]e;["P!;^6aXM%'P7Z<9leiE<W&i.i![G`0:Z@+QcQ8m2Of"t,?l:X:>4WLe(B;j->-c0Zs]Mhr.5dR5$EEX>)7(FXBHKVmOLNb$.L)ICYhT3R.8Xk.BJ%BBX.[;WF6^*B`m=Ps!-A\HH*Ql5-sAlbqo+Ng^`*Cu;ERE@<C!`hl*b5j@R:8f0-8nW-tanOZ7[Vjr.-#eM;TjqI?5Cr&*!*_$RT6K)V5q#16Ek*S_6W-[W=Zs`)(U1N*\`nn0FIEp`3QYPE]i!G@a0h?<raNO)"npKrnX#.P"]1<#FhEjmENgt.@3$.u>busc<VJ0t1TOifW%`uYo#9)sGQekLpdVdb>pA(DqQ9pAS9[lNI#E'9"V0S@!$,^GIF[7Lq`od7ZZ==4B%94K6V:jVjmikth0G,pG?MM5F%kr,\>&2S`mp]]4p^k]I!e&7'9sbt@+0`f;D+u[>2clk0])m8UPRX)B3l;=*=HM[_CX4l>Q^#D.3NL9-*)k=@LsG`]Eg[MW8]W)e.U=_XcAs86?[,*CC[,hL?):Q`]iMVj':Ch`2P"Z=>8;Pe.^BSmX#)Y)]eqLQS:^uZLBi6VcfT?I(4:nq>T=CWbcW6.8ebXWM*4>/[A!FqZKKER12G"Bq'%RZ0,-W'ZO-5D><9sU5Jb]c+fqYG!3:C-<QW^pso95Mk?sV*qWgS*t6B[\,OqT5.8?NqkjN-gDa@WWTCn7p)h/cN#X1S7K%`u_A*:I"4t8k@,%hUaC_+X^KjsgDQ-HVCWV'YE'N\M]/g)5T.TWHM(.iGED^,h3!@*FoED`/H.i-GI'55B28RuP(\cRJ4C*d+kgN]K/ju`H([dGIcF#!F_Y$ZJ.9:MIUd\0W);+J@E@fr>HL.3m@eT6N^=jg)TBad=U)ajL4mG]kV9=YR[_]l[iV@b]jGO^tFP>%WfN6FdBlL]*nC8\NhhN$YdkXr!'C0m%s8ASmI3Bef$nV$>N5"7+ckd#c_?*NF-6\k4L;%h>!N`,L^t+VI#,,t2iadX4SGr#?NO'n5Za)On!bt399!8]I/sEDejOjS23.4f(Z\Ef\lr3-MX]/?YI=o-hEi^Tri)obA*u@tA0[^I@=hW1nQl.>_Alc;$+:>3L4_4c'd5VBTe(Ga&)o^"%.W6j(bHTMr1PHo>S_rlJ&,dh!Qes^e&E<\A)#?i=6sN@`S7BoR]0:jf]S]Jl`bI<jmZ)ntK)Tt-%_#I6\XpV"XIbZ7)U_=Z2j(N:rKl8BmX':rCL'm9%ptr8ZlQ7DGDA\*/G/oG,`&'O~>endstream
 endobj
 12 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2860
+/Contents 13 0 R
+/MediaBox [ 0 0 612 792 ]
+/Resources <<
+/Font <<
+/F1 6 0 R
+/F1-0 14 0 R
+/F2 8 0 R
+/F2-0 15 0 R
+/F3 10 0 R
+/F4 11 0 R
+>>
+/ProcSet [ /ImageB /ImageC /ImageI /PDF /Text ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Annots [ ]
+/Parent 2 0 R
+>>
+endobj
+13 0 obj
+<<
+/Length 10471
 >>
 stream
-Gb!l!gN)(-&q-CUkQbZlYr+39'"i&2<iqRNG84>e@k$)'Q!PRCAqi2s'4.Ku-/ZGm!5Z3:1Ql3ZCF`U=M#[hR5m+$sJYkDOpqtA6ZiKm`&mi91^]dugJHm`VbBIoO3Vd7'qjsJd1(LNE[X"aP?;0-.cO:K]#$LIuV'#'M@P5PX";V6)-PKmEQc*21+9+?0&oK)Y,fC;66j,>%a/@72*l_:o5mW'rYqJd*KQKOV*XL5U9%*DR#4[3nSp@2scoeS:'g`XR4ifFB;H,6d52H9N+4Q1:9U:l\?;)3]?hdME!AMgt84ZX\SF?NF+Mc[N!L!YIQ$a4"/;b'KC2r%DO=Z:LG[76C\Vb;p\OspGa+YP0pc,8in'`Zdogpa\X\>bRILIGq3M;t8!Qo8QT><2gB@kJ%[%+m5n!Vj=!>00g4:hU!h'Va7#ehkJp`EYfelg_D9%@dXlXlQe^4sg,E;>(i1%*.C(:\0(mQW:5ipe;L5iLKPa_0T6*;kGA#j8kDgMGT>bGr]neq7iA4h*oj_l+cl#BfQUW=?cXpYK3_&K^c)gJ,dZ.L5)`K$+E:&K)C(D%&-j:N-LK$'0`O^=)[.D0Q4`^!j"<`9Ak+,m8urQ@rRtp1Kd?cka_sE+>a'ZnH-16`LHb*\:'<^m%21Xsn>='+;[#*_(iIO=5LP,TEAo&h=#63,^a/MVO@DoIQ=KQ5^s':%YnBdU%"ZQ/GMm[Vs[R;9Zm`%3?gm\JK-u7[:^/9n-)`F*"*jb!tS:UsK,i(6B1SU$.RFZi!qHiSmLUiu?jfH4t+;42)=_1o/e>E"$b0=9F&*,MBDkA)Yto-I[,h/9rkp7B1CaJ4f.-BqQTl>icm*EAiR+BiVULg9T(BeF:#A5IP;59@^grkd>X45Qa`]>()mboNo=IoN]>@1<mEK.U#o!??IhVh.fs?/\D59/M"/JZ%;Vd7M)BRoOeSb^5tW9pi%#=#eg(0-qlUaZ04P`ij1''D(UnKM`q[]Fdf)+Qr#bAqLCIp_*I2%rssk$pDoE:Z#&Cc"#O[7E22u!rt3*:C^tYh#E@#MBU9W<Fg\/JYnaY>D:S5EU@=Zh3Ia&89WZD7%b/-[It8NnkRrj#aK"gW)&<aNO&H0Aku?Vn8Z)nn,$6@*C/u?Z1^_p1;ot"GQ&O)ikKs!tel0U@CR0I(h_6fhDTf0RhNp^Pf.E!JK;!j92FPPA?9gmul+L=(Tc+HqlBd7AT5_?*=h&7tkS[bo&<-N%<*=AoLK^J?DL"8ML-M&tmH^S7YEO_JYeEd,G-Vqdf%8/V3W8dGogee%qU=^'5G#`IO70hFrV#gKrV%+41YBW8>T^p(m'!Sb,"#G,Y0f\i)NWomSun*Qe@!(L%4D:I-RV7apN4eLR\2,,&48n9b)FVS$3,GTjl@ptcL)hqE;uaH'-#;tn8T"U7NqBWQi66KJ'AV34J+a1Q%t*LlT#CCigg*Snm_S\EN%q!C"U#[D'*\Z4o#.?XRP+=$H#dLR7N4-[kCZAgJ=Mi*1UrJZI/=S)T7WlMoYdLH"/"(Wd:An]i]l]V2hs@s2+@8Hr03N0:_KVbT%hIJ:"?cTZHUTd8oAsC@5](%M4FXYB',[[@W;`EuD8cEaTIJ7lW=8e5:=>cMCE7N!./6'CPpi,LBP+nfXC]cT#T%XKoLUqd3MAGQhsWCbK`9EASS.`*o*nK6/@K04dqCOhg%A=>CLkoH]TY"1CCPSR@LZX)po>$=1-c!O@C8BOpWDP@Y`0a7c\ab=H#cUjWSS`^5#?\"554TY8J4VHp*7B3OC%B]Aoad3L\FPAu[*Zb2kV,Cr"dEBR#c65*.iaZ*u-Hc/15Qc>^]OGLI1=%;5.I)N/b<t*oqQ#S_OM-aa-Yi$*Ik>]G$H_(/aAPHbhd95/f)Ge"RY+ZA[T^VCEdh<?Ep.f:>XAkq<MS&ZVX^4,sidK-2@_oJ2S^+ZP_6r52cF./t[Rj((g8crLG@>7L5%gI8dhgX).-5!&bCqHa]LrA`WTCu3h7MjQ!,"Fb@WN?H;%ua#cW8/D8L\*[Xrd>hpiLqhT3U0`oWMKc[6?Oq4up]9+;+n&-HgSJdtqA3@$%n!erU.,,BN_;a\W9CG@W-"ct4]MF3&rgL)e$kTtiO7;MO1nMuk;)l'>*KHd.'2rrnef\lE[l@(9ieL>8SuLIAt-F$jHKVJe3$C%(#<8B+'4a61uHf-QrfP!2OV?f51UXifTs<OZ,cbqrr?.,a(V<pS'ZGY$>\Wj?GTdp-TgUM'&dY(1e_G(&LGX]B_%`L0KKTW<*:W6\VW3,rPX>iU*<H<\qqN:%r[=(\F'St1DK"](JBZB4]1=Pr>T=qs"E#+'+:i)V`'-0!/7Wdk`<I=;FgD+1sl5"SaqaOT[.WloZfVjaE4rcP('9UD_:O;WHdX1Pb+C6YX]Wl)i7.a;o]:5b"lL8B)"5p*JllM0B2h::*_X9sr5Hu@k#CR6FVFKo#L#3DuYo>b^Mb%?\1>RC$=)Vs1`7:I0=i"@\TD.V;b%[t^HSi>m4^ar?Sbr).e[&HJVR[7"^T/uV&MDQli'H5f9.'$cqLAPhn+:TkN6Xe=4_^#F?UTaQ0LX+H6?.Db">]Nd\@9+kSq(9/dqlD^so'Es-!k"/T?6i@ip]_bJDROa<)]\T,b/kDFXt?Z"X`9-elpfH-?f*$?kZEqkM)'D.+VerS[%9\EWa&L[Q`Rj!nf,2dB"p:74]%haq]c8'T1%$j!=PY^n2\$M+$J[`qe\;UoG#=0q>Q]/6XR.\oWUM=]mK0ALj7ObRF[JA5+9nI:R]i8([pK#,bfM-pMmiVOSHIF']2MM+X(KBBL"sZAr(`O,>)M71^CkS(PU"PL6c\g>TF'`6u.V]Dp%)cgt<p>r!*HSD!q~>endstream
+q
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 60 584 cm
+q
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 0 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.6 .235294 .113725 rg
+n
+14 124 m
+84.568 124 l
+86.7792 124 88.568 125.7888 88.568 128 c
+88.568 134 l
+88.568 136.2112 86.7792 138 84.568 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (District partnership) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (Multi-school district) Tj T* ET
+.6 .235294 .113725 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($10K\226$30K) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (per district / per year) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.6 .235294 .113725 rg
+n
+12 58 m
+177.5 58 l
+178.6056 58 179.5 58.8944 179.5 60 c
+179.5 61 l
+179.5 62.1056 178.6056 63 177.5 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( 5 districts = $50K\226$150K/yr) Tj T* ET
+BT 1 0 0 1 10 19 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Scales across multiple schools per contract) Tj T* ET
+BT 1 0 0 1 10 6 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Utah has ~42 school districts statewide) Tj T* ET
+BT 1 0 0 1 10 -7 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Includes rollout support + training) Tj T* ET
+Q
+q
+1 0 0 1 246 0 cm
+1 1 1 rg
+.815686 .847059 .909804 RG
+.5 w
+n
+6 0 m
+240 0 l
+243.3168 0 246 2.6832 246 6 c
+246 142 l
+246 145.3168 243.3168 148 240 148 c
+6 148 l
+2.6832 148 0 145.3168 0 142 c
+0 6 l
+0 2.6832 2.6832 0 6 0 c
+h
+B*
+.32549 .290196 .717647 rg
+n
+14 124 m
+91.582 124 l
+93.7932 124 95.582 125.7888 95.582 128 c
+95.582 134 l
+95.582 136.2112 93.7932 138 91.582 138 c
+14 138 l
+11.7888 138 10 136.2112 10 134 c
+10 128 l
+10 125.7888 11.7888 124 14 124 c
+h
+f*
+1 1 1 rg
+BT /F2 7 Tf 8.4 TL ET
+BT 1 0 0 1 17 128 Tm (Outright IP sale value) Tj T* ET
+.105882 .164706 .290196 rg
+BT /F2 11 Tf 13.2 TL ET
+BT 1 0 0 1 10 106 Tm (If you sell the program) Tj T* ET
+.32549 .290196 .717647 rg
+BT /F2 17 Tf 20.4 TL ET
+BT 1 0 0 1 10 86 Tm ($200K\226$1M+) Tj T* ET
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 72 Tm (only after proven traction) Tj T* ET
+.909804 .929412 .960784 rg
+n
+12 58 m
+234 58 l
+235.1056 58 236 58.8944 236 60 c
+236 61 l
+236 62.1056 235.1056 63 234 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.32549 .290196 .717647 rg
+n
+12 58 m
+211.4 58 l
+212.5056 58 213.4 58.8944 213.4 60 c
+213.4 61 l
+213.4 62.1056 212.5056 63 211.4 63 c
+12 63 l
+10.8944 63 10 62.1056 10 61 c
+10 60 l
+10 58.8944 10.8944 58 12 58 c
+h
+f*
+.815686 .847059 .909804 RG
+.4 w
+n 10 46 m 236 46 l S
+.352941 .392157 .470588 rg
+BT /F1 8 Tf 9.6 TL ET
+BT 1 0 0 1 10 32 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Pre-traction value: ~$15K\226$50K) Tj T* ET
+BT 1 0 0 1 10 19 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( At 10 schools: ~$100K\226$200K) Tj T* ET
+BT 1 0 0 1 10 6 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( At 50+ schools: $500K\226$1M+) Tj T* ET
+BT 1 0 0 1 10 -7 Tm /F4 8 Tf 9.6 TL (\256) Tj /F1 8 Tf 9.6 TL ( Valuation based on 2\2265x annual revenue) Tj T* ET
+Q
+q
+Q
+Q
+Q
+q
+1 0 0 1 60 554 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 9 Tf 12 TL (5-YEAR REVENUE PROJECTIONS) Tj T* ET
+Q
+Q
+q
+1 0 0 1 54 388 cm
+q
+%begin table rect clip
+n 0 0 m 504 0 l 504 158 l 4 158 l 1.7888 158 0 156.2112 0 154 c 0 0 l h W* n
+%end table rect clip
+.105882 .164706 .290196 rg
+n 0 158 504 -23 re f*
+1 1 1 rg
+n 0 135 504 -27 re f*
+.956863 .964706 .980392 rg
+n 0 108 504 -27 re f*
+1 1 1 rg
+n 0 81 504 -27 re f*
+.956863 .964706 .980392 rg
+n 0 54 504 -27 re f*
+1 1 1 rg
+n 0 27 504 -27 re f*
+1 1 1 rg
+BT /F2 9 Tf 12 TL ET
+q
+1 0 0 1 8 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Year) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Conservative) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Target) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (High Path) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 141 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F2 8 Tf 11 TL (Key milestone) Tj T* ET
+Q
+Q
+0 0 0 rg
+BT /F1 9 Tf 12 TL ET
+q
+1 0 0 1 8 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($7,500) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($10,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($15,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 114 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (3 pilots completed) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 2) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($25,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($50,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($75,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 87 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (10 schools, 5 teacher certs) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 3) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($50,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($100,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($150,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 60 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (First district deal) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 4) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($75,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($150,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($250,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 33 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Multi-district + cert program) Tj T* ET
+Q
+Q
+q
+1 0 0 1 8 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Year 5) Tj T* ET
+Q
+Q
+q
+1 0 0 1 58.4 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($100,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 139.04 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($200,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 219.68 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL ($400,000) Tj T* ET
+Q
+Q
+q
+1 0 0 1 300.32 6 cm
+q
+.105882 .164706 .290196 rg
+BT 1 0 0 1 0 5 Tm /F1 10 Tf 15 TL (Acquisition interest begins) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.815686 .847059 .909804 RG
+.4 w
+n 0 135 m 504 135 l S
+n 0 108 m 504 108 l S
+n 0 81 m 504 81 l S
+n 0 54 m 504 54 l S
+n 0 27 m 504 27 l S
+n 50.4 0 m 50.4 158 l S
+n 131.04 0 m 131.04 158 l S
+n 211.68 0 m 211.68 158 l S
+n 292.32 0 m 292.32 158 l S
+Q
+Q
+q
+1 J
+1 j
+.815686 .847059 .909804 RG
+.4 w
+n 1.1708 156.8292 m 1.8944 157.5528 2.8944 158 4 158 c 504 158 l
+S
+n 0 0 m 504 0 l S
+n 0 0 m 0 154 l 0 155.1056 .4472 156.1056 1.1708 156.8292 c
+S
+n 504 0 m 504 158 l S
+Q
+Q
+q
+1 0 0 1 60 374 cm
+Q
+q
+1 0 0 1 54 238 cm
+q
+%begin table rect clip
+n 0 0 m 504 0 l 504 136 l 4 136 l 1.7888 136 0 134.2112 0 132 c 0 0 l h W* n
+%end table rect clip
+.956863 .964706 .980392 rg
+n 0 136 504 -136 re f*
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 14 12 cm
+q
+BT 1 0 0 1 0 103 Tm 14 TL /F2 9 Tf .105882 .164706 .290196 rg (About the program) Tj /F1 9 Tf  T*  T* (Modern Manners & Mental Fortitude is a 16-week, scenario-based curriculum focused on applied decision-making,) Tj T* (real-world communication, and character development. The program was developed from nearly two decades of law) Tj T* (enforcement experience and is structured around Social Emotional Learning \(SEL\) frameworks with an emphasis on) Tj T* (transfer \227 equipping students to apply skills in real-life situations, not just academic settings. It targets high school) Tj T* (students and includes instructor materials, pacing guides, scenario libraries, and student activities. The program is) Tj T* (designed to be delivered by a certified educator without ongoing involvement from the program developer.) Tj T* ET
+Q
+Q
+q
+1 J
+1 j
+.196078 .4 .678431 RG
+3 w
+Q
+Q
+q
+1 J
+1 j
+.196078 .4 .678431 RG
+3 w
+n 0 0 m 0 132 l 0 133.1056 .4472 134.1056 1.1708 134.8292 c
+S
+Q
+Q
+q
+1 0 0 1 60 228 cm
+Q
+q
+1 0 0 1 60 226.5 cm
+q
+.5 w
+1 J
+.815686 .847059 .909804 RG
+n 0 0 m 492 0 l S
+Q
+Q
+q
+1 0 0 1 60 209.5 cm
+q
+.352941 .392157 .470588 rg
+BT 1 0 0 1 0 3 Tm /F1 8 Tf 11 TL (readyforreal.life \177 readyforreal.life44@gmail.com \177 \(435\) 840-1896) Tj T* ET
+Q
+Q
+ 
+
+Q
+
+q
+0.0 0.0 612 792 re
+W
+n
+1 0 0 1 0 0 cm
+BT
+/F1-0 12 Tf
+14.4 TL
+ET
+1 1 1 rg
+n
+36 46 540 150 re
+f*
+0.145098 0.227451 0.356863 rg
+BT
+/F2-0 12 Tf
+14.4 TL
+ET
+BT
+1 0 0 1 42 175 Tm
+(About the program) Tj
+T*
+ET
+0.121569 0.168627 0.239216 rg
+BT
+/F1-0 9 Tf
+10.8 TL
+ET
+BT
+1 0 0 1 42 159 Tm
+(Ready for Real Life Instruction and Education \050MMMF\051 is a 16\055week\054 scenario\055based curriculum focused on applied) Tj
+T*
+ET
+BT
+1 0 0 1 42 147 Tm
+(decision\055making\054 real\055world communication\054 and character development\056 It is designed for high school implementation with instructor) Tj
+T*
+ET
+BT
+1 0 0 1 42 135 Tm
+(materials\054 pacing guides\054 scenario libraries\054 and student activities that support school and district rollout\056) Tj
+T*
+ET
+0.431373 0.462745 0.52549 rg
+BT
+/F1-0 8 Tf
+9.6 TL
+ET
+BT
+1 0 0 1 42 54 Tm
+(School and district revenue planning) Tj
+T*
+ET
+Q
+
+
+endstream
+endobj
+14 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+15 0 obj
+<<
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
 endobj
 xref
-0 13
+0 16
 0000000000 65535 f 
-0000000061 00000 n 
-0000000122 00000 n 
-0000000229 00000 n 
-0000000341 00000 n 
-0000000424 00000 n 
-0000000501 00000 n 
-0000000696 00000 n 
-0000000891 00000 n 
-0000000960 00000 n 
-0000001240 00000 n 
-0000001306 00000 n 
-0000004015 00000 n 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000120 00000 n 
+0000000169 00000 n 
+0000000436 00000 n 
+0000011158 00000 n 
+0000011265 00000 n 
+0000011372 00000 n 
+0000011484 00000 n 
+0000011596 00000 n 
+0000011680 00000 n 
+0000011758 00000 n 
+0000012029 00000 n 
+0000022554 00000 n 
+0000022662 00000 n 
 trailer
 <<
-/ID 
-[<60dacf2c68da29602c03c1a8fedbe79a><60dacf2c68da29602c03c1a8fedbe79a>]
-% ReportLab generated PDF document -- digest (opensource)
-
-/Info 9 0 R
-/Root 8 0 R
-/Size 13
+/Size 16
+/Root 3 0 R
+/Info 1 0 R
 >>
 startxref
-6967
+22775
 %%EOF
