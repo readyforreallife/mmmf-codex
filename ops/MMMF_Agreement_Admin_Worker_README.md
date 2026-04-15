@@ -10,6 +10,8 @@ This Cloudflare Worker is the shared backend for the MMMF certification admin pa
 - issues one agreement number at a time
 - blocks duplicate agreement numbers
 - blocks issuing a second number to the same person/email pair
+- stores registration submissions
+- powers live classroom challenge session create, join, start, vote, reveal, and next-question actions
 
 ## Required Cloudflare setup
 
@@ -55,3 +57,4 @@ Paste the Worker URL into the endpoint field, enter `4429`, and click `Enter Tea
 - The registry is stored in KV, so it is shared across devices.
 - The public certification viewer should stay copy-only.
 - The admin page can still fall back to local safe mode if no Worker URL is entered.
+- If the live challenge screen reports that the backend is on an older Worker version, redeploy this Worker so `questionStartedAt` and the live session endpoints are available.

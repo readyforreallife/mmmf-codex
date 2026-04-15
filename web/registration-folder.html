@@ -1,556 +1,714 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Folder | Ready for Real Life Instruction and Education</title>
-<link rel="stylesheet" href="../assets/site-search.css">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap');
-:root {
-  --navy:#18304f;
-  --navy2:#274061;
-  --gold:#c89b3c;
-  --paper:#f7f2e9;
-  --ink:#1e293b;
-  --muted:#64748b;
-  --line:#d9cfbd;
-  --white:#ffffff;
-  --teal:#1d6b69;
-  --teal-bg:#eef7f6;
-  --warn:#8a5a14;
-  --warn-bg:#fff6e5;
-}
-* { box-sizing:border-box; }
-body { margin:0; font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--ink); }
-header {
-  background:linear-gradient(135deg,var(--navy),var(--navy2));
-  color:#fff;
-  padding:24px;
-  border-bottom:4px solid var(--gold);
-}
-.wrap { max-width:1400px; margin:0 auto; }
-.topbar { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
-.eyebrow { font-size:.76rem; letter-spacing:.16em; text-transform:uppercase; color:#e8c778; font-weight:700; margin-bottom:8px; }
-h1 { font-family:'Playfair Display',serif; margin:0 0 8px; font-size:2rem; }
-.sub { margin:0; color:#d7deea; line-height:1.7; max-width:900px; }
-.header-actions,.toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-.btn {
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:10px 14px; border-radius:999px; text-decoration:none;
-  border:1px solid var(--line); font-weight:700; white-space:nowrap;
-  background:var(--white); color:var(--navy); cursor:pointer;
-}
-.btn.secondary { background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.22); }
-.btn.dark { background:var(--navy); color:#fff; border-color:var(--navy); }
-main { max-width:1400px; margin:0 auto; padding:24px; }
-.search-host,.toolbar { margin-bottom:18px; }
-.admin-gate,.panel {
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 10px 24px rgba(0,0,0,.04);
-}
-.admin-gate h2,.panel h2 { font-family:'Playfair Display',serif; color:var(--navy); margin:0 0 10px; }
-.kicker { font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-.locked-copy,.panel p { line-height:1.7; color:#334155; }
-.admin-gate form { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
-.admin-gate input,.search-line input {
-  flex:1; min-width:220px; padding:11px 12px; border:1px solid var(--line); border-radius:10px;
-}
-.gate-note,.helper { margin-top:12px; font-size:.86rem; color:var(--muted); line-height:1.6; }
-.notice {
-  border-radius:12px; padding:12px 14px; margin-top:12px;
-  font-size:.95rem; line-height:1.6;
-}
-.notice.warn { background:var(--warn-bg); color:var(--warn); border:1px solid #f0d89d; }
-.notice.ok { background:var(--teal-bg); color:var(--teal); border:1px solid #c8e5e0; }
-.summary-grid {
-  display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:16px;
-}
-.summary-card { background:#fbfaf7; border:1px solid var(--line); border-radius:12px; padding:14px; }
-.summary-card .label { font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:6px; }
-.summary-card .value { font-family:'Playfair Display',serif; font-size:1.45rem; color:var(--navy); }
-.search-line { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
-.bulk-bar {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-bottom:12px;
-  padding:12px 14px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:#fbfaf7;
-}
-.bulk-copy {
-  font-size:.92rem;
-  color:#334155;
-}
-.bulk-actions {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.btn.danger {
-  background:#8f2d2d;
-  color:#fff;
-  border-color:#8f2d2d;
-}
-.btn:disabled {
-  opacity:.45;
-  cursor:not-allowed;
-}
-.sheet-shell {
-  border:1px solid var(--line);
-  border-radius:16px;
-  overflow:hidden;
-  background:#fffdfa;
-}
-.sheet-wrap { overflow:auto; max-height:68vh; }
-table { width:100%; border-collapse:collapse; min-width:1300px; }
-th, td {
-  padding:12px 10px;
-  border-top:1px solid var(--line);
-  text-align:left;
-  vertical-align:top;
-  font-size:.92rem;
-}
-th {
-  position:sticky;
-  top:0;
-  z-index:1;
-  font-size:.76rem;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--muted);
-  background:#f7f3ea;
-}
-tbody tr:hover { background:#fcfbf8; }
-tbody tr.selected-row { background:#f7f3ea; }
-.select-cell {
-  width:44px;
-  text-align:center;
-}
-.select-cell input {
-  width:16px;
-  height:16px;
-}
-.tag {
-  display:inline-flex;
-  padding:4px 8px;
-  border-radius:999px;
-  font-size:.76rem;
-  font-weight:700;
-  background:#eef2ff;
-  color:#334155;
-}
-.muted { color:var(--muted); }
-.empty { padding:18px; color:var(--muted); }
-.row-actions button {
-  border:none;
-  background:none;
-  color:var(--navy);
-  font-weight:700;
-  cursor:pointer;
-  padding:0;
-  text-decoration:underline;
-}
-@media (max-width: 900px) {
-  .summary-grid { grid-template-columns:1fr 1fr; }
-}
-@media (max-width: 640px) {
-  .summary-grid { grid-template-columns:1fr; }
-}
-</style>
-</head>
-<body>
-  <header>
-    <div class="wrap topbar">
-      <div>
-        <div class="eyebrow">Teacher Mode Folder</div>
-        <h1>MMMF Registration Folder</h1>
-        <p class="sub">This page stores every signup submitted through the MMMF public registration flow. It is laid out like a clean spreadsheet so you can scan names, contact details, tracks, organizations, timestamps, and notes in one place.</p>
-      </div>
-      <div class="header-actions">
-        <a class="btn secondary" href="https://readyforreal.life/">Main Homepage</a>
-        <a class="btn secondary" href="agreement-tracker.html">&larr; Back to Teacher Mode</a>
-        <a class="btn" href="certificate-folder.html">Certificate Folder</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="search-host"></div>
-
-    <div class="toolbar">
-      <button class="btn dark" id="refreshBtn" type="button" style="display:none;">Refresh Folder</button>
-      <button class="btn" id="exportBtn" type="button" style="display:none;">Export JSON</button>
-      <button class="btn" id="lockBtn" type="button" style="display:none;">Lock Teacher Mode</button>
-    </div>
-
-    <section class="admin-gate" id="adminGate">
-      <div class="kicker">Teacher Mode</div>
-      <h2>Unlock the registration folder</h2>
-      <p class="locked-copy">Enter your Worker URL and teacher code to load the shared registration records. This page uses the same protected Teacher Mode session as the certificate tools.</p>
-      <form id="unlockForm">
-        <input id="adminEndpointInput" type="url" placeholder="Paste the Cloudflare Worker URL once">
-        <input id="teacherCodeInput" type="password" placeholder="Enter admin access code">
-        <button class="btn dark" type="submit">Open Registration Folder</button>
-      </form>
-      <p class="gate-note">If you already unlocked Teacher Mode elsewhere, this page should reopen automatically after a refresh.</p>
-      <div id="unlockNotice" class="notice warn" style="display:none;"></div>
-    </section>
-
-    <section class="panel" id="folderShell" style="display:none;">
-      <div class="kicker">Shared Registry</div>
-      <h2>Registration records</h2>
-      <p>Everything submitted through the live registration form appears here. Use search to narrow the table quickly without leaving the page.</p>
-
-      <div class="summary-grid">
-        <div class="summary-card"><div class="label">Total signups</div><div class="value" id="registrationTotal">0</div></div>
-        <div class="summary-card"><div class="label">Latest signup</div><div class="value" id="registrationLatest">—</div></div>
-        <div class="summary-card"><div class="label">Latest person</div><div class="value" id="registrationLatestPerson">—</div></div>
-        <div class="summary-card"><div class="label">Organizations</div><div class="value" id="registrationOrganizations">0</div></div>
-      </div>
-
-      <div class="search-line">
-        <input id="searchInput" type="search" placeholder="Search by name, email, phone, role, organization, program, track, or status">
-      </div>
-      <div class="bulk-bar">
-        <div class="bulk-copy"><strong id="selectedCount">0</strong> selected</div>
-        <div class="bulk-actions">
-          <button class="btn" id="clearSelectionBtn" type="button" disabled>Clear Selection</button>
-          <button class="btn danger" id="deleteSelectedBtn" type="button" disabled>Delete Selected</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Registration Folder | Ready for Real Life Instruction and Education
+    </title>
+    <link rel="stylesheet" href="../assets/site-search.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap");
+      :root {
+        --navy: #18304f;
+        --navy2: #274061;
+        --gold: #c89b3c;
+        --paper: #f7f2e9;
+        --ink: #1e293b;
+        --muted: #64748b;
+        --line: #d9cfbd;
+        --white: #ffffff;
+        --teal: #1d6b69;
+        --teal-bg: #eef7f6;
+        --warn: #8a5a14;
+        --warn-bg: #fff6e5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      header {
+        background: linear-gradient(135deg, var(--navy), var(--navy2));
+        color: #fff;
+        padding: 24px;
+        border-bottom: 4px solid var(--gold);
+      }
+      .wrap {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .eyebrow {
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #e8c778;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      h1 {
+        font-family: "Playfair Display", serif;
+        margin: 0 0 8px;
+        font-size: 2rem;
+      }
+      .sub {
+        margin: 0;
+        color: #d7deea;
+        line-height: 1.7;
+        max-width: 900px;
+      }
+      .header-actions,
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 999px;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        font-weight: 700;
+        white-space: nowrap;
+        background: var(--white);
+        color: var(--navy);
+        cursor: pointer;
+      }
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.22);
+      }
+      .btn.dark {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+      }
+      main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .search-host,
+      .toolbar {
+        margin-bottom: 18px;
+      }
+      .admin-gate,
+      .panel {
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+      }
+      .admin-gate h2,
+      .panel h2 {
+        font-family: "Playfair Display", serif;
+        color: var(--navy);
+        margin: 0 0 10px;
+      }
+      .kicker {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+      .locked-copy,
+      .panel p {
+        line-height: 1.7;
+        color: #334155;
+      }
+      .admin-gate form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .admin-gate input,
+      .search-line input {
+        flex: 1;
+        min-width: 220px;
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      .gate-note,
+      .helper {
+        margin-top: 12px;
+        font-size: 0.86rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .notice {
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-top: 12px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      .notice.warn {
+        background: var(--warn-bg);
+        color: var(--warn);
+        border: 1px solid #f0d89d;
+      }
+      .notice.ok {
+        background: var(--teal-bg);
+        color: var(--teal);
+        border: 1px solid #c8e5e0;
+      }
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .summary-card {
+        background: #fbfaf7;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .summary-card .label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .summary-card .value {
+        font-family: "Playfair Display", serif;
+        font-size: 1.45rem;
+        color: var(--navy);
+      }
+      .search-line {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .bulk-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fbfaf7;
+      }
+      .bulk-copy {
+        font-size: 0.92rem;
+        color: #334155;
+      }
+      .bulk-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn.danger {
+        background: #8f2d2d;
+        color: #fff;
+        border-color: #8f2d2d;
+      }
+      .btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .sheet-shell {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fffdfa;
+      }
+      .sheet-wrap {
+        overflow: auto;
+        max-height: 68vh;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1300px;
+      }
+      th,
+      td {
+        padding: 12px 10px;
+        border-top: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        font-size: 0.92rem;
+      }
+      th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        background: #f7f3ea;
+      }
+      tbody tr:hover {
+        background: #fcfbf8;
+      }
+      tbody tr.selected-row {
+        background: #f7f3ea;
+      }
+      .select-cell {
+        width: 44px;
+        text-align: center;
+      }
+      .select-cell input {
+        width: 16px;
+        height: 16px;
+      }
+      .tag {
+        display: inline-flex;
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        background: #eef2ff;
+        color: #334155;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .empty {
+        padding: 18px;
+        color: var(--muted);
+      }
+      .row-actions button {
+        border: none;
+        background: none;
+        color: var(--navy);
+        font-weight: 700;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+      }
+      @media (max-width: 900px) {
+        .summary-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .summary-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap topbar">
+        <div>
+          <div class="eyebrow">Teacher Mode Folder</div>
+          <h1>MMMF Registration Folder</h1>
+          <p class="sub">
+            This page stores every signup submitted through the MMMF public
+            registration flow. It is laid out like a clean spreadsheet so you
+            can scan names, contact details, tracks, organizations, timestamps,
+            and notes in one place.
+          </p>
+        </div>
+        <div class="header-actions">
+          <a class="btn secondary" href="https://readyforreal.life/"
+            >Main Homepage</a
+          >
+          <a class="btn secondary" href="agreement-tracker.html"
+            >&larr; Back to Teacher Mode</a
+          >
+          <a class="btn" href="certificate-folder.html">Certificate Folder</a>
         </div>
       </div>
+    </header>
 
-      <div class="sheet-shell">
-        <div class="sheet-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th class="select-cell"><input id="selectAllCheckbox" type="checkbox" aria-label="Select all visible registrations"></th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Organization</th>
-                <th>Program</th>
-                <th>Tracks</th>
-                <th>Location</th>
-                <th>Submitted</th>
-                <th>Status</th>
-                <th>Notes</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="registrationBody"></tbody>
-          </table>
-        </div>
-        <div id="emptyState" class="empty">No registrations have been submitted yet.</div>
+    <main>
+      <div class="search-host"></div>
+
+      <div class="toolbar">
+        <button
+          class="btn dark"
+          id="refreshBtn"
+          type="button"
+          style="display: none"
+        >
+          Refresh Folder
+        </button>
+        <button class="btn" id="exportBtn" type="button" style="display: none">
+          Export JSON
+        </button>
+        <button class="btn" id="lockBtn" type="button" style="display: none">
+          Lock Teacher Mode
+        </button>
       </div>
-    </section>
-  </main>
 
-  <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
-  <script>
-    const DEFAULT_ADMIN_ENDPOINT = '';
-    const ENDPOINT_PLACEHOLDER = 'https://mmmf-agreement-admin.your-subdomain.workers.dev';
-    const ADMIN_MODE_KEY = 'mmmf_agreement_admin_mode_v2';
-    const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
-    const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
+      <section class="admin-gate" id="adminGate">
+        <div class="kicker">Teacher Mode</div>
+        <h2>Unlock the registration folder</h2>
+        <p class="locked-copy">
+          Enter your Worker URL and teacher code to load the shared registration
+          records. This page uses the same protected Teacher Mode session as the
+          certificate tools.
+        </p>
+        <form id="unlockForm">
+          <input
+            id="adminEndpointInput"
+            type="url"
+            placeholder="Paste the Cloudflare Worker URL once"
+          />
+          <input
+            id="teacherCodeInput"
+            type="password"
+            placeholder="Enter admin access code"
+          />
+          <button class="btn dark" type="submit">
+            Open Registration Folder
+          </button>
+        </form>
+        <p class="gate-note">
+          If you already unlocked Teacher Mode elsewhere, this page should
+          reopen automatically after a refresh.
+        </p>
+        <div id="unlockNotice" class="notice warn" style="display: none"></div>
+      </section>
 
-    const state = {
-      registrations: [],
-      selectedRegistrationIds: new Set()
-    };
+      <section class="panel" id="folderShell" style="display: none">
+        <div class="kicker">Shared Registry</div>
+        <h2>Registration records</h2>
+        <p>
+          Everything submitted through the live registration form appears here.
+          Use search to narrow the table quickly without leaving the page.
+        </p>
 
-    const adminGate = document.getElementById('adminGate');
-    const folderShell = document.getElementById('folderShell');
-    const unlockForm = document.getElementById('unlockForm');
-    const adminEndpointInput = document.getElementById('adminEndpointInput');
-    const teacherCodeInput = document.getElementById('teacherCodeInput');
-    const unlockNotice = document.getElementById('unlockNotice');
-    const refreshBtn = document.getElementById('refreshBtn');
-    const exportBtn = document.getElementById('exportBtn');
-    const lockBtn = document.getElementById('lockBtn');
-    const searchInput = document.getElementById('searchInput');
-    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
-    const clearSelectionBtn = document.getElementById('clearSelectionBtn');
-    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
-    const selectedCount = document.getElementById('selectedCount');
-    const folderNotice = document.createElement('div');
-    folderNotice.id = 'folderNotice';
-    folderNotice.className = 'notice ok';
-    folderNotice.style.display = 'none';
-    document.querySelector('.search-line').insertAdjacentElement('afterend', folderNotice);
-    const registrationBody = document.getElementById('registrationBody');
-    const emptyState = document.getElementById('emptyState');
-    const registrationTotal = document.getElementById('registrationTotal');
-    const registrationLatest = document.getElementById('registrationLatest');
-    const registrationLatestPerson = document.getElementById('registrationLatestPerson');
-    const registrationOrganizations = document.getElementById('registrationOrganizations');
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="label">Total signups</div>
+            <div class="value" id="registrationTotal">0</div>
+          </div>
+          <div class="summary-card">
+            <div class="label">Latest signup</div>
+            <div class="value" id="registrationLatest">—</div>
+          </div>
+          <div class="summary-card">
+            <div class="label">Latest person</div>
+            <div class="value" id="registrationLatestPerson">—</div>
+          </div>
+          <div class="summary-card">
+            <div class="label">Organizations</div>
+            <div class="value" id="registrationOrganizations">0</div>
+          </div>
+        </div>
 
-    function getFilteredRegistrations() {
-      const query = searchInput.value.trim();
-      return state.registrations.filter(entry => rowMatches(entry, query));
-    }
+        <div class="search-line">
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search by name, email, phone, role, organization, program, track, or status"
+          />
+        </div>
+        <div class="bulk-bar">
+          <div class="bulk-copy">
+            <strong id="selectedCount">0</strong> selected
+          </div>
+          <div class="bulk-actions">
+            <button class="btn" id="clearSelectionBtn" type="button" disabled>
+              Clear Selection
+            </button>
+            <button
+              class="btn danger"
+              id="deleteSelectedBtn"
+              type="button"
+              disabled
+            >
+              Delete Selected
+            </button>
+          </div>
+        </div>
 
-    function syncBulkControls(filtered) {
-      const visibleIds = filtered.map(entry => entry.registrationId).filter(Boolean);
-      const selectedVisible = visibleIds.filter(id => state.selectedRegistrationIds.has(id));
-      selectedCount.textContent = state.selectedRegistrationIds.size;
-      clearSelectionBtn.disabled = state.selectedRegistrationIds.size === 0;
-      deleteSelectedBtn.disabled = state.selectedRegistrationIds.size === 0;
-      selectAllCheckbox.checked = visibleIds.length > 0 && selectedVisible.length === visibleIds.length;
-      selectAllCheckbox.indeterminate = selectedVisible.length > 0 && selectedVisible.length < visibleIds.length;
-    }
+        <div class="sheet-shell">
+          <div class="sheet-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th class="select-cell">
+                    <input
+                      id="selectAllCheckbox"
+                      type="checkbox"
+                      aria-label="Select all visible registrations"
+                    />
+                  </th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Organization</th>
+                  <th>Program</th>
+                  <th>Tracks</th>
+                  <th>Location</th>
+                  <th>Submitted</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="registrationBody"></tbody>
+            </table>
+          </div>
+          <div id="emptyState" class="empty">
+            No registrations have been submitted yet.
+          </div>
+        </div>
+      </section>
+    </main>
 
-    function getSessionToken() {
-      return sessionStorage.getItem(ADMIN_SESSION_KEY) || '';
-    }
+    <script
+      src="../assets/site-search.js"
+      data-search-index="../data/site-search-index.json"
+      defer
+    ></script>
+    <script>
+      const DEFAULT_ADMIN_ENDPOINT = "";
+      const ENDPOINT_PLACEHOLDER =
+        "https://mmmf-agreement-admin.your-subdomain.workers.dev";
+      const ADMIN_MODE_KEY = "mmmf_agreement_admin_mode_v2";
+      const ADMIN_SESSION_KEY = "mmmf_agreement_admin_session_v2";
+      const ADMIN_ENDPOINT_KEY = "mmmf_agreement_admin_endpoint_v2";
 
-    function getAdminEndpoint() {
-      return (adminEndpointInput.value || localStorage.getItem(ADMIN_ENDPOINT_KEY) || DEFAULT_ADMIN_ENDPOINT || '').trim();
-    }
+      const state = {
+        registrations: [],
+        selectedRegistrationIds: new Set(),
+      };
 
-    function showNotice(el, message) {
-      if (!message) {
-        el.style.display = 'none';
-        el.textContent = '';
-        return;
+      const adminGate = document.getElementById("adminGate");
+      const folderShell = document.getElementById("folderShell");
+      const unlockForm = document.getElementById("unlockForm");
+      const adminEndpointInput = document.getElementById("adminEndpointInput");
+      const teacherCodeInput = document.getElementById("teacherCodeInput");
+      const unlockNotice = document.getElementById("unlockNotice");
+      const refreshBtn = document.getElementById("refreshBtn");
+      const exportBtn = document.getElementById("exportBtn");
+      const lockBtn = document.getElementById("lockBtn");
+      const searchInput = document.getElementById("searchInput");
+      const selectAllCheckbox = document.getElementById("selectAllCheckbox");
+      const clearSelectionBtn = document.getElementById("clearSelectionBtn");
+      const deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
+      const selectedCount = document.getElementById("selectedCount");
+      const folderNotice = document.createElement("div");
+      folderNotice.id = "folderNotice";
+      folderNotice.className = "notice ok";
+      folderNotice.style.display = "none";
+      document
+        .querySelector(".search-line")
+        .insertAdjacentElement("afterend", folderNotice);
+      const registrationBody = document.getElementById("registrationBody");
+      const emptyState = document.getElementById("emptyState");
+      const registrationTotal = document.getElementById("registrationTotal");
+      const registrationLatest = document.getElementById("registrationLatest");
+      const registrationLatestPerson = document.getElementById(
+        "registrationLatestPerson",
+      );
+      const registrationOrganizations = document.getElementById(
+        "registrationOrganizations",
+      );
+
+      function getFilteredRegistrations() {
+        const query = searchInput.value.trim();
+        return state.registrations.filter((entry) => rowMatches(entry, query));
       }
-      el.textContent = message;
-      el.style.display = 'block';
-    }
 
-    function setTeacherMode(enabled) {
-      sessionStorage.setItem(ADMIN_MODE_KEY, enabled ? 'true' : 'false');
-      adminGate.style.display = enabled ? 'none' : 'block';
-      folderShell.style.display = enabled ? 'block' : 'none';
-      refreshBtn.style.display = enabled ? 'inline-flex' : 'none';
-      exportBtn.style.display = enabled ? 'inline-flex' : 'none';
-      lockBtn.style.display = enabled ? 'inline-flex' : 'none';
-    }
-
-    function clearSession() {
-      sessionStorage.removeItem(ADMIN_SESSION_KEY);
-    }
-
-    async function postAdminAction(action, payload = {}) {
-      const endpoint = getAdminEndpoint();
-      if (!endpoint) throw new Error('Paste the Cloudflare Worker admin URL first.');
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ action, ...payload })
-      });
-
-      const text = await response.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (_error) {
-        throw new Error('The Worker endpoint did not return valid JSON.');
+      function syncBulkControls(filtered) {
+        const visibleIds = filtered
+          .map((entry) => entry.registrationId)
+          .filter(Boolean);
+        const selectedVisible = visibleIds.filter((id) =>
+          state.selectedRegistrationIds.has(id),
+        );
+        selectedCount.textContent = state.selectedRegistrationIds.size;
+        clearSelectionBtn.disabled = state.selectedRegistrationIds.size === 0;
+        deleteSelectedBtn.disabled = state.selectedRegistrationIds.size === 0;
+        selectAllCheckbox.checked =
+          visibleIds.length > 0 && selectedVisible.length === visibleIds.length;
+        selectAllCheckbox.indeterminate =
+          selectedVisible.length > 0 &&
+          selectedVisible.length < visibleIds.length;
       }
 
-      if (!response.ok || !data.ok) {
-        throw new Error(data.error || 'The admin request failed.');
+      function getSessionToken() {
+        return sessionStorage.getItem(ADMIN_SESSION_KEY) || "";
       }
-      return data;
-    }
 
-    function rowMatches(entry, query) {
-      if (!query) return true;
-      const detailsText = entry.detailsJson || '';
-      return [
-        entry.name,
-        entry.email,
-        entry.phone,
-        entry.role,
-        entry.organization,
-        entry.program,
-        entry.status,
-        detailsText
-      ].join(' ').toLowerCase().includes(query.toLowerCase());
-    }
+      function getAdminEndpoint() {
+        return (
+          adminEndpointInput.value ||
+          localStorage.getItem(ADMIN_ENDPOINT_KEY) ||
+          DEFAULT_ADMIN_ENDPOINT ||
+          ""
+        ).trim();
+      }
 
-    function renderRegistrations() {
-      const filtered = getFilteredRegistrations();
-      const orgs = new Set(state.registrations.map(entry => entry.organization || '').filter(Boolean));
+      function showNotice(el, message) {
+        if (!message) {
+          el.style.display = "none";
+          el.textContent = "";
+          return;
+        }
+        el.textContent = message;
+        el.style.display = "block";
+      }
 
-      registrationTotal.textContent = state.registrations.length;
-      registrationLatest.textContent = state.registrations.length ? new Date(state.registrations[0].submittedAt).toLocaleDateString() : '—';
-      registrationLatestPerson.textContent = state.registrations.length ? state.registrations[0].name : '—';
-      registrationOrganizations.textContent = orgs.size;
+      function setTeacherMode(enabled) {
+        sessionStorage.setItem(ADMIN_MODE_KEY, enabled ? "true" : "false");
+        adminGate.style.display = enabled ? "none" : "block";
+        folderShell.style.display = enabled ? "block" : "none";
+        refreshBtn.style.display = enabled ? "inline-flex" : "none";
+        exportBtn.style.display = enabled ? "inline-flex" : "none";
+        lockBtn.style.display = enabled ? "inline-flex" : "none";
+      }
 
-      registrationBody.innerHTML = '';
-      emptyState.style.display = filtered.length ? 'none' : 'block';
+      function clearSession() {
+        sessionStorage.removeItem(ADMIN_SESSION_KEY);
+      }
 
-      filtered.forEach(entry => {
-        let details = {};
+      async function postAdminAction(action, payload = {}) {
+        const endpoint = getAdminEndpoint();
+        if (!endpoint)
+          throw new Error("Paste the Cloudflare Worker admin URL first.");
+
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action, ...payload }),
+        });
+
+        const text = await response.text();
+        let data;
         try {
-          details = entry.detailsJson ? JSON.parse(entry.detailsJson) : {};
+          data = JSON.parse(text);
         } catch (_error) {
-          details = {};
+          throw new Error("The Worker endpoint did not return valid JSON.");
         }
 
-        const row = document.createElement('tr');
-        const registrationId = entry.registrationId || '';
-        if (registrationId && state.selectedRegistrationIds.has(registrationId)) {
-          row.classList.add('selected-row');
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || "The admin request failed.");
         }
-        row.innerHTML = `
-          <td class="select-cell"><input type="checkbox" data-select="${registrationId}" ${registrationId && state.selectedRegistrationIds.has(registrationId) ? 'checked' : ''} aria-label="Select ${entry.name || 'registration'}"></td>
-          <td><strong>${entry.name || '—'}</strong></td>
-          <td>${entry.email || '—'}</td>
-          <td>${entry.phone || '—'}</td>
-          <td>${entry.role || '—'}</td>
-          <td>${details.organization || entry.organization || '—'}</td>
-          <td>${entry.program || '—'}</td>
-          <td>${details.tracks || 'No track selected'}</td>
-          <td>${details.location || '—'}</td>
-          <td>${entry.submittedAt ? new Date(entry.submittedAt).toLocaleString() : '—'}</td>
-          <td><span class="tag">${entry.status || 'New'}</span></td>
+        return data;
+      }
+
+      function rowMatches(entry, query) {
+        if (!query) return true;
+        const detailsText = entry.detailsJson || "";
+        return [
+          entry.name,
+          entry.email,
+          entry.phone,
+          entry.role,
+          entry.organization,
+          entry.program,
+          entry.status,
+          detailsText,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(query.toLowerCase());
+      }
+
+      function renderRegistrations() {
+        const filtered = getFilteredRegistrations();
+        const orgs = new Set(
+          state.registrations
+            .map((entry) => entry.organization || "")
+            .filter(Boolean),
+        );
+
+        registrationTotal.textContent = state.registrations.length;
+        registrationLatest.textContent = state.registrations.length
+          ? new Date(state.registrations[0].submittedAt).toLocaleDateString()
+          : "—";
+        registrationLatestPerson.textContent = state.registrations.length
+          ? state.registrations[0].name
+          : "—";
+        registrationOrganizations.textContent = orgs.size;
+
+        registrationBody.innerHTML = "";
+        emptyState.style.display = filtered.length ? "none" : "block";
+
+        filtered.forEach((entry) => {
+          let details = {};
+          try {
+            details = entry.detailsJson ? JSON.parse(entry.detailsJson) : {};
+          } catch (_error) {
+            details = {};
+          }
+
+          const row = document.createElement("tr");
+          const registrationId = entry.registrationId || "";
+          if (
+            registrationId &&
+            state.selectedRegistrationIds.has(registrationId)
+          ) {
+            row.classList.add("selected-row");
+          }
+          row.innerHTML = `
+          <td class="select-cell"><input type="checkbox" data-select="${registrationId}" ${registrationId && state.selectedRegistrationIds.has(registrationId) ? "checked" : ""} aria-label="Select ${entry.name || "registration"}"></td>
+          <td><strong>${entry.name || "—"}</strong></td>
+          <td>${entry.email || "—"}</td>
+          <td>${entry.phone || "—"}</td>
+          <td>${entry.role || "—"}</td>
+          <td>${details.organization || entry.organization || "—"}</td>
+          <td>${entry.program || "—"}</td>
+          <td>${details.tracks || "No track selected"}</td>
+          <td>${details.location || "—"}</td>
+          <td>${entry.submittedAt ? new Date(entry.submittedAt).toLocaleString() : "—"}</td>
+          <td><span class="tag">${entry.status || "New"}</span></td>
           <td>${entry.notes || details.notes || '<span class="muted">—</span>'}</td>
           <td class="row-actions"><button type="button" data-delete="${registrationId}">Delete</button></td>
         `;
-        registrationBody.appendChild(row);
-      });
-      syncBulkControls(filtered);
-    }
-
-    async function refreshRegistrations() {
-      const data = await postAdminAction('registration_list', { session_token: getSessionToken() });
-      state.registrations = Array.isArray(data.entries) ? data.entries : [];
-      renderRegistrations();
-    }
-
-    unlockForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      showNotice(unlockNotice, '');
-      try {
-        const endpoint = getAdminEndpoint();
-        if (!endpoint) throw new Error('Paste the Cloudflare Worker admin URL first.');
-        localStorage.setItem(ADMIN_ENDPOINT_KEY, endpoint);
-        const data = await postAdminAction('admin_login', { access_code: teacherCodeInput.value.trim() });
-        sessionStorage.setItem(ADMIN_SESSION_KEY, data.session_token);
-        teacherCodeInput.value = '';
-        setTeacherMode(true);
-        await refreshRegistrations();
-      } catch (error) {
-        clearSession();
-        setTeacherMode(false);
-        showNotice(unlockNotice, error.message);
+          registrationBody.appendChild(row);
+        });
+        syncBulkControls(filtered);
       }
-    });
 
-    refreshBtn.addEventListener('click', async () => {
-      showNotice(unlockNotice, '');
-      showNotice(folderNotice, '');
-      try {
-        await refreshRegistrations();
-      } catch (error) {
-        showNotice(unlockNotice, error.message);
-      }
-    });
-
-    lockBtn.addEventListener('click', () => {
-      clearSession();
-      setTeacherMode(false);
-    });
-
-    exportBtn.addEventListener('click', () => {
-      const blob = new Blob([JSON.stringify(state.registrations, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'mmmf-registration-folder.json';
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    clearSelectionBtn.addEventListener('click', () => {
-      state.selectedRegistrationIds.clear();
-      renderRegistrations();
-    });
-
-    deleteSelectedBtn.addEventListener('click', async () => {
-      const ids = Array.from(state.selectedRegistrationIds);
-      if (!ids.length) return;
-      const confirmed = window.confirm(`Delete ${ids.length} selected registration record${ids.length === 1 ? '' : 's'}? This cannot be undone.`);
-      if (!confirmed) return;
-      showNotice(unlockNotice, '');
-      showNotice(folderNotice, '');
-      let deleted = 0;
-      try {
-        for (const registrationId of ids) {
-          const data = await postAdminAction('registration_delete', {
-            session_token: getSessionToken(),
-            registration_id: registrationId
-          });
-          state.registrations = Array.isArray(data.entries) ? data.entries : [];
-          deleted += 1;
-        }
-        state.selectedRegistrationIds.clear();
-        renderRegistrations();
-        showNotice(folderNotice, `${deleted} registration record${deleted === 1 ? '' : 's'} deleted from the folder.`);
-      } catch (error) {
-        renderRegistrations();
-        showNotice(unlockNotice, deleted ? `${error.message} ${deleted} record${deleted === 1 ? '' : 's'} deleted before the error.` : error.message);
-      }
-    });
-
-    registrationBody.addEventListener('click', async (event) => {
-      const selectId = event.target.dataset.select;
-      if (selectId) {
-        if (event.target.checked) state.selectedRegistrationIds.add(selectId);
-        else state.selectedRegistrationIds.delete(selectId);
-        renderRegistrations();
-        return;
-      }
-      const registrationId = event.target.dataset.delete;
-      if (!registrationId) return;
-      const confirmed = window.confirm('Delete this registration record? This cannot be undone.');
-      if (!confirmed) return;
-      showNotice(unlockNotice, '');
-      showNotice(folderNotice, '');
-      try {
-        const data = await postAdminAction('registration_delete', {
+      async function refreshRegistrations() {
+        const data = await postAdminAction("registration_list", {
           session_token: getSessionToken(),
-          registration_id: registrationId
         });
         state.registrations = Array.isArray(data.entries) ? data.entries : [];
-        state.selectedRegistrationIds.delete(registrationId);
         renderRegistrations();
-        showNotice(folderNotice, 'Registration deleted from the folder.');
-      } catch (error) {
-        showNotice(unlockNotice, error.message);
       }
-    });
 
-    selectAllCheckbox.addEventListener('change', () => {
-      const visibleIds = getFilteredRegistrations().map(entry => entry.registrationId).filter(Boolean);
-      if (selectAllCheckbox.checked) {
-        visibleIds.forEach(id => state.selectedRegistrationIds.add(id));
-      } else {
-        visibleIds.forEach(id => state.selectedRegistrationIds.delete(id));
-      }
-      renderRegistrations();
-    });
-
-    searchInput.addEventListener('input', renderRegistrations);
-
-    adminEndpointInput.placeholder = ENDPOINT_PLACEHOLDER;
-    adminEndpointInput.value = localStorage.getItem(ADMIN_ENDPOINT_KEY) || DEFAULT_ADMIN_ENDPOINT;
-
-    (async () => {
-      if (sessionStorage.getItem(ADMIN_MODE_KEY) === 'true' && getSessionToken()) {
+      unlockForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        showNotice(unlockNotice, "");
         try {
+          const endpoint = getAdminEndpoint();
+          if (!endpoint)
+            throw new Error("Paste the Cloudflare Worker admin URL first.");
+          localStorage.setItem(ADMIN_ENDPOINT_KEY, endpoint);
+          const data = await postAdminAction("admin_login", {
+            access_code: teacherCodeInput.value.trim(),
+          });
+          sessionStorage.setItem(ADMIN_SESSION_KEY, data.session_token);
+          teacherCodeInput.value = "";
           setTeacherMode(true);
           await refreshRegistrations();
         } catch (error) {
@@ -558,10 +716,143 @@ tbody tr.selected-row { background:#f7f3ea; }
           setTeacherMode(false);
           showNotice(unlockNotice, error.message);
         }
-      } else {
+      });
+
+      refreshBtn.addEventListener("click", async () => {
+        showNotice(unlockNotice, "");
+        showNotice(folderNotice, "");
+        try {
+          await refreshRegistrations();
+        } catch (error) {
+          showNotice(unlockNotice, error.message);
+        }
+      });
+
+      lockBtn.addEventListener("click", () => {
+        clearSession();
         setTeacherMode(false);
-      }
-    })();
-  </script>
-</body>
+      });
+
+      exportBtn.addEventListener("click", () => {
+        const blob = new Blob([JSON.stringify(state.registrations, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "mmmf-registration-folder.json";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      clearSelectionBtn.addEventListener("click", () => {
+        state.selectedRegistrationIds.clear();
+        renderRegistrations();
+      });
+
+      deleteSelectedBtn.addEventListener("click", async () => {
+        const ids = Array.from(state.selectedRegistrationIds);
+        if (!ids.length) return;
+        const confirmed = window.confirm(
+          `Delete ${ids.length} selected registration record${ids.length === 1 ? "" : "s"}? This cannot be undone.`,
+        );
+        if (!confirmed) return;
+        showNotice(unlockNotice, "");
+        showNotice(folderNotice, "");
+        let deleted = 0;
+        try {
+          for (const registrationId of ids) {
+            const data = await postAdminAction("registration_delete", {
+              session_token: getSessionToken(),
+              registration_id: registrationId,
+            });
+            state.registrations = Array.isArray(data.entries)
+              ? data.entries
+              : [];
+            deleted += 1;
+          }
+          state.selectedRegistrationIds.clear();
+          renderRegistrations();
+          showNotice(
+            folderNotice,
+            `${deleted} registration record${deleted === 1 ? "" : "s"} deleted from the folder.`,
+          );
+        } catch (error) {
+          renderRegistrations();
+          showNotice(
+            unlockNotice,
+            deleted
+              ? `${error.message} ${deleted} record${deleted === 1 ? "" : "s"} deleted before the error.`
+              : error.message,
+          );
+        }
+      });
+
+      registrationBody.addEventListener("click", async (event) => {
+        const selectId = event.target.dataset.select;
+        if (selectId) {
+          if (event.target.checked) state.selectedRegistrationIds.add(selectId);
+          else state.selectedRegistrationIds.delete(selectId);
+          renderRegistrations();
+          return;
+        }
+        const registrationId = event.target.dataset.delete;
+        if (!registrationId) return;
+        const confirmed = window.confirm(
+          "Delete this registration record? This cannot be undone.",
+        );
+        if (!confirmed) return;
+        showNotice(unlockNotice, "");
+        showNotice(folderNotice, "");
+        try {
+          const data = await postAdminAction("registration_delete", {
+            session_token: getSessionToken(),
+            registration_id: registrationId,
+          });
+          state.registrations = Array.isArray(data.entries) ? data.entries : [];
+          state.selectedRegistrationIds.delete(registrationId);
+          renderRegistrations();
+          showNotice(folderNotice, "Registration deleted from the folder.");
+        } catch (error) {
+          showNotice(unlockNotice, error.message);
+        }
+      });
+
+      selectAllCheckbox.addEventListener("change", () => {
+        const visibleIds = getFilteredRegistrations()
+          .map((entry) => entry.registrationId)
+          .filter(Boolean);
+        if (selectAllCheckbox.checked) {
+          visibleIds.forEach((id) => state.selectedRegistrationIds.add(id));
+        } else {
+          visibleIds.forEach((id) => state.selectedRegistrationIds.delete(id));
+        }
+        renderRegistrations();
+      });
+
+      searchInput.addEventListener("input", renderRegistrations);
+
+      adminEndpointInput.placeholder = ENDPOINT_PLACEHOLDER;
+      adminEndpointInput.value =
+        localStorage.getItem(ADMIN_ENDPOINT_KEY) || DEFAULT_ADMIN_ENDPOINT;
+
+      (async () => {
+        if (
+          sessionStorage.getItem(ADMIN_MODE_KEY) === "true" &&
+          getSessionToken()
+        ) {
+          try {
+            setTeacherMode(true);
+            await refreshRegistrations();
+          } catch (error) {
+            clearSession();
+            setTeacherMode(false);
+            showNotice(unlockNotice, error.message);
+          }
+        } else {
+          setTeacherMode(false);
+        }
+      })();
+    </script>
+  </body>
 </html>

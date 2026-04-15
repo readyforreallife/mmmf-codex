@@ -1,18 +1,19 @@
 (function () {
-  const DEFAULT_REGISTRATION_ENDPOINT = 'https://flat-flower-4af8mmmf-agreement-admin.mikeyterry44.workers.dev';
+  const DEFAULT_REGISTRATION_ENDPOINT =
+    "https://flat-flower-4af8mmmf-agreement-admin.mikeyterry44.workers.dev";
   const ACCESS_CONTROL = {
-    storageKey: 'rrl_paid_access',
-    unlockedAtKey: 'rrl_paid_access_unlocked_at',
-    unlockCode: 'MRT-PAID-2026',
-    checkoutUrl: 'https://buy.stripe.com/9B628r30NcCG1qd1s8dIA00'
+    storageKey: "rrl_paid_access",
+    unlockedAtKey: "rrl_paid_access_unlocked_at",
+    unlockCode: "MRT-PAID-2026",
+    checkoutUrl: "https://buy.stripe.com/9B628r30NcCG1qd1s8dIA00",
   };
 
-  let globalAccessState = { publicUnlocked: false, updatedAt: '' };
+  let globalAccessState = { publicUnlocked: false, updatedAt: "" };
 
   function injectStyles() {
-    if (document.getElementById('sharedAccessGateStyles')) return;
-    const style = document.createElement('style');
-    style.id = 'sharedAccessGateStyles';
+    if (document.getElementById("sharedAccessGateStyles")) return;
+    const style = document.createElement("style");
+    style.id = "sharedAccessGateStyles";
     style.textContent = `
       .shared-access-gate {
         background: #f9f0d7;
@@ -135,10 +136,10 @@
   }
 
   function createUi() {
-    if (document.getElementById('sharedAccessGate')) return;
-    const gate = document.createElement('div');
-    gate.id = 'sharedAccessGate';
-    gate.className = 'shared-access-gate';
+    if (document.getElementById("sharedAccessGate")) return;
+    const gate = document.createElement("div");
+    gate.id = "sharedAccessGate";
+    gate.className = "shared-access-gate";
     gate.innerHTML = `
       <div class="shared-access-copy">Preview mode is active. Full MMMF materials on this page are restricted to licensed users.</div>
       <div class="shared-access-actions">
@@ -147,9 +148,9 @@
       </div>
     `;
 
-    const overlay = document.createElement('div');
-    overlay.id = 'sharedAccessOverlay';
-    overlay.className = 'shared-access-overlay';
+    const overlay = document.createElement("div");
+    overlay.id = "sharedAccessOverlay";
+    overlay.className = "shared-access-overlay";
     overlay.innerHTML = `
       <div class="shared-access-panel">
         <h3>Full MMMF Access Is Locked</h3>
@@ -161,10 +162,10 @@
       </div>
     `;
 
-    const modal = document.createElement('div');
-    modal.id = 'sharedAccessModal';
-    modal.className = 'shared-access-modal';
-    modal.setAttribute('aria-hidden', 'true');
+    const modal = document.createElement("div");
+    modal.id = "sharedAccessModal";
+    modal.className = "shared-access-modal";
+    modal.setAttribute("aria-hidden", "true");
     modal.innerHTML = `
       <div class="shared-access-backdrop" data-close-access></div>
       <div class="shared-access-modal-panel">
@@ -182,128 +183,158 @@
       </div>
     `;
 
-    const anchor = document.querySelector('body > nav, body > header, body > .utility-bar');
+    const anchor = document.querySelector(
+      "body > nav, body > header, body > .utility-bar",
+    );
     if (anchor && anchor.parentNode) {
-      anchor.insertAdjacentElement('afterend', gate);
+      anchor.insertAdjacentElement("afterend", gate);
     } else {
-      document.body.insertAdjacentElement('afterbegin', gate);
+      document.body.insertAdjacentElement("afterbegin", gate);
     }
     document.body.appendChild(overlay);
     document.body.appendChild(modal);
   }
 
   function isOwnerPreviewOn() {
-    return localStorage.getItem('rrl_owner_preview') === '1';
+    return localStorage.getItem("rrl_owner_preview") === "1";
   }
 
   function setLocalUnlocked(ts) {
-    localStorage.setItem(ACCESS_CONTROL.storageKey, '1');
-    localStorage.setItem(ACCESS_CONTROL.unlockedAtKey, String(ts || new Date().toISOString()));
+    localStorage.setItem(ACCESS_CONTROL.storageKey, "1");
+    localStorage.setItem(
+      ACCESS_CONTROL.unlockedAtKey,
+      String(ts || new Date().toISOString()),
+    );
   }
 
   function isUnlocked() {
     if (isOwnerPreviewOn()) return true;
-    if (localStorage.getItem(ACCESS_CONTROL.storageKey) !== '1') return false;
+    if (localStorage.getItem(ACCESS_CONTROL.storageKey) !== "1") return false;
     if (globalAccessState.publicUnlocked) return true;
-    const localTs = Date.parse(String(localStorage.getItem(ACCESS_CONTROL.unlockedAtKey) || '')) || 0;
-    const globalTs = Date.parse(String(globalAccessState.updatedAt || '')) || 0;
+    const localTs =
+      Date.parse(
+        String(localStorage.getItem(ACCESS_CONTROL.unlockedAtKey) || ""),
+      ) || 0;
+    const globalTs = Date.parse(String(globalAccessState.updatedAt || "")) || 0;
     if (!globalTs) return true;
     return localTs >= globalTs;
   }
 
   function setLockedState(locked) {
-    document.body.classList.toggle('shared-preview-locked', locked);
-    const gate = document.getElementById('sharedAccessGate');
-    if (gate) gate.style.display = locked ? 'flex' : 'none';
+    document.body.classList.toggle("shared-preview-locked", locked);
+    const gate = document.getElementById("sharedAccessGate");
+    if (gate) gate.style.display = locked ? "flex" : "none";
   }
 
   function showStatus(text, isError) {
-    const status = document.getElementById('sharedAccessStatus');
+    const status = document.getElementById("sharedAccessStatus");
     if (!status) return;
     status.textContent = text;
-    status.style.display = 'block';
-    status.style.borderColor = isError ? '#b0432e' : '#5f7f35';
-    status.style.color = isError ? '#b0432e' : '#253044';
+    status.style.display = "block";
+    status.style.borderColor = isError ? "#b0432e" : "#5f7f35";
+    status.style.color = isError ? "#b0432e" : "#253044";
   }
 
   function openModal() {
-    const modal = document.getElementById('sharedAccessModal');
-    const input = document.getElementById('sharedAccessCodeInput');
-    const status = document.getElementById('sharedAccessStatus');
+    const modal = document.getElementById("sharedAccessModal");
+    const input = document.getElementById("sharedAccessCodeInput");
+    const status = document.getElementById("sharedAccessStatus");
     if (!modal) return;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    if (status) status.style.display = 'none';
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    if (status) status.style.display = "none";
     if (input) {
-      input.value = '';
+      input.value = "";
       setTimeout(() => input.focus(), 30);
     }
   }
 
   function closeModal() {
-    const modal = document.getElementById('sharedAccessModal');
+    const modal = document.getElementById("sharedAccessModal");
     if (!modal) return;
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
   }
 
   async function loadGlobalAccessState() {
     try {
       const res = await fetch(DEFAULT_REGISTRATION_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'public_access_get' }),
-        cache: 'no-store'
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "public_access_get" }),
+        cache: "no-store",
       });
       const json = await res.json().catch(() => null);
       if (!res.ok || !json || !json.ok) return;
       globalAccessState = {
         publicUnlocked: !!json.publicUnlocked,
-        updatedAt: String(json.updatedAt || '')
+        updatedAt: String(json.updatedAt || ""),
       };
       setLockedState(!(isUnlocked() || globalAccessState.publicUnlocked));
     } catch (_err) {}
   }
 
   function bindEvents() {
-    document.getElementById('sharedUnlockTop')?.addEventListener('click', openModal);
-    document.getElementById('sharedUnlockOverlay')?.addEventListener('click', openModal);
-    document.getElementById('sharedAccessCloseBtn')?.addEventListener('click', closeModal);
-    document.querySelectorAll('#sharedAccessModal [data-close-access]').forEach((el) => el.addEventListener('click', closeModal));
-    document.getElementById('sharedAccessUnlockBtn')?.addEventListener('click', () => {
-      const input = document.getElementById('sharedAccessCodeInput');
-      const code = String(input?.value || '').trim();
-      if (code !== ACCESS_CONTROL.unlockCode) {
-        showStatus('Code not recognized. Please check your purchase email.', true);
-        return;
-      }
-      setLocalUnlocked();
-      setLockedState(!(isUnlocked() || globalAccessState.publicUnlocked));
-      closeModal();
-    });
+    document
+      .getElementById("sharedUnlockTop")
+      ?.addEventListener("click", openModal);
+    document
+      .getElementById("sharedUnlockOverlay")
+      ?.addEventListener("click", openModal);
+    document
+      .getElementById("sharedAccessCloseBtn")
+      ?.addEventListener("click", closeModal);
+    document
+      .querySelectorAll("#sharedAccessModal [data-close-access]")
+      .forEach((el) => el.addEventListener("click", closeModal));
+    document
+      .getElementById("sharedAccessUnlockBtn")
+      ?.addEventListener("click", () => {
+        const input = document.getElementById("sharedAccessCodeInput");
+        const code = String(input?.value || "").trim();
+        if (code !== ACCESS_CONTROL.unlockCode) {
+          showStatus(
+            "Code not recognized. Please check your purchase email.",
+            true,
+          );
+          return;
+        }
+        setLocalUnlocked();
+        setLockedState(!(isUnlocked() || globalAccessState.publicUnlocked));
+        closeModal();
+      });
 
-    document.getElementById('sharedAccessCodeInput')?.addEventListener('keydown', (evt) => {
-      if (evt.key === 'Enter') {
+    document
+      .getElementById("sharedAccessCodeInput")
+      ?.addEventListener("keydown", (evt) => {
+        if (evt.key === "Enter") {
+          evt.preventDefault();
+          document.getElementById("sharedAccessUnlockBtn")?.click();
+        }
+      });
+
+    document.addEventListener("contextmenu", (evt) => {
+      if (document.body.classList.contains("shared-preview-locked"))
         evt.preventDefault();
-        document.getElementById('sharedAccessUnlockBtn')?.click();
-      }
     });
-
-    document.addEventListener('contextmenu', (evt) => {
-      if (document.body.classList.contains('shared-preview-locked')) evt.preventDefault();
+    document.addEventListener("copy", (evt) => {
+      if (document.body.classList.contains("shared-preview-locked"))
+        evt.preventDefault();
     });
-    document.addEventListener('copy', (evt) => {
-      if (document.body.classList.contains('shared-preview-locked')) evt.preventDefault();
+    document.addEventListener("cut", (evt) => {
+      if (document.body.classList.contains("shared-preview-locked"))
+        evt.preventDefault();
     });
-    document.addEventListener('cut', (evt) => {
-      if (document.body.classList.contains('shared-preview-locked')) evt.preventDefault();
-    });
-    document.addEventListener('keydown', (evt) => {
-      if (!document.body.classList.contains('shared-preview-locked')) return;
+    document.addEventListener("keydown", (evt) => {
+      if (!document.body.classList.contains("shared-preview-locked")) return;
       const k = evt.key.toLowerCase();
-      if ((evt.metaKey || evt.ctrlKey) && (k === 'c' || k === 's' || k === 'p' || k === 'u')) evt.preventDefault();
+      if (
+        (evt.metaKey || evt.ctrlKey) &&
+        (k === "c" || k === "s" || k === "p" || k === "u")
+      )
+        evt.preventDefault();
     });
-    window.addEventListener('focus', loadGlobalAccessState);
+    window.addEventListener("focus", loadGlobalAccessState);
   }
 
   injectStyles();

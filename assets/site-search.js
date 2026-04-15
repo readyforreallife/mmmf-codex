@@ -1,10 +1,17 @@
 (function () {
   const script = document.currentScript;
-  const indexPath = script?.dataset.searchIndex || "data/site-search-index.json";
-  const siteBaseUrl = script?.src ? new URL("../", script.src) : new URL("./", window.location.href);
+  const indexPath =
+    script?.dataset.searchIndex || "data/site-search-index.json";
+  const siteBaseUrl = script?.src
+    ? new URL("../", script.src)
+    : new URL("./", window.location.href);
 
   function normalize(value) {
-    return (value || "").toLowerCase().replace(/[^a-z0-9\s-]/g, " ").replace(/\s+/g, " ").trim();
+    return (value || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
   function resolveUrl(url) {
@@ -61,8 +68,7 @@
       utilityBar.insertAdjacentElement("afterbegin", shell);
     } else if (anchor && anchor.parentNode) {
       anchor.insertAdjacentElement("afterend", shell);
-    }
-    else document.body.insertAdjacentElement("afterbegin", shell);
+    } else document.body.insertAdjacentElement("afterbegin", shell);
 
     const input = document.getElementById("site-search-input");
     const results = document.getElementById("site-search-results");
@@ -97,7 +103,9 @@
       results.hidden = false;
       results.innerHTML = `
         <ul class="site-search-list">
-          ${items.map((item) => `
+          ${items
+            .map(
+              (item) => `
             <li class="site-search-item">
               <a class="site-search-link" href="${resolveUrl(item.url)}">
                 <div class="site-search-topline">
@@ -107,7 +115,9 @@
                 <div class="site-search-snippet">${item.snippet}</div>
               </a>
             </li>
-          `).join("")}
+          `,
+            )
+            .join("")}
         </ul>
       `;
     }

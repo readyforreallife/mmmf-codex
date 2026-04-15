@@ -1,0 +1,14 @@
+{
+  "name": "mmmf-codex-site",
+  "private": true,
+  "scripts": {
+    "dev": "serve .",
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,json,md}\"",
+    "check:js": "node --check ops/mmmf-agreement-admin-worker.js && node --check assets/access-gate.js && node --check assets/site-search.js"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "serve": "^14.2.5"
+  }
+}

@@ -1,613 +1,857 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Printable Registration and Intake Form | Ready for Real Life Instruction and Education</title>
-  <link rel="stylesheet" href="../assets/site-search.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap');
-    :root {
-      --navy:#18304f;
-      --navy2:#274061;
-      --gold:#c89b3c;
-      --paper:#f7f2e9;
-      --ink:#1e293b;
-      --muted:#64748b;
-      --line:#d9cfbd;
-      --white:#ffffff;
-      --teal:#2f7b7c;
-    }
-    * { box-sizing:border-box; }
-    body {
-      margin:0;
-      font-family:'DM Sans',sans-serif;
-      background:var(--paper);
-      color:var(--ink);
-    }
-    header {
-      background:linear-gradient(135deg,var(--navy),var(--navy2));
-      color:#fff;
-      padding:24px;
-      border-bottom:4px solid var(--gold);
-    }
-    .wrap {
-      width:100%;
-      max-width:1200px;
-      margin:0 auto;
-    }
-    .topbar {
-      display:flex;
-      justify-content:space-between;
-      gap:18px;
-      align-items:flex-start;
-      flex-wrap:wrap;
-    }
-    .eyebrow {
-      font-size:.76rem;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:#e8c778;
-      font-weight:700;
-      margin-bottom:8px;
-    }
-    h1 {
-      margin:0 0 8px;
-      font-family:'Playfair Display',serif;
-      font-size:2rem;
-    }
-    .sub {
-      margin:0;
-      color:#d7deea;
-      max-width:760px;
-      line-height:1.7;
-    }
-    .header-actions {
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .btn {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      border-radius:999px;
-      background:var(--white);
-      color:var(--navy);
-      text-decoration:none;
-      border:1px solid var(--line);
-      font-weight:700;
-      white-space:nowrap;
-    }
-    .btn.secondary {
-      background:rgba(255,255,255,.12);
-      border-color:rgba(255,255,255,.22);
-      color:#fff;
-    }
-    main {
-      width:100%;
-      max-width:1200px;
-      margin:0 auto;
-      padding:20px 24px 42px;
-    }
-    .search-host {
-      margin-bottom:16px;
-    }
-    .form-shell {
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      overflow:hidden;
-      box-shadow:0 14px 30px rgba(0,0,0,.05);
-    }
-    .doc-head {
-      background:var(--navy);
-      color:#fff;
-      padding:20px 28px 18px;
-      border-bottom:4px solid var(--gold);
-      display:flex;
-      justify-content:space-between;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-    .doc-head h2 {
-      margin:0 0 8px;
-      font-family:'Playfair Display',serif;
-      font-size:1.85rem;
-    }
-    .doc-brand {
-      font-size:.78rem;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:#e8c778;
-      font-weight:700;
-      margin-bottom:6px;
-    }
-    .doc-meta {
-      color:#d7deea;
-      font-size:.95rem;
-      line-height:1.7;
-    }
-    .doc-page-pill {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      border-radius:12px;
-      background:#2e4c73;
-      color:#f2d287;
-      font-weight:700;
-      min-width:116px;
-      align-self:flex-start;
-    }
-    .pages {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:20px;
-      padding:22px;
-      background:#fbf8f1;
-    }
-    .page {
-      background:#fff;
-      border:1px solid #e7dece;
-      border-radius:18px;
-      padding:22px 24px 24px;
-      min-height:100%;
-    }
-    .section-bar {
-      margin:0 0 18px;
-      padding:10px 14px;
-      background:var(--teal);
-      color:#fff;
-      font-size:.93rem;
-      font-weight:700;
-      letter-spacing:.03em;
-      text-transform:uppercase;
-      border-radius:10px;
-    }
-    .field-grid {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px 20px;
-      margin-bottom:18px;
-    }
-    .field {
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .label {
-      font-size:.92rem;
-      color:#475569;
-      font-weight:500;
-    }
-    .line {
-      min-height:24px;
-      border-bottom:1.5px solid #d9dfeb;
-    }
-    .check-grid {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:8px 28px;
-      margin:10px 0 18px;
-    }
-    .check-grid.three {
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .check-grid.four {
-      grid-template-columns:repeat(4,minmax(0,1fr));
-    }
-    .check-item {
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      min-height:24px;
-      font-size:.95rem;
-      color:#334155;
-      line-height:1.35;
-    }
-    .box {
-      width:15px;
-      height:15px;
-      border:1.8px solid #6d7f95;
-      border-radius:2px;
-      flex:0 0 15px;
-      margin-top:2px;
-      background:#fff;
-    }
-    .scale-row {
-      display:flex;
-      gap:10px;
-      margin:8px 0 8px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .scale-box {
-      width:32px;
-      height:32px;
-      border:1.8px solid #98a8bd;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:4px;
-      font-weight:700;
-      color:#4b5c72;
-    }
-    .scale-caption {
-      font-size:.86rem;
-      color:#64748b;
-      display:flex;
-      justify-content:space-between;
-      max-width:230px;
-      gap:16px;
-    }
-    .textarea {
-      min-height:90px;
-      border:1.5px solid #d9dfeb;
-      border-radius:10px;
-      background:linear-gradient(180deg,#fff 0,#fff 26px,#f8fafc 26px,#f8fafc 27px,#fff 27px);
-      background-size:100% 24px;
-    }
-    .signature-grid {
-      display:grid;
-      grid-template-columns:1.3fr .7fr;
-      gap:18px;
-      margin-top:14px;
-    }
-    .ownership-note {
-      margin-top:12px;
-      padding-top:10px;
-      border-top:1px solid #d9dfeb;
-      font-size:.82rem;
-      line-height:1.5;
-      color:#64748b;
-    }
-    .footer-note {
-      padding:0 22px 22px;
-      color:var(--muted);
-      line-height:1.75;
-      display:flex;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-    .footer-actions {
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    @media (max-width:980px) {
-      .pages,
-      .field-grid,
-      .signature-grid,
-      .check-grid,
-      .check-grid.three,
-      .check-grid.four {
-        grid-template-columns:1fr;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Printable Registration and Intake Form | Ready for Real Life Instruction
+      and Education
+    </title>
+    <link rel="stylesheet" href="../assets/site-search.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap");
+      :root {
+        --navy: #18304f;
+        --navy2: #274061;
+        --gold: #c89b3c;
+        --paper: #f7f2e9;
+        --ink: #1e293b;
+        --muted: #64748b;
+        --line: #d9cfbd;
+        --white: #ffffff;
+        --teal: #2f7b7c;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      header {
+        background: linear-gradient(135deg, var(--navy), var(--navy2));
+        color: #fff;
+        padding: 24px;
+        border-bottom: 4px solid var(--gold);
+      }
+      .wrap {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .eyebrow {
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #e8c778;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+      }
+      .sub {
+        margin: 0;
+        color: #d7deea;
+        max-width: 760px;
+        line-height: 1.7;
+      }
+      .header-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: var(--white);
+        color: var(--navy);
+        text-decoration: none;
+        border: 1px solid var(--line);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.22);
+        color: #fff;
+      }
+      main {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 24px 42px;
+      }
+      .search-host {
+        margin-bottom: 16px;
+      }
+      .form-shell {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
       }
       .doc-head {
-        flex-direction:column;
-      }
-    }
-    @media print {
-      @page {
-        size: letter;
-        margin: .26in .3in .26in .42in;
-      }
-      body { background:#fff; }
-      header, .search-host, .footer-note { display:none; }
-      main { padding:0; max-width:none; }
-      .form-shell { border:none; box-shadow:none; }
-      .doc-head {
-        background:#fff;
-        color:var(--navy);
-        padding:0 0 6px;
-        border-bottom:2px solid var(--gold);
-        padding-left:18px;
-      }
-      .doc-brand {
-        color:#8f6b27;
-        font-size:.56rem;
-        margin-bottom:4px;
-        padding-left:0;
-        letter-spacing:.1em;
+        background: var(--navy);
+        color: #fff;
+        padding: 20px 28px 18px;
+        border-bottom: 4px solid var(--gold);
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
       }
       .doc-head h2 {
-        font-size:1rem;
-        margin:0;
+        margin: 0 0 8px;
+        font-family: "Playfair Display", serif;
+        font-size: 1.85rem;
+      }
+      .doc-brand {
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #e8c778;
+        font-weight: 700;
+        margin-bottom: 6px;
       }
       .doc-meta {
-        display:block;
-        color:#475569;
-        font-size:.52rem;
-        line-height:1.2;
-        margin-top:2px;
+        color: #d7deea;
+        font-size: 0.95rem;
+        line-height: 1.7;
       }
-      .doc-page-pill { display:none; }
+      .doc-page-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: #2e4c73;
+        color: #f2d287;
+        font-weight: 700;
+        min-width: 116px;
+        align-self: flex-start;
+      }
       .pages {
-        display:block;
-        padding:0;
-        gap:0;
-        background:#fff;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        padding: 22px;
+        background: #fbf8f1;
       }
       .page {
-        border:none;
-        border-radius:0;
-        break-after:page;
-        min-height:auto;
-        padding:8px 0 0;
-      }
-      .page:first-child {
-        padding-top:6px;
-      }
-      .page:last-child {
-        break-after:auto;
-      }
-      .page:first-child .field-grid {
-        gap:6px 10px;
-        margin-bottom:6px;
-      }
-      .page:first-child .label {
-        font-size:.62rem;
-        line-height:1.1;
-      }
-      .page:first-child .line {
-        min-height:12px;
-      }
-      .page:first-child .check-grid,
-      .page:first-child .check-grid.three {
-        gap:1px 10px;
-        margin:3px 0 6px;
-      }
-      .page:first-child .check-item {
-        gap:4px;
-        min-height:12px;
-        font-size:.62rem;
+        background: #fff;
+        border: 1px solid #e7dece;
+        border-radius: 18px;
+        padding: 22px 24px 24px;
+        min-height: 100%;
       }
       .section-bar {
-        margin:0 0 8px;
-        padding:6px 9px;
-        font-size:.68rem;
-        border-radius:7px;
+        margin: 0 0 18px;
+        padding: 10px 14px;
+        background: var(--teal);
+        color: #fff;
+        font-size: 0.93rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        border-radius: 10px;
       }
       .field-grid {
-        gap:8px 12px;
-        margin-bottom:8px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px 20px;
+        margin-bottom: 18px;
       }
       .field {
-        gap:3px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
       .label {
-        font-size:.66rem;
-        line-height:1.18;
+        font-size: 0.92rem;
+        color: #475569;
+        font-weight: 500;
       }
       .line {
-        min-height:14px;
+        min-height: 24px;
+        border-bottom: 1.5px solid #d9dfeb;
       }
-      .check-grid,
-      .check-grid.three,
+      .check-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 28px;
+        margin: 10px 0 18px;
+      }
+      .check-grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
       .check-grid.four {
-        gap:2px 12px;
-        margin:4px 0 8px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
       .check-item {
-        gap:5px;
-        min-height:14px;
-        font-size:.66rem;
-        line-height:1.12;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        min-height: 24px;
+        font-size: 0.95rem;
+        color: #334155;
+        line-height: 1.35;
       }
       .box {
-        width:9px;
-        height:9px;
-        flex-basis:9px;
-        border-width:1px;
-        margin-top:1px;
+        width: 15px;
+        height: 15px;
+        border: 1.8px solid #6d7f95;
+        border-radius: 2px;
+        flex: 0 0 15px;
+        margin-top: 2px;
+        background: #fff;
       }
       .scale-row {
-        gap:5px;
-        margin:5px 0 4px;
+        display: flex;
+        gap: 10px;
+        margin: 8px 0 8px;
+        flex-wrap: wrap;
+        align-items: center;
       }
       .scale-box {
-        width:20px;
-        height:20px;
-        font-size:.64rem;
-        border-width:1px;
+        width: 32px;
+        height: 32px;
+        border: 1.8px solid #98a8bd;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        font-weight: 700;
+        color: #4b5c72;
       }
       .scale-caption {
-        font-size:.58rem;
-        max-width:168px;
-        gap:8px;
+        font-size: 0.86rem;
+        color: #64748b;
+        display: flex;
+        justify-content: space-between;
+        max-width: 230px;
+        gap: 16px;
       }
       .textarea {
-        min-height:44px;
-        border-width:1.2px;
-        border-radius:8px;
-        background:linear-gradient(180deg,#fff 0,#fff 15px,#f8fafc 15px,#f8fafc 16px,#fff 16px);
-        background-size:100% 15px;
+        min-height: 90px;
+        border: 1.5px solid #d9dfeb;
+        border-radius: 10px;
+        background: linear-gradient(
+          180deg,
+          #fff 0,
+          #fff 26px,
+          #f8fafc 26px,
+          #f8fafc 27px,
+          #fff 27px
+        );
+        background-size: 100% 24px;
       }
       .signature-grid {
-        gap:10px;
-        margin-top:6px;
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 18px;
+        margin-top: 14px;
       }
       .ownership-note {
-        margin-top:8px;
-        padding-top:6px;
-        font-size:.58rem;
-        line-height:1.2;
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid #d9dfeb;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: #64748b;
       }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="wrap topbar">
-      <div>
-        <div class="eyebrow">MMMF Document Viewer</div>
-        <h1>Printable Registration and Intake Form</h1>
-        <p class="sub">This is the cleaner in-site version of the printable intake form. Use the download button if you still want the original PDF file.</p>
-      </div>
-      <div class="header-actions">
-        <a class="btn secondary" href="https://readyforreal.life/">Main Homepage</a>
-        <a class="btn secondary" href="index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
-        <a class="btn" href="MMMF_Registration_Form_Printable_Clean.pdf" download>Download PDF</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="search-host"></div>
-    <div class="form-shell">
-      <div class="doc-head">
+      .footer-note {
+        padding: 0 22px 22px;
+        color: var(--muted);
+        line-height: 1.75;
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .footer-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 980px) {
+        .pages,
+        .field-grid,
+        .signature-grid,
+        .check-grid,
+        .check-grid.three,
+        .check-grid.four {
+          grid-template-columns: 1fr;
+        }
+        .doc-head {
+          flex-direction: column;
+        }
+      }
+      @media print {
+        @page {
+          size: letter;
+          margin: 0.26in 0.3in 0.26in 0.42in;
+        }
+        body {
+          background: #fff;
+        }
+        header,
+        .search-host,
+        .footer-note {
+          display: none;
+        }
+        main {
+          padding: 0;
+          max-width: none;
+        }
+        .form-shell {
+          border: none;
+          box-shadow: none;
+        }
+        .doc-head {
+          background: #fff;
+          color: var(--navy);
+          padding: 0 0 6px;
+          border-bottom: 2px solid var(--gold);
+          padding-left: 18px;
+        }
+        .doc-brand {
+          color: #8f6b27;
+          font-size: 0.56rem;
+          margin-bottom: 4px;
+          padding-left: 0;
+          letter-spacing: 0.1em;
+        }
+        .doc-head h2 {
+          font-size: 1rem;
+          margin: 0;
+        }
+        .doc-meta {
+          display: block;
+          color: #475569;
+          font-size: 0.52rem;
+          line-height: 1.2;
+          margin-top: 2px;
+        }
+        .doc-page-pill {
+          display: none;
+        }
+        .pages {
+          display: block;
+          padding: 0;
+          gap: 0;
+          background: #fff;
+        }
+        .page {
+          border: none;
+          border-radius: 0;
+          break-after: page;
+          min-height: auto;
+          padding: 8px 0 0;
+        }
+        .page:first-child {
+          padding-top: 6px;
+        }
+        .page:last-child {
+          break-after: auto;
+        }
+        .page:first-child .field-grid {
+          gap: 6px 10px;
+          margin-bottom: 6px;
+        }
+        .page:first-child .label {
+          font-size: 0.62rem;
+          line-height: 1.1;
+        }
+        .page:first-child .line {
+          min-height: 12px;
+        }
+        .page:first-child .check-grid,
+        .page:first-child .check-grid.three {
+          gap: 1px 10px;
+          margin: 3px 0 6px;
+        }
+        .page:first-child .check-item {
+          gap: 4px;
+          min-height: 12px;
+          font-size: 0.62rem;
+        }
+        .section-bar {
+          margin: 0 0 8px;
+          padding: 6px 9px;
+          font-size: 0.68rem;
+          border-radius: 7px;
+        }
+        .field-grid {
+          gap: 8px 12px;
+          margin-bottom: 8px;
+        }
+        .field {
+          gap: 3px;
+        }
+        .label {
+          font-size: 0.66rem;
+          line-height: 1.18;
+        }
+        .line {
+          min-height: 14px;
+        }
+        .check-grid,
+        .check-grid.three,
+        .check-grid.four {
+          gap: 2px 12px;
+          margin: 4px 0 8px;
+        }
+        .check-item {
+          gap: 5px;
+          min-height: 14px;
+          font-size: 0.66rem;
+          line-height: 1.12;
+        }
+        .box {
+          width: 9px;
+          height: 9px;
+          flex-basis: 9px;
+          border-width: 1px;
+          margin-top: 1px;
+        }
+        .scale-row {
+          gap: 5px;
+          margin: 5px 0 4px;
+        }
+        .scale-box {
+          width: 20px;
+          height: 20px;
+          font-size: 0.64rem;
+          border-width: 1px;
+        }
+        .scale-caption {
+          font-size: 0.58rem;
+          max-width: 168px;
+          gap: 8px;
+        }
+        .textarea {
+          min-height: 44px;
+          border-width: 1.2px;
+          border-radius: 8px;
+          background: linear-gradient(
+            180deg,
+            #fff 0,
+            #fff 15px,
+            #f8fafc 15px,
+            #f8fafc 16px,
+            #fff 16px
+          );
+          background-size: 100% 15px;
+        }
+        .signature-grid {
+          gap: 10px;
+          margin-top: 6px;
+        }
+        .ownership-note {
+          margin-top: 8px;
+          padding-top: 6px;
+          font-size: 0.58rem;
+          line-height: 1.2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap topbar">
         <div>
-          <div class="doc-brand">Ready for Real Life Instruction and Education</div>
-          <h2>Program Registration & Intake Form</h2>
-          <div class="doc-meta">Founders: Michael R. Terry &amp; Mekenzi G. Terry &middot; readyforreal.life44@gmail.com &middot; (435) 840-1896 &middot; readyforreal.life</div>
+          <div class="eyebrow">MMMF Document Viewer</div>
+          <h1>Printable Registration and Intake Form</h1>
+          <p class="sub">
+            This is the cleaner in-site version of the printable intake form.
+            Use the download button if you still want the original PDF file.
+          </p>
         </div>
-        <div class="doc-page-pill">2 Pages</div>
-      </div>
-
-      <div class="pages">
-        <section class="page">
-          <div class="section-bar">Section 1 - About You</div>
-          <div class="field-grid">
-            <div class="field"><div class="label">First Name</div><div class="line"></div></div>
-            <div class="field"><div class="label">Last Name</div><div class="line"></div></div>
-            <div class="field"><div class="label">Email Address</div><div class="line"></div></div>
-            <div class="field"><div class="label">Phone Number</div><div class="line"></div></div>
-            <div class="field"><div class="label">School / Organization</div><div class="line"></div></div>
-            <div class="field"><div class="label">City &amp; State / Country</div><div class="line"></div></div>
-          </div>
-
-          <div class="label">Your Role - check one:</div>
-          <div class="check-grid three">
-            <div class="check-item"><span class="box"></span><span>K-12 Teacher</span></div>
-            <div class="check-item"><span class="box"></span><span>University / College Instructor</span></div>
-            <div class="check-item"><span class="box"></span><span>Faith Community Leader</span></div>
-            <div class="check-item"><span class="box"></span><span>School Counselor</span></div>
-            <div class="check-item"><span class="box"></span><span>Community Program Facilitator</span></div>
-            <div class="check-item"><span class="box"></span><span>Parent / Guardian</span></div>
-            <div class="check-item"><span class="box"></span><span>School Administrator</span></div>
-            <div class="check-item"><span class="box"></span><span>Youth Organization Leader</span></div>
-            <div class="check-item"><span class="box"></span><span>Other Educator / Coach</span></div>
-          </div>
-
-          <div class="label">How did you hear about MMMF?</div>
-          <div class="check-grid three">
-            <div class="check-item"><span class="box"></span><span>Colleague / coworker</span></div>
-            <div class="check-item"><span class="box"></span><span>readyforreal.life</span></div>
-            <div class="check-item"><span class="box"></span><span>Conference / event</span></div>
-            <div class="check-item"><span class="box"></span><span>School administrator</span></div>
-            <div class="check-item"><span class="box"></span><span>Social media</span></div>
-            <div class="check-item"><span class="box"></span><span>Word of mouth</span></div>
-            <div class="check-item"><span class="box"></span><span>Other</span></div>
-          </div>
-
-          <div class="section-bar">Section 2 - Program Details</div>
-          <div class="label">Implementation Track(s) - check all that apply:</div>
-          <div class="check-grid">
-            <div class="check-item"><span class="box"></span><span>Grades 7-8 (Foundational)</span></div>
-            <div class="check-item"><span class="box"></span><span>Community Youth (After-school / flexible)</span></div>
-            <div class="check-item"><span class="box"></span><span>Grades 9-12 (Levels up annually)</span></div>
-            <div class="check-item"><span class="box"></span><span>Community Adult (Workplace / family)</span></div>
-          </div>
-
-          <div class="label">Preferred Delivery Format - check one:</div>
-          <div class="check-grid three">
-            <div class="check-item"><span class="box"></span><span>Daily elective (45-60 min)</span></div>
-            <div class="check-item"><span class="box"></span><span>Advisory / enrichment block</span></div>
-            <div class="check-item"><span class="box"></span><span>Online / hybrid</span></div>
-            <div class="check-item"><span class="box"></span><span>A/B block (90 min)</span></div>
-            <div class="check-item"><span class="box"></span><span>Community workshop series</span></div>
-            <div class="check-item"><span class="box"></span><span>Not sure yet</span></div>
-          </div>
-
-          <div class="field-grid">
-            <div class="field"><div class="label">Anticipated Start Date</div><div class="line"></div></div>
-            <div class="field"><div class="label">Estimated Class / Group Size</div><div class="line"></div></div>
-          </div>
-
-          <div class="label">Have you completed the MMMF Teach the Teacher Training?</div>
-          <div class="check-grid">
-            <div class="check-item"><span class="box"></span><span>Yes - fully certified</span></div>
-            <div class="check-item"><span class="box"></span><span>Not yet - interested</span></div>
-            <div class="check-item"><span class="box"></span><span>In progress</span></div>
-            <div class="check-item"><span class="box"></span><span>Please send training info</span></div>
-          </div>
-        </section>
-
-        <section class="page">
-          <div class="section-bar">Section 3 - Your Students &amp; Context</div>
-          <div class="field">
-            <div class="label">Describe your student or participant population:</div>
-            <div class="textarea"></div>
-          </div>
-
-          <div class="label" style="margin-top:18px;">Most pressing soft-skill gap(s) - check all that apply:</div>
-          <div class="check-grid">
-            <div class="check-item"><span class="box"></span><span>Respectful communication</span></div>
-            <div class="check-item"><span class="box"></span><span>Accountability &amp; repair</span></div>
-            <div class="check-item"><span class="box"></span><span>Digital citizenship</span></div>
-            <div class="check-item"><span class="box"></span><span>Decision-making under pressure</span></div>
-            <div class="check-item"><span class="box"></span><span>Emotional regulation</span></div>
-            <div class="check-item"><span class="box"></span><span>All of the above - they need the full program</span></div>
-          </div>
-
-          <div class="label">Current confidence facilitating SEL / life skills content (circle one):</div>
-          <div class="scale-row">
-            <span class="scale-box">1</span>
-            <span class="scale-box">2</span>
-            <span class="scale-box">3</span>
-            <span class="scale-box">4</span>
-            <span class="scale-box">5</span>
-          </div>
-          <div class="scale-caption"><span>1 - Not confident</span><span>5 - Very confident</span></div>
-
-          <div class="label" style="margin-top:18px;">What support would help you most before your first session? - check all that apply:</div>
-          <div class="check-grid">
-            <div class="check-item"><span class="box"></span><span>One-on-one coaching call with Michael</span></div>
-            <div class="check-item"><span class="box"></span><span>I'm good - just need the materials</span></div>
-            <div class="check-item"><span class="box"></span><span>Access to digital curriculum portal</span></div>
-            <div class="check-item"><span class="box"></span><span>Parent / community comms template</span></div>
-            <div class="check-item"><span class="box"></span><span>Sample lesson plan for my track</span></div>
-          </div>
-
-          <div class="field" style="margin-top:10px;">
-            <div class="label">Anything else the founders should know before your first session?</div>
-            <div class="textarea"></div>
-          </div>
-
-          <div class="section-bar" style="margin-top:18px;">Section 4 - Consent &amp; Signature</div>
-          <div class="label">By signing below I confirm:</div>
-          <div class="check-grid">
-            <div class="check-item"><span class="box"></span><span>The information I provided is accurate.</span></div>
-            <div class="check-item"><span class="box"></span><span>I understand this form initiates my MMMF program enrollment.</span></div>
-            <div class="check-item"><span class="box"></span><span>My information will be used solely for MMMF onboarding by the founders.</span></div>
-          </div>
-
-          <div class="signature-grid">
-            <div class="field"><div class="label">Signature</div><div class="line"></div></div>
-            <div class="field"><div class="label">Date</div><div class="line"></div></div>
-            <div class="field"><div class="label">Printed Full Name</div><div class="line"></div></div>
-          </div>
-
-          <div class="ownership-note">
-            Ready for Real Life Instruction and Education | MMMF LLC &mdash; &copy; Michael R. Terry &amp; Mekenzi G. Terry. This intake form is part of the MMMF program materials and is provided for authorized program use.
-          </div>
-        </section>
-      </div>
-
-      <div class="footer-note">
-        <p>If you need the original paper version, use the download button above, or contact <a href="mailto:readyforreal.life44@gmail.com">readyforreal.life44@gmail.com</a>.</p>
-        <div class="footer-actions">
-          <a class="btn secondary" href="index.html">Back to library</a>
-          <a class="btn" href="MMMF_Registration_Form_Printable_Clean.pdf" download>Download PDF</a>
+        <div class="header-actions">
+          <a class="btn secondary" href="https://readyforreal.life/"
+            >Main Homepage</a
+          >
+          <a
+            class="btn secondary"
+            href="index.html"
+            onclick="
+              if (window.history.length > 1) {
+                event.preventDefault();
+                window.history.back();
+              }
+            "
+            >&larr; Back</a
+          >
+          <a
+            class="btn"
+            href="MMMF_Registration_Form_Printable_Clean.pdf"
+            download
+            >Download PDF</a
+          >
         </div>
       </div>
-    </div>
-  </main>
+    </header>
 
-  <script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
-  <script src="../assets/access-gate.js" defer></script>
-</body>
+    <main>
+      <div class="search-host"></div>
+      <div class="form-shell">
+        <div class="doc-head">
+          <div>
+            <div class="doc-brand">
+              Ready for Real Life Instruction and Education
+            </div>
+            <h2>Program Registration & Intake Form</h2>
+            <div class="doc-meta">
+              Founders: Michael R. Terry &amp; Mekenzi G. Terry &middot;
+              readyforreal.life44@gmail.com &middot; (435) 840-1896 &middot;
+              readyforreal.life
+            </div>
+          </div>
+          <div class="doc-page-pill">2 Pages</div>
+        </div>
+
+        <div class="pages">
+          <section class="page">
+            <div class="section-bar">Section 1 - About You</div>
+            <div class="field-grid">
+              <div class="field">
+                <div class="label">First Name</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">Last Name</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">Email Address</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">Phone Number</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">School / Organization</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">City &amp; State / Country</div>
+                <div class="line"></div>
+              </div>
+            </div>
+
+            <div class="label">Your Role - check one:</div>
+            <div class="check-grid three">
+              <div class="check-item">
+                <span class="box"></span><span>K-12 Teacher</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>University / College Instructor</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Faith Community Leader</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>School Counselor</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Community Program Facilitator</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Parent / Guardian</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>School Administrator</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Youth Organization Leader</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Other Educator / Coach</span>
+              </div>
+            </div>
+
+            <div class="label">How did you hear about MMMF?</div>
+            <div class="check-grid three">
+              <div class="check-item">
+                <span class="box"></span><span>Colleague / coworker</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>readyforreal.life</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Conference / event</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>School administrator</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Social media</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Word of mouth</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Other</span>
+              </div>
+            </div>
+
+            <div class="section-bar">Section 2 - Program Details</div>
+            <div class="label">
+              Implementation Track(s) - check all that apply:
+            </div>
+            <div class="check-grid">
+              <div class="check-item">
+                <span class="box"></span><span>Grades 7-8 (Foundational)</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Community Youth (After-school / flexible)</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Grades 9-12 (Levels up annually)</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Community Adult (Workplace / family)</span>
+              </div>
+            </div>
+
+            <div class="label">Preferred Delivery Format - check one:</div>
+            <div class="check-grid three">
+              <div class="check-item">
+                <span class="box"></span><span>Daily elective (45-60 min)</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Advisory / enrichment block</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Online / hybrid</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>A/B block (90 min)</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Community workshop series</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Not sure yet</span>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <div class="label">Anticipated Start Date</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">Estimated Class / Group Size</div>
+                <div class="line"></div>
+              </div>
+            </div>
+
+            <div class="label">
+              Have you completed the MMMF Teach the Teacher Training?
+            </div>
+            <div class="check-grid">
+              <div class="check-item">
+                <span class="box"></span><span>Yes - fully certified</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Not yet - interested</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>In progress</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Please send training info</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="page">
+            <div class="section-bar">
+              Section 3 - Your Students &amp; Context
+            </div>
+            <div class="field">
+              <div class="label">
+                Describe your student or participant population:
+              </div>
+              <div class="textarea"></div>
+            </div>
+
+            <div class="label" style="margin-top: 18px">
+              Most pressing soft-skill gap(s) - check all that apply:
+            </div>
+            <div class="check-grid">
+              <div class="check-item">
+                <span class="box"></span><span>Respectful communication</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Accountability &amp; repair</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Digital citizenship</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Decision-making under pressure</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span><span>Emotional regulation</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>All of the above - they need the full program</span>
+              </div>
+            </div>
+
+            <div class="label">
+              Current confidence facilitating SEL / life skills content (circle
+              one):
+            </div>
+            <div class="scale-row">
+              <span class="scale-box">1</span>
+              <span class="scale-box">2</span>
+              <span class="scale-box">3</span>
+              <span class="scale-box">4</span>
+              <span class="scale-box">5</span>
+            </div>
+            <div class="scale-caption">
+              <span>1 - Not confident</span><span>5 - Very confident</span>
+            </div>
+
+            <div class="label" style="margin-top: 18px">
+              What support would help you most before your first session? -
+              check all that apply:
+            </div>
+            <div class="check-grid">
+              <div class="check-item">
+                <span class="box"></span
+                ><span>One-on-one coaching call with Michael</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>I'm good - just need the materials</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Access to digital curriculum portal</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Parent / community comms template</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span>Sample lesson plan for my track</span>
+              </div>
+            </div>
+
+            <div class="field" style="margin-top: 10px">
+              <div class="label">
+                Anything else the founders should know before your first
+                session?
+              </div>
+              <div class="textarea"></div>
+            </div>
+
+            <div class="section-bar" style="margin-top: 18px">
+              Section 4 - Consent &amp; Signature
+            </div>
+            <div class="label">By signing below I confirm:</div>
+            <div class="check-grid">
+              <div class="check-item">
+                <span class="box"></span
+                ><span>The information I provided is accurate.</span>
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span
+                  >I understand this form initiates my MMMF program
+                  enrollment.</span
+                >
+              </div>
+              <div class="check-item">
+                <span class="box"></span
+                ><span
+                  >My information will be used solely for MMMF onboarding by the
+                  founders.</span
+                >
+              </div>
+            </div>
+
+            <div class="signature-grid">
+              <div class="field">
+                <div class="label">Signature</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">Date</div>
+                <div class="line"></div>
+              </div>
+              <div class="field">
+                <div class="label">Printed Full Name</div>
+                <div class="line"></div>
+              </div>
+            </div>
+
+            <div class="ownership-note">
+              Ready for Real Life Instruction and Education | MMMF LLC &mdash;
+              &copy; Michael R. Terry &amp; Mekenzi G. Terry. This intake form
+              is part of the MMMF program materials and is provided for
+              authorized program use.
+            </div>
+          </section>
+        </div>
+
+        <div class="footer-note">
+          <p>
+            If you need the original paper version, use the download button
+            above, or contact
+            <a href="mailto:readyforreal.life44@gmail.com"
+              >readyforreal.life44@gmail.com</a
+            >.
+          </p>
+          <div class="footer-actions">
+            <a class="btn secondary" href="index.html">Back to library</a>
+            <a
+              class="btn"
+              href="MMMF_Registration_Form_Printable_Clean.pdf"
+              download
+              >Download PDF</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script
+      src="../assets/site-search.js"
+      data-search-index="../data/site-search-index.json"
+      defer
+    ></script>
+    <script src="../assets/access-gate.js" defer></script>
+  </body>
 </html>

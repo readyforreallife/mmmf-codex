@@ -1,160 +1,391 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Issued Certificate | Ready for Real Life Instruction and Education</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap');
-:root {
-  --navy:#18304f; --gold:#c89b3c; --paper:#f7f2e9; --ink:#1e293b; --muted:#64748b; --line:#d9cfbd; --white:#fff;
-}
-* { box-sizing:border-box; }
-body { margin:0; font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--ink); }
-header { background:linear-gradient(135deg,var(--navy),#274061); color:#fff; padding:24px; border-bottom:4px solid var(--gold); }
-.wrap { max-width:1100px; margin:0 auto; }
-.topbar { display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
-.btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.25); color:#fff; text-decoration:none; font-weight:700; background:rgba(255,255,255,.08); }
-main { max-width:1100px; margin:0 auto; padding:24px; }
-.notice { background:#fff6e5; color:#8a5a14; border:1px solid #f0d89d; border-radius:12px; padding:14px; margin-bottom:18px; }
-.cert-shell { background:#fff; border:1px solid var(--line); border-radius:18px; padding:40px; box-shadow:0 16px 40px rgba(0,0,0,.06); }
-.certificate { border:8px solid rgba(200,155,60,.35); border-radius:18px; padding:48px 52px; background:linear-gradient(180deg,#fff,#fcfaf5); }
-.ey { text-transform:uppercase; letter-spacing:.18em; color:var(--gold); font-weight:700; font-size:.76rem; text-align:center; margin-bottom:18px; }
-h1 { font-family:'Playfair Display',serif; font-size:3rem; margin:0 0 10px; text-align:center; color:var(--navy); }
-.sub { text-align:center; color:var(--muted); font-size:1rem; line-height:1.7; max-width:720px; margin:0 auto 34px; }
-.recipient { text-align:center; font-family:'Playfair Display',serif; font-size:2.4rem; color:var(--navy); margin:16px 0; }
-.copy { text-align:center; max-width:760px; margin:0 auto 24px; line-height:1.8; color:#334155; }
-.meta-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:28px; }
-.meta-card { border:1px solid var(--line); border-radius:12px; padding:16px; background:#fff; }
-.meta-label { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:700; }
-.meta-value { color:var(--navy); font-weight:700; }
-.footer-line { display:flex; justify-content:space-between; gap:24px; margin-top:42px; align-items:flex-end; flex-wrap:wrap; }
-.signature { min-width:260px; }
-.sig-line { height:1px; background:#b9aa86; margin-bottom:8px; }
-.sig-label { color:var(--muted); font-size:.86rem; }
-@media print {
-  header, .notice, .screen-only { display:none !important; }
-  body { background:#fff; }
-  main { padding:0; }
-  .cert-shell { border:none; box-shadow:none; padding:0; }
-}
-@media (max-width: 820px) {
-  .certificate { padding:28px 22px; }
-  .meta-grid { grid-template-columns:1fr; }
-  h1 { font-size:2.2rem; }
-  .recipient { font-size:1.85rem; }
-}
-</style>
-</head>
-<body>
-  <header>
-    <div class="wrap topbar">
-      <div>
-        <div style="font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:#e8c778;font-weight:700;">Issued Certificate</div>
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;">MMMF Certification Record</div>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a class="btn" href="agreement-tracker.html">&larr; Back to Teacher Mode</a>
-        <a class="btn screen-only" href="#" onclick="window.print(); return false;">Print / Save PDF</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div id="notice" class="notice">Loading certificate record...</div>
-    <div class="cert-shell" id="certShell" style="display:none;">
-      <div class="certificate">
-        <div class="ey">Ready for Real Life Instruction and Education</div>
-        <h1 id="certificateTitle">MMMF Completion Certificate</h1>
-        <p class="sub" id="certificateSub">This certificate confirms successful completion of the named MMMF track through the protected teacher-mode administration system.</p>
-        <div class="recipient" id="recipientName">Recipient Name</div>
-        <p class="copy" id="certificateCopy">This record recognizes successful completion of the MMMF track listed below.</p>
-        <div class="meta-grid">
-          <div class="meta-card"><div class="meta-label">Agreement Number</div><div class="meta-value" id="agreementNumber">MMMF-0001</div></div>
-          <div class="meta-card"><div class="meta-label">Organization</div><div class="meta-value" id="organization">Organization</div></div>
-          <div class="meta-card"><div class="meta-label">Credential Type</div><div class="meta-value" id="credentialType">Program Completion</div></div>
-          <div class="meta-card"><div class="meta-label">Track</div><div class="meta-value" id="track">Track</div></div>
-          <div class="meta-card"><div class="meta-label">Status</div><div class="meta-value" id="status">Signed</div></div>
-          <div class="meta-card"><div class="meta-label">Issued At</div><div class="meta-value" id="issuedAt">2026-04-03</div></div>
-          <div class="meta-card"><div class="meta-label">Effective Date</div><div class="meta-value" id="effectiveDate">2026-04-03</div></div>
-        </div>
-        <div class="footer-line">
-          <div class="signature">
-            <div class="sig-line"></div>
-            <div class="sig-label">Michael R. Terry &amp; Mekenzi G. Terry · Founders</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Issued Certificate | Ready for Real Life Instruction and Education
+    </title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap");
+      :root {
+        --navy: #18304f;
+        --gold: #c89b3c;
+        --paper: #f7f2e9;
+        --ink: #1e293b;
+        --muted: #64748b;
+        --line: #d9cfbd;
+        --white: #fff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      header {
+        background: linear-gradient(135deg, var(--navy), #274061);
+        color: #fff;
+        padding: 24px;
+        border-bottom: 4px solid var(--gold);
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .notice {
+        background: #fff6e5;
+        color: #8a5a14;
+        border: 1px solid #f0d89d;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 18px;
+      }
+      .cert-shell {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 40px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+      }
+      .certificate {
+        border: 8px solid rgba(200, 155, 60, 0.35);
+        border-radius: 18px;
+        padding: 48px 52px;
+        background: linear-gradient(180deg, #fff, #fcfaf5);
+      }
+      .ey {
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--gold);
+        font-weight: 700;
+        font-size: 0.76rem;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3rem;
+        margin: 0 0 10px;
+        text-align: center;
+        color: var(--navy);
+      }
+      .sub {
+        text-align: center;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 720px;
+        margin: 0 auto 34px;
+      }
+      .recipient {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 2.4rem;
+        color: var(--navy);
+        margin: 16px 0;
+      }
+      .copy {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 24px;
+        line-height: 1.8;
+        color: #334155;
+      }
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+      }
+      .meta-card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        background: #fff;
+      }
+      .meta-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+      .meta-value {
+        color: var(--navy);
+        font-weight: 700;
+      }
+      .footer-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        margin-top: 42px;
+        align-items: flex-end;
+        flex-wrap: wrap;
+      }
+      .signature {
+        min-width: 260px;
+      }
+      .sig-line {
+        height: 1px;
+        background: #b9aa86;
+        margin-bottom: 8px;
+      }
+      .sig-label {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+      @media print {
+        header,
+        .notice,
+        .screen-only {
+          display: none !important;
+        }
+        body {
+          background: #fff;
+        }
+        main {
+          padding: 0;
+        }
+        .cert-shell {
+          border: none;
+          box-shadow: none;
+          padding: 0;
+        }
+      }
+      @media (max-width: 820px) {
+        .certificate {
+          padding: 28px 22px;
+        }
+        .meta-grid {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 2.2rem;
+        }
+        .recipient {
+          font-size: 1.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap topbar">
+        <div>
+          <div
+            style="
+              font-size: 0.76rem;
+              letter-spacing: 0.16em;
+              text-transform: uppercase;
+              color: #e8c778;
+              font-weight: 700;
+            "
+          >
+            Issued Certificate
           </div>
-          <div style="color:var(--muted);font-size:.9rem;">readyforreal.life · readyforreal.life44@gmail.com</div>
+          <div
+            style="
+              font-family: &quot;Playfair Display&quot;, serif;
+              font-size: 2rem;
+            "
+          >
+            MMMF Certification Record
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <a class="btn" href="agreement-tracker.html"
+            >&larr; Back to Teacher Mode</a
+          >
+          <a
+            class="btn screen-only"
+            href="#"
+            onclick="
+              window.print();
+              return false;
+            "
+            >Print / Save PDF</a
+          >
         </div>
       </div>
-    </div>
-  </main>
+    </header>
 
-  <script>
-    const ADMIN_SESSION_KEY = 'mmmf_agreement_admin_session_v2';
-    const ADMIN_ENDPOINT_KEY = 'mmmf_agreement_admin_endpoint_v2';
-    const params = new URLSearchParams(window.location.search);
-    const agreementNumber = params.get('agreement') || '';
-    const endpoint = localStorage.getItem(ADMIN_ENDPOINT_KEY) || '';
-    const sessionToken = sessionStorage.getItem(ADMIN_SESSION_KEY) || '';
+    <main>
+      <div id="notice" class="notice">Loading certificate record...</div>
+      <div class="cert-shell" id="certShell" style="display: none">
+        <div class="certificate">
+          <div class="ey">Ready for Real Life Instruction and Education</div>
+          <h1 id="certificateTitle">MMMF Completion Certificate</h1>
+          <p class="sub" id="certificateSub">
+            This certificate confirms successful completion of the named MMMF
+            track through the protected teacher-mode administration system.
+          </p>
+          <div class="recipient" id="recipientName">Recipient Name</div>
+          <p class="copy" id="certificateCopy">
+            This record recognizes successful completion of the MMMF track
+            listed below.
+          </p>
+          <div class="meta-grid">
+            <div class="meta-card">
+              <div class="meta-label">Agreement Number</div>
+              <div class="meta-value" id="agreementNumber">MMMF-0001</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Organization</div>
+              <div class="meta-value" id="organization">Organization</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Credential Type</div>
+              <div class="meta-value" id="credentialType">
+                Program Completion
+              </div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Track</div>
+              <div class="meta-value" id="track">Track</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Status</div>
+              <div class="meta-value" id="status">Signed</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Issued At</div>
+              <div class="meta-value" id="issuedAt">2026-04-03</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Effective Date</div>
+              <div class="meta-value" id="effectiveDate">2026-04-03</div>
+            </div>
+          </div>
+          <div class="footer-line">
+            <div class="signature">
+              <div class="sig-line"></div>
+              <div class="sig-label">
+                Michael R. Terry &amp; Mekenzi G. Terry · Founders
+              </div>
+            </div>
+            <div style="color: var(--muted); font-size: 0.9rem">
+              readyforreal.life · readyforreal.life44@gmail.com
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
 
-    const notice = document.getElementById('notice');
-    const certShell = document.getElementById('certShell');
+    <script>
+      const ADMIN_SESSION_KEY = "mmmf_agreement_admin_session_v2";
+      const ADMIN_ENDPOINT_KEY = "mmmf_agreement_admin_endpoint_v2";
+      const params = new URLSearchParams(window.location.search);
+      const agreementNumber = params.get("agreement") || "";
+      const endpoint = localStorage.getItem(ADMIN_ENDPOINT_KEY) || "";
+      const sessionToken = sessionStorage.getItem(ADMIN_SESSION_KEY) || "";
 
-    async function loadRecord() {
-      if (!agreementNumber) {
-        notice.textContent = 'No agreement number was provided.';
-        return;
-      }
-      if (!endpoint || !sessionToken) {
-        notice.textContent = 'Teacher Mode session not found. Return to the admin page and unlock Teacher Mode again first.';
-        return;
-      }
+      const notice = document.getElementById("notice");
+      const certShell = document.getElementById("certShell");
 
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'certificate_get',
-            session_token: sessionToken,
-            agreement_number: agreementNumber
-          })
-        });
-        const data = await response.json();
-        if (!response.ok || !data.ok || !data.record) {
-          throw new Error(data.error || 'Certificate record not found.');
+      async function loadRecord() {
+        if (!agreementNumber) {
+          notice.textContent = "No agreement number was provided.";
+          return;
+        }
+        if (!endpoint || !sessionToken) {
+          notice.textContent =
+            "Teacher Mode session not found. Return to the admin page and unlock Teacher Mode again first.";
+          return;
         }
 
-        const record = data.record;
-        const certificateType = record.certificateType === 'facilitator' ? 'facilitator' : 'completion';
-        const track = record.track || 'assigned MMMF track';
-        document.getElementById('recipientName').textContent = record.fullName || 'Unnamed recipient';
-        document.getElementById('agreementNumber').textContent = record.agreementNumber || '—';
-        document.getElementById('organization').textContent = record.organization || '—';
-        document.getElementById('credentialType').textContent = certificateType === 'facilitator' ? 'Facilitator Certification' : 'Program Completion';
-        document.getElementById('track').textContent = record.track || '—';
-        document.getElementById('status').textContent = record.status || '—';
-        document.getElementById('effectiveDate').textContent = record.effectiveDate || '—';
-        document.getElementById('issuedAt').textContent = record.issuedAt ? new Date(record.issuedAt).toLocaleString() : '—';
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              action: "certificate_get",
+              session_token: sessionToken,
+              agreement_number: agreementNumber,
+            }),
+          });
+          const data = await response.json();
+          if (!response.ok || !data.ok || !data.record) {
+            throw new Error(data.error || "Certificate record not found.");
+          }
 
-        if (certificateType === 'facilitator') {
-          document.getElementById('certificateTitle').textContent = 'Facilitator Certification';
-          document.getElementById('certificateSub').textContent = 'This certificate confirms that the named recipient completed Teach the Teacher and has been certified to teach MMMF.';
-          document.getElementById('certificateCopy').textContent = `This record recognizes certification to teach MMMF within the approved ${track} implementation track listed below.`;
-        } else {
-          document.getElementById('certificateTitle').textContent = 'MMMF Completion Certificate';
-          document.getElementById('certificateSub').textContent = 'This certificate confirms successful completion of the named MMMF track through the protected teacher-mode administration system.';
-          document.getElementById('certificateCopy').textContent = `This record recognizes successful completion of the ${track} MMMF track listed below.`;
+          const record = data.record;
+          const certificateType =
+            record.certificateType === "facilitator"
+              ? "facilitator"
+              : "completion";
+          const track = record.track || "assigned MMMF track";
+          document.getElementById("recipientName").textContent =
+            record.fullName || "Unnamed recipient";
+          document.getElementById("agreementNumber").textContent =
+            record.agreementNumber || "—";
+          document.getElementById("organization").textContent =
+            record.organization || "—";
+          document.getElementById("credentialType").textContent =
+            certificateType === "facilitator"
+              ? "Facilitator Certification"
+              : "Program Completion";
+          document.getElementById("track").textContent = record.track || "—";
+          document.getElementById("status").textContent = record.status || "—";
+          document.getElementById("effectiveDate").textContent =
+            record.effectiveDate || "—";
+          document.getElementById("issuedAt").textContent = record.issuedAt
+            ? new Date(record.issuedAt).toLocaleString()
+            : "—";
+
+          if (certificateType === "facilitator") {
+            document.getElementById("certificateTitle").textContent =
+              "Facilitator Certification";
+            document.getElementById("certificateSub").textContent =
+              "This certificate confirms that the named recipient completed Teach the Teacher and has been certified to teach MMMF.";
+            document.getElementById("certificateCopy").textContent =
+              `This record recognizes certification to teach MMMF within the approved ${track} implementation track listed below.`;
+          } else {
+            document.getElementById("certificateTitle").textContent =
+              "MMMF Completion Certificate";
+            document.getElementById("certificateSub").textContent =
+              "This certificate confirms successful completion of the named MMMF track through the protected teacher-mode administration system.";
+            document.getElementById("certificateCopy").textContent =
+              `This record recognizes successful completion of the ${track} MMMF track listed below.`;
+          }
+
+          notice.style.display = "none";
+          certShell.style.display = "block";
+        } catch (error) {
+          notice.textContent =
+            error.message || "Could not load the certificate record.";
         }
-
-        notice.style.display = 'none';
-        certShell.style.display = 'block';
-      } catch (error) {
-        notice.textContent = error.message || 'Could not load the certificate record.';
       }
-    }
 
-    loadRecord();
-  </script>
-</body>
+      loadRecord();
+    </script>
+  </body>
 </html>

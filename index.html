@@ -1,216 +1,621 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ready for Real Life Instruction and Education</title>
-  <link rel="stylesheet" href="assets/site-search.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap');
-    :root {
-      --navy:#0f1d33;
-      --navy2:#1a2d49;
-      --navy3:#25405f;
-      --gold:#c89b3c;
-      --gold2:#e4bb5e;
-      --paper:#f6f1e7;
-      --ink:#1f2937;
-      --muted:#768399;
-      --line:rgba(255,255,255,.12);
-      --panel:rgba(255,255,255,.06);
-      --panel2:rgba(255,255,255,.04);
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:'DM Sans',sans-serif;background:linear-gradient(180deg,var(--navy) 0%,#132743 40%,#1a2d47 100%);color:#fff}
-    body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 18% 16%,rgba(200,155,60,.14),transparent 34%),radial-gradient(circle at 82% 20%,rgba(20,137,120,.12),transparent 28%),radial-gradient(circle at 50% 100%,rgba(255,255,255,.04),transparent 44%);pointer-events:none}
-    .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
-    header{padding:22px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,29,51,.84);backdrop-filter:blur(10px);z-index:10}
-    .top{display:flex;justify-content:space-between;gap:16px;align-items:center}
-    .brand-wrap{display:flex;align-items:center;gap:14px}
-    .logo{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,.25))}
-    .ey{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:700}
-    .brand{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:900}
-    .brand em{font-style:italic;color:var(--gold2)}
-    .meta{font-size:.84rem;color:#c0c9d8;text-align:right;line-height:1.7}
-    main{padding:54px 0 74px}
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:stretch}
-    .hero-copy{padding:18px 0}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5.3rem);line-height:1.02;margin:14px 0 14px}
-    .hero h1 em{font-style:italic;color:var(--gold2)}
-    .lede{font-size:1.06rem;line-height:1.85;max-width:760px;color:#c7d0de}
-    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:700;border:1px solid var(--line)}
-    .btn.primary{background:var(--gold);color:#172640;border-color:transparent}
-    .btn.secondary{background:rgba(255,255,255,.06);color:#fff}
-    .back-row{margin-bottom:18px}
-    .hero-panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 40px rgba(0,0,0,.22)}
-    .hero-panel h2{font-family:'Playfair Display',serif;font-size:1.5rem;margin:10px 0 10px}
-    .hero-panel p{color:#cad2df;line-height:1.8;margin:0}
-    .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-    .stat{background:var(--panel2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:16px}
-    .stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold2);line-height:1}
-    .stat-label{font-size:.78rem;color:#cad3e1;margin-top:6px}
-    section{margin-top:58px}
-    .section-title{font-family:'Playfair Display',serif;font-size:2.1rem;margin:0 0 10px}
-    .section-copy{color:#c5cfdd;line-height:1.8;max-width:760px;margin-bottom:22px}
-    .three-up{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
-    .card h3{font-family:'Playfair Display',serif;font-size:1.28rem;margin:10px 0 8px}
-    .card p{color:#c0cad9;line-height:1.75;font-size:.96rem}
-    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(200,155,60,.14);color:var(--gold2);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-    .linkline{display:inline-block;margin-top:14px;color:var(--gold2);font-weight:700;text-decoration:none}
-    .aud-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .aud-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
-    .aud-card h3{font-family:'Playfair Display',serif;font-size:1.35rem;margin:8px 0 10px}
-    .aud-card ul{margin:0;padding-left:18px;color:#c4cedc;line-height:1.85}
-    .resource-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-    .resource{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:16px}
-    .resource strong{display:block;margin-bottom:6px}
-    .resource span{color:#c7d0de;font-size:.92rem;line-height:1.65}
-    .contact-band{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
-    .contact-band p{margin:0;color:#c7d0de;line-height:1.8;max-width:720px}
-    footer{padding:30px 0 56px;color:#aeb8ca;font-size:.85rem}
-    a.inline{color:var(--gold2);text-decoration:none;font-weight:700}
-    @media (max-width:980px){.hero,.three-up,.aud-grid,.resource-grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.meta{text-align:left}}
-  </style>
-</head>
-<body>
-  <header>
-    <div class="wrap top">
-      <div class="brand-wrap">
-        <img class="logo" src="assets/mmmf-site-mark.svg" alt="MMMF logo">
-        <div>
-          <div class="ey">Ready for Real Life Instruction and Education</div>
-          <div class="brand"><em>MMMF</em> Program Repository</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ready for Real Life Instruction and Education</title>
+    <link rel="stylesheet" href="assets/site-search.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap");
+      :root {
+        --navy: #0f1d33;
+        --navy2: #1a2d49;
+        --navy3: #25405f;
+        --gold: #c89b3c;
+        --gold2: #e4bb5e;
+        --paper: #f6f1e7;
+        --ink: #1f2937;
+        --muted: #768399;
+        --line: rgba(255, 255, 255, 0.12);
+        --panel: rgba(255, 255, 255, 0.06);
+        --panel2: rgba(255, 255, 255, 0.04);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        background: linear-gradient(
+          180deg,
+          var(--navy) 0%,
+          #132743 40%,
+          #1a2d47 100%
+        );
+        color: #fff;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 18% 16%,
+            rgba(200, 155, 60, 0.14),
+            transparent 34%
+          ),
+          radial-gradient(
+            circle at 82% 20%,
+            rgba(20, 137, 120, 0.12),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 50% 100%,
+            rgba(255, 255, 255, 0.04),
+            transparent 44%
+          );
+        pointer-events: none;
+      }
+      .wrap {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      header {
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        background: rgba(15, 29, 51, 0.84);
+        backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+      }
+      .brand-wrap {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .logo {
+        width: 58px;
+        height: 58px;
+        object-fit: contain;
+        filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+      }
+      .ey {
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold2);
+        font-weight: 700;
+      }
+      .brand {
+        font-family: "Playfair Display", serif;
+        font-size: 1.55rem;
+        font-weight: 900;
+      }
+      .brand em {
+        font-style: italic;
+        color: var(--gold2);
+      }
+      .meta {
+        font-size: 0.84rem;
+        color: #c0c9d8;
+        text-align: right;
+        line-height: 1.7;
+      }
+      main {
+        padding: 54px 0 74px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+      .hero-copy {
+        padding: 18px 0;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.8rem, 6vw, 5.3rem);
+        line-height: 1.02;
+        margin: 14px 0 14px;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--gold2);
+      }
+      .lede {
+        font-size: 1.06rem;
+        line-height: 1.85;
+        max-width: 760px;
+        color: #c7d0de;
+      }
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 13px 18px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+        border: 1px solid var(--line);
+      }
+      .btn.primary {
+        background: var(--gold);
+        color: #172640;
+        border-color: transparent;
+      }
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+      }
+      .back-row {
+        margin-bottom: 18px;
+      }
+      .hero-panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+      }
+      .hero-panel h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        margin: 10px 0 10px;
+      }
+      .hero-panel p {
+        color: #cad2df;
+        line-height: 1.8;
+        margin: 0;
+      }
+      .stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .stat {
+        background: var(--panel2);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .stat-num {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--gold2);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.78rem;
+        color: #cad3e1;
+        margin-top: 6px;
+      }
+      section {
+        margin-top: 58px;
+      }
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2.1rem;
+        margin: 0 0 10px;
+      }
+      .section-copy {
+        color: #c5cfdd;
+        line-height: 1.8;
+        max-width: 760px;
+        margin-bottom: 22px;
+      }
+      .three-up {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+      }
+      .card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.28rem;
+        margin: 10px 0 8px;
+      }
+      .card p {
+        color: #c0cad9;
+        line-height: 1.75;
+        font-size: 0.96rem;
+      }
+      .chip {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(200, 155, 60, 0.14);
+        color: var(--gold2);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .linkline {
+        display: inline-block;
+        margin-top: 14px;
+        color: var(--gold2);
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .aud-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .aud-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+      }
+      .aud-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.35rem;
+        margin: 8px 0 10px;
+      }
+      .aud-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: #c4cedc;
+        line-height: 1.85;
+      }
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .resource {
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .resource strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+      .resource span {
+        color: #c7d0de;
+        font-size: 0.92rem;
+        line-height: 1.65;
+      }
+      .contact-band {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 24px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .contact-band p {
+        margin: 0;
+        color: #c7d0de;
+        line-height: 1.8;
+        max-width: 720px;
+      }
+      footer {
+        padding: 30px 0 56px;
+        color: #aeb8ca;
+        font-size: 0.85rem;
+      }
+      a.inline {
+        color: var(--gold2);
+        text-decoration: none;
+        font-weight: 700;
+      }
+      @media (max-width: 980px) {
+        .hero,
+        .three-up,
+        .aud-grid,
+        .resource-grid {
+          grid-template-columns: 1fr;
+        }
+        .top {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .meta {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap top">
+        <div class="brand-wrap">
+          <img class="logo" src="assets/mmmf-site-mark.svg" alt="MMMF logo" />
+          <div>
+            <div class="ey">Ready for Real Life Instruction and Education</div>
+            <div class="brand"><em>MMMF</em> Program Repository</div>
+          </div>
+        </div>
+        <div class="meta">
+          readyforreal.life<br />Michael R. Terry &amp; Mekenzi G. Terry ·
+          Founders
         </div>
       </div>
-      <div class="meta">readyforreal.life<br>Michael R. Terry &amp; Mekenzi G. Terry · Founders</div>
-    </div>
-  </header>
+    </header>
 
-  <main class="wrap">
-    <section class="hero" id="site-hero">
-      <div class="hero-copy">
-        <div class="back-row cta-row" style="margin-top:0;">
-          <a class="btn secondary" href="https://readyforreal.life/">Main Homepage</a>
-          <a class="btn secondary" href="javascript:history.back()">← Back</a>
+    <main class="wrap">
+      <section class="hero" id="site-hero">
+        <div class="hero-copy">
+          <div class="back-row cta-row" style="margin-top: 0">
+            <a class="btn secondary" href="https://readyforreal.life/"
+              >Main Homepage</a
+            >
+            <a class="btn secondary" href="javascript:history.back()">← Back</a>
+          </div>
+          <div class="ey">School and Community Implementation Resource</div>
+          <h1>
+            A program for the skills students must <em>live</em>, not just
+            learn.
+          </h1>
+          <p class="lede">
+            Ready for Real Life Instruction and Education (MMMF) is a real-world
+            life skills program built for schools, community organizations, and
+            families who want practical tools for communication, regulation,
+            decision-making, and accountability. This repository brings the core
+            materials together in one public-facing home for review, planning,
+            and adoption conversations.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="schools.html"
+              >Start Here for Schools</a
+            >
+            <a class="btn secondary" href="web/index.html"
+              >Review the Program Hub</a
+            >
+            <a class="btn secondary" href="docs/index.html"
+              >Open the Deliverables Library</a
+            >
+          </div>
+          <div style="margin-top: 18px; color: #c8d1df; line-height: 1.85">
+            School adoption, speaking, and partnership inquiries:
+            <a class="inline" href="mailto:readyforreal.life44@gmail.com"
+              >readyforreal.life44@gmail.com</a
+            >
+            · <a class="inline" href="tel:+14358401896">(435) 840-1896</a>
+          </div>
         </div>
-        <div class="ey">School and Community Implementation Resource</div>
-        <h1>A program for the skills students must <em>live</em>, not just learn.</h1>
-        <p class="lede">Ready for Real Life Instruction and Education (MMMF) is a real-world life skills program built for schools, community organizations, and families who want practical tools for communication, regulation, decision-making, and accountability. This repository brings the core materials together in one public-facing home for review, planning, and adoption conversations.</p>
-        <div class="cta-row">
-          <a class="btn primary" href="schools.html">Start Here for Schools</a>
-          <a class="btn secondary" href="web/index.html">Review the Program Hub</a>
-          <a class="btn secondary" href="docs/index.html">Open the Deliverables Library</a>
+        <div class="hero-panel">
+          <div class="ey">Why It Matters</div>
+          <h2>
+            Students face real decisions before adults ever teach the tools.
+          </h2>
+          <p>
+            MMMF gives facilitators a structured way to teach the behaviors and
+            judgment skills that shape trust, opportunity, and long-term success
+            in classrooms, workplaces, families, and community settings.
+          </p>
+          <div class="stat-grid">
+            <div class="stat">
+              <div class="stat-num">4</div>
+              <div class="stat-label">Core pillars</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">8</div>
+              <div class="stat-label">Primary deliverables</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3</div>
+              <div class="stat-label">Web-based tools</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">1</div>
+              <div class="stat-label">Program implementation pathway</div>
+            </div>
+          </div>
         </div>
-        <div style="margin-top:18px;color:#c8d1df;line-height:1.85;">School adoption, speaking, and partnership inquiries: <a class="inline" href="mailto:readyforreal.life44@gmail.com">readyforreal.life44@gmail.com</a> · <a class="inline" href="tel:+14358401896">(435) 840-1896</a></div>
-      </div>
-      <div class="hero-panel">
-        <div class="ey">Why It Matters</div>
-        <h2>Students face real decisions before adults ever teach the tools.</h2>
-        <p>MMMF gives facilitators a structured way to teach the behaviors and judgment skills that shape trust, opportunity, and long-term success in classrooms, workplaces, families, and community settings.</p>
-        <div class="stat-grid">
-          <div class="stat"><div class="stat-num">4</div><div class="stat-label">Core pillars</div></div>
-          <div class="stat"><div class="stat-num">8</div><div class="stat-label">Primary deliverables</div></div>
-          <div class="stat"><div class="stat-num">3</div><div class="stat-label">Web-based tools</div></div>
-          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Program implementation pathway</div></div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="review-actions">
-      <div class="ey">For Review and Adoption</div>
-      <h2 class="section-title">What decision-makers can do here.</h2>
-      <p class="section-copy">This landing page is designed for principals, district leaders, school boards, community partners, and family stakeholders who need a clear view of the program before implementation.</p>
-      <div class="three-up">
-        <div class="card">
-          <span class="chip">Explore</span>
-          <h3>Review the Interactive Hub</h3>
-          <p>Use the school-focused review path if you want the fastest route for principals, district leaders, and school teams.</p>
-          <a class="linkline" href="schools.html">Start here for schools →</a>
+      <section id="review-actions">
+        <div class="ey">For Review and Adoption</div>
+        <h2 class="section-title">What decision-makers can do here.</h2>
+        <p class="section-copy">
+          This landing page is designed for principals, district leaders, school
+          boards, community partners, and family stakeholders who need a clear
+          view of the program before implementation.
+        </p>
+        <div class="three-up">
+          <div class="card">
+            <span class="chip">Explore</span>
+            <h3>Review the Interactive Hub</h3>
+            <p>
+              Use the school-focused review path if you want the fastest route
+              for principals, district leaders, and school teams.
+            </p>
+            <a class="linkline" href="schools.html">Start here for schools →</a>
+          </div>
+          <div class="card">
+            <span class="chip">Download</span>
+            <h3>Examine the Deliverables</h3>
+            <p>
+              Browse the formal document library and open or download the slide
+              deck, handbook, printable cards, one-pager, and registration
+              materials.
+            </p>
+            <a class="linkline" href="docs/index.html">Open the library →</a>
+          </div>
+          <div class="card">
+            <span class="chip">Plan</span>
+            <h3>Review Program Fit</h3>
+            <p>
+              Use the school review path and deliverables library to understand
+              implementation, training materials, and adoption readiness.
+            </p>
+            <a class="linkline" href="schools.html">Review the school path →</a>
+          </div>
         </div>
-        <div class="card">
-          <span class="chip">Download</span>
-          <h3>Examine the Deliverables</h3>
-          <p>Browse the formal document library and open or download the slide deck, handbook, printable cards, one-pager, and registration materials.</p>
-          <a class="linkline" href="docs/index.html">Open the library →</a>
-        </div>
-        <div class="card">
-          <span class="chip">Plan</span>
-          <h3>Review Program Fit</h3>
-          <p>Use the school review path and deliverables library to understand implementation, training materials, and adoption readiness.</p>
-          <a class="linkline" href="schools.html">Review the school path →</a>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="audience-fit">
-      <div class="ey">Who It Serves</div>
-      <h2 class="section-title">Built for schools, partners, and families.</h2>
-      <div class="aud-grid">
-        <div class="aud-card">
-          <span class="chip">Schools</span>
-          <h3>For Schools</h3>
-          <ul>
-            <li>Supports student growth beyond academics alone</li>
-            <li>Fits classroom, elective, advisory, or enrichment use</li>
-            <li>Provides concrete materials for implementation review</li>
-            <li>Helps frame communication, judgment, and behavior as teachable skills</li>
-          </ul>
+      <section id="audience-fit">
+        <div class="ey">Who It Serves</div>
+        <h2 class="section-title">
+          Built for schools, partners, and families.
+        </h2>
+        <div class="aud-grid">
+          <div class="aud-card">
+            <span class="chip">Schools</span>
+            <h3>For Schools</h3>
+            <ul>
+              <li>Supports student growth beyond academics alone</li>
+              <li>Fits classroom, elective, advisory, or enrichment use</li>
+              <li>Provides concrete materials for implementation review</li>
+              <li>
+                Helps frame communication, judgment, and behavior as teachable
+                skills
+              </li>
+            </ul>
+          </div>
+          <div class="aud-card">
+            <span class="chip">Partners</span>
+            <h3>For Community Partners</h3>
+            <ul>
+              <li>
+                Useful for youth programs, mentoring settings, and workshops
+              </li>
+              <li>
+                Provides professional, shareable materials for collaboration
+              </li>
+              <li>
+                Supports joint programming with schools, churches, and agencies
+              </li>
+              <li>
+                Creates a common language around conduct, regulation, and repair
+              </li>
+            </ul>
+          </div>
+          <div class="aud-card">
+            <span class="chip">Families</span>
+            <h3>For Families</h3>
+            <ul>
+              <li>
+                Clarifies what students are being taught and why it matters
+              </li>
+              <li>
+                Offers a visible bridge between home expectations and public
+                behavior
+              </li>
+              <li>
+                Helps families understand the real-world purpose of the program
+              </li>
+              <li>Provides materials that are easier to discuss and share</li>
+            </ul>
+          </div>
         </div>
-        <div class="aud-card">
-          <span class="chip">Partners</span>
-          <h3>For Community Partners</h3>
-          <ul>
-            <li>Useful for youth programs, mentoring settings, and workshops</li>
-            <li>Provides professional, shareable materials for collaboration</li>
-            <li>Supports joint programming with schools, churches, and agencies</li>
-            <li>Creates a common language around conduct, regulation, and repair</li>
-          </ul>
-        </div>
-        <div class="aud-card">
-          <span class="chip">Families</span>
-          <h3>For Families</h3>
-          <ul>
-            <li>Clarifies what students are being taught and why it matters</li>
-            <li>Offers a visible bridge between home expectations and public behavior</li>
-            <li>Helps families understand the real-world purpose of the program</li>
-            <li>Provides materials that are easier to discuss and share</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="core-materials">
-      <div class="ey">Core Materials</div>
-      <h2 class="section-title">What is included in this repository.</h2>
-      <div class="resource-grid">
-        <div class="resource"><strong>Teach-the-Teacher Slide Deck</strong><span>Facilitator-facing presentation for training and rollout.</span></div>
-        <div class="resource"><strong>Facilitator Handbook</strong><span>Implementation guide for delivery, planning, and support.</span></div>
-        <div class="resource"><strong>Participant Workbook</strong><span>Learner-facing workbook with prompts, activities, and reflection.</span></div>
-        <div class="resource"><strong>Certification Agreement</strong><span>Licensing and facilitator certification materials.</span></div>
-        <div class="resource"><strong>Scenario Cards</strong><span>Printable prompts for transfer practice and discussion.</span></div>
-        <div class="resource"><strong>Manners in Motion Cards</strong><span>Printable challenge cards for repeated use and reflection.</span></div>
-        <div class="resource"><strong>Community One-Pager</strong><span>Overview page for school and community stakeholders.</span></div>
-        <div class="resource"><strong>Registration and Intake Form</strong><span>Printable and digital access points for enrollment.</span></div>
-      </div>
-    </section>
-
-    <section>
-      <div class="contact-band">
-        <div>
-          <div class="ey">Next Step</div>
-          <p>If you want to review the materials for school adoption, request a presentation, or discuss program fit for your organization, reach out directly.</p>
+      <section id="core-materials">
+        <div class="ey">Core Materials</div>
+        <h2 class="section-title">What is included in this repository.</h2>
+        <div class="resource-grid">
+          <div class="resource">
+            <strong>Teach-the-Teacher Slide Deck</strong
+            ><span
+              >Facilitator-facing presentation for training and rollout.</span
+            >
+          </div>
+          <div class="resource">
+            <strong>Facilitator Handbook</strong
+            ><span
+              >Implementation guide for delivery, planning, and support.</span
+            >
+          </div>
+          <div class="resource">
+            <strong>Participant Workbook</strong
+            ><span
+              >Learner-facing workbook with prompts, activities, and
+              reflection.</span
+            >
+          </div>
+          <div class="resource">
+            <strong>Certification Agreement</strong
+            ><span>Licensing and facilitator certification materials.</span>
+          </div>
+          <div class="resource">
+            <strong>Scenario Cards</strong
+            ><span
+              >Printable prompts for transfer practice and discussion.</span
+            >
+          </div>
+          <div class="resource">
+            <strong>Manners in Motion Cards</strong
+            ><span
+              >Printable challenge cards for repeated use and reflection.</span
+            >
+          </div>
+          <div class="resource">
+            <strong>Community One-Pager</strong
+            ><span>Overview page for school and community stakeholders.</span>
+          </div>
+          <div class="resource">
+            <strong>Registration and Intake Form</strong
+            ><span>Printable and digital access points for enrollment.</span>
+          </div>
         </div>
-        <div>
-          <a class="btn primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=readyforreal.life44@gmail.com&amp;su=Ready%20for%20Real%20Life%20Instruction%20and%20Education%20Inquiry" target="_blank" rel="noopener noreferrer">Email the Founders</a>
-        </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <footer class="wrap">Ready for Real Life Instruction and Education | MMMF LLC — © Michael R. Terry &amp; Mekenzi G. Terry · Public repository landing page for schools, partners, and families. · <a class="inline" href="mailto:readyforreal.life44@gmail.com">readyforreal.life44@gmail.com</a></footer>
-  <script src="assets/site-search.js" data-search-index="data/site-search-index.json" defer></script>
-  <script src="assets/access-gate.js" defer></script>
-</body>
+      <section>
+        <div class="contact-band">
+          <div>
+            <div class="ey">Next Step</div>
+            <p>
+              If you want to review the materials for school adoption, request a
+              presentation, or discuss program fit for your organization, reach
+              out directly.
+            </p>
+          </div>
+          <div>
+            <a
+              class="btn primary"
+              href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=readyforreal.life44@gmail.com&amp;su=Ready%20for%20Real%20Life%20Instruction%20and%20Education%20Inquiry"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Email the Founders</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      Ready for Real Life Instruction and Education | MMMF LLC — © Michael R.
+      Terry &amp; Mekenzi G. Terry · Public repository landing page for schools,
+      partners, and families. ·
+      <a class="inline" href="mailto:readyforreal.life44@gmail.com"
+        >readyforreal.life44@gmail.com</a
+      >
+    </footer>
+    <script
+      src="assets/site-search.js"
+      data-search-index="data/site-search-index.json"
+      defer
+    ></script>
+    <script src="assets/access-gate.js" defer></script>
+  </body>
 </html>

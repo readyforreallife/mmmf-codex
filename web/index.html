@@ -1,194 +1,631 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ready for Real Life Instruction and Education — Founder Program Hub</title>
-<link rel="stylesheet" href="../assets/site-search.css">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
-:root {
-  --navy:#111E35; --navy2:#1B2A4A; --navy3:#1E3A5F;
-  --gold:#C89B3C; --gold-lt:#E8B84B;
-  --teal:#0D7377; --teal-lt:#14A085;
-  --gray:#6B7280; --gray-lt:#9CA3AF;
-  --white:#FFFFFF; --border:rgba(255,255,255,0.09);
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 90% 10%,rgba(13,115,119,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 5% 90%,rgba(200,155,60,.07) 0%,transparent 60%);pointer-events:none;}
-header{background:rgba(17,30,53,.97);border-bottom:3px solid var(--gold);padding:1.1rem 2rem;position:sticky;top:0;z-index:10;}
-.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-.brand{display:flex;align-items:center;gap:12px;}
-.brand-logo{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));}
-.brand-copy .ey{font-size:.58rem;font-weight:700;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;}
-.brand h1{font-family:'Playfair Display',serif;font-size:1.1rem;}
-.brand h1 em{color:var(--gold);font-style:italic;}
-.htag{font-size:.68rem;color:var(--gray);text-align:right;line-height:1.8;}
-main{max-width:1100px;margin:0 auto;padding:3rem 2rem;}
-.hero{text-align:center;margin-bottom:3rem;}
-.top-actions{display:flex;justify-content:flex-start;margin-bottom:1.1rem;}
-.back-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1px solid rgba(200,155,60,.28);background:rgba(255,255,255,.06);color:var(--white);text-decoration:none;font-size:.82rem;font-weight:700;transition:transform .18s,background .18s,border-color .18s;}
-.back-btn:hover,.back-btn:focus-visible{background:rgba(255,255,255,.12);border-color:rgba(200,155,60,.5);transform:translateY(-1px);}
-.hero .ey{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;padding:.3rem .9rem;border:1px solid rgba(200,155,60,.3);border-radius:99px;margin-bottom:1rem;}
-.hero h2{font-family:'Playfair Display',serif;font-size:2.8rem;margin-bottom:.6rem;}
-.hero h2 em{color:var(--gold);font-style:italic;}
-.hero p{font-size:.95rem;color:var(--gray-lt);max-width:640px;margin:0 auto;line-height:1.75;}
-.quick-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:1.4rem 0 0;}
-.quick-links a{display:inline-flex;padding:.8rem 1rem;border-radius:999px;border:1px solid rgba(200,155,60,.28);background:rgba(200,155,60,.08);color:var(--gold-lt);font-weight:700;text-decoration:none;font-size:.82rem;}
-.section-label{font-size:.62rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;}
-.app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem;margin-bottom:3rem;}
-.app-card{background:var(--navy3);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s;text-decoration:none;display:flex;flex-direction:column;}
-.app-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4);}
-.app-card-top{padding:1.5rem 1.5rem 1rem;border-bottom:1px solid var(--border);}
-.app-icon{font-size:2rem;margin-bottom:.6rem;display:block;}
-.app-tag{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .6rem;border-radius:99px;margin-bottom:.5rem;display:inline-block;}
-.tag-gold{background:rgba(200,155,60,.15);color:var(--gold-lt);}
-.tag-teal{background:rgba(13,115,119,.2);color:var(--teal-lt);}
-.tag-red{background:rgba(192,57,43,.2);color:#FCA5A5;}
-.app-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white);margin-bottom:.35rem;}
-.app-desc{font-size:.82rem;color:var(--gray);line-height:1.7;}
-.app-card-foot{padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.app-link{font-size:.78rem;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:.35rem;}
-.app-tech{font-size:.65rem;color:var(--gray);}
-.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;margin-bottom:3rem;}
-.doc-card{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem;display:flex;align-items:flex-start;gap:.85rem;text-decoration:none;transition:border-color .2s,background .2s;}
-.doc-card:hover{border-color:rgba(200,155,60,.35);background:rgba(200,155,60,.05);}
-.doc-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
-.doc-info .doc-name{font-size:.83rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:.2rem;}
-.doc-info .doc-type{font-size:.65rem;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;}
-.info-bar{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
-.info-bar .ib-item{font-size:.78rem;color:var(--gray-lt);display:flex;align-items:center;gap:.4rem;}
-.info-bar .ib-item strong{color:var(--white);}
-.info-bar a.ib-item{text-decoration:none;padding:.15rem 0;border-radius:8px;transition:color .18s ease,transform .18s ease;}
-.info-bar a.ib-item:hover,
-.info-bar a.ib-item:focus-visible{color:var(--white);transform:translateY(-1px);}
-.info-bar a.ib-item:hover strong,
-.info-bar a.ib-item:focus-visible strong{color:var(--gold-lt);}
-footer{text-align:center;padding:1.5rem 2rem;font-size:.68rem;color:var(--gray);border-top:1px solid var(--border);}
-footer a{color:var(--teal-lt);text-decoration:none;}
-@media (max-width:800px){.header-inner{flex-direction:column;align-items:flex-start}.htag{text-align:left}}
-</style>
-</head>
-<body>
-<header>
-  <div class="header-inner">
-    <div class="brand">
-      <img class="brand-logo" src="../assets/mmmf-site-mark.svg" alt="MMMF logo">
-      <div class="brand-copy">
-        <div class="ey">Ready for Real Life Instruction and Education</div>
-        <h1><em>MMMF</em> Founder Program Hub</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Ready for Real Life Instruction and Education — Founder Program Hub
+    </title>
+    <link rel="stylesheet" href="../assets/site-search.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap");
+      :root {
+        --navy: #111e35;
+        --navy2: #1b2a4a;
+        --navy3: #1e3a5f;
+        --gold: #c89b3c;
+        --gold-lt: #e8b84b;
+        --teal: #0d7377;
+        --teal-lt: #14a085;
+        --gray: #6b7280;
+        --gray-lt: #9ca3af;
+        --white: #ffffff;
+        --border: rgba(255, 255, 255, 0.09);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--navy);
+        color: var(--white);
+        min-height: 100vh;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 90% 10%,
+            rgba(13, 115, 119, 0.12) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 80% at 5% 90%,
+            rgba(200, 155, 60, 0.07) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      header {
+        background: rgba(17, 30, 53, 0.97);
+        border-bottom: 3px solid var(--gold);
+        padding: 1.1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .header-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-logo {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.22));
+      }
+      .brand-copy .ey {
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        color: var(--gold);
+        text-transform: uppercase;
+      }
+      .brand h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+      }
+      .brand h1 em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .htag {
+        font-size: 0.68rem;
+        color: var(--gray);
+        text-align: right;
+        line-height: 1.8;
+      }
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+      .hero {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .top-actions {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 1.1rem;
+      }
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(200, 155, 60, 0.28);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--white);
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+        transition:
+          transform 0.18s,
+          background 0.18s,
+          border-color 0.18s;
+      }
+      .back-btn:hover,
+      .back-btn:focus-visible {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(200, 155, 60, 0.5);
+        transform: translateY(-1px);
+      }
+      .hero .ey {
+        display: inline-block;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: var(--gold);
+        text-transform: uppercase;
+        padding: 0.3rem 0.9rem;
+        border: 1px solid rgba(200, 155, 60, 0.3);
+        border-radius: 99px;
+        margin-bottom: 1rem;
+      }
+      .hero h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.8rem;
+        margin-bottom: 0.6rem;
+      }
+      .hero h2 em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .hero p {
+        font-size: 0.95rem;
+        color: var(--gray-lt);
+        max-width: 640px;
+        margin: 0 auto;
+        line-height: 1.75;
+      }
+      .quick-links {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 1.4rem 0 0;
+      }
+      .quick-links a {
+        display: inline-flex;
+        padding: 0.8rem 1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(200, 155, 60, 0.28);
+        background: rgba(200, 155, 60, 0.08);
+        color: var(--gold-lt);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.82rem;
+      }
+      .section-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .app-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.25rem;
+        margin-bottom: 3rem;
+      }
+      .app-card {
+        background: var(--navy3);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+      }
+      .app-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      }
+      .app-card-top {
+        padding: 1.5rem 1.5rem 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .app-icon {
+        font-size: 2rem;
+        margin-bottom: 0.6rem;
+        display: block;
+      }
+      .app-tag {
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 0.2rem 0.6rem;
+        border-radius: 99px;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+      }
+      .tag-gold {
+        background: rgba(200, 155, 60, 0.15);
+        color: var(--gold-lt);
+      }
+      .tag-teal {
+        background: rgba(13, 115, 119, 0.2);
+        color: var(--teal-lt);
+      }
+      .tag-red {
+        background: rgba(192, 57, 43, 0.2);
+        color: #fca5a5;
+      }
+      .app-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        color: var(--white);
+        margin-bottom: 0.35rem;
+      }
+      .app-desc {
+        font-size: 0.82rem;
+        color: var(--gray);
+        line-height: 1.7;
+      }
+      .app-card-foot {
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .app-link {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .app-tech {
+        font-size: 0.65rem;
+        color: var(--gray);
+      }
+      .doc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 0.85rem;
+        margin-bottom: 3rem;
+      }
+      .doc-card {
+        background: var(--navy3);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem 1.1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+        text-decoration: none;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .doc-card:hover {
+        border-color: rgba(200, 155, 60, 0.35);
+        background: rgba(200, 155, 60, 0.05);
+      }
+      .doc-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .doc-info .doc-name {
+        font-size: 0.83rem;
+        font-weight: 600;
+        color: var(--white);
+        line-height: 1.3;
+        margin-bottom: 0.2rem;
+      }
+      .doc-info .doc-type {
+        font-size: 0.65rem;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .info-bar {
+        background: var(--navy3);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+      .info-bar .ib-item {
+        font-size: 0.78rem;
+        color: var(--gray-lt);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .info-bar .ib-item strong {
+        color: var(--white);
+      }
+      .info-bar a.ib-item {
+        text-decoration: none;
+        padding: 0.15rem 0;
+        border-radius: 8px;
+        transition:
+          color 0.18s ease,
+          transform 0.18s ease;
+      }
+      .info-bar a.ib-item:hover,
+      .info-bar a.ib-item:focus-visible {
+        color: var(--white);
+        transform: translateY(-1px);
+      }
+      .info-bar a.ib-item:hover strong,
+      .info-bar a.ib-item:focus-visible strong {
+        color: var(--gold-lt);
+      }
+      footer {
+        text-align: center;
+        padding: 1.5rem 2rem;
+        font-size: 0.68rem;
+        color: var(--gray);
+        border-top: 1px solid var(--border);
+      }
+      footer a {
+        color: var(--teal-lt);
+        text-decoration: none;
+      }
+      @media (max-width: 800px) {
+        .header-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .htag {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <img
+            class="brand-logo"
+            src="../assets/mmmf-site-mark.svg"
+            alt="MMMF logo"
+          />
+          <div class="brand-copy">
+            <div class="ey">Ready for Real Life Instruction and Education</div>
+            <h1><em>MMMF</em> Founder Program Hub</h1>
+          </div>
+        </div>
+        <div class="htag">
+          readyforreal.life<br />Michael R. Terry &amp; Mekenzi G. Terry ·
+          Founders
+        </div>
       </div>
-    </div>
-    <div class="htag">readyforreal.life<br>Michael R. Terry &amp; Mekenzi G. Terry · Founders</div>
-  </div>
-</header>
-<main>
-  <div class="hero" id="hub-hero">
-    <div class="top-actions">
-      <a class="back-btn" href="../index.html" onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }">&larr; Back</a>
-      <a class="back-btn" href="https://readyforreal.life/" style="margin-left:10px;">Main Homepage</a>
-    </div>
-    <div class="ey">Program Resource Hub</div>
-    <h2>Everything You Need to<br><em>Teach It Well.</em></h2>
-    <p>The MMMF hub brings together facilitator training, interactive tools, downloadable deliverables, and curriculum materials in one place. Open the experience you need, then move straight into the supporting files.</p>
-    <div class="quick-links">
-      <a href="../index.html">Program Landing</a>
-      <a href="../docs/index.html">Document Library</a>
-    </div>
-  </div>
+    </header>
+    <main>
+      <div class="hero" id="hub-hero">
+        <div class="top-actions">
+          <a
+            class="back-btn"
+            href="../index.html"
+            onclick="
+              if (window.history.length > 1) {
+                event.preventDefault();
+                window.history.back();
+              }
+            "
+            >&larr; Back</a
+          >
+          <a
+            class="back-btn"
+            href="https://readyforreal.life/"
+            style="margin-left: 10px"
+            >Main Homepage</a
+          >
+        </div>
+        <div class="ey">Program Resource Hub</div>
+        <h2>Everything You Need to<br /><em>Teach It Well.</em></h2>
+        <p>
+          The MMMF hub brings together facilitator training, interactive tools,
+          downloadable deliverables, and curriculum materials in one place. Open
+          the experience you need, then move straight into the supporting files.
+        </p>
+        <div class="quick-links">
+          <a href="../index.html">Program Landing</a>
+          <a href="../docs/index.html">Document Library</a>
+        </div>
+      </div>
 
-  <div class="info-bar">
-    <a class="ib-item" href="../docs/index.html#documents-library">📁 <strong>12</strong> total repository assets</a>
-    <a class="ib-item" href="#hub-web-apps">🌐 <strong>3</strong> browser-based tools</a>
-    <a class="ib-item" href="../docs/index.html#group-training">📄 <strong>5</strong> Word documents</a>
-    <a class="ib-item" href="../docs/index.html#group-outreach">🖨️ <strong>6</strong> print-ready PDFs</a>
-    <a class="ib-item" href="../docs/index.html#doc-teach-the-teacher">📊 <strong>1</strong> presentation deck</a>
-    <a class="ib-item" href="teach-the-teacher-portal.html">🎓 <strong>4</strong> implementation tracks</a>
-  </div>
+      <div class="info-bar">
+        <a class="ib-item" href="../docs/index.html#documents-library"
+          >📁 <strong>12</strong> total repository assets</a
+        >
+        <a class="ib-item" href="#hub-web-apps"
+          >🌐 <strong>3</strong> browser-based tools</a
+        >
+        <a class="ib-item" href="../docs/index.html#group-training"
+          >📄 <strong>5</strong> Word documents</a
+        >
+        <a class="ib-item" href="../docs/index.html#group-outreach"
+          >🖨️ <strong>6</strong> print-ready PDFs</a
+        >
+        <a class="ib-item" href="../docs/index.html#doc-teach-the-teacher"
+          >📊 <strong>1</strong> presentation deck</a
+        >
+        <a class="ib-item" href="teach-the-teacher-portal.html"
+          >🎓 <strong>4</strong> implementation tracks</a
+        >
+      </div>
 
-  <div class="section-label" id="hub-web-apps">Web Applications — Open in Browser</div>
-  <div class="app-grid">
-    <a class="app-card" href="teach-the-teacher-portal.html">
-      <div class="app-card-top">
-        <span class="app-icon">🎓</span>
-        <span class="app-tag tag-gold">3-Day Training</span>
-        <div class="app-title">Teach the Teacher Portal</div>
-        <div class="app-desc">A facilitator-facing portal with agendas, frameworks, implementation tracks, readiness tools, and presentation support for program delivery.</div>
+      <div class="section-label" id="hub-web-apps">
+        Web Applications — Open in Browser
       </div>
-      <div class="app-card-foot">
-        <span class="app-link">Open Portal →</span>
-        <span class="app-tech">HTML · Self-contained</span>
+      <div class="app-grid">
+        <a class="app-card" href="teach-the-teacher-portal.html">
+          <div class="app-card-top">
+            <span class="app-icon">🎓</span>
+            <span class="app-tag tag-gold">3-Day Training</span>
+            <div class="app-title">Teach the Teacher Portal</div>
+            <div class="app-desc">
+              A facilitator-facing portal with agendas, frameworks,
+              implementation tracks, readiness tools, and presentation support
+              for program delivery.
+            </div>
+          </div>
+          <div class="app-card-foot">
+            <span class="app-link">Open Portal →</span>
+            <span class="app-tech">HTML · Self-contained</span>
+          </div>
+        </a>
+        <a class="app-card" href="manners-in-motion-cards.html">
+          <div class="app-card-top">
+            <span class="app-icon">🏅</span>
+            <span class="app-tag tag-teal">36 Cards · 6 Categories</span>
+            <div class="app-title">Manners in Motion Cards</div>
+            <div class="app-desc">
+              A digital card deck for practice, prompting, and discussion,
+              designed to work quickly across desktop and mobile screens.
+            </div>
+          </div>
+          <div class="app-card-foot">
+            <span class="app-link">Open Card Deck →</span>
+            <span class="app-tech">HTML · Self-contained</span>
+          </div>
+        </a>
+        <a class="app-card" href="registration-form.html">
+          <div class="app-card-top">
+            <span class="app-icon">📋</span>
+            <span class="app-tag tag-red">Program Enrollment</span>
+            <div class="app-title">Registration and Intake Form</div>
+            <div class="app-desc">
+              A guided intake form for collecting participant information,
+              support needs, implementation context, and enrollment details.
+            </div>
+          </div>
+          <div class="app-card-foot">
+            <span class="app-link">Open Form →</span>
+            <span class="app-tech">HTML · Embeddable</span>
+          </div>
+        </a>
       </div>
-    </a>
-    <a class="app-card" href="manners-in-motion-cards.html">
-      <div class="app-card-top">
-        <span class="app-icon">🏅</span>
-        <span class="app-tag tag-teal">36 Cards · 6 Categories</span>
-        <div class="app-title">Manners in Motion Cards</div>
-        <div class="app-desc">A digital card deck for practice, prompting, and discussion, designed to work quickly across desktop and mobile screens.</div>
-      </div>
-      <div class="app-card-foot">
-        <span class="app-link">Open Card Deck →</span>
-        <span class="app-tech">HTML · Self-contained</span>
-      </div>
-    </a>
-    <a class="app-card" href="registration-form.html">
-      <div class="app-card-top">
-        <span class="app-icon">📋</span>
-        <span class="app-tag tag-red">Program Enrollment</span>
-        <div class="app-title">Registration and Intake Form</div>
-        <div class="app-desc">A guided intake form for collecting participant information, support needs, implementation context, and enrollment details.</div>
-      </div>
-      <div class="app-card-foot">
-        <span class="app-link">Open Form →</span>
-        <span class="app-tech">HTML · Embeddable</span>
-      </div>
-    </a>
-  </div>
 
-  <div class="section-label" id="hub-documents">Documents & Print Materials</div>
-  <p style="color:var(--gray-lt);margin:-.3rem 0 1rem;line-height:1.7;max-width:760px;">Use the document library for the cleanest browsing experience, or grab individual files directly below if you already know what you need.</p>
-  <p style="margin:0 0 1.25rem;"><a href="../docs/index.html" style="display:inline-block;padding:.7rem 1rem;border-radius:999px;border:1px solid rgba(200,155,60,.25);background:rgba(200,155,60,.08);color:var(--gold-lt);text-decoration:none;font-weight:700;">Open documents library →</a></p>
-  <div class="doc-grid">
-    <a class="doc-card" href="../docs/viewer.html?file=MMMF_Teach_the_Teacher.pptx&amp;title=Teach-the-Teacher%20Slide%20Deck&amp;type=pptx">
-      <span class="doc-icon">📊</span>
-      <div class="doc-info"><div class="doc-name">Teach the Teacher Slide Deck</div><div class="doc-type">PowerPoint · Training deck</div></div>
-    </a>
-    <a class="doc-card" href="../docs/viewer.html?file=MMMF_Facilitator_Handbook.docx&amp;title=Facilitator%20Handbook&amp;type=docx">
-      <span class="doc-icon">📖</span>
-      <div class="doc-info"><div class="doc-name">Facilitator Handbook</div><div class="doc-type">Word · Delivery guide</div></div>
-    </a>
-    <a class="doc-card" href="../docs/viewer.html?file=MMMF_Participant_Workbook.docx&amp;title=Participant%20Workbook&amp;type=docx">
-      <span class="doc-icon">📓</span>
-      <div class="doc-info"><div class="doc-name">Participant Workbook</div><div class="doc-type">Word · Activities + journals</div></div>
-    </a>
-    <a class="doc-card" href="../docs/viewer.html?file=MMMF_Facilitator_Certification_Agreement.docx&amp;title=Facilitator%20Certification%20and%20Licensing%20Agreement&amp;type=docx">
-      <span class="doc-icon">✍️</span>
-      <div class="doc-info"><div class="doc-name">Facilitator Certification Agreement</div><div class="doc-type">Word · Licensing document</div></div>
-    </a>
-    <a class="doc-card" href="../docs/viewer.html?file=MMMF_Scenario_Cards.pdf&amp;title=Scenario%20Cards&amp;type=pdf">
-      <span class="doc-icon">🃏</span>
-      <div class="doc-info"><div class="doc-name">Scenario Cards</div><div class="doc-type">PDF · Printable prompts</div></div>
-    </a>
-    <a class="doc-card" href="../docs/viewer.html?file=MMMF_Manners_in_Motion_Cards.pdf&amp;title=Manners%20in%20Motion%20Cards&amp;type=pdf">
-      <span class="doc-icon">🏅</span>
-      <div class="doc-info"><div class="doc-name">Manners in Motion Cards</div><div class="doc-type">PDF · Printable cards</div></div>
-    </a>
-    <a class="doc-card" href="../docs/viewer.html?file=MMMF_Community_OnePager.pdf&amp;title=Community%20One-Pager&amp;type=pdf">
-      <span class="doc-icon">📄</span>
-      <div class="doc-info"><div class="doc-name">Community One-Pager</div><div class="doc-type">PDF · Outreach overview</div></div>
-    </a>
-    <a class="doc-card" href="../docs/registration-intake-form.html">
-      <span class="doc-icon">📝</span>
-      <div class="doc-info"><div class="doc-name">Printable Registration and Intake Form</div><div class="doc-type">PDF · Intake handout</div></div>
-    </a>
-  </div>
-</main>
-<footer>
-  <p>Ready for Real Life Instruction and Education | MMMF LLC — © Michael R. Terry &amp; Mekenzi G. Terry · <a href="../index.html">readyforreal.life</a> · <a href="mailto:readyforreal.life44@gmail.com">readyforreal.life44@gmail.com</a> · Protected Intellectual Property</p>
-</footer>
-<script src="../assets/site-search.js" data-search-index="../data/site-search-index.json" defer></script>
-<script src="../assets/access-gate.js" defer></script>
-</body>
+      <div class="section-label" id="hub-documents">
+        Documents & Print Materials
+      </div>
+      <p
+        style="
+          color: var(--gray-lt);
+          margin: -0.3rem 0 1rem;
+          line-height: 1.7;
+          max-width: 760px;
+        "
+      >
+        Use the document library for the cleanest browsing experience, or grab
+        individual files directly below if you already know what you need.
+      </p>
+      <p style="margin: 0 0 1.25rem">
+        <a
+          href="../docs/index.html"
+          style="
+            display: inline-block;
+            padding: 0.7rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(200, 155, 60, 0.25);
+            background: rgba(200, 155, 60, 0.08);
+            color: var(--gold-lt);
+            text-decoration: none;
+            font-weight: 700;
+          "
+          >Open documents library →</a
+        >
+      </p>
+      <div class="doc-grid">
+        <a
+          class="doc-card"
+          href="../docs/viewer.html?file=MMMF_Teach_the_Teacher.pptx&amp;title=Teach-the-Teacher%20Slide%20Deck&amp;type=pptx"
+        >
+          <span class="doc-icon">📊</span>
+          <div class="doc-info">
+            <div class="doc-name">Teach the Teacher Slide Deck</div>
+            <div class="doc-type">PowerPoint · Training deck</div>
+          </div>
+        </a>
+        <a
+          class="doc-card"
+          href="../docs/viewer.html?file=MMMF_Facilitator_Handbook.docx&amp;title=Facilitator%20Handbook&amp;type=docx"
+        >
+          <span class="doc-icon">📖</span>
+          <div class="doc-info">
+            <div class="doc-name">Facilitator Handbook</div>
+            <div class="doc-type">Word · Delivery guide</div>
+          </div>
+        </a>
+        <a
+          class="doc-card"
+          href="../docs/viewer.html?file=MMMF_Participant_Workbook.docx&amp;title=Participant%20Workbook&amp;type=docx"
+        >
+          <span class="doc-icon">📓</span>
+          <div class="doc-info">
+            <div class="doc-name">Participant Workbook</div>
+            <div class="doc-type">Word · Activities + journals</div>
+          </div>
+        </a>
+        <a
+          class="doc-card"
+          href="../docs/viewer.html?file=MMMF_Facilitator_Certification_Agreement.docx&amp;title=Facilitator%20Certification%20and%20Licensing%20Agreement&amp;type=docx"
+        >
+          <span class="doc-icon">✍️</span>
+          <div class="doc-info">
+            <div class="doc-name">Facilitator Certification Agreement</div>
+            <div class="doc-type">Word · Licensing document</div>
+          </div>
+        </a>
+        <a
+          class="doc-card"
+          href="../docs/viewer.html?file=MMMF_Scenario_Cards.pdf&amp;title=Scenario%20Cards&amp;type=pdf"
+        >
+          <span class="doc-icon">🃏</span>
+          <div class="doc-info">
+            <div class="doc-name">Scenario Cards</div>
+            <div class="doc-type">PDF · Printable prompts</div>
+          </div>
+        </a>
+        <a
+          class="doc-card"
+          href="../docs/viewer.html?file=MMMF_Manners_in_Motion_Cards.pdf&amp;title=Manners%20in%20Motion%20Cards&amp;type=pdf"
+        >
+          <span class="doc-icon">🏅</span>
+          <div class="doc-info">
+            <div class="doc-name">Manners in Motion Cards</div>
+            <div class="doc-type">PDF · Printable cards</div>
+          </div>
+        </a>
+        <a
+          class="doc-card"
+          href="../docs/viewer.html?file=MMMF_Community_OnePager.pdf&amp;title=Community%20One-Pager&amp;type=pdf"
+        >
+          <span class="doc-icon">📄</span>
+          <div class="doc-info">
+            <div class="doc-name">Community One-Pager</div>
+            <div class="doc-type">PDF · Outreach overview</div>
+          </div>
+        </a>
+        <a class="doc-card" href="../docs/registration-intake-form.html">
+          <span class="doc-icon">📝</span>
+          <div class="doc-info">
+            <div class="doc-name">Printable Registration and Intake Form</div>
+            <div class="doc-type">PDF · Intake handout</div>
+          </div>
+        </a>
+      </div>
+    </main>
+    <footer>
+      <p>
+        Ready for Real Life Instruction and Education | MMMF LLC — © Michael R.
+        Terry &amp; Mekenzi G. Terry ·
+        <a href="../index.html">readyforreal.life</a> ·
+        <a href="mailto:readyforreal.life44@gmail.com"
+          >readyforreal.life44@gmail.com</a
+        >
+        · Protected Intellectual Property
+      </p>
+    </footer>
+    <script
+      src="../assets/site-search.js"
+      data-search-index="../data/site-search-index.json"
+      defer
+    ></script>
+    <script src="../assets/access-gate.js" defer></script>
+  </body>
 </html>

@@ -29,7 +29,14 @@
     "section": "What is included in this repository",
     "url": "index.html#core-materials",
     "snippet": "Lists the slide deck, handbook, workbook, certification agreement, cards, one-pager, and registration materials.",
-    "keywords": ["materials", "documents", "workbook", "handbook", "cards", "one-pager"]
+    "keywords": [
+      "materials",
+      "documents",
+      "workbook",
+      "handbook",
+      "cards",
+      "one-pager"
+    ]
   },
   {
     "title": "School leader review path",
@@ -53,7 +60,13 @@
     "section": "Recommended Materials",
     "url": "schools.html#school-review-order",
     "snippet": "Recommended sequence: community one-pager, slide deck, facilitator handbook, and participant workbook.",
-    "keywords": ["review order", "one-pager", "slide deck", "handbook", "participant workbook"]
+    "keywords": [
+      "review order",
+      "one-pager",
+      "slide deck",
+      "handbook",
+      "participant workbook"
+    ]
   },
   {
     "title": "School adoption contact",
@@ -61,7 +74,13 @@
     "section": "Next Step",
     "url": "schools.html#school-adoption",
     "snippet": "Contact point for school adoption, presentation requests, and implementation conversations.",
-    "keywords": ["contact", "adoption", "presentation", "implementation", "email"]
+    "keywords": [
+      "contact",
+      "adoption",
+      "presentation",
+      "implementation",
+      "email"
+    ]
   },
   {
     "title": "Formal program documents library",
@@ -93,7 +112,13 @@
     "section": "Participant",
     "url": "docs/index.html#doc-participant-workbook",
     "snippet": "Learner-facing workbook with activities, reflection pages, and guided participation materials.",
-    "keywords": ["workbook", "participant", "learner", "activities", "reflection"]
+    "keywords": [
+      "workbook",
+      "participant",
+      "learner",
+      "activities",
+      "reflection"
+    ]
   },
   {
     "title": "Instructor guide",
@@ -101,7 +126,13 @@
     "section": "Facilitator",
     "url": "docs/index.html#doc-instructor-guide",
     "snippet": "Instructor-facing guide for delivering MMMF sessions with structured support, pacing, and implementation notes.",
-    "keywords": ["instructor guide", "guide", "facilitator", "teaching guide", "implementation notes"]
+    "keywords": [
+      "instructor guide",
+      "guide",
+      "facilitator",
+      "teaching guide",
+      "implementation notes"
+    ]
   },
   {
     "title": "CASEL survey",
@@ -109,7 +140,14 @@
     "section": "Assessment",
     "url": "docs/index.html#doc-casel-survey",
     "snippet": "Survey instrument aligned to MMMF outcomes and CASEL-related review needs for reflection, feedback, and program evaluation.",
-    "keywords": ["casel", "survey", "assessment", "feedback", "evaluation", "utah casel"]
+    "keywords": [
+      "casel",
+      "survey",
+      "assessment",
+      "feedback",
+      "evaluation",
+      "utah casel"
+    ]
   },
   {
     "title": "Facilitator certification agreement",
@@ -125,7 +163,16 @@
     "section": "Agreement Registry",
     "url": "web/agreement-tracker.html",
     "snippet": "Protected teacher-mode admin page for issuing unique MMMF agreement numbers and preventing duplicate certification assignments.",
-    "keywords": ["agreement number", "admin", "teacher mode", "registry", "licensing", "facilitator agreement", "assign number", "issue certification"]
+    "keywords": [
+      "agreement number",
+      "admin",
+      "teacher mode",
+      "registry",
+      "licensing",
+      "facilitator agreement",
+      "assign number",
+      "issue certification"
+    ]
   },
   {
     "title": "Certificate folder",
@@ -133,7 +180,14 @@
     "section": "Teacher Mode",
     "url": "web/certificate-folder.html",
     "snippet": "Teacher-mode certificate folder laid out like a management spreadsheet for reopening, printing, and saving every certificate record that has been issued.",
-    "keywords": ["certificate folder", "issued certificates", "print certificate", "teacher mode", "certificate record", "spreadsheet"]
+    "keywords": [
+      "certificate folder",
+      "issued certificates",
+      "print certificate",
+      "teacher mode",
+      "certificate record",
+      "spreadsheet"
+    ]
   },
   {
     "title": "Registration folder",
@@ -141,7 +195,14 @@
     "section": "Teacher Mode",
     "url": "web/registration-folder.html",
     "snippet": "Protected registration folder laid out like a management spreadsheet that stores every signup submitted through the public MMMF registration form.",
-    "keywords": ["registration folder", "signups", "teacher mode", "submitted registrations", "registration records", "spreadsheet"]
+    "keywords": [
+      "registration folder",
+      "signups",
+      "teacher mode",
+      "submitted registrations",
+      "registration records",
+      "spreadsheet"
+    ]
   },
   {
     "title": "Scenario cards",
@@ -181,7 +242,14 @@
     "section": "Revenue",
     "url": "docs/index.html#doc-community-revenue",
     "snippet": "Teacher-facing community pricing and revenue planning sheet for rollout and partnership conversations.",
-    "keywords": ["revenue", "community revenue", "pricing", "teacher mode", "planning", "projection"]
+    "keywords": [
+      "revenue",
+      "community revenue",
+      "pricing",
+      "teacher mode",
+      "planning",
+      "projection"
+    ]
   },
   {
     "title": "School revenue projection",
@@ -189,7 +257,14 @@
     "section": "Revenue",
     "url": "docs/index.html#doc-school-revenue",
     "snippet": "Teacher-facing school pricing and revenue planning sheet for implementation and presentation discussions.",
-    "keywords": ["revenue", "school revenue", "pricing", "teacher mode", "planning", "projection"]
+    "keywords": [
+      "revenue",
+      "school revenue",
+      "pricing",
+      "teacher mode",
+      "planning",
+      "projection"
+    ]
   },
   {
     "title": "Program hub home",
@@ -237,7 +312,14 @@
     "section": "Overview",
     "url": "web/teach-the-teacher-portal.html?tab=overview#portal-founder",
     "snippet": "Founders overview, program background, awards, experience, and professional credentials.",
-    "keywords": ["michael terry", "mekenzi terry", "founders", "bio", "awards", "experience"]
+    "keywords": [
+      "michael terry",
+      "mekenzi terry",
+      "founders",
+      "bio",
+      "awards",
+      "experience"
+    ]
   },
   {
     "title": "Four core pillars",
@@ -245,7 +327,13 @@
     "section": "Pillars & Modules",
     "url": "web/teach-the-teacher-portal.html?tab=pillars#portal-pillars",
     "snippet": "Respectful communication, emotional regulation, wise decision-making, and personal accountability.",
-    "keywords": ["pillars", "respectful communication", "emotional regulation", "decision making", "accountability"]
+    "keywords": [
+      "pillars",
+      "respectful communication",
+      "emotional regulation",
+      "decision making",
+      "accountability"
+    ]
   },
   {
     "title": "Five modules",
@@ -277,7 +365,14 @@
     "section": "Implementation Tracks",
     "url": "web/teach-the-teacher-portal.html?tab=tracks#portal-tracks",
     "snippet": "Four implementation tracks for grades 7–8, 9–12, community youth, and community adult settings.",
-    "keywords": ["tracks", "implementation", "grades 7 8", "grades 9 12", "community youth", "community adult"]
+    "keywords": [
+      "tracks",
+      "implementation",
+      "grades 7 8",
+      "grades 9 12",
+      "community youth",
+      "community adult"
+    ]
   },
   {
     "title": "Curriculum overview and philosophy",
@@ -333,7 +428,12 @@
     "section": "Readiness Check",
     "url": "web/teach-the-teacher-portal.html?tab=readiness#readiness-checklist",
     "snippet": "Teacher readiness checklist for receiving MMMF Licensed Facilitator status.",
-    "keywords": ["readiness", "facilitator status", "checklist", "licensed facilitator"]
+    "keywords": [
+      "readiness",
+      "facilitator status",
+      "checklist",
+      "licensed facilitator"
+    ]
   },
   {
     "title": "Registration form overview",
@@ -357,7 +457,13 @@
     "section": "Step 2",
     "url": "web/registration-form.html#step-2",
     "snippet": "Tracks, delivery format, class size, training status, and implementation context.",
-    "keywords": ["step 2", "tracks", "delivery", "class size", "training status"]
+    "keywords": [
+      "step 2",
+      "tracks",
+      "delivery",
+      "class size",
+      "training status"
+    ]
   },
   {
     "title": "Step 3 support and needs",
@@ -413,7 +519,13 @@
     "section": "Category",
     "url": "web/manners-in-motion-cards.html?cat=digital-life",
     "snippet": "Challenges about messaging tone, privacy, screen-free time, and digital permanence.",
-    "keywords": ["digital life", "social media", "privacy", "screen free", "digital tone"]
+    "keywords": [
+      "digital life",
+      "social media",
+      "privacy",
+      "screen free",
+      "digital tone"
+    ]
   },
   {
     "title": "Repair Move cards",
@@ -421,7 +533,13 @@
     "section": "Category",
     "url": "web/manners-in-motion-cards.html?cat=repair-move",
     "snippet": "Challenges focused on apology, follow-through, repair conversations, and integrity.",
-    "keywords": ["repair move", "apology", "integrity", "follow through", "repair conversation"]
+    "keywords": [
+      "repair move",
+      "apology",
+      "integrity",
+      "follow through",
+      "repair conversation"
+    ]
   },
   {
     "title": "Wild Card challenges",
@@ -429,6 +547,12 @@
     "section": "Category",
     "url": "web/manners-in-motion-cards.html?cat=wild-card",
     "snippet": "Challenge prompts for discomfort, observation, feedback, and designing your own growth task.",
-    "keywords": ["wild card", "feedback", "observation", "growth target", "design your own"]
+    "keywords": [
+      "wild card",
+      "feedback",
+      "observation",
+      "growth target",
+      "design your own"
+    ]
   }
 ]
