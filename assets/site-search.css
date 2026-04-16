@@ -1,6 +1,6 @@
 .site-search-shell {
-  position: sticky;
-  top: 0;
+  position: static;
+  top: auto;
   z-index: 120;
   padding: 0 1rem;
 }

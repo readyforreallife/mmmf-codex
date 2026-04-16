@@ -2,11 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>
       Document Viewer | Ready for Real Life Instruction and Education
     </title>
-    <link rel="stylesheet" href="../assets/site-search.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
       defer
@@ -38,7 +40,7 @@
       header {
         background: linear-gradient(135deg, var(--navy), var(--navy2));
         color: #fff;
-        padding: 24px;
+        padding: calc(env(safe-area-inset-top, 0px) + 54px) 24px 18px;
         border-bottom: 4px solid var(--gold);
       }
       .wrap {
@@ -100,16 +102,23 @@
         max-width: 1200px;
         margin: 0 auto;
         width: 100%;
-        padding: 20px 24px 28px;
+        padding: 16px 24px 28px;
         flex: 1;
-      }
-      .search-host {
-        margin-bottom: 14px;
       }
       .viewer-shell {
         display: flex;
         flex-direction: column;
         gap: 12px;
+      }
+      .viewer-shell.html-preview-mode .viewer-frame-wrap {
+        overflow: auto;
+        background: #eef2f7;
+      }
+      .viewer-shell.html-preview-mode iframe {
+        display: block;
+        width: 100%;
+        min-height: 100%;
+        background: #eef2f7;
       }
       .viewer-shell.pdf-mode {
         gap: 8px;
@@ -240,13 +249,51 @@
         gap: 10px;
         flex-wrap: wrap;
       }
+      .fallback-actions .btn.secondary {
+        background: var(--white);
+        color: var(--navy);
+        border-color: var(--line);
+      }
+      .fallback-actions .btn.secondary:hover,
+      .fallback-actions .btn.secondary:focus-visible {
+        background: #eef2f7;
+        color: var(--navy2);
+      }
+      .btn.back-btn {
+        order: -1;
+      }
       @media (max-width: 800px) {
+        header {
+          padding:
+            calc(env(safe-area-inset-top, 0px) + 58px)
+            14px
+            14px;
+        }
+        .topbar {
+          align-items: stretch;
+        }
+        .header-actions {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+        .header-actions .btn {
+          width: 100%;
+        }
+        main {
+          padding: 12px 14px 20px;
+        }
         .viewer-frame-wrap {
-          height: 70vh;
-          min-height: 520px;
+          height: calc(100vh - 250px);
+          min-height: 360px;
         }
         h1 {
-          font-size: 1.55rem;
+          font-size: 1.4rem;
+        }
+        .fallback-actions {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr;
         }
         .fallback {
           padding: 0;
@@ -265,11 +312,8 @@
           </p>
         </div>
         <div class="header-actions">
-          <a class="btn secondary" href="https://readyforreal.life/"
-            >Main Homepage</a
-          >
           <a
-            class="btn secondary"
+            class="btn secondary back-btn"
             href="index.html"
             onclick="
               if (window.history.length > 1) {
@@ -279,13 +323,14 @@
             "
             >&larr; Back</a
           >
+          <a class="btn secondary" href="../web/index.html">Hub Home</a>
+          <a class="btn secondary" href="../../index.html">Main Homepage</a>
           <a class="btn" id="downloadBtn" href="#">Download file</a>
         </div>
       </div>
     </header>
 
     <main>
-      <div class="search-host"></div>
       <div class="viewer-shell">
         <div class="viewer-frame-wrap">
           <iframe id="viewerFrame" title="MMMF document viewer"></iframe>
@@ -306,11 +351,8 @@
             >.
           </p>
           <div class="fallback-actions">
-            <a class="btn secondary" href="https://readyforreal.life/"
-              >Main Homepage</a
-            >
             <a
-              class="btn secondary"
+              class="btn secondary back-btn"
               href="index.html"
               onclick="
                 if (window.history.length > 1) {
@@ -320,17 +362,14 @@
               "
               >&larr; Back to library</a
             >
+            <a class="btn secondary" href="../web/index.html">Hub Home</a>
+            <a class="btn secondary" href="../../index.html">Main Homepage</a>
             <a class="btn" id="openDirectBtn" href="#">Open file directly</a>
           </div>
         </div>
       </div>
     </main>
 
-    <script
-      src="../assets/site-search.js"
-      data-search-index="../data/site-search-index.json"
-      defer
-    ></script>
     <script src="../assets/access-gate.js" defer></script>
     <script>
       const params = new URLSearchParams(window.location.search);
@@ -347,6 +386,29 @@
       const downloadBtn = document.getElementById("downloadBtn");
       const openDirectBtn = document.getElementById("openDirectBtn");
       const viewerWatermark = document.getElementById("viewerWatermark");
+
+      async function urlExists(url) {
+        try {
+          const res = await fetch(url, { method: "GET", cache: "no-store" });
+          return res.ok;
+        } catch (_err) {
+          return false;
+        }
+      }
+
+      async function getLocalPreviewUrl() {
+        if (!file) return "";
+        const base = file.replace(/^.*[\\/]/, "").replace(/\.[^.]+$/, "");
+        if (type === "docx") {
+          const previewUrl = `previews/${base}.html`;
+          return (await urlExists(previewUrl)) ? previewUrl : "";
+        }
+        if (type === "pptx") {
+          const previewUrl = `previews/${base}.qlpreview/Preview.html`;
+          return (await urlExists(previewUrl)) ? previewUrl : "";
+        }
+        return "";
+      }
 
       async function renderPdfDocument(url) {
         if (!window.pdfjsLib) {
@@ -388,17 +450,153 @@
         frame.style.display = "none";
       }
 
-      if (file === "MMMF_Registration_Form_Printable.pdf") {
-        window.location.replace("registration-intake-form.html");
-      } else if (!file) {
-        titleEl.textContent = "Document unavailable";
-        subEl.textContent = "No document was selected.";
-        frame.remove();
-      } else {
+      async function renderPdfDocuments(urls) {
+        if (!window.pdfjsLib) {
+          throw new Error("PDF renderer did not load.");
+        }
+
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+        pdfStack.style.display = "block";
+        pdfPages.innerHTML =
+          '<div class="pdf-loading"><strong>Loading slide preview...</strong><br>Rendering a cleaner in-app version of the deck for phone viewing.</div>';
+
+        const renderedPages = [];
+        const targetWidth = Math.min(pdfPages.clientWidth || 900, 900);
+
+        for (const url of urls) {
+          const pdf = await window.pdfjsLib.getDocument(url).promise;
+          for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+            const page = await pdf.getPage(pageNumber);
+            const unscaledViewport = page.getViewport({ scale: 1 });
+            const scale = targetWidth / unscaledViewport.width;
+            const viewport = page.getViewport({ scale });
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            const pageShell = document.createElement("div");
+            pageShell.className = "pdf-page";
+            pageShell.appendChild(canvas);
+            renderedPages.push(pageShell);
+
+            await page.render({ canvasContext: context, viewport }).promise;
+          }
+        }
+
+        pdfPages.innerHTML = "";
+        renderedPages.forEach((pageShell) => pdfPages.appendChild(pageShell));
+        frame.style.display = "none";
+      }
+
+      function addPxUnits(cssText) {
+        return String(cssText || "").replace(
+          /\b(top|left|right|bottom|width|height|font-size|margin-top|margin-left|margin-right|margin-bottom)\s*:\s*(-?\d+(?:\.\d+)?)(?=;|}|$)/gi,
+          "$1:$2px",
+        );
+      }
+
+      async function renderHtmlPreview(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("HTML preview did not load.");
+        }
+
+        const markup = await response.text();
+        const parsed = new DOMParser().parseFromString(markup, "text/html");
+        parsed.querySelectorAll("style").forEach((styleNode) => {
+          styleNode.textContent = addPxUnits(styleNode.textContent);
+        });
+        parsed.querySelectorAll("[style]").forEach((node) => {
+          node.setAttribute("style", addPxUnits(node.getAttribute("style")));
+        });
+        parsed.querySelectorAll('img[src$=".pdf"]').forEach((img) => {
+          img.remove();
+        });
+        parsed.querySelectorAll("img[src]").forEach((img) => {
+          img.src = new URL(img.getAttribute("src"), url).href;
+        });
+
+        pdfStack.style.display = "block";
+        pdfPages.innerHTML = "";
+        frame.style.display = "none";
+
+        const slides = Array.from(parsed.querySelectorAll(".slide"));
+        const targetWidth = Math.min(pdfPages.clientWidth || 900, 900);
+
+        slides.forEach((slide) => {
+          const rawWidth = parseFloat(slide.style.width) || 720;
+          const rawHeight = parseFloat(slide.style.height) || 405;
+          const scale = Math.min(1, targetWidth / rawWidth);
+
+          const shell = document.createElement("div");
+          shell.className = "pdf-page";
+          shell.style.height = Math.ceil(rawHeight * scale) + "px";
+
+          const inner = document.createElement("div");
+          inner.style.width = rawWidth + "px";
+          inner.style.height = rawHeight + "px";
+          inner.style.transform = `scale(${scale})`;
+          inner.style.transformOrigin = "top left";
+          inner.style.position = "relative";
+
+          slide.style.margin = "0";
+          slide.style.boxShadow = "0 8px 22px rgba(0,0,0,0.08)";
+          slide.style.borderRadius = "14px";
+          slide.style.overflow = "hidden";
+          inner.appendChild(slide);
+          shell.appendChild(inner);
+          pdfPages.appendChild(shell);
+        });
+      }
+
+      async function initViewer() {
+        if (file === "MMMF_Registration_Form_Printable.pdf") {
+          window.location.replace("registration-intake-form.html");
+          return;
+        }
+        if (file === "MMMF_Teach_the_Teacher.pptx") {
+          window.location.replace("../web/teach-the-teacher-portal.html");
+          return;
+        }
+        if (file === "MMMF_Scenario_Cards.pdf") {
+          window.location.replace("../web/scenario-cards-portal.html");
+          return;
+        }
+        if (file === "MMMF_Manners_in_Motion_Cards.pdf") {
+          window.location.replace("../web/manners-in-motion-portal.html");
+          return;
+        }
+        if (file === "MMMF_Community_OnePager.pdf") {
+          window.location.replace("../web/community-onepager-portal.html");
+          return;
+        }
+        if (file === "ModernManners_Community_Revenue.pdf") {
+          window.location.replace("../web/community-revenue-portal.html");
+          return;
+        }
+        if (file === "ModernManners_School_Revenue.pdf") {
+          window.location.replace("../web/school-revenue-portal.html");
+          return;
+        }
+        if (file === "POST-Community-Engagement-and-Outreach-Training.docx") {
+          window.location.replace("../web/post-community-engagement-portal.html");
+          return;
+        }
+        if (!file) {
+          titleEl.textContent = "Document unavailable";
+          subEl.textContent = "No document was selected.";
+          frame.remove();
+          return;
+        }
+
         const absoluteFileUrl = new URL(file, window.location.href).href;
         const officeViewerUrl =
           "https://view.officeapps.live.com/op/embed.aspx?src=" +
           encodeURIComponent(absoluteFileUrl);
+        const localPreviewUrl = await getLocalPreviewUrl();
 
         titleEl.textContent = title;
         const typeLabel = type ? type.toUpperCase() : "DOCUMENT";
@@ -415,6 +613,23 @@
             pdfStack.style.display = "none";
             frame.style.display = "block";
           });
+        } else if (localPreviewUrl) {
+          if (type === "pptx") {
+            subEl.textContent = `Viewing ${typeLabel} · ${fileLabel} inside the MMMF site as a mobile slide preview.`;
+            viewerShell.classList.add("pdf-mode");
+            renderHtmlPreview(localPreviewUrl).catch(() => {
+              frame.style.display = "block";
+              frame.src = localPreviewUrl;
+            });
+          } else {
+            frame.src = localPreviewUrl;
+          }
+          if (type !== "pptx" || !pdfStack.style.display) {
+            openDirectBtn.href = localPreviewUrl;
+          }
+          if (type !== "pptx") {
+            subEl.textContent = `Viewing ${typeLabel} · ${fileLabel} inside the MMMF site with a generated in-app preview.`;
+          }
         } else if (type === "docx" || type === "pptx") {
           frame.src = officeViewerUrl;
         } else {
@@ -446,6 +661,7 @@
             "Public visitors can view a watermarked copy only. To assign an agreement number, prevent duplicates, and issue certification, enter Teacher Mode.";
         }
       }
+      initViewer();
     </script>
   </body>
 </html>

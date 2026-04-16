@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Community One-Pager | Ready for Real Life</title>
+    <link rel="stylesheet" href="../assets/site-search.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
+      :root {
+        --navy: #132540;
+        --gold: #c89b3c;
+        --paper: #f7f2e9;
+        --panel: rgba(255,255,255,0.06);
+        --line: rgba(255,255,255,0.12);
+        --text: #eef3fa;
+        --muted: #b8c6db;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        background:
+          radial-gradient(circle at top right, rgba(18,122,120,0.18), transparent 28%),
+          radial-gradient(circle at bottom left, rgba(200,155,60,0.12), transparent 24%),
+          var(--navy);
+        color: var(--text);
+      }
+      header {
+        position: relative;
+        z-index: 20;
+        background: rgba(19,37,64,0.96);
+        backdrop-filter: blur(14px);
+        border-bottom: 2px solid var(--gold);
+      }
+      .header-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: calc(env(safe-area-inset-top, 0px) + 1.1rem) 1rem 1rem;
+        display: grid;
+        gap: 0.9rem;
+      }
+      .eyebrow {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      h1 {
+        margin: 0.15rem 0 0;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.75rem, 4vw, 2.4rem);
+        line-height: 1.05;
+      }
+      .sub {
+        margin-top: 0.55rem;
+        max-width: 760px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 0.98rem;
+      }
+      .header-actions {
+        display: flex;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0.7rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.16);
+        background: rgba(255,255,255,0.06);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .btn.primary {
+        background: var(--paper);
+        color: var(--navy);
+        border-color: transparent;
+      }
+      main {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 1rem 1rem 4rem;
+      }
+      .search-host { margin-bottom: 1rem; }
+      .section, .preview-wrap {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--panel);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+        padding: 1.35rem;
+        margin-top: 1rem;
+      }
+      .section-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .section h2 {
+        margin: 0.3rem 0 1rem;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
+        gap: 1rem;
+      }
+      .card {
+        border-radius: 20px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        padding: 1rem;
+      }
+      .card h3 { margin: 0 0 0.55rem; }
+      .card p, .section p { color: var(--muted); line-height: 1.7; }
+      .preview {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: #fff;
+      }
+      @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div>
+          <div class="eyebrow">Ready for Real Life Instruction and Education</div>
+          <h1>Community One-Pager</h1>
+          <div class="sub">
+            Cleaner mobile page for the stakeholder-facing one-pager used with
+            families, school leaders, board members, and community partners.
+          </div>
+        </div>
+        <div class="header-actions">
+          <a class="btn" href="../index.html">Main Homepage</a>
+          <a class="btn" href="../docs/index.html">Back to Library</a>
+          <a class="btn primary" href="../docs/MMMF_Community_OnePager.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="search-host" id="siteSearchMount"></div>
+      <section class="section">
+        <div class="section-kicker">What This Page Is For</div>
+        <h2>A quick stakeholder overview that is easier to read on mobile</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>School Leaders</h3>
+            <p>Use it during short overview conversations when someone needs a quick picture of the program without opening a full curriculum deck.</p>
+          </div>
+          <div class="card">
+            <h3>Families & Community Partners</h3>
+            <p>Share a concise summary of what the program is, who it serves, and why it matters in real-world settings.</p>
+          </div>
+          <div class="card">
+            <h3>Board & Outreach Conversations</h3>
+            <p>Good for presentations where you want a clear one-page leave-behind rather than a heavy file preview.</p>
+          </div>
+        </div>
+      </section>
+      <section class="preview-wrap">
+        <div class="section-kicker">Preview</div>
+        <h2>Community one-pager preview</h2>
+        <img
+          class="preview"
+          src="../docs/MMMF_Community_OnePager_preview.png"
+          alt="Community one-pager preview"
+        />
+      </section>
+    </main>
+    <script src="../assets/site-search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Manners in Motion Cards | Ready for Real Life</title>
+    <link rel="stylesheet" href="../assets/site-search.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
+      :root {
+        --navy: #132540;
+        --teal: #127a78;
+        --gold: #c89b3c;
+        --paper: #f7f2e9;
+        --panel: rgba(255, 255, 255, 0.06);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: #eef3fa;
+        --muted: #b8c6db;
+        --blue: #315f9f;
+        --purple: #6150a6;
+        --rust: #96462e;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        background:
+          radial-gradient(circle at top right, rgba(18, 122, 120, 0.18), transparent 28%),
+          radial-gradient(circle at bottom left, rgba(200, 155, 60, 0.12), transparent 24%),
+          var(--navy);
+        color: var(--text);
+      }
+      header {
+        position: relative;
+        z-index: 20;
+        background: rgba(19, 37, 64, 0.96);
+        backdrop-filter: blur(14px);
+        border-bottom: 2px solid var(--gold);
+      }
+      .header-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: calc(env(safe-area-inset-top, 0px) + 1.1rem) 1rem 1rem;
+        display: grid;
+        gap: 0.9rem;
+      }
+      .eyebrow {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      h1 {
+        margin: 0.15rem 0 0;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.75rem, 4vw, 2.4rem);
+        line-height: 1.05;
+      }
+      .sub {
+        margin-top: 0.55rem;
+        max-width: 760px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 0.98rem;
+      }
+      .header-actions {
+        display: flex;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0.7rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.16);
+        background: rgba(255,255,255,0.06);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .btn.primary {
+        background: var(--paper);
+        color: var(--navy);
+        border-color: transparent;
+      }
+      main {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 1rem 1rem 4rem;
+      }
+      .search-host { margin-bottom: 1rem; }
+      .section, .steps, .callout {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--panel);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+      }
+      .section, .callout { padding: 1.35rem; margin-top: 1rem; }
+      .controls {
+        background: rgba(255, 255, 255, 0.04);
+        padding: 1rem 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        margin-top: 1rem;
+      }
+      .filter-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .filter-btn {
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.73rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1.5px solid transparent;
+        font-family: "DM Sans", sans-serif;
+        transition: all 0.18s;
+        background: rgba(255,255,255,0.08);
+        color: var(--muted);
+      }
+      .filter-btn:hover {
+        color: var(--text);
+        border-color: rgba(255,255,255,0.2);
+      }
+      .filter-btn.active {
+        color: var(--gold);
+        border-color: var(--gold);
+        background: rgba(200, 155, 60, 0.12);
+      }
+      .filter-btn[data-cat="0"].active {
+        color: #5eead4;
+        border-color: var(--teal);
+        background: rgba(13, 115, 119, 0.18);
+      }
+      .filter-btn[data-cat="1"].active {
+        color: #93c5fd;
+        border-color: var(--blue);
+        background: rgba(49, 95, 159, 0.18);
+      }
+      .filter-btn[data-cat="2"].active {
+        color: #fca5a5;
+        border-color: #c0392b;
+        background: rgba(192, 57, 43, 0.18);
+      }
+      .filter-btn[data-cat="3"].active {
+        color: #c4b5fd;
+        border-color: var(--purple);
+        background: rgba(124, 58, 237, 0.18);
+      }
+      .filter-btn[data-cat="4"].active {
+        color: #86efac;
+        border-color: #16a34a;
+        background: rgba(22, 163, 74, 0.18);
+      }
+      .filter-btn[data-cat="5"].active {
+        color: #fcd34d;
+        border-color: var(--gold);
+        background: rgba(200, 155, 60, 0.18);
+      }
+      .controls-right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .count-badge {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .shuffle-btn {
+        padding: 0.45rem 0.95rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        cursor: pointer;
+        border: 1.5px solid var(--gold);
+        color: var(--gold);
+        background: transparent;
+        font-family: "DM Sans", sans-serif;
+      }
+      .shuffle-btn:hover {
+        background: var(--gold);
+        color: var(--navy);
+      }
+      .section-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .section h2 {
+        margin: 0.3rem 0 1rem;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+        padding: 1rem;
+      }
+      .step {
+        border-radius: 20px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        padding: 1rem;
+      }
+      .step-num {
+        display: inline-flex;
+        width: 34px;
+        height: 34px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 800;
+        margin-bottom: 0.7rem;
+      }
+      .tracks {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .track {
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.05);
+      }
+      .track-head {
+        padding: 0.95rem 1rem;
+        color: #fff;
+      }
+      .track-body { padding: 1rem; }
+      .track h3 { margin: 0; font-size: 1.06rem; }
+      .track p, .callout p { color: var(--muted); line-height: 1.7; }
+      .samples {
+        margin-top: 0.85rem;
+        padding-left: 1rem;
+      }
+      .samples li { margin: 0.4rem 0; line-height: 1.55; }
+      .card-grid {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        background: rgba(255,255,255,0.06);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        flex-direction: column;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+      }
+      .card.flipped .card-front { display: none; }
+      .card.flipped .card-back { display: flex; }
+      .card-top {
+        padding: 0.7rem 0.9rem 0.55rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .cat-label {
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .card-num {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 0.22rem 0.5rem;
+        border-radius: 999px;
+      }
+      .card-front {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .card-back {
+        display: none;
+        flex-direction: column;
+        flex: 1;
+        padding: 1rem;
+      }
+      .card-body {
+        padding: 0 0.95rem 0.95rem;
+        flex: 1;
+      }
+      .card-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        color: #fff;
+        margin-bottom: 0.3rem;
+      }
+      .card-divider {
+        width: 52px;
+        height: 3px;
+        border-radius: 999px;
+        margin: 0.55rem 0 0.8rem;
+      }
+      .challenge-label,
+      .back-label {
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .card-scenario {
+        margin-top: 0.55rem;
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 0.95rem;
+      }
+      .card-prompts-hint {
+        padding: 0.8rem 0.95rem;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        color: var(--muted);
+        font-size: 0.78rem;
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+      .back-prompts {
+        margin: 0.9rem 0 1rem;
+        padding-left: 1rem;
+      }
+      .back-prompts li {
+        margin: 0.45rem 0;
+        line-height: 1.6;
+        color: var(--text);
+      }
+      .reflection-box {
+        margin-top: auto;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.09);
+        padding: 0.9rem;
+      }
+      .reflection-box .rlabel {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.45rem;
+      }
+      .reflection-box p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 0;
+      }
+      .unflip-btn {
+        margin-top: 0.85rem;
+        min-height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.16);
+        background: rgba(255,255,255,0.05);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .no-results {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem 1.2rem;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.09);
+        color: var(--muted);
+      }
+      .conversation .track-head { background: var(--teal); }
+      .self-control .track-head { background: var(--blue); }
+      .relationship .track-head { background: var(--purple); }
+      .community .track-head { background: var(--rust); }
+      @media (max-width: 820px) {
+        .steps, .tracks { grid-template-columns: 1fr; }
+        .controls-right {
+          margin-left: 0;
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div>
+          <div class="eyebrow">Ready for Real Life Instruction and Education</div>
+          <h1>Manners in Motion Cards</h1>
+          <div class="sub">
+            Mobile-friendly overview for the printable Manners in Motion cards
+            used in repeated discussion, behavior coaching, and everyday
+            real-world practice across school and community settings.
+          </div>
+        </div>
+        <div class="header-actions">
+          <a class="btn" href="../index.html">Main Homepage</a>
+          <a class="btn" href="../docs/index.html">Back to Library</a>
+          <a class="btn primary" href="../docs/MMMF_Manners_in_Motion_Cards.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="search-host" id="siteSearchMount"></div>
+
+      <section class="section">
+        <div class="section-kicker">How to Use These Cards</div>
+        <h2>Simple discussion flow for daily behavior practice</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <strong>Choose one card for the moment</strong>
+            <p>Start with the card that best fits the class mood, transition point, or current behavior theme.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <strong>Read and pause</strong>
+            <p>Give participants a brief pause so they can think before anyone else shapes the answer.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <strong>Discuss the response</strong>
+            <p>Talk through what respectful, self-controlled, or community-minded action looks like in real life.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <strong>Connect it to next action</strong>
+            <p>End by naming the one behavior participants should actually try in the next hallway, group, or work moment.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">Card Sets</div>
+        <h2>Four ways the deck supports real-world behavior coaching</h2>
+        <div class="tracks">
+          <article class="track conversation">
+            <div class="track-head"><h3>Conversation & Respect</h3></div>
+            <div class="track-body">
+              <p>Use these cards when the group needs practice with tone, listening, and respectful everyday interaction.</p>
+              <ul class="samples">
+                <li>Greeting others with confidence and respect</li>
+                <li>Taking turns and listening without interrupting</li>
+                <li>Choosing words that build trust instead of friction</li>
+              </ul>
+            </div>
+          </article>
+          <article class="track self-control">
+            <div class="track-head"><h3>Self-Control & Choices</h3></div>
+            <div class="track-body">
+              <p>These cards move discussion beyond manners language into emotional control and responsible decision-making.</p>
+              <ul class="samples">
+                <li>Responding instead of reacting</li>
+                <li>Owning behavior when pressure rises</li>
+                <li>Resetting after a poor choice</li>
+              </ul>
+            </div>
+          </article>
+          <article class="track relationship">
+            <div class="track-head"><h3>Peer & Relationship Skills</h3></div>
+            <div class="track-body">
+              <p>Helpful for group conflict, team roles, and the kind of social moments that shape school and workplace culture.</p>
+              <ul class="samples">
+                <li>Handling disagreements without escalation</li>
+                <li>Respectful group participation</li>
+                <li>Repairing trust after mistakes</li>
+              </ul>
+            </div>
+          </article>
+          <article class="track community">
+            <div class="track-head"><h3>Community & Transfer</h3></div>
+            <div class="track-body">
+              <p>Use these cards when you want participants to carry the same behaviors into home, community, work, and service settings.</p>
+              <ul class="samples">
+                <li>Representing yourself well in public</li>
+                <li>Showing respect in mixed-age settings</li>
+                <li>Turning discussion into everyday habits</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="callout">
+        <div class="section-kicker">Best Use</div>
+        <p>
+          Manners in Motion works best as a repeated touchpoint, not a one-time
+          activity. Bring one card into openings, transitions, coaching moments,
+          or group debriefs so the discussion keeps pointing back to practical
+          behavior people can actually carry into the rest of the day.
+        </p>
+      </section>
+
+      <div class="controls" id="card-filters">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-cat="all" onclick="filterCards('all', this)">All 36</button>
+        <button class="filter-btn" data-cat="0" onclick="filterCards(0, this)">🤝 Manners in Action</button>
+        <button class="filter-btn" data-cat="1" onclick="filterCards(1, this)">🧘 Regulation Check</button>
+        <button class="filter-btn" data-cat="2" onclick="filterCards(2, this)">⚖️ Decide Now</button>
+        <button class="filter-btn" data-cat="3" onclick="filterCards(3, this)">📱 Digital Life</button>
+        <button class="filter-btn" data-cat="4" onclick="filterCards(4, this)">🔁 Repair Move</button>
+        <button class="filter-btn" data-cat="5" onclick="filterCards(5, this)">⭐ Wild Card</button>
+        <div class="controls-right">
+          <span class="count-badge" id="count-badge">36 cards</span>
+          <button class="shuffle-btn" onclick="shuffleCards()">⇄ Shuffle</button>
+        </div>
+      </div>
+
+      <div class="card-grid" id="card-grid"></div>
+      <div class="no-results" id="no-results">No cards in this category.</div>
+    </main>
+    <script src="../assets/site-search.js"></script>
+    <script>
+      let CATS = [];
+      let CARDS = [];
+      let currentFilter = "all";
+      let displayOrder = [];
+      const CAT_SLUGS = [
+        "manners-in-action",
+        "regulation-check",
+        "decide-now",
+        "digital-life",
+        "repair-move",
+        "wild-card",
+      ];
+      const CAT_COLORS = [
+        "#0D7377",
+        "#3B82F6",
+        "#C0392B",
+        "#7C3AED",
+        "#16A34A",
+        "#C89B3C",
+      ];
+      const CAT_TEXT = [
+        "#5EEAD4",
+        "#93C5FD",
+        "#FCA5A5",
+        "#C4B5FD",
+        "#86EFAC",
+        "#E8B84B",
+      ];
+
+      function flipCard(i) {
+        const el = document.getElementById("card-" + i);
+        if (el && !el.classList.contains("flipped")) el.classList.add("flipped");
+      }
+
+      function unflipCard(i) {
+        const el = document.getElementById("card-" + i);
+        if (el) el.classList.remove("flipped");
+      }
+
+      function renderCards() {
+        const grid = document.getElementById("card-grid");
+        const noRes = document.getElementById("no-results");
+        const filtered = displayOrder.filter(
+          (i) => currentFilter === "all" || CARDS[i].cat === currentFilter,
+        );
+
+        document.getElementById("count-badge").textContent =
+          filtered.length + " card" + (filtered.length !== 1 ? "s" : "");
+
+        if (filtered.length === 0) {
+          grid.innerHTML = "";
+          noRes.style.display = "block";
+          return;
+        }
+
+        noRes.style.display = "block";
+        noRes.style.display = "none";
+
+        grid.innerHTML = filtered
+          .map((i) => {
+            const card = CARDS[i];
+            const cat = CATS[card.cat];
+            const color = CAT_COLORS[card.cat];
+            const textColor = CAT_TEXT[card.cat];
+
+            return `
+              <div class="card" id="card-${i}" onclick="flipCard(${i})">
+                <div class="card-front">
+                  <div class="card-top" style="background:${color}22; border-bottom:2px solid ${color};">
+                    <span class="cat-label" style="color:${textColor};">${cat.icon} ${cat.label}</span>
+                    <span class="card-num" style="background:${color}33; color:${textColor};">${card.num}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-title">${card.title}</div>
+                    <div class="card-divider" style="background:${color};"></div>
+                    <div class="challenge-label" style="color:${textColor};">Challenge</div>
+                    <div class="card-scenario">${card.challenge}</div>
+                  </div>
+                  <div class="card-prompts-hint">
+                    <span>💬</span>
+                    <span>Tap to reveal discussion prompts & reflection</span>
+                  </div>
+                </div>
+                <div class="card-back">
+                  <div class="back-label" style="color:${textColor};">${cat.icon} Discussion Prompts</div>
+                  <ul class="back-prompts">
+                    ${card.prompts.map((p) => `<li>${p}</li>`).join("")}
+                  </ul>
+                  <div class="reflection-box">
+                    <div class="rlabel">Reflection</div>
+                    <p>${card.reflection}</p>
+                  </div>
+                  <button class="unflip-btn" onclick="event.stopPropagation(); unflipCard(${i})">← Back to challenge</button>
+                </div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      function filterCards(cat, btn) {
+        currentFilter = cat;
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        if (btn) btn.classList.add("active");
+        const url = new URL(window.location.href);
+        if (cat === "all") url.searchParams.delete("cat");
+        else url.searchParams.set("cat", CAT_SLUGS[cat]);
+        window.history.replaceState({}, "", url);
+        renderCards();
+      }
+
+      function shuffleCards() {
+        for (let i = displayOrder.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [displayOrder[i], displayOrder[j]] = [displayOrder[j], displayOrder[i]];
+        }
+        renderCards();
+      }
+
+      function applyCardsLocation() {
+        const url = new URL(window.location.href);
+        const slug = url.searchParams.get("cat");
+        const index = CAT_SLUGS.indexOf(slug);
+        const filterValue = index >= 0 ? index : "all";
+        const button = document.querySelector('.filter-btn[data-cat="' + filterValue + '"]');
+        currentFilter = filterValue;
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        if (button) button.classList.add("active");
+      }
+
+      async function loadCardsSource() {
+        const response = await fetch("manners-in-motion-cards.html");
+        const html = await response.text();
+        const catsMatch = html.match(/const CATS = (\[[\s\S]*?\]);/);
+        const cardsMatch = html.match(/const CARDS = (\[[\s\S]*?\]);\s*let currentFilter/);
+        if (!catsMatch || !cardsMatch) {
+          throw new Error("Card data could not be loaded.");
+        }
+        CATS = new Function("return " + catsMatch[1])();
+        CARDS = new Function("return " + cardsMatch[1])();
+        displayOrder = [...Array(CARDS.length).keys()];
+      }
+
+      (async function initPortalCards() {
+        try {
+          await loadCardsSource();
+          applyCardsLocation();
+          renderCards();
+        } catch (error) {
+          document.getElementById("no-results").style.display = "block";
+          document.getElementById("no-results").textContent =
+            "The Manners in Motion cards could not load on this page yet.";
+        }
+      })();
+    </script>
+  </body>
+</html>

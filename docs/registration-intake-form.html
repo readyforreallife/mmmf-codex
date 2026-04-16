@@ -2,12 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>
       Printable Registration and Intake Form | Ready for Real Life Instruction
       and Education
     </title>
-    <link rel="stylesheet" href="../assets/site-search.css" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap");
       :root {
@@ -33,7 +35,7 @@
       header {
         background: linear-gradient(135deg, var(--navy), var(--navy2));
         color: #fff;
-        padding: 24px;
+        padding: calc(env(safe-area-inset-top, 0px) + 54px) 24px 18px;
         border-bottom: 4px solid var(--gold);
       }
       .wrap {
@@ -95,9 +97,6 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px 24px 42px;
-      }
-      .search-host {
-        margin-bottom: 16px;
       }
       .form-shell {
         background: #fff;
@@ -290,6 +289,21 @@
         flex-wrap: wrap;
       }
       @media (max-width: 980px) {
+        header {
+          padding:
+            calc(env(safe-area-inset-top, 0px) + 58px)
+            14px
+            14px;
+        }
+        .topbar {
+          align-items: stretch;
+        }
+        .header-actions {
+          width: 100%;
+        }
+        main {
+          padding: 12px 14px 24px;
+        }
         .pages,
         .field-grid,
         .signature-grid,
@@ -484,7 +498,7 @@
           </p>
         </div>
         <div class="header-actions">
-          <a class="btn secondary" href="https://readyforreal.life/"
+          <a class="btn secondary" href="../../index.html"
             >Main Homepage</a
           >
           <a
@@ -509,7 +523,6 @@
     </header>
 
     <main>
-      <div class="search-host"></div>
       <div class="form-shell">
         <div class="doc-head">
           <div>
@@ -847,11 +860,6 @@
       </div>
     </main>
 
-    <script
-      src="../assets/site-search.js"
-      data-search-index="../data/site-search-index.json"
-      defer
-    ></script>
     <script src="../assets/access-gate.js" defer></script>
   </body>
 </html>

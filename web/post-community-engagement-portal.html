@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>POST Community Engagement Training | Ready for Real Life</title>
+    <link rel="stylesheet" href="../assets/site-search.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
+
+      :root {
+        --navy: #132540;
+        --navy-2: #1b3558;
+        --navy-3: #26466f;
+        --gold: #c89b3c;
+        --paper: #f7f2e9;
+        --panel: rgba(255, 255, 255, 0.06);
+        --line: rgba(255, 255, 255, 0.12);
+        --text: #eef3fa;
+        --muted: #c7d2e4;
+        --teal: #127a78;
+        --sky: #3566a8;
+        --plum: #654d98;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "DM Sans", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top right, rgba(18, 122, 120, 0.18), transparent 26%),
+          radial-gradient(circle at bottom left, rgba(200, 155, 60, 0.12), transparent 22%),
+          var(--navy);
+      }
+
+      header {
+        position: relative;
+        z-index: 10;
+        background: rgba(19, 37, 64, 0.96);
+        border-bottom: 2px solid var(--gold);
+        backdrop-filter: blur(14px);
+      }
+
+      .header-inner {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: calc(env(safe-area-inset-top, 0px) + 1.15rem) 1rem 1rem;
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .eyebrow {
+        font-size: 0.64rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 0.15rem 0 0;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        line-height: 1.04;
+      }
+
+      .sub {
+        margin: 0.5rem 0 0;
+        max-width: 820px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 1rem;
+      }
+
+      .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0.7rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .btn.primary {
+        background: var(--paper);
+        color: var(--navy);
+        border-color: transparent;
+      }
+
+      main {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 1rem 1rem 4rem;
+      }
+
+      .search-host {
+        margin-bottom: 1rem;
+      }
+
+      .metric-grid,
+      .card-grid,
+      .service-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-bottom: 1.2rem;
+      }
+
+      .metric,
+      .section,
+      .service-card,
+      .callout {
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+      }
+
+      .metric {
+        padding: 1.2rem;
+      }
+
+      .metric .label,
+      .section-kicker {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      .metric .value {
+        margin-top: 0.45rem;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.9rem, 4vw, 2.7rem);
+        color: #fff;
+      }
+
+      .metric .note {
+        margin-top: 0.45rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .section {
+        padding: 1.35rem;
+        margin-top: 1rem;
+      }
+
+      .section h2 {
+        margin: 0.35rem 0 1rem;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.45rem, 3vw, 2rem);
+      }
+
+      .section p {
+        margin: 0.55rem 0 0;
+        line-height: 1.72;
+        color: var(--muted);
+      }
+
+      .callout {
+        padding: 1.2rem 1.25rem;
+        background: rgba(200, 155, 60, 0.12);
+        border-color: rgba(200, 155, 60, 0.34);
+      }
+
+      .callout strong {
+        color: #fff;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topic-card {
+        padding: 1.1rem;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .topic-card h3,
+      .service-card h3 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      .topic-card p,
+      .service-card p {
+        margin: 0.55rem 0 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .topic-card ul,
+      .service-card ul,
+      .section ul {
+        margin: 0.85rem 0 0;
+        padding-left: 1rem;
+        color: var(--text);
+        line-height: 1.65;
+      }
+
+      .topic-card li + li,
+      .service-card li + li,
+      .section li + li {
+        margin-top: 0.45rem;
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .service-card {
+        padding: 1.15rem;
+      }
+
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 1rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0.5rem 0.85rem;
+        border-radius: 999px;
+        color: #fff;
+        font-size: 0.88rem;
+        font-weight: 700;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .teal {
+        background: rgba(18, 122, 120, 0.24);
+      }
+
+      .sky {
+        background: rgba(53, 102, 168, 0.24);
+      }
+
+      .plum {
+        background: rgba(101, 77, 152, 0.24);
+      }
+
+      footer {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 1rem 2.5rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 880px) {
+        .metric-grid,
+        .card-grid,
+        .service-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div>
+          <div class="eyebrow">MMMF Document Viewer</div>
+          <h1>POST Community Engagement and Outreach Training</h1>
+          <p class="sub">
+            Mobile-friendly overview of the POST training document covering
+            community engagement, crisis response, youth service, refugee
+            outreach, and law-enforcement partnership work.
+          </p>
+        </div>
+        <div class="header-actions">
+          <a class="btn" href="../index.html">Main Homepage</a>
+          <a class="btn" href="../docs/index.html">Back to Library</a>
+          <a class="btn primary" href="../docs/POST-Community-Engagement-and-Outreach-Training.docx" download>Download DOCX</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="search-host" id="siteSearchHost"></div>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="label">Training Focus</div>
+          <div class="value">Outreach</div>
+          <div class="note">
+            Built around practical community engagement and service connection.
+          </div>
+        </div>
+        <div class="metric">
+          <div class="label">Primary Lens</div>
+          <div class="value">Crisis + Care</div>
+          <div class="note">
+            Emphasizes mental-health collaboration, high utilizers, and public
+            trust.
+          </div>
+        </div>
+        <div class="metric">
+          <div class="label">Audience</div>
+          <div class="value">Law Enforcement</div>
+          <div class="note">
+            Designed for officers and agencies building stronger community
+            response systems.
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="section-kicker">Course Purpose</div>
+        <h2>Why this training matters</h2>
+        <p>
+          The document frames community engagement as more than public
+          relations. It teaches officers how to recognize crisis, connect
+          people to help, work across community systems, and build trust with
+          groups who may have valid reasons to be cautious around law
+          enforcement.
+        </p>
+        <div class="callout" style="margin-top: 1rem">
+          <strong>Core goal:</strong> help law enforcement understand the value
+          of mental-health and law-enforcement collaboration, identify people in
+          need, connect them to services, and engage communities with more
+          credibility and long-term stability.
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">Training Map</div>
+        <h2>Main strands covered in the course</h2>
+        <div class="card-grid">
+          <article class="topic-card">
+            <h3>Community Engagement Team</h3>
+            <p>
+              Defines team structure, mission, continuum of care, and the role
+              of partnerships in reducing repeat offenses and increasing
+              stability.
+            </p>
+            <ul>
+              <li>Build collaborative partnerships with citizens and providers.</li>
+              <li>Support sustainable recovery for people not helped by prior interventions.</li>
+              <li>Increase trust with youth, refugees, and people experiencing homelessness.</li>
+            </ul>
+          </article>
+          <article class="topic-card">
+            <h3>Community Engagement Practice</h3>
+            <p>
+              Teaches officers how to meet partners, listen first, understand
+              culture, and design community-facing events that create trust.
+            </p>
+            <ul>
+              <li>Use active listening in partner meetings.</li>
+              <li>Ask communities what they need instead of assuming.</li>
+              <li>Adapt outreach for underserved and high-crime areas.</li>
+            </ul>
+          </article>
+          <article class="topic-card">
+            <h3>Youth and Juvenile Support</h3>
+            <p>
+              Highlights youth engagement, juvenile partners, schools, and
+              community organizations that can interrupt long-term negative
+              pathways.
+            </p>
+            <ul>
+              <li>Partner with schools, nonprofits, and youth-serving agencies.</li>
+              <li>Understand juvenile justice and family-service pathways.</li>
+              <li>Use early engagement to reduce deeper system involvement.</li>
+            </ul>
+          </article>
+          <article class="topic-card">
+            <h3>Refugee and Cultural Outreach</h3>
+            <p>
+              Gives officers context for refugee experiences, mistrust of
+              government systems, and the importance of translators and cultural
+              awareness.
+            </p>
+            <ul>
+              <li>Understand why prior police experiences may affect behavior.</li>
+              <li>Use translators and language support early.</li>
+              <li>Recognize that survival context often shapes responses.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">Response Areas</div>
+        <h2>Service areas the training prepares officers to work within</h2>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>Youth + Schools</h3>
+            <p>
+              Focuses on youth engagement, homelessness, juvenile services, and
+              school-connected intervention.
+            </p>
+            <div class="badge-row">
+              <span class="badge teal">Youth Engagement</span>
+              <span class="badge sky">JJS / DCFS</span>
+            </div>
+          </article>
+          <article class="service-card">
+            <h3>Crisis + Mental Health</h3>
+            <p>
+              Covers co-response models, trauma-informed response, and how to
+              work with mobile crisis or case-management teams.
+            </p>
+            <div class="badge-row">
+              <span class="badge teal">PMHC Models</span>
+              <span class="badge plum">Co-Response</span>
+            </div>
+          </article>
+          <article class="service-card">
+            <h3>Community Connections</h3>
+            <p>
+              Reinforces public trust, public information, and long-term
+              stability through meaningful community partnerships.
+            </p>
+            <div class="badge-row">
+              <span class="badge sky">Public Relations</span>
+              <span class="badge plum">Continuum of Care</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">Key takeaways</div>
+        <h2>What a reviewer should notice</h2>
+        <ul>
+          <li>
+            This is not generic theory. The training is built around real
+            community-service categories officers encounter in practice.
+          </li>
+          <li>
+            The document ties law enforcement to service coordination, not just
+            enforcement activity.
+          </li>
+          <li>
+            It deliberately includes youth, refugee, mental-health, and
+            high-utilizer populations that often require cross-system response.
+          </li>
+          <li>
+            It supports the broader public-service credibility behind your
+            outreach, curriculum, and review-facing work.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      If you need the original source file for formal review, use the download
+      button above to open the Word document directly.
+    </footer>
+
+    <script src="../assets/site-search.js"></script>
+    <script>
+      window.siteSearch?.mount({
+        target: document.getElementById("siteSearchHost"),
+        basePath: "..",
+        dataPath: "../data/site-search-index.json",
+      });
+    </script>
+  </body>
+</html>

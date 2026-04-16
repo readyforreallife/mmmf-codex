@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>
       Ready for Real Life Instruction and Education — Teach the Teacher Training
       Portal
@@ -21,8 +24,8 @@
         --teal-lt: #14a085;
         --white: #ffffff;
         --off-white: #f5f4f0;
-        --gray: #6b7280;
-        --gray-lt: #e5e7eb;
+        --gray: #aeb9cb;
+        --gray-lt: #eef2f7;
         --sand: #f0ebe1;
         --red: #c0392b;
         --purple: #7c3aed;
@@ -47,8 +50,7 @@
         background: var(--navy-dk);
         border-bottom: 3px solid var(--gold);
         padding: 0 2rem;
-        position: sticky;
-        top: 0;
+        position: relative;
         z-index: 100;
       }
       .header-inner {
@@ -57,7 +59,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem 0;
+        padding: calc(env(safe-area-inset-top, 0px) + 1.35rem) 0 1rem;
         gap: 1rem;
       }
       .logo-block .eyebrow {
@@ -664,6 +666,30 @@
 
       /* ── RESPONSIVE ─────────────────────────────────────────── */
       @media (max-width: 640px) {
+        header {
+          padding: 0 0.95rem;
+        }
+        .header-inner {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: calc(env(safe-area-inset-top, 0px) + 1.4rem) 0 1rem;
+        }
+        .logo-block h1 {
+          font-size: 1rem;
+        }
+        .header-actions {
+          width: 100%;
+          align-items: stretch;
+        }
+        .back-link {
+          justify-content: center;
+          width: 100%;
+        }
+        .header-meta {
+          text-align: left;
+          font-size: 0.7rem;
+          line-height: 1.8;
+        }
         main {
           padding: 1rem;
         }
