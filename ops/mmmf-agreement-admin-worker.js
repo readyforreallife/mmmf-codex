@@ -16,6 +16,10 @@ function corsHeaders(env, request) {
   const defaults = [
     "https://readyforreal.life",
     "https://readyforreallife.github.io",
+    "capacitor://localhost",
+    "http://localhost",
+    "https://localhost",
+    "ionic://localhost",
   ];
   const allowedOrigins = new Set([...defaults, ...configured]);
   const allowed = allowedOrigins.has(origin)
@@ -434,7 +438,7 @@ function parseDetails(detailsJson) {
 
 function resolveEmailLogoUrl(env) {
   const fallbackUrl =
-    "https://raw.githubusercontent.com/readyforreallife/readyforreal.life/main/assets/mmmf-email-avatar.png";
+    "https://raw.githubusercontent.com/readyforreallife/readyforreal.life/main/assets/mmmf-domain-icon.png";
   const configured = String(env.EMAIL_LOGO_URL || "").trim();
   if (!configured) return fallbackUrl;
 
@@ -448,6 +452,23 @@ function resolveEmailLogoUrl(env) {
   ];
 
   return legacyLogos.includes(configured) ? fallbackUrl : configured;
+}
+
+function resolveResendFromName(env) {
+  const configured = String(env.RESEND_FROM_NAME || "").trim();
+  const fallbackName = "Ready for Real Life Instruction and Education";
+  if (!configured) return fallbackName;
+
+  const legacyNames = new Set([
+    "Modern Manners & Mental Fortitude",
+    "Modern Manners and Mental Fortitude",
+    "Modern Manners & Mental Fortitude LLC",
+    "Modern Manners and Mental Fortitude LLC",
+    "Modern Manners & Mental Fortitude (MMMF) LLC",
+    "Modern Manners and Mental Fortitude (MMMF) LLC",
+  ]);
+
+  return legacyNames.has(configured) ? fallbackName : configured;
 }
 
 function resolveFounderPhotoUrls() {
@@ -480,9 +501,7 @@ async function sendRegistrationConfirmation(env, record) {
   const replyTo = String(
     env.RESEND_REPLY_TO || "readyforreal.life44@gmail.com",
   ).trim();
-  const fromName = String(
-    env.RESEND_FROM_NAME || "Ready for Real Life Instruction and Education",
-  ).trim();
+  const fromName = resolveResendFromName(env);
   const trackLine = details.tracks || record.role || "Track to be confirmed";
   const organizationLine =
     details.organization || record.organization || "Independent Registration";
@@ -510,7 +529,7 @@ async function sendRegistrationConfirmation(env, record) {
             </table>
             <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#e8c778;font-weight:700;">Registration Confirmation</div>
             <h1 style="margin:10px 0 0;color:#ffffff;font-size:32px;line-height:1.2;">Ready for Real Life Instruction and Education</h1>
-            <div style="margin:8px 0 0;color:#d9cfbd;font-size:13px;line-height:1.5;">Modern Manners and Mental Fortitude (MMMF) LLC</div>
+            <div style="margin:8px 0 0;color:#d9cfbd;font-size:13px;line-height:1.5;">Real-World Life Skills Program</div>
           </div>
           <div style="padding:28px;">
             <p style="margin:0 0 16px;font-size:17px;line-height:1.7;">Hi ${escapeHtml(record.name || "there")},</p>
