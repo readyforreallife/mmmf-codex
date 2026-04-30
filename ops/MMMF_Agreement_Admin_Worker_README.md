@@ -35,6 +35,41 @@ Add these:
   - set this to `4429`
 - `ALLOWED_ORIGIN`
   - set this to `https://readyforreallife.github.io`
+- `REGISTRATION_NOTIFY_EMAIL`
+  - set this to the email address that should receive new registration alerts
+  - use commas if you want more than one recipient
+
+If you want registration confirmation and notification email to go through Gmail,
+also add:
+
+- `GOOGLE_MAIL_WEBHOOK_URL`
+- `GOOGLE_MAIL_WEBHOOK_SECRET`
+
+If Gmail is not configured, email falls back to Resend when these are present:
+
+- `RESEND_API_KEY`
+- `RESEND_FROM_EMAIL`
+- `RESEND_FROM_NAME`
+
+For Stripe payment checkmarks in the portal approval queue, also add:
+
+- `STRIPE_WEBHOOK_SECRET`
+  - from the Stripe webhook endpoint for this Worker
+- `SUPABASE_URL`
+  - your Supabase project URL, for example `https://PROJECT.supabase.co`
+- `SUPABASE_SERVICE_ROLE_KEY`
+  - Supabase service role key, stored only as a Worker secret
+
+Create a Stripe webhook endpoint pointing to:
+
+- `https://your-worker-name.your-subdomain.workers.dev/stripe-webhook`
+
+Subscribe it to:
+
+- `checkout.session.completed`
+
+When Stripe reports a paid checkout session, the Worker matches the purchaser
+by email and marks their `course_enrollments.payment_status` as `paid`.
 
 ### 4. Deploy
 

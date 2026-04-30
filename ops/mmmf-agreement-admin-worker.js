@@ -436,6 +436,85 @@ function parseDetails(detailsJson) {
   }
 }
 
+function splitConfiguredList(value) {
+  return String(value || "")
+    .split(/[,\n;]/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function buildRegistrationNotification(record) {
+  const details = parseDetails(record.detailsJson);
+  const trackLine = details.tracks || record.role || "Track to be confirmed";
+  const organizationLine =
+    details.organization || record.organization || "Independent Registration";
+  const locationLine = details.location || "Location to be confirmed";
+  const referralLine = details.referral || "Not provided";
+  const deliveryLine = details.delivery || "Not provided";
+  const startLine = details.startDate || "Not provided";
+  const classSizeLine = details.classSize || "Not provided";
+  const supportLine = details.support || "Not provided";
+  const extraNotes = details.extraNotes || record.notes || "None provided";
+
+  const subject = `New Ready for Real Life registration: ${record.name || "Unknown"}`;
+  const text = [
+    "A new Ready for Real Life Instruction and Education registration was submitted.",
+    "",
+    `Name: ${record.name || "Not provided"}`,
+    `Email: ${record.email || "Not provided"}`,
+    `Phone: ${record.phone || "Not provided"}`,
+    `Organization: ${organizationLine}`,
+    `Program / Track: ${trackLine}`,
+    `Location: ${locationLine}`,
+    `Preferred delivery: ${deliveryLine}`,
+    `Preferred start date: ${startLine}`,
+    `Class size: ${classSizeLine}`,
+    `Referral source: ${referralLine}`,
+    "",
+    `Support requested: ${supportLine}`,
+    "",
+    `Notes: ${extraNotes}`,
+    "",
+    `Registration ID: ${record.registrationId || ""}`,
+    `Submitted: ${record.submittedAt || ""}`,
+  ].join("\n");
+
+  const html = `
+    <div style="font-family:Arial,sans-serif;color:#1e293b;background:#f7f2e9;padding:24px;">
+      <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #d9cfbd;border-radius:16px;overflow:hidden;">
+        <div style="background:#18304f;color:#ffffff;padding:20px 24px;border-bottom:4px solid #c89b3c;">
+          <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#e8c778;font-weight:700;">New Registration</div>
+          <h1 style="margin:8px 0 0;font-size:26px;line-height:1.2;">Ready for Real Life Instruction and Education</h1>
+        </div>
+        <div style="padding:24px;">
+          <p style="margin:0 0 16px;font-size:16px;line-height:1.6;">A new registration was submitted.</p>
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="border-collapse:collapse;">
+            <tr><td style="padding:8px 0;font-weight:700;">Name</td><td style="padding:8px 0;">${escapeHtml(record.name || "Not provided")}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Email</td><td style="padding:8px 0;">${escapeHtml(record.email || "Not provided")}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Phone</td><td style="padding:8px 0;">${escapeHtml(record.phone || "Not provided")}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Organization</td><td style="padding:8px 0;">${escapeHtml(organizationLine)}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Program / Track</td><td style="padding:8px 0;">${escapeHtml(trackLine)}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Location</td><td style="padding:8px 0;">${escapeHtml(locationLine)}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Preferred delivery</td><td style="padding:8px 0;">${escapeHtml(deliveryLine)}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Preferred start date</td><td style="padding:8px 0;">${escapeHtml(startLine)}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Class size</td><td style="padding:8px 0;">${escapeHtml(classSizeLine)}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:700;">Referral source</td><td style="padding:8px 0;">${escapeHtml(referralLine)}</td></tr>
+          </table>
+          <div style="margin-top:18px;padding:16px;border-radius:12px;background:#fbfaf7;border:1px solid #d9cfbd;">
+            <p style="margin:0 0 10px;font-weight:700;">Support requested</p>
+            <p style="margin:0 0 16px;line-height:1.6;">${escapeHtml(supportLine)}</p>
+            <p style="margin:0 0 10px;font-weight:700;">Notes</p>
+            <p style="margin:0;line-height:1.6;">${escapeHtml(extraNotes)}</p>
+          </div>
+          <p style="margin:18px 0 0;font-size:13px;color:#64748b;line-height:1.6;">Registration ID: ${escapeHtml(record.registrationId || "")}<br>Submitted: ${escapeHtml(record.submittedAt || "")}</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  return { subject, text, html };
+}
+
 function resolveEmailLogoUrl(env) {
   const fallbackUrl =
     "https://raw.githubusercontent.com/readyforreallife/readyforreal.life/main/assets/mmmf-domain-icon.png";
@@ -478,6 +557,61 @@ function resolveFounderPhotoUrls() {
   };
 }
 
+function resolveGoogleSenderName() {
+  return "Ready for Real Life Instruction and Education";
+}
+
+async function sendViaGoogleMail(env, payload) {
+  const webhookUrl = String(env.GOOGLE_MAIL_WEBHOOK_URL || "").trim();
+  if (!webhookUrl) {
+    return {
+      configured: false,
+      sent: false,
+      reason: "Google mail webhook is not configured yet.",
+    };
+  }
+
+  const webhookSecret = String(env.GOOGLE_MAIL_WEBHOOK_SECRET || "").trim();
+  const authValue = webhookSecret ? `Bearer ${webhookSecret}` : "";
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(authValue ? { Authorization: authValue } : {}),
+    },
+    body: JSON.stringify({
+      ...payload,
+      ...(authValue ? { authorization: authValue } : {}),
+    }),
+  });
+
+  const raw = await response.text();
+  let parsed = null;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    parsed = null;
+  }
+
+  if (!response.ok || (parsed && parsed.ok === false)) {
+    return {
+      configured: true,
+      sent: false,
+      reason:
+        (parsed && (parsed.error || parsed.message)) ||
+        raw ||
+        "Google mail request failed.",
+    };
+  }
+
+  return {
+    configured: true,
+    sent: true,
+    id:
+      (parsed && (parsed.id || parsed.messageId || parsed.message_id)) || "",
+  };
+}
+
 async function sendRegistrationConfirmation(env, record) {
   if (!record.email) {
     return {
@@ -487,21 +621,11 @@ async function sendRegistrationConfirmation(env, record) {
     };
   }
 
-  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL) {
-    return {
-      configured: false,
-      sent: false,
-      reason: "Email service is not configured yet.",
-    };
-  }
-
   const details = parseDetails(record.detailsJson);
   const logoUrl = resolveEmailLogoUrl(env);
   const founderPhotos = resolveFounderPhotoUrls();
-  const replyTo = String(
-    env.RESEND_REPLY_TO || "readyforreal.life44@gmail.com",
-  ).trim();
-  const fromName = resolveResendFromName(env);
+  const replyTo = "readyforreallife.mmmf@gmail.com";
+  const fromName = resolveGoogleSenderName();
   const trackLine = details.tracks || record.role || "Track to be confirmed";
   const organizationLine =
     details.organization || record.organization || "Independent Registration";
@@ -591,6 +715,28 @@ async function sendRegistrationConfirmation(env, record) {
     "Founders, Ready for Real Life Instruction and Education | MMMF LLC",
   ].join("\n");
 
+  const googleResult = await sendViaGoogleMail(env, {
+    action: "send_registration_confirmation",
+    to: record.email,
+    subject,
+    html,
+    text,
+    replyTo,
+    senderName: fromName,
+    registrationId: String(record.registrationId || ""),
+  });
+  if (googleResult.configured) {
+    return googleResult;
+  }
+
+  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL) {
+    return {
+      configured: false,
+      sent: false,
+      reason: "Neither Google mail nor Resend is configured yet.",
+    };
+  }
+
   const resendResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -633,9 +779,228 @@ async function sendRegistrationConfirmation(env, record) {
   };
 }
 
+async function sendRegistrationOwnerEmail(env, record) {
+  const recipients = splitConfiguredList(
+    env.REGISTRATION_NOTIFY_EMAIL || env.NOTIFY_EMAIL || env.ADMIN_EMAIL,
+  );
+  if (!recipients.length) {
+    return {
+      configured: false,
+      sent: false,
+      reason: "REGISTRATION_NOTIFY_EMAIL is not configured yet.",
+    };
+  }
+
+  const notification = buildRegistrationNotification(record);
+  const replyTo = record.email || "readyforreal.life44@gmail.com";
+  const googleResult = await sendViaGoogleMail(env, {
+    action: "send_registration_owner_notification",
+    to: recipients.join(","),
+    subject: notification.subject,
+    html: notification.html,
+    text: notification.text,
+    replyTo,
+    senderName: resolveGoogleSenderName(),
+    registrationId: String(record.registrationId || ""),
+  });
+  if (googleResult.configured) {
+    return googleResult;
+  }
+
+  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL) {
+    return {
+      configured: false,
+      sent: false,
+      reason: "Neither Google mail nor Resend is configured for owner notifications.",
+    };
+  }
+
+  const resendResponse = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: `${resolveResendFromName(env)} <${env.RESEND_FROM_EMAIL}>`,
+      to: recipients,
+      reply_to: replyTo,
+      subject: notification.subject,
+      html: notification.html,
+      text: notification.text,
+    }),
+  });
+
+  const raw = await resendResponse.text();
+  let parsed = null;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    parsed = null;
+  }
+
+  if (!resendResponse.ok) {
+    return {
+      configured: true,
+      sent: false,
+      reason:
+        (parsed && (parsed.message || parsed.error)) ||
+        raw ||
+        "Owner email request failed.",
+    };
+  }
+
+  return {
+    configured: true,
+    sent: true,
+    id: parsed && parsed.id ? parsed.id : "",
+  };
+}
+
+function bytesToHex(buffer) {
+  return [...new Uint8Array(buffer)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function timingSafeEqual(a, b) {
+  const left = String(a || "");
+  const right = String(b || "");
+  if (left.length !== right.length) return false;
+  let mismatch = 0;
+  for (let index = 0; index < left.length; index += 1) {
+    mismatch |= left.charCodeAt(index) ^ right.charCodeAt(index);
+  }
+  return mismatch === 0;
+}
+
+async function hmacSha256Hex(secret, payload) {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const signature = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    new TextEncoder().encode(payload),
+  );
+  return bytesToHex(signature);
+}
+
+async function verifyStripeSignature(env, request, rawBody) {
+  const webhookSecret = String(env.STRIPE_WEBHOOK_SECRET || "").trim();
+  if (!webhookSecret) {
+    throw new Error("STRIPE_WEBHOOK_SECRET is not configured.");
+  }
+
+  const signatureHeader = request.headers.get("Stripe-Signature") || "";
+  const parts = Object.fromEntries(
+    signatureHeader.split(",").map((part) => {
+      const [key, value] = part.split("=");
+      return [String(key || "").trim(), String(value || "").trim()];
+    }),
+  );
+  const timestamp = parts.t || "";
+  const expectedSignature = parts.v1 || "";
+  if (!timestamp || !expectedSignature) {
+    throw new Error("Stripe signature header is missing required values.");
+  }
+
+  const signedPayload = `${timestamp}.${rawBody}`;
+  const actualSignature = await hmacSha256Hex(webhookSecret, signedPayload);
+  if (!timingSafeEqual(actualSignature, expectedSignature)) {
+    throw new Error("Stripe signature did not match.");
+  }
+}
+
+async function markSupabaseEnrollmentPaid(env, payment) {
+  const supabaseUrl = String(env.SUPABASE_URL || "").replace(/\/+$/, "");
+  const serviceRoleKey = String(env.SUPABASE_SERVICE_ROLE_KEY || "").trim();
+  if (!supabaseUrl || !serviceRoleKey) {
+    throw new Error("Supabase webhook settings are not configured.");
+  }
+
+  const email = String(payment.email || "").trim().toLowerCase();
+  if (!email) {
+    throw new Error("Stripe payment did not include an email address.");
+  }
+
+  const response = await fetch(
+    `${supabaseUrl}/rest/v1/course_enrollments?email=eq.${encodeURIComponent(email)}`,
+    {
+      method: "PATCH",
+      headers: {
+        apikey: serviceRoleKey,
+        Authorization: `Bearer ${serviceRoleKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({
+        payment_status: "paid",
+        stripe_checkout_session_id: String(payment.sessionId || ""),
+        payment_amount_cents:
+          Number.isFinite(payment.amountCents) && payment.amountCents > 0
+            ? payment.amountCents
+            : null,
+        payment_currency: String(payment.currency || "").toLowerCase(),
+        paid_at: payment.paidAt || new Date().toISOString(),
+      }),
+    },
+  );
+
+  const text = await response.text();
+  if (!response.ok) {
+    throw new Error(text || "Could not update Supabase payment status.");
+  }
+
+  let rows = [];
+  try {
+    rows = text ? JSON.parse(text) : [];
+  } catch {
+    rows = [];
+  }
+
+  return {
+    email,
+    updated: Array.isArray(rows) ? rows.length : 0,
+  };
+}
+
+async function handleStripeWebhook(request, env, headers) {
+  const rawBody = await request.text();
+  await verifyStripeSignature(env, request, rawBody);
+  const event = JSON.parse(rawBody);
+
+  if (event.type !== "checkout.session.completed") {
+    return json({ ok: true, ignored: event.type || "" }, 200, headers);
+  }
+
+  const session = event.data && event.data.object ? event.data.object : {};
+  if (String(session.payment_status || "").toLowerCase() !== "paid") {
+    return json({ ok: true, ignored: "checkout session was not paid" }, 200, headers);
+  }
+
+  const result = await markSupabaseEnrollmentPaid(env, {
+    email:
+      session.customer_details && session.customer_details.email
+        ? session.customer_details.email
+        : session.customer_email || "",
+    sessionId: session.id || "",
+    amountCents: Number(session.amount_total || 0),
+    currency: session.currency || "",
+    paidAt: new Date((Number(session.created || 0) || Date.now() / 1000) * 1000).toISOString(),
+  });
+
+  return json({ ok: true, ...result }, 200, headers);
+}
+
 export default {
   async fetch(request, env) {
     const headers = corsHeaders(env, request);
+    const url = new URL(request.url);
 
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers });
@@ -654,6 +1019,18 @@ export default {
         500,
         headers,
       );
+    }
+
+    if (url.pathname === "/stripe-webhook") {
+      try {
+        return await handleStripeWebhook(request, env, headers);
+      } catch (error) {
+        return json(
+          { ok: false, error: error.message || "Stripe webhook failed." },
+          400,
+          headers,
+        );
+      }
     }
 
     let payload;
@@ -875,6 +1252,7 @@ export default {
 
         await writeRegistrations(env, registrations);
         const emailResult = await sendRegistrationConfirmation(env, record);
+        const ownerEmailResult = await sendRegistrationOwnerEmail(env, record);
 
         return json(
           {
@@ -886,6 +1264,12 @@ export default {
               ? ""
               : String(emailResult.reason || ""),
             email_id: String(emailResult.id || ""),
+            owner_email_sent: !!ownerEmailResult.sent,
+            owner_email_service_configured: !!ownerEmailResult.configured,
+            owner_email_error: ownerEmailResult.sent
+              ? ""
+              : String(ownerEmailResult.reason || ""),
+            owner_email_id: String(ownerEmailResult.id || ""),
           },
           200,
           headers,
