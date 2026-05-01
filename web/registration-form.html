@@ -10,6 +10,20 @@
       Ready for Real Life Instruction and Education — Registration and Intake
       Form
     </title>
+    <script>
+      (() => {
+        const isApp =
+          window.location.protocol === "capacitor:" ||
+          (window.location.hostname === "localhost" &&
+            !window.location.port &&
+            navigator.userAgent.includes("AppleWebKit"));
+        window.location.replace(
+          isApp
+            ? "../../index.html#get-access"
+            : "https://readyforreal.life/index.html#get-access",
+        );
+      })();
+    </script>
     <link rel="stylesheet" href="../assets/site-search.css" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap");
