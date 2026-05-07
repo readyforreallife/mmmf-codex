@@ -10,7 +10,7 @@
       Issued Certificate | Ready for Real Life Instruction and Education
     </title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap");
       :root {
         --navy: #18304f;
         --gold: #c89b3c;
@@ -79,41 +79,66 @@
         box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
       }
       .certificate {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
         border: 8px solid rgba(200, 155, 60, 0.35);
         border-radius: 18px;
         padding: 48px 52px;
         background: linear-gradient(180deg, #fff, #fcfaf5);
       }
+      .certificate-watermark {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 0;
+        width: min(520px, 66%);
+        max-height: 66%;
+        object-fit: contain;
+        opacity: 0.08;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+      .certificate > :not(.certificate-watermark) {
+        position: relative;
+        z-index: 1;
+      }
       .ey {
         text-transform: uppercase;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.14em;
         color: var(--gold);
         font-weight: 700;
-        font-size: 0.76rem;
+        font-size: 1rem;
+        line-height: 1.45;
         text-align: center;
         margin-bottom: 18px;
       }
       h1 {
-        font-family: "Playfair Display", serif;
-        font-size: 3rem;
-        margin: 0 0 10px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3.35rem;
+        line-height: 1;
+        margin: 0 0 14px;
         text-align: center;
         color: var(--navy);
+        font-weight: 700;
       }
       .sub {
         text-align: center;
         color: var(--muted);
-        font-size: 1rem;
+        font-family: "Libre Baskerville", serif;
+        font-size: 0.98rem;
         line-height: 1.7;
         max-width: 720px;
         margin: 0 auto 34px;
       }
       .recipient {
         text-align: center;
-        font-family: "Playfair Display", serif;
-        font-size: 2.4rem;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.75rem;
+        line-height: 1.05;
         color: var(--navy);
         margin: 16px 0;
+        font-weight: 700;
       }
       .copy {
         text-align: center;
@@ -121,6 +146,8 @@
         margin: 0 auto 24px;
         line-height: 1.8;
         color: #334155;
+        font-family: "Libre Baskerville", serif;
+        font-size: 0.96rem;
       }
       .meta-grid {
         display: grid;
@@ -217,11 +244,13 @@
           </div>
           <div
             style="
-              font-family: &quot;Playfair Display&quot;, serif;
+              font-family: &quot;Cormorant Garamond&quot;, serif;
               font-size: 2rem;
+              font-weight: 700;
+              line-height: 1.05;
             "
           >
-            MMMF Certification Record
+            Modern Manners and Mental Fortitude Certification Record
           </div>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap">
@@ -245,16 +274,24 @@
       <div id="notice" class="notice">Loading certificate record...</div>
       <div class="cert-shell" id="certShell" style="display: none">
         <div class="certificate">
+          <img
+            class="certificate-watermark"
+            src="../assets/logo-square.png"
+            alt=""
+            aria-hidden="true"
+          />
           <div class="ey">Ready for Real Life Instruction and Education</div>
-          <h1 id="certificateTitle">MMMF Completion Certificate</h1>
+          <h1 id="certificateTitle">
+            Modern Manners and Mental Fortitude Completion Certificate
+          </h1>
           <p class="sub" id="certificateSub">
-            This certificate confirms successful completion of the named MMMF
-            track through the protected teacher-mode administration system.
+            This certificate confirms successful completion of the Modern
+            Manners and Mental Fortitude program requirements.
           </p>
           <div class="recipient" id="recipientName">Recipient Name</div>
           <p class="copy" id="certificateCopy">
-            This record recognizes successful completion of the MMMF track
-            listed below.
+            This record recognizes successful completion of the implementation
+            category listed below.
           </p>
           <div class="meta-grid">
             <div class="meta-card">
@@ -306,6 +343,7 @@
     <script>
       const ADMIN_SESSION_KEY = "mmmf_agreement_admin_session_v2";
       const ADMIN_ENDPOINT_KEY = "mmmf_agreement_admin_endpoint_v2";
+      const PROGRAM_NAME = "Modern Manners and Mental Fortitude";
       const params = new URLSearchParams(window.location.search);
       const agreementNumber = params.get("agreement") || "";
       const endpoint = localStorage.getItem(ADMIN_ENDPOINT_KEY) || "";
@@ -313,6 +351,14 @@
 
       const notice = document.getElementById("notice");
       const certShell = document.getElementById("certShell");
+
+      function getTrackPhrase(track) {
+        if (!track) return "the assigned implementation category";
+        if (track.toLowerCase() === "all categories") {
+          return "all approved implementation categories";
+        }
+        return `the ${track} implementation category`;
+      }
 
       async function loadRecord() {
         if (!agreementNumber) {
@@ -345,7 +391,8 @@
             record.certificateType === "facilitator"
               ? "facilitator"
               : "completion";
-          const track = record.track || "assigned MMMF track";
+          const track = record.track || "";
+          const trackPhrase = getTrackPhrase(track);
           document.getElementById("recipientName").textContent =
             record.fullName || "Unnamed recipient";
           document.getElementById("agreementNumber").textContent =
@@ -366,18 +413,18 @@
 
           if (certificateType === "facilitator") {
             document.getElementById("certificateTitle").textContent =
-              "Facilitator Certification";
+              `${PROGRAM_NAME} Facilitator Certification`;
             document.getElementById("certificateSub").textContent =
-              "This certificate confirms that the named recipient completed Teach the Teacher and has been certified to teach MMMF.";
+              `This certificate confirms that the named recipient completed Teach the Teacher training and is certified to facilitate ${PROGRAM_NAME}.`;
             document.getElementById("certificateCopy").textContent =
-              `This record recognizes certification to teach MMMF within the approved ${track} implementation track listed below.`;
+              `This certification applies to ${trackPhrase}.`;
           } else {
             document.getElementById("certificateTitle").textContent =
-              "MMMF Completion Certificate";
+              `${PROGRAM_NAME} Completion Certificate`;
             document.getElementById("certificateSub").textContent =
-              "This certificate confirms successful completion of the named MMMF track through the protected teacher-mode administration system.";
+              `This certificate confirms that the named recipient has successfully completed the ${PROGRAM_NAME} program requirements.`;
             document.getElementById("certificateCopy").textContent =
-              `This record recognizes successful completion of the ${track} MMMF track listed below.`;
+              `This record recognizes completion for ${trackPhrase}.`;
           }
 
           notice.style.display = "none";
