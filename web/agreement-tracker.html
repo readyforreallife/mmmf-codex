@@ -28,6 +28,12 @@
       * {
         box-sizing: border-box;
       }
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
       body {
         margin: 0;
         font-family: "DM Sans", sans-serif;
@@ -43,6 +49,8 @@
       .wrap {
         max-width: 1200px;
         margin: 0 auto;
+        width: min(100%, 1200px);
+        min-width: 0;
       }
       .topbar {
         display: flex;
@@ -107,9 +115,12 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 24px;
+        width: min(100%, 1200px);
+        min-width: 0;
       }
       .search-host {
         margin-bottom: 18px;
+        min-width: 0;
       }
       .toolbar {
         margin-bottom: 18px;
@@ -145,6 +156,7 @@
         padding: 11px 12px;
         border: 1px solid var(--line);
         border-radius: 10px;
+        font-size: 16px;
       }
       .gate-note {
         margin-top: 12px;
@@ -163,6 +175,7 @@
         border-radius: 16px;
         padding: 18px;
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+        min-width: 0;
       }
       .kicker {
         font-size: 0.72rem;
@@ -212,6 +225,9 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 12px;
+      }
+      .field.small-row > div {
+        min-width: 0;
       }
       .number-preview {
         background: var(--teal-bg);
@@ -339,6 +355,44 @@
         }
       }
       @media (max-width: 640px) {
+        header {
+          padding: calc(env(safe-area-inset-top, 0px) + 18px) 16px 18px;
+        }
+        h1 {
+          font-size: 1.55rem;
+          line-height: 1.15;
+        }
+        main {
+          padding: 16px;
+        }
+        .topbar,
+        .header-actions,
+        .toolbar,
+        .action-row,
+        .table-actions,
+        .admin-gate form {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .header-actions,
+        .toolbar,
+        .action-row,
+        .table-actions {
+          width: 100%;
+        }
+        .btn {
+          width: 100%;
+          white-space: normal;
+          text-align: center;
+        }
+        .admin-gate,
+        .panel {
+          padding: 16px;
+        }
+        .admin-gate input {
+          min-width: 0;
+          width: 100%;
+        }
         .summary-grid,
         .field.small-row {
           grid-template-columns: 1fr;
@@ -359,7 +413,10 @@
           </p>
         </div>
         <div class="header-actions">
-          <a class="btn secondary" href="https://readyforreal.life/"
+          <a
+            class="btn secondary"
+            id="mainHomepageBtn"
+            href="https://readyforreal.life/"
             >Main Homepage</a
           >
           <a
@@ -494,6 +551,7 @@
                   <label for="track">Implementation track</label>
                   <select id="track" name="track">
                     <option value="">Select track</option>
+                    <option>All Categories</option>
                     <option>Grades 7-8</option>
                     <option>Grades 9-12</option>
                     <option>Community Youth</option>
@@ -650,7 +708,8 @@
       defer
     ></script>
     <script>
-      const DEFAULT_ADMIN_ENDPOINT = "";
+      const DEFAULT_ADMIN_ENDPOINT =
+        "https://flat-flower-4af8mmmf-agreement-admin.mikeyterry44.workers.dev";
       const ENDPOINT_PLACEHOLDER =
         "https://mmmf-agreement-admin.your-subdomain.workers.dev";
       const ADMIN_MODE_KEY = "mmmf_agreement_admin_mode_v2";
@@ -991,6 +1050,7 @@
 
       unlockForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+        document.activeElement?.blur?.();
         showNotice(unlockNotice, "");
 
         try {
@@ -1002,6 +1062,7 @@
               throw new Error("That teacher code is not correct.");
             }
             teacherCodeInput.value = "";
+            document.activeElement?.blur?.();
             setTeacherMode(true);
             refreshRegistryFromLocal();
             showNotice(
@@ -1017,6 +1078,7 @@
           });
           sessionStorage.setItem(ADMIN_SESSION_KEY, data.session_token);
           teacherCodeInput.value = "";
+          document.activeElement?.blur?.();
           setTeacherMode(true);
           await refreshRegistryFromBackend();
         } catch (error) {
@@ -1162,6 +1224,18 @@
           setTeacherMode(false);
           refreshRegistryFromLocal();
         }
+      })();
+
+      (() => {
+        const isCapacitorApp =
+          window.location.protocol === "capacitor:" ||
+          (window.location.hostname === "localhost" &&
+            !window.location.port &&
+            navigator.userAgent.includes("AppleWebKit"));
+        if (!isCapacitorApp) return;
+        document
+          .getElementById("mainHomepageBtn")
+          ?.setAttribute("href", "../../website-home.html");
       })();
     </script>
   </body>
